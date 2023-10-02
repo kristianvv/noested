@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\bacit-dotnet.MVC.props" />
+</Project>
