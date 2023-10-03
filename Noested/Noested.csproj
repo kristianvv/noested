@@ -27,6 +27,13 @@
 
 	<ItemGroup>
 	  <Folder Include="Migrations\" />
+	  <Folder Include="Views\Checklist\" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <None Remove="Views\Checklist\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Content Remove="Views\Checklist\Checklist.cshtml" />
+	</ItemGroup>
 </Project>

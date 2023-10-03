@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Noested.styles.css" asp-append-version="true" />
+    @await RenderSectionAsync("Styles", required: false) <!-- Allows for individual views to render sections for stylesheets -->
 </head>
 <body>
     <header>
@@ -30,6 +31,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="LogOff">Sign out</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Checklist" asp-action="Index">Checklist</a>
                         </li>
                     </ul>
                 </div>
