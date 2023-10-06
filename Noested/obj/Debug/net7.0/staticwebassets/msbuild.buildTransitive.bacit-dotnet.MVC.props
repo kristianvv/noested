@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\buildMultiTargeting\bacit-dotnet.MVC.props" />
-</Project>
