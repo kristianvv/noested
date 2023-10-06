@@ -1,0 +1,32 @@
+﻿using System;
+namespace innlogging.Views.Login
+
+@Model
+{
+    ViewData["Title"] = "Logg inn";
+}
+
+<h1>Logg inn</h1>
+
+<form method="post" asp-action="Login">
+    <div class="form-group">
+        <label for="employeeNumber">Ansatt Nummer</label>
+        <input type="text" class="form-control" id="employeeNumber" name="employeeNumber" required>
+    </div>
+    <div class="form-group">
+        <label for="password">Passord</label>
+        <input type="password" class="form-control" id="password" name="password" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Logg inn</button>
+</form>
+
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger mt-3" role="alert">
+        @ViewBag.ErrorMessage
+    </div>
+}
+
+
+
+
