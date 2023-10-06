@@ -1,0 +1,72 @@
+﻿@{
+    ViewData["Title"] = "Service Sjekkliste";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/Checklist.css" asp-append-version="true">
+}
+
+
+<h1 class="text-center mb-5">@ViewData["Title"] – Vinsjer</h1>
+
+<div class="container mt-3">
+    <form action="#" method="post">
+
+        <!-- Produktets Serienummer og Type -->
+        <fieldset class="mb-4">
+            <legend>Produktinformasjon</legend>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="serial_number" class="form-label">Serie nr.</label>
+                    <input type="text" class="form-control" id="serial_number" name="serial_number" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="machine_type" class="form-label">Type:</label>
+                    <input type="text" class="form-control" id="machine_type" name="machine_type" required>
+                </div>
+            </div>
+        </fieldset>
+
+        <!-- Sjekkliste-tabellen -->
+        <table class="table table-bordered mb-3" id="checklistTable">
+            <thead>
+                <tr>
+                    <th>Kategorier</th>
+                    <th>Sjekkpunkter</th>
+                    <th>OK</th>
+                    <th>Bør Skiftes</th>
+                    <th>Defekt</th>
+                </tr>
+            </thead>
+            <tbody id="itemRows">
+                <!-- Genereres av JS-filen-->
+            </tbody>
+        </table>
+
+        <!-- Mekaniker kommentar -->
+        <div class="mb-3">
+            <label for="mechanicsCommentary" class="form-label">Kommentar</label>
+            <textarea class="form-control" id="mechanicsCommentary" name="mechanics_commentary"></textarea>
+        </div>
+
+        <!-- Dato og Signatur -->
+        <div class="row mb-3">
+            <div class="col">
+                <label for="signature" class="form-label">Signatur</label>
+                <input type="text" class="form-control" id="signature" name="signature">
+            </div>
+            <div class="col">
+                <label for="displayDateTime" class="form-label">Dato</label>
+                <span class="form-control" id="displayDateTime"></span>
+                <input type="hidden" name="date_time" id="date_time" value="">
+            </div>
+        </div>
+
+        <!-- Submit Knapp -->
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+@section Scripts {
+    <script src="/js/checklist.js"></script>
+}
