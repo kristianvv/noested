@@ -1,29 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "/Users/danieldahlegray/Documents/GitHub/noested/Noested/Noested.csproj": {}
+    "C:\\Users\\timef\\noested\\Noested\\Noested.csproj": {}
   },
   "projects": {
-    "/Users/danieldahlegray/Documents/GitHub/noested/Noested/Noested.csproj": {
+    "C:\\Users\\timef\\noested\\Noested\\Noested.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/danieldahlegray/Documents/GitHub/noested/Noested/Noested.csproj",
+        "projectUniqueName": "C:\\Users\\timef\\noested\\Noested\\Noested.csproj",
         "projectName": "Noested",
-        "projectPath": "/Users/danieldahlegray/Documents/GitHub/noested/Noested/Noested.csproj",
-        "packagesPath": "/Users/danieldahlegray/.nuget/packages/",
-        "outputPath": "/Users/danieldahlegray/Documents/GitHub/noested/Noested/obj/",
+        "projectPath": "C:\\Users\\timef\\noested\\Noested\\Noested.csproj",
+        "packagesPath": "C:\\Users\\timef\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\timef\\noested\\Noested\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/danieldahlegray/Documents/GitHub/noested/Noested/NuGet.Config",
-          "/Users/danieldahlegray/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\timef\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "/usr/local/share/dotnet/library-packs": {},
-          "/usr/local/share/dotnet/sdk/7.0.308/Sdks/Microsoft.NET.Sdk.Web/library-packs": {},
-          "https://api.nuget.org/v3/index.json": {},
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -68,9 +66,19 @@
               "target": "Package",
               "version": "[7.0.10, )"
             },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.10, )"
+            },
             "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
               "target": "Package",
               "version": "[1.19.5, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[7.0.9, )"
             },
             "MySql.Data": {
               "target": "Package",
@@ -104,7 +112,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.308/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

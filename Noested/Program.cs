@@ -10,20 +10,20 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        // Add services to the container.
+         //Add services to the container.
         builder.Services.AddControllersWithViews();
         
         SetupDataConnections(builder);
 
-        // SetupAuthentication(builder);
+         SetupAuthentication(builder);
 
         var app = builder.Build();
 
-        // Configure the HTTP request pipeline.
+         //Configure the HTTP request pipeline.
         if (!app.Environment.IsDevelopment())
         {
             app.UseExceptionHandler("/Home/Error");
-            // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+             //The default HSTS value is 30 days. You may want to change this for production scenarios, see https:aka.ms/aspnetcore-hsts.
             app.UseHsts();
         }
 
@@ -31,7 +31,7 @@ public class Program
 
         app.UseRouting();
 
-        //UseAuthentication(app);
+        UseAuthentication(app);
 
         app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
         app.MapControllers();
@@ -45,16 +45,20 @@ public class Program
 
     private static void SetupDataConnections(WebApplicationBuilder builder)
     {
-        //builder.Services.AddTransient<ISqlConnector, SqlConnector>();
 
-        //builder.Services.AddDbContext<DataContext>(options =>
-        //{
-        //    options.UseMySql(builder.Configuration.GetConnectionString("MariaDb"), ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("MariaDb")));
-        //});
+        builder.Services.AddDbContext<DataContext>(options =>
+        {
+            options.UseMySql(builder.Configuration.GetConnectionString("MariaDb"),
+                             ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("MariaDb")));
+        });
+
         builder.Services.AddSingleton<IUserRepository, InMemoryUserRepository>();
-        //builder.Services.AddScoped<IUserRepository, EFUserRepository>();
-        //builder.Services.AddSingleton<IUserRepository, SqlUserRepository>();
-        //builder.Services.AddSingleton<IUserRepository, DapperUserRepository>();
+        builder.Services.AddScoped<IUserRepository, EFUserRepository>();
+
+        // Ikke kommenter ut enda.
+        // builder.Services.AddTransient<ISqlConnector, SqlConnector>();
+        // builder.Services.AddSingleton<IUserRepository, SqlUserRepository>();
+        // builder.Services.AddSingleton<IUserRepository, DapperUserRepository>();
     }
 
     private static void UseAuthentication(WebApplication app)
@@ -68,7 +72,7 @@ public class Program
         //Setup for Authentication
         builder.Services.Configure<IdentityOptions>(options =>
         {
-            // Default Lockout settings.
+             //Default Lockout settings.
             options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
             options.Lockout.MaxFailedAccessAttempts = 5;
             options.Lockout.AllowedForNewUsers = false;
