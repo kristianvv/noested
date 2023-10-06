@@ -6,91 +6,91 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Noested.Data;
-using Noested.Models.Movies;
+using Noested.Models;
 
 namespace Noested.Controllers
 {
-    public class MoviesController : Controller
+    public class TestsController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly NoestedContext _context;
 
-        public MoviesController(ApplicationDbContext context)
+        public TestsController(NoestedContext context)
         {
             _context = context;
         }
 
-        // GET: Movies
+        // GET: Tests
         public async Task<IActionResult> Index()
         {
-              return _context.Movie != null ? 
-                          View(await _context.Movie.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Movie'  is null.");
+              return _context.Test != null ? 
+                          View(await _context.Test.ToListAsync()) :
+                          Problem("Entity set 'NoestedContext.Test'  is null.");
         }
 
-        // GET: Movies/Details/5
+        // GET: Tests/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Movie == null)
+            if (id == null || _context.Test == null)
             {
                 return NotFound();
             }
 
-            var movie = await _context.Movie
+            var test = await _context.Test
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (movie == null)
+            if (test == null)
             {
                 return NotFound();
             }
 
-            return View(movie);
+            return View(test);
         }
 
-        // GET: Movies/Create
+        // GET: Tests/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Movies/Create
+        // POST: Tests/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,ReleaseDate,Genre,Price")] Movie movie)
+        public async Task<IActionResult> Create([Bind("Id,Title,ReleaseDate,Genre,Price")] Test test)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(movie);
+                _context.Add(test);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(movie);
+            return View(test);
         }
 
-        // GET: Movies/Edit/5
+        // GET: Tests/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Movie == null)
+            if (id == null || _context.Test == null)
             {
                 return NotFound();
             }
 
-            var movie = await _context.Movie.FindAsync(id);
-            if (movie == null)
+            var test = await _context.Test.FindAsync(id);
+            if (test == null)
             {
                 return NotFound();
             }
-            return View(movie);
+            return View(test);
         }
 
-        // POST: Movies/Edit/5
+        // POST: Tests/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,ReleaseDate,Genre,Price")] Movie movie)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,ReleaseDate,Genre,Price")] Test test)
         {
-            if (id != movie.Id)
+            if (id != test.Id)
             {
                 return NotFound();
             }
@@ -99,12 +99,12 @@ namespace Noested.Controllers
             {
                 try
                 {
-                    _context.Update(movie);
+                    _context.Update(test);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!MovieExists(movie.Id))
+                    if (!TestExists(test.Id))
                     {
                         return NotFound();
                     }
@@ -115,49 +115,49 @@ namespace Noested.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(movie);
+            return View(test);
         }
 
-        // GET: Movies/Delete/5
+        // GET: Tests/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Movie == null)
+            if (id == null || _context.Test == null)
             {
                 return NotFound();
             }
 
-            var movie = await _context.Movie
+            var test = await _context.Test
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (movie == null)
+            if (test == null)
             {
                 return NotFound();
             }
 
-            return View(movie);
+            return View(test);
         }
 
-        // POST: Movies/Delete/5
+        // POST: Tests/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Movie == null)
+            if (_context.Test == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.Movie'  is null.");
+                return Problem("Entity set 'NoestedContext.Test'  is null.");
             }
-            var movie = await _context.Movie.FindAsync(id);
-            if (movie != null)
+            var test = await _context.Test.FindAsync(id);
+            if (test != null)
             {
-                _context.Movie.Remove(movie);
+                _context.Test.Remove(test);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool MovieExists(int id)
+        private bool TestExists(int id)
         {
-          return (_context.Movie?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Test?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\chris\\Documents\\IT og informasjonsystemer\\Applikasjoner\\Noested\\Noested.csproj": {}
+    "C:\\Users\\chris\\Desktop\\Noested\\Noested.csproj": {}
   },
   "projects": {
-    "C:\\Users\\chris\\Documents\\IT og informasjonsystemer\\Applikasjoner\\Noested\\Noested.csproj": {
+    "C:\\Users\\chris\\Desktop\\Noested\\Noested.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\chris\\Documents\\IT og informasjonsystemer\\Applikasjoner\\Noested\\Noested.csproj",
+        "projectUniqueName": "C:\\Users\\chris\\Desktop\\Noested\\Noested.csproj",
         "projectName": "Noested",
-        "projectPath": "C:\\Users\\chris\\Documents\\IT og informasjonsystemer\\Applikasjoner\\Noested\\Noested.csproj",
+        "projectPath": "C:\\Users\\chris\\Desktop\\Noested\\Noested.csproj",
         "packagesPath": "C:\\Users\\chris\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\chris\\Documents\\IT og informasjonsystemer\\Applikasjoner\\Noested\\obj\\",
+        "outputPath": "C:\\Users\\chris\\Desktop\\Noested\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\chris\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -40,25 +40,15 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
-            "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[7.0.11, )"
-            },
-            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[7.0.11, )"
-            },
-            "Microsoft.AspNetCore.Identity.UI": {
-              "target": "Package",
-              "version": "[7.0.11, )"
-            },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[7.0.11, )"
+              "version": "[7.0.10, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
-              "version": "[7.0.11, )"
+              "version": "[7.0.10, )"
             },
             "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
               "target": "Package",

@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Noested.Models.Movies
+namespace Noested.Models
 {
-    public class Movie
+    public class Test
     {
         public int Id { get; set; }
         public string? Title { get; set; }
