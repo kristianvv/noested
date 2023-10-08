@@ -1,12 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Noested.Data;
+
+
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<NoestedContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("NoestedContext") ?? throw new InvalidOperationException("Connection string 'NoestedContext' not found.")));
+
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("TestDatabase"));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
@@ -14,19 +17,30 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
 
 app.UseAuthorization();
 
 app.MapControllerRoute(
+    name: "login",
+    pattern: "/login",
+    defaults: new { controller = "Login", action = "Index" }
+);
+
+app.MapControllerRoute(
+    name: "register",
+    pattern: "/register",
+    defaults: new { controller = "Register", action = "RegisterUser" }
+);
+
+app.MapRazorPages();
+app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Login}/{action=Index}/{id?}");
 
 app.Run();
