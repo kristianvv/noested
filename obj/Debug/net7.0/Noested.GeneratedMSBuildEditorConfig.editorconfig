@@ -9,81 +9,101 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Noested
 build_property.RootNamespace = Noested
-build_property.ProjectDir = C:\Users\vikfj\source\repos\noested\
+build_property.ProjectDir = C:\Users\chris\Documents\IT og informasjonsystemer\IS202 Programmeringsprosjekt\noested\
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\vikfj\source\repos\noested
+build_property.MSBuildProjectDirectory = C:\Users\chris\Documents\IT og informasjonsystemer\IS202 Programmeringsprosjekt\noested
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/vikfj/source/repos/noested/Views/Home/AdminPage.cshtml]
+[C:/Users/chris/Documents/IT og informasjonsystemer/IS202 Programmeringsprosjekt/noested/Views/Home/AdminPage.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBZG1pblBhZ2UuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/vikfj/source/repos/noested/Views/Home/Index.cshtml]
+[C:/Users/chris/Documents/IT og informasjonsystemer/IS202 Programmeringsprosjekt/noested/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/vikfj/source/repos/noested/Views/Home/MechanicPage.cshtml]
+[C:/Users/chris/Documents/IT og informasjonsystemer/IS202 Programmeringsprosjekt/noested/Views/Home/MechanicPage.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxNZWNoYW5pY1BhZ2UuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/vikfj/source/repos/noested/Views/Home/Privacy.cshtml]
+[C:/Users/chris/Documents/IT og informasjonsystemer/IS202 Programmeringsprosjekt/noested/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/vikfj/source/repos/noested/Views/Home/ServicePage.cshtml]
+[C:/Users/chris/Documents/IT og informasjonsystemer/IS202 Programmeringsprosjekt/noested/Views/Home/ServicePage.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxTZXJ2aWNlUGFnZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/vikfj/source/repos/noested/Views/Login/Index.cshtml]
+[C:/Users/chris/Documents/IT og informasjonsystemer/IS202 Programmeringsprosjekt/noested/Views/Login/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/vikfj/source/repos/noested/Views/Login/_LoginLayout.cshtml]
+[C:/Users/chris/Documents/IT og informasjonsystemer/IS202 Programmeringsprosjekt/noested/Views/Login/_LoginLayout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cX0xvZ2luTGF5b3V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/vikfj/source/repos/noested/Views/Register/RegisterUser.cshtml]
+[C:/Users/chris/Documents/IT og informasjonsystemer/IS202 Programmeringsprosjekt/noested/Views/Register/RegisterUser.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVnaXN0ZXJcUmVnaXN0ZXJVc2VyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/vikfj/source/repos/noested/Views/Shared/Error.cshtml]
+[C:/Users/chris/Documents/IT og informasjonsystemer/IS202 Programmeringsprosjekt/noested/Views/ServiceOrders/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmljZU9yZGVyc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/chris/Documents/IT og informasjonsystemer/IS202 Programmeringsprosjekt/noested/Views/ServiceOrders/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmljZU9yZGVyc1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/chris/Documents/IT og informasjonsystemer/IS202 Programmeringsprosjekt/noested/Views/ServiceOrders/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmljZU9yZGVyc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/chris/Documents/IT og informasjonsystemer/IS202 Programmeringsprosjekt/noested/Views/ServiceOrders/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmljZU9yZGVyc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/chris/Documents/IT og informasjonsystemer/IS202 Programmeringsprosjekt/noested/Views/ServiceOrders/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmljZU9yZGVyc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/chris/Documents/IT og informasjonsystemer/IS202 Programmeringsprosjekt/noested/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/vikfj/source/repos/noested/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/chris/Documents/IT og informasjonsystemer/IS202 Programmeringsprosjekt/noested/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/vikfj/source/repos/noested/Views/Tests/Create.cshtml]
+[C:/Users/chris/Documents/IT og informasjonsystemer/IS202 Programmeringsprosjekt/noested/Views/Tests/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVzdHNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/vikfj/source/repos/noested/Views/Tests/Delete.cshtml]
+[C:/Users/chris/Documents/IT og informasjonsystemer/IS202 Programmeringsprosjekt/noested/Views/Tests/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVzdHNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/vikfj/source/repos/noested/Views/Tests/Details.cshtml]
+[C:/Users/chris/Documents/IT og informasjonsystemer/IS202 Programmeringsprosjekt/noested/Views/Tests/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVzdHNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/vikfj/source/repos/noested/Views/Tests/Edit.cshtml]
+[C:/Users/chris/Documents/IT og informasjonsystemer/IS202 Programmeringsprosjekt/noested/Views/Tests/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVzdHNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/vikfj/source/repos/noested/Views/Tests/Index.cshtml]
+[C:/Users/chris/Documents/IT og informasjonsystemer/IS202 Programmeringsprosjekt/noested/Views/Tests/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVzdHNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/vikfj/source/repos/noested/Views/_ViewImports.cshtml]
+[C:/Users/chris/Documents/IT og informasjonsystemer/IS202 Programmeringsprosjekt/noested/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/vikfj/source/repos/noested/Views/_ViewStart.cshtml]
+[C:/Users/chris/Documents/IT og informasjonsystemer/IS202 Programmeringsprosjekt/noested/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/vikfj/source/repos/noested/Views/Shared/_Layout.cshtml]
+[C:/Users/chris/Documents/IT og informasjonsystemer/IS202 Programmeringsprosjekt/noested/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-jefttkelwh
