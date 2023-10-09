@@ -17,5 +17,7 @@ namespace Noested.Data
         public DbSet<Noested.Models.Test> Test { get; set; } = default!;
 
         public DbSet<Noested.Models.ServiceOrder> ServiceOrder { get; set; } = default!;
+
+        public DbSet<Noested.Models.DummyServiceOrder> DummyServiceOrder { get; set; } = default!;
     }
 }

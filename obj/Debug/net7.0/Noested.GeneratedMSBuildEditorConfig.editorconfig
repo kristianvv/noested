@@ -16,6 +16,26 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\chris\Documents\IT og informasjonsystemer\IS202 Programmeringsprosjekt\noested
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/chris/Documents/IT og informasjonsystemer/IS202 Programmeringsprosjekt/noested/Views/DummyServiceOrders/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRHVtbXlTZXJ2aWNlT3JkZXJzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/chris/Documents/IT og informasjonsystemer/IS202 Programmeringsprosjekt/noested/Views/DummyServiceOrders/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRHVtbXlTZXJ2aWNlT3JkZXJzXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/chris/Documents/IT og informasjonsystemer/IS202 Programmeringsprosjekt/noested/Views/DummyServiceOrders/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRHVtbXlTZXJ2aWNlT3JkZXJzXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/chris/Documents/IT og informasjonsystemer/IS202 Programmeringsprosjekt/noested/Views/DummyServiceOrders/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRHVtbXlTZXJ2aWNlT3JkZXJzXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/chris/Documents/IT og informasjonsystemer/IS202 Programmeringsprosjekt/noested/Views/DummyServiceOrders/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRHVtbXlTZXJ2aWNlT3JkZXJzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/chris/Documents/IT og informasjonsystemer/IS202 Programmeringsprosjekt/noested/Views/Home/AdminPage.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBZG1pblBhZ2UuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

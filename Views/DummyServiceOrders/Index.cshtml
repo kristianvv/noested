@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Noested.Models.DummyServiceOrder>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Ordreliste</h1>
+
+<p>
+    <a asp-action="Create">Opprett ny</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderNum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerFirstname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerLastname)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderNum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerFirstname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerLastname)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ServiceOrderID">Endre</a> |
+                <a asp-action="Details" asp-route-id="@item.ServiceOrderID">Detaljer</a> |
+                <a asp-action="Delete" asp-route-id="@item.ServiceOrderID">Slett</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
