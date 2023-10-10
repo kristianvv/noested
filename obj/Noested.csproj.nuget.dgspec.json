@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\chris\\Documents\\IT og informasjonsystemer\\IS202 Programmeringsprosjekt\\noested\\Noested.csproj": {}
+    "C:\\Users\\vikfj\\source\\repos\\noested\\Noested.csproj": {}
   },
   "projects": {
-    "C:\\Users\\chris\\Documents\\IT og informasjonsystemer\\IS202 Programmeringsprosjekt\\noested\\Noested.csproj": {
+    "C:\\Users\\vikfj\\source\\repos\\noested\\Noested.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\chris\\Documents\\IT og informasjonsystemer\\IS202 Programmeringsprosjekt\\noested\\Noested.csproj",
+        "projectUniqueName": "C:\\Users\\vikfj\\source\\repos\\noested\\Noested.csproj",
         "projectName": "Noested",
-        "projectPath": "C:\\Users\\chris\\Documents\\IT og informasjonsystemer\\IS202 Programmeringsprosjekt\\noested\\Noested.csproj",
-        "packagesPath": "C:\\Users\\chris\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\chris\\Documents\\IT og informasjonsystemer\\IS202 Programmeringsprosjekt\\noested\\obj\\",
+        "projectPath": "C:\\Users\\vikfj\\source\\repos\\noested\\Noested.csproj",
+        "packagesPath": "C:\\Users\\vikfj\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\vikfj\\source\\repos\\noested\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\chris\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\vikfj\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -52,7 +52,7 @@
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[7.0.10, )"
+              "version": "[7.0.11, )"
             },
             "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
               "target": "Package",

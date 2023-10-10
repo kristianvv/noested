@@ -1325,11 +1325,11 @@
           "lib/netstandard2.0/_._": {}
         }
       },
-      "Microsoft.EntityFrameworkCore.Design/7.0.10": {
+      "Microsoft.EntityFrameworkCore.Design/7.0.11": {
         "type": "package",
         "dependencies": {
           "Humanizer.Core": "2.14.1",
-          "Microsoft.EntityFrameworkCore.Relational": "7.0.10",
+          "Microsoft.EntityFrameworkCore.Relational": "7.0.11",
           "Microsoft.Extensions.DependencyModel": "7.0.0",
           "Mono.TextTemplating": "2.2.1"
         },
@@ -1363,10 +1363,10 @@
           }
         }
       },
-      "Microsoft.EntityFrameworkCore.Relational/7.0.10": {
+      "Microsoft.EntityFrameworkCore.Relational/7.0.11": {
         "type": "package",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore": "7.0.10",
+          "Microsoft.EntityFrameworkCore": "7.0.11",
           "Microsoft.Extensions.Configuration.Abstractions": "7.0.0"
         },
         "compile": {
@@ -1397,10 +1397,10 @@
           }
         }
       },
-      "Microsoft.EntityFrameworkCore.Tools/7.0.10": {
+      "Microsoft.EntityFrameworkCore.Tools/7.0.11": {
         "type": "package",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore.Design": "7.0.10"
+          "Microsoft.EntityFrameworkCore.Design": "7.0.11"
         },
         "compile": {
           "lib/net6.0/_._": {}
@@ -5589,10 +5589,10 @@
         "microsoft.entityframeworkcore.analyzers.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.Design/7.0.10": {
-      "sha512": "ZDdJ2aAE529A1zd3sEvszADRCiJmlOKxc0WlhS+NIhSs68NESAApPZL4uHXrIk0vb7SBRnNPYPfOhASWf9dahg==",
+    "Microsoft.EntityFrameworkCore.Design/7.0.11": {
+      "sha512": "DaykA+XkNNiznnJq8HWVl4jpBycL9/W8NkonoBz7eIrxfU9Q4zH4iPztlvOkJugYCNPS29frPnju3RY72FoPNQ==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.design/7.0.10",
+      "path": "microsoft.entityframeworkcore.design/7.0.11",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -5600,7 +5600,7 @@
         "build/net6.0/Microsoft.EntityFrameworkCore.Design.props",
         "lib/net6.0/Microsoft.EntityFrameworkCore.Design.dll",
         "lib/net6.0/Microsoft.EntityFrameworkCore.Design.xml",
-        "microsoft.entityframeworkcore.design.7.0.10.nupkg.sha512",
+        "microsoft.entityframeworkcore.design.7.0.11.nupkg.sha512",
         "microsoft.entityframeworkcore.design.nuspec"
       ]
     },
@@ -5618,17 +5618,17 @@
         "microsoft.entityframeworkcore.inmemory.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.Relational/7.0.10": {
-      "sha512": "PO2QB2Du+pW210UHmepYR12bk+ZOZJCiNkA7zEAxWs+vzvrRAMsUPlDlfgX2LXE7NBsnb0uvZp7a1/qqKf3fRQ==",
+    "Microsoft.EntityFrameworkCore.Relational/7.0.11": {
+      "sha512": "yHEEyah1XARStV1SJOsdKj8ieoMCZ0MkNuQaLfWONMWmbqwuDohfGQZk/FuzdT4aO/lJrUYiXbBSFv0ACzphEw==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.relational/7.0.10",
+      "path": "microsoft.entityframeworkcore.relational/7.0.11",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "lib/net6.0/Microsoft.EntityFrameworkCore.Relational.dll",
         "lib/net6.0/Microsoft.EntityFrameworkCore.Relational.xml",
-        "microsoft.entityframeworkcore.relational.7.0.10.nupkg.sha512",
+        "microsoft.entityframeworkcore.relational.7.0.11.nupkg.sha512",
         "microsoft.entityframeworkcore.relational.nuspec"
       ]
     },
@@ -5646,17 +5646,17 @@
         "microsoft.entityframeworkcore.sqlserver.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.Tools/7.0.10": {
-      "sha512": "+ZctjoxaO3ZOxZGbnwjsycBbFmwcKiwbvoaIbaE4k693rYGo42svOVV+BAt+QbddkBnaAmikp8iWeus33Qj5mw==",
+    "Microsoft.EntityFrameworkCore.Tools/7.0.11": {
+      "sha512": "dhNLVQsMi6E4XEkVNmxbaNkLd06Q0ipwgiBz9k9rSjzaNJQVUA+/N6lsKRWXjFjTPgsaVpos+KN5Iimy6TQ2Yg==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.tools/7.0.10",
+      "path": "microsoft.entityframeworkcore.tools/7.0.11",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "lib/net6.0/_._",
-        "microsoft.entityframeworkcore.tools.7.0.10.nupkg.sha512",
+        "microsoft.entityframeworkcore.tools.7.0.11.nupkg.sha512",
         "microsoft.entityframeworkcore.tools.nuspec",
         "tools/EntityFrameworkCore.PS2.psd1",
         "tools/EntityFrameworkCore.PS2.psm1",
@@ -11391,25 +11391,25 @@
     "net7.0": [
       "Microsoft.EntityFrameworkCore.InMemory >= 7.0.11",
       "Microsoft.EntityFrameworkCore.SqlServer >= 7.0.10",
-      "Microsoft.EntityFrameworkCore.Tools >= 7.0.10",
+      "Microsoft.EntityFrameworkCore.Tools >= 7.0.11",
       "Microsoft.VisualStudio.Azure.Containers.Tools.Targets >= 1.19.4",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 7.0.9"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\chris\\.nuget\\packages\\": {}
+    "C:\\Users\\vikfj\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\chris\\Documents\\IT og informasjonsystemer\\IS202 Programmeringsprosjekt\\noested\\Noested.csproj",
+      "projectUniqueName": "C:\\Users\\vikfj\\source\\repos\\noested\\Noested.csproj",
       "projectName": "Noested",
-      "projectPath": "C:\\Users\\chris\\Documents\\IT og informasjonsystemer\\IS202 Programmeringsprosjekt\\noested\\Noested.csproj",
-      "packagesPath": "C:\\Users\\chris\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\chris\\Documents\\IT og informasjonsystemer\\IS202 Programmeringsprosjekt\\noested\\obj\\",
+      "projectPath": "C:\\Users\\vikfj\\source\\repos\\noested\\Noested.csproj",
+      "packagesPath": "C:\\Users\\vikfj\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\vikfj\\source\\repos\\noested\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\chris\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\vikfj\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -11447,7 +11447,7 @@
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
             "suppressParent": "All",
             "target": "Package",
-            "version": "[7.0.10, )"
+            "version": "[7.0.11, )"
           },
           "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
             "target": "Package",
