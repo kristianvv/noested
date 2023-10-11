@@ -16,24 +16,28 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\vikfj\source\repos\noested
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/vikfj/source/repos/noested/Views/Home/AdminPage.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBZG1pblBhZ2UuY3NodG1s
+[C:/Users/vikfj/source/repos/noested/Views/Admin/AdminPage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRtaW5QYWdlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/vikfj/source/repos/noested/Views/Home/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+[C:/Users/vikfj/source/repos/noested/Views/DummyServiceOrders/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRHVtbXlTZXJ2aWNlT3JkZXJzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/vikfj/source/repos/noested/Views/Home/MechanicPage.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxNZWNoYW5pY1BhZ2UuY3NodG1s
+[C:/Users/vikfj/source/repos/noested/Views/DummyServiceOrders/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRHVtbXlTZXJ2aWNlT3JkZXJzXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/vikfj/source/repos/noested/Views/Home/Privacy.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+[C:/Users/vikfj/source/repos/noested/Views/DummyServiceOrders/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRHVtbXlTZXJ2aWNlT3JkZXJzXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/vikfj/source/repos/noested/Views/Home/ServicePage.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxTZXJ2aWNlUGFnZS5jc2h0bWw=
+[C:/Users/vikfj/source/repos/noested/Views/DummyServiceOrders/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRHVtbXlTZXJ2aWNlT3JkZXJzXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vikfj/source/repos/noested/Views/DummyServiceOrders/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRHVtbXlTZXJ2aWNlT3JkZXJzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/vikfj/source/repos/noested/Views/Login/Index.cshtml]
@@ -44,8 +48,36 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cX0xvZ2luTGF5b3V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/vikfj/source/repos/noested/Views/Mechanic/MechanicPage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVjaGFuaWNcTWVjaGFuaWNQYWdlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vikfj/source/repos/noested/Views/Privacy/PrivacyPage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJpdmFjeVxQcml2YWN5UGFnZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/vikfj/source/repos/noested/Views/Register/RegisterUser.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVnaXN0ZXJcUmVnaXN0ZXJVc2VyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vikfj/source/repos/noested/Views/ServiceOrders/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmljZU9yZGVyc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vikfj/source/repos/noested/Views/ServiceOrders/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmljZU9yZGVyc1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vikfj/source/repos/noested/Views/ServiceOrders/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmljZU9yZGVyc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vikfj/source/repos/noested/Views/ServiceOrders/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmljZU9yZGVyc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vikfj/source/repos/noested/Views/ServiceOrders/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmljZU9yZGVyc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/vikfj/source/repos/noested/Views/Shared/Error.cshtml]

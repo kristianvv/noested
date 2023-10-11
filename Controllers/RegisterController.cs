@@ -1,10 +1,10 @@
 ﻿
 using Microsoft.AspNetCore.Mvc;
 using Noested.Data;
-using Innlogging.Models;
+using Noested.Models;
 
 
-namespace Innlogging.Controllers
+namespace Noested.Controllers
 {
     public class RegisterController : Controller
     {

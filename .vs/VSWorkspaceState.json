@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Models",
+    "\\Views",
+    "\\Views\\DummyServiceOrders",
+    "\\Views\\Login",
+    "\\wwwroot",
+    "\\wwwroot\\css"
+  ],
+  "SelectedNode": "\\Views\\DummyServiceOrders\\Create.cshtml",
+  "PreviewInSolutionExplorer": false
+}

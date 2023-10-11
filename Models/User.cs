@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Innlogging.Models
+namespace Noested.Models
 {
     public class User
     {

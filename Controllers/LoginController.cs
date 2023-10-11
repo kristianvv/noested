@@ -1,9 +1,11 @@
 ﻿
-namespace Innlogging.Controllers;
+
 
 using Noested.Data;
-using Innlogging.Models;
+using Noested.Models;
 using Microsoft.AspNetCore.Mvc;
+
+namespace Noested.Controllers;
 
 public class LoginController : Controller
     {
@@ -47,11 +49,11 @@ public class LoginController : Controller
                 switch (user.Role)
                 {
                     case UserRole.Service:
-                        return RedirectToAction("ServicePage", "Home");
+                        return RedirectToAction("Index", "ServiceOrders");
                     case UserRole.Mechanic:
-                        return RedirectToAction("MechanicPage", "Home");
+                        return RedirectToAction("MechanicPage", "Mechanic");
                     case UserRole.Administrator:
-                        return RedirectToAction("AdminPage", "Home");
+                        return RedirectToAction("AdminPage", "Admin");
                 }
             }
             ViewBag.ErrorMessage = "Feil ansattnummer eller passord";

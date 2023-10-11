@@ -2,7 +2,7 @@
 
 using System.ComponentModel.DataAnnotations;
 
-namespace Innlogging.Models
+namespace Noested.Models
 {
     public class RegistreringViewModel
     {

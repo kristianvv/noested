@@ -2,7 +2,7 @@
 namespace Noested.Data;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using Innlogging.Models;
+using Noested.Models;
 
 
 public class AppDbContext : DbContext
