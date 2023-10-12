@@ -1,0 +1,108 @@
+﻿<!-- A form to create a new service order.
+    For service personnel: The Create action method will load the Create.cshtml View. -->
+
+@model ServiceOrderModel
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/CreateServiceOrder.css">
+}
+
+<h1>Create New Service Order</h1>
+
+<form asp-action="Create" asp-controller="ServiceOrder" method="post">
+    <!-- REQUIRED FIELDS -->
+    <section class="left-section">
+        <!-- Order Number -->
+        <div class="form-group">
+            <label asp-for="OrderNumber"></label>
+            <input asp-for="OrderNumber" class="form-control" required />
+        </div>
+        <!-- Order Status -->
+        <div class="form-group">
+            <label asp-for="OrderStatus"></label>
+            <input asp-for="OrderStatus" class="form-control" required />
+        </div>
+        <!-- Product -->
+        <div class="form-group">
+            <label asp-for="ProductName"></label>
+            <input asp-for="ProductName" class="form-control" required />
+        </div>
+        <!-- Product Type -->
+        <div class="form-group">
+            <label asp-for="ProductType"></label>
+            <input asp-for="ProductType" class="form-control" required />
+        </div>
+        <!-- WeekNumber Order is created -->
+        <div class="form-group">
+            <label asp-for="WeekNumber"></label>
+            <input asp-for="WeekNumber" class="form-control" required />
+        </div>
+        <!-- DayOfWeek Order is created -->
+        <div class="form-group">
+            <label asp-for="DayOfWeek"></label>
+            <input asp-for="DayOfWeek" class="form-control" required />
+        </div>
+        <!-- Customer's Name -->
+        <div class="form-group">
+            <label asp-for="ContactPerson"></label>
+            <input asp-for="ContactPerson" class="form-control" required />
+        </div>
+        <!-- Customer's Address -->
+        <div class="form-group">
+            <label asp-for="Address"></label>
+            <input asp-for="Address" class="form-control" required />
+        </div>
+        <!-- Customer's Phonenumber -->
+        <div class="form-group">
+            <label asp-for="PhoneNumber"></label>
+            <input asp-for="PhoneNumber" class="form-control" required />
+        </div>
+        <!-- Customer's Email -->
+        <div class="form-group">
+            <label asp-for="Email"></label>
+            <input asp-for="Email" type="email" class="form-control" required />
+        </div>
+    </section>
+
+    <!-- ADDITIONAL FIELDS -->
+    <section class="right-section">
+        <!-- Agreed-upon Finish Date -->
+        <div class="form-group">
+            <label asp-for="AgreedFinishedDate"></label>
+            <input asp-for="AgreedFinishedDate" type="date" class="form-control" />
+        </div>
+
+        <!-- Agreed-upon Delivery Date-->
+        <div class="form-group">
+            <label asp-for="AgreedDeliveryDate"></label>
+            <input asp-for="AgreedDeliveryDate" type="date" class="form-control" />
+        </div>
+
+        <!-- Date Product was Received for Service (filled by Mechanic) -->
+        <div class="form-group">
+            <label asp-for="ReceivedProductDate"></label>
+            <input asp-for="ReceivedProductDate" type="date" class="form-control" />
+        </div>
+
+        <!-- Date Service on Product was Completed (filled by Mechanic) -->
+        <div class="form-group">
+            <label asp-for="CompletedServiceDate"></label>
+            <input asp-for="CompletedServiceDate" type="date" class="form-control" />
+        </div>
+
+        <!-- Working hours it took to complete the service (filled by Mechanic)-->
+        <div class="form-group">
+            <label asp-for="HoursToComplete"></label>
+            <input asp-for="HoursToComplete" class="form-control" />
+        </div>
+    </section>
+
+    <section class="full-width-section">
+        <!-- Customer Comment -->
+        <div class="form-group">
+            <label asp-for="CustomerComment"></label>
+            <textarea asp-for="CustomerComment" class="form-control"></textarea>
+        </div>
+    </section>
+    <button type="submit" onclick="" class="btn btn-primary create-button">Create</button>
+</form>

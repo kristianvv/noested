@@ -1,0 +1,113 @@
+﻿<!-- To display a single service order with its checklist when a mechanic selects it -->
+@model ServiceOrderModel
+
+<h1>View Service Order</h1>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/Checklist.css" asp-append-version="true">
+}
+
+
+<form id="serviceOrderForm" asp-action="SaveCompletedOrder" method="post">
+    <!-- Display Static Order Info -->
+    <section class="order-info">
+        <section class="left-panel">
+            <!-- Left panel -->
+            <div>
+                <label>Order Number</label>
+                <input type="text" name="OrderNumber" readonly value="@Model.OrderNumber" />
+            </div>
+
+            <div>
+                <label>Contact Person</label>
+                <input type="text" name="ContactPerson" readonly value="@Model.ContactPerson" />
+            </div>
+
+            <div>
+                <label>Contact Email</label>
+                <input type="text" name="Email" readonly value="@Model.Email" />
+            </div>
+
+            <div>
+                <label>Product Name</label>
+                <input type="text" name="ProductName" readonly value="@Model.ProductName" />
+            </div>
+
+            <div>
+                <label>Product Type</label>
+                <input type="text" name="ProductType" readonly value="@Model.ProductType" />
+            </div>
+        </section>
+        <!-- Right panel -->
+        <section class="right-panel">
+            <div>
+                <label>Week of the Year</label>
+                <input type="text" name="WeekNumber" readonly value="@Model.WeekNumber" />
+            </div>
+
+            <div>
+                <label>Day of the Week</label>
+                <input type="text" name="DayOfWeek" readonly value="@Model.DayOfWeek" />
+            </div>
+
+            <div>
+                <label>Service Order Completion Status</label>
+                <input type="text" name="OrderStatus" readonly value="@Model.OrderStatus" />
+            </div>
+
+            <!-- More/other? -->
+
+        </section>
+    </section>
+
+    <!-- Customer Comments or Problems -->
+    <section class="customer-comments">
+        <h2>Customer Comments</h2>
+        <textarea readonly name="CustomerComment">@Model.CustomerComment</textarea>
+    </section>
+
+    <!-- Checklist Section -->
+    <section id="checklistSection">
+        <table class="table table-bordered mb-3" id="checklistTable">
+            <thead>
+                <tr>
+                    <th>Kategorier</th>
+                    <th>Sjekkpunkter</th>
+                    <th>OK</th>
+                    <th>Bør Skiftes</th>
+                    <th>Defekt</th>
+                </tr>
+            </thead>
+            <tbody id="itemRows">
+                <!-- Genereres av JS-filen-->
+            </tbody>
+        </table>
+
+        <!-- Mekaniker kommentar -->
+        <div class="mb-3">
+            <label for="mechanicsCommentary" class="form-label">Kommentar</label>
+            <textarea class="form-control" name="MechanicCommentary" id="mechanicsCommentary"></textarea>
+        </div>
+
+        <!-- Dato og Signatur -->
+        <div class="row mb-3">
+            <div class="col">
+                <label for="signature" class="form-label">Signatur</label>
+                <input type="text" class="form-control" name="Signature" id="signature">
+            </div>
+            <div class="col">
+                <label for="displayDateTime" class="form-label">Dato</label>
+                <span class="form-control" id="displayDateTime"></span>
+                <input type="hidden" name="CompletedAt" id="date_time" value="">
+            </div>
+        </div>
+    </section>
+
+    <button type="submit" class="btn btn-success">Complete Order</button>
+</form>
+
+
+@section Scripts {
+    <script src="~/js/categoryitems.js"></script>
+    <script src="/js/serviceorder.js"></script>
+}

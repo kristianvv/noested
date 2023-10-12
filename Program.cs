@@ -2,6 +2,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using Noested.Data;
 
+using Noested.Services;
+using Noested.Utilities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,8 +19,22 @@ builder.Services.AddDbContext<NoestedContext>(options => options.UseSqlServer(co
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+builder.Services.AddSingleton<ServiceOrderDatabase>();
+builder.Services.AddScoped<ServiceOrderService>();
+builder.Services.AddScoped<IServiceOrderRepository, ServiceOrderRepository>();
+builder.Services.AddScoped<ChecklistService>();
 
 var app = builder.Build();
+
+/* Retrieve the ServiceOrderDatabase instance from the service provider */
+using (var serviceScope = app.Services.CreateScope())
+{
+    // Retrieve instance of database
+    var serviceOrderDatabase = serviceScope.ServiceProvider.GetRequiredService<ServiceOrderDatabase>();
+
+    // Seed the database with hardcoded service orders
+    DatabaseSeeder.SeedServiceOrders(serviceOrderDatabase);
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
