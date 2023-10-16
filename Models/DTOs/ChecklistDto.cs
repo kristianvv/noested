@@ -8,13 +8,38 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Noested.Models.DTOs
 {
-    public class ChecklistDto : Controller
+    public class ChecklistDto
     {
-        // GET: /<controller>/
-        public IActionResult Index()
+        public List<Category> Categories { get; set; }
+        public ChecklistDto()
         {
-            return View();
+            Categories = new List<Category>();
+        }
+    }
+
+    //
+    public class Category
+    {
+        public string Name { get; set; }
+        public List<Item> Items { get; set; }
+
+        public Category()
+        {
+            Name = "";
+            Items = new List<Item>();
+        }
+    }
+
+    //
+    public class Item
+    {
+        public string Name { get; set; }
+        public string Status { get; set; } // OK, Bør Skiftes, Defekt
+
+        public Item()
+        {
+            Name = "";
+            Status = "";
         }
     }
 }
-

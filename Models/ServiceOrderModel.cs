@@ -1,6 +1,5 @@
 ﻿// To Remain POCO. Update methods in Services > ServiceOrderService.cs
 using System.ComponentModel.DataAnnotations;
-using Noested.Data.DTOs;
 using Noested.Models.DTOs;
 
 namespace Noested.Models
