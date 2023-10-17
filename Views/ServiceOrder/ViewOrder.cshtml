@@ -14,45 +14,61 @@
         <section class="left-panel">
             <!-- Left panel -->
             <div>
-                <label>Order Number</label>
-                <input type="text" name="OrderNumber" readonly value="@Model.OrderNumber" />
+                <label>
+                    Order Number
+                    <input type="text" name="OrderNumber" readonly value="@Model.OrderNumber" />
+                </label>
             </div>
 
             <div>
-                <label>Contact Person</label>
-                <input type="text" name="ContactPerson" readonly value="@Model.ContactPerson" />
+                <label>
+                    Contact Person
+                    <input type="text" name="ContactPerson" readonly value="@Model.ContactPerson" />
+                </label>
             </div>
 
             <div>
-                <label>Contact Email</label>
-                <input type="text" name="Email" readonly value="@Model.Email" />
+                <label>
+                    Contact Email
+                    <input autocomplete="on" type="text" name="Email" readonly value="@Model.Email" />
+                </label>
             </div>
 
             <div>
-                <label>Product Name</label>
-                <input type="text" name="ProductName" readonly value="@Model.ProductName" />
+                <label>
+                    Product Name
+                    <input type="text" name="ProductName" readonly value="@Model.ProductName" />
+                </label>
             </div>
 
             <div>
-                <label>Product Type</label>
-                <input type="text" name="ProductType" readonly value="@Model.ProductType" />
+                <label>
+                    Product Type
+                    <input type="text" name="ProductType" readonly value="@Model.ProductType" />
+                </label>
             </div>
         </section>
         <!-- Right panel -->
         <section class="right-panel">
             <div>
-                <label>Week of the Year</label>
-                <input type="text" name="WeekNumber" readonly value="@Model.WeekNumber" />
+                <label>
+                    Week of the Year
+                    <input type="text" name="WeekNumber" readonly value="@Model.WeekNumber" />
+                </label>
             </div>
 
             <div>
-                <label>Day of the Week</label>
-                <input type="text" name="DayOfWeek" readonly value="@Model.DayOfWeek" />
+                <label>
+                    Day of the Week
+                    <input type="text" name="DayOfWeek" readonly value="@Model.DayOfWeek" />
+                </label>
             </div>
 
             <div>
-                <label>Service Order Completion Status</label>
-                <input type="text" name="OrderStatus" readonly value="@Model.OrderStatus" />
+                <label>
+                    Service Order Completion Status
+                    <input type="text" name="OrderStatus" readonly value="@Model.OrderStatus" />
+                </label>
             </div>
 
             <!-- More/other? -->
@@ -94,11 +110,6 @@
             <div class="col">
                 <label for="signature" class="form-label">Signatur</label>
                 <input type="text" class="form-control" name="Signature" id="signature">
-            </div>
-            <div class="col">
-                <label for="displayDateTime" class="form-label">Dato</label>
-                <span class="form-control" id="displayDateTime"></span>
-                <input type="hidden" name="CompletedAt" id="date_time" value="">
             </div>
         </div>
     </section>

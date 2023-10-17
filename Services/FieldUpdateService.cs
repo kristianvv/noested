@@ -31,7 +31,7 @@ namespace Noested.Services
             existingOrder.HoursToComplete = completedOrder.HoursToComplete;
             existingOrder.OpenedAt = completedOrder.OpenedAt;
             existingOrder.TimeToOpen = completedOrder.TimeToOpen;
-            existingOrder.CompletedAt = completedOrder.CompletedAt;
+            // existingOrder.CompletedAt = completedOrder.CompletedAt;
             existingOrder.TimeToComplete = completedOrder.TimeToComplete;
             existingOrder.Checklists = completedOrder.Checklists;
         }

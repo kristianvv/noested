@@ -46,7 +46,7 @@ function generateChecklist() {
             hiddenInput.type = "hidden";
             hiddenInput.name = `category_${sanitize(item)}`;
             hiddenInput.value = category.name;
-            form.appendChild(hiddenInput); * /
+            form.appendChild(hiddenInput);
 
             // Item cell
             const itemCell = document.createElement("td");

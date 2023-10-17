@@ -31,10 +31,10 @@ namespace Noested.Services
             try
             {
                 UpdateOrderStatus(existingOrder, "Completed");
-                UpdateCompletedAt(existingOrder, DateTime.Now);
+                // UpdateCompletedAt(existingOrder, DateTime.Now);
                 _checklistService.PopulateChecklistFromForm(completedOrder, form);
                 UpdateChecklist(existingOrder, completedOrder.Checklists);
-                UpdateTimeToComplete(existingOrder, existingOrder.CompletedAt - existingOrder.OpenedAt);
+                // UpdateTimeToComplete(existingOrder, existingOrder.CompletedAt - existingOrder.OpenedAt);
 
                 FieldUpdateService.UpdateFields(existingOrder, completedOrder);
 
@@ -126,10 +126,10 @@ namespace Noested.Services
             order.Checklists = newChecklist;
         }
 
-        public void UpdateCompletedAt(ServiceOrderModel order, DateTime newCompletedAt)
+        /* public void UpdateCompletedAt(ServiceOrderModel order, DateTime newCompletedAt)
         {
             order.CompletedAt = newCompletedAt;
-        }
+        } */
 
         public void UpdateTimeToComplete(ServiceOrderModel order, TimeSpan newTimeToComplete)
         {
