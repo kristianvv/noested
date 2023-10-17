@@ -28,7 +28,7 @@ namespace Noested.Models
             HoursToComplete = 0.0;
             OpenedAt = DateTime.Now;
             TimeToOpen = new TimeSpan(0);
-            CompletedAt = DateTime.Now;
+            // CompletedAt = DateTime.Now;
             TimeToComplete = new TimeSpan(0);
 
             Checklists = new ChecklistDto();
@@ -104,7 +104,7 @@ namespace Noested.Models
         // ACTION INFORMATION ON SERVICE ORDERS (Invisible & for generating reports only)
         public DateTime OpenedAt { get; set; } // When was it opened
         public TimeSpan TimeToOpen { get; set; } // Difference between creating it and opening it
-        public DateTime CompletedAt { get; set; } // When was it finished (checklist submit)
+        // public DateTime CompletedAt { get; set; } // When was it finished (checklist submit)
         public TimeSpan TimeToComplete { get; set; } // Difference between opening and submitting.
     }
 }
