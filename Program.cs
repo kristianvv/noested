@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Noested.Data;
 
@@ -23,6 +24,21 @@ builder.Services.AddSingleton<ServiceOrderDatabase>();
 builder.Services.AddScoped<ServiceOrderService>();
 builder.Services.AddScoped<IServiceOrderRepository, ServiceOrderRepository>();
 builder.Services.AddScoped<ChecklistService>();
+
+
+//Login og logout
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/login"; // Set the login path
+        options.LogoutPath = "/logout"; // Set the logout path
+        options.Cookie.HttpOnly = true;
+        options.Cookie.SameSite = SameSiteMode.Strict;
+        options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(60); // Set the cookie expiration time
+        options.SlidingExpiration = true;
+    });
+
 
 var app = builder.Build();
 
