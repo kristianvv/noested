@@ -10,6 +10,10 @@ namespace Noested.Controllers
             return View();
         }
 
+        public IActionResult CreateNewUser()
+        {
+            return RedirectToAction("RegisterUser", "Account");
+        }
 
 
     }

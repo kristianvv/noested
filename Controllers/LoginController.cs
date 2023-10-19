@@ -4,6 +4,8 @@
 using Noested.Data;
 using Noested.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace Noested.Controllers;
 
@@ -59,7 +61,14 @@ public class LoginController : Controller
             ViewBag.ErrorMessage = "Feil ansattnummer eller passord";
             return View("Index");
         }
+
+    public IActionResult Logout()
+    {
+        // Perform logout logic
+        HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        return RedirectToAction("Login", "Login"); // Redirect to login page
     }
+}
 
 
 
