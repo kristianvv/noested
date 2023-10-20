@@ -1,6 +1,7 @@
 ﻿// To Remain POCO. Update methods in Services > ServiceOrderService.cs
+using System;
 using System.ComponentModel.DataAnnotations;
-using Noested.Models.DTOs;
+using Noested.Data;
 
 namespace Noested.Models
 {
@@ -8,103 +9,75 @@ namespace Noested.Models
     {
         public ServiceOrderModel()
         {
-            OrderNumber = 0;
+            ServiceOrderID = 0;
+            ServiceOrderStatus = "";
+            OrderRecieved = DateTime.MinValue;
+            AgreedFinishedDate = DateTime.MinValue;
+            OrderCompleted = DateTime.MinValue;
             ProductName = "";
             ProductType = "";
-            WeekNumber = 0;
-            DayOfWeek = "";
-            OrderStatus = "";
-            ContactPerson = "";
-            Address = "";
-            PhoneNumber = "";
-            Email = "";
+            SerialNumber = 0;
+            ModelYear = null;
+            Warranty = WarrantyType.None;
             CustomerComment = "";
-            MechanicCommentary = "";
-            Signature = "";
-            AgreedFinishedDate = DateTime.Now;
-            AgreedDeliveryDate = DateTime.Now;
-            ReceivedProductDate = DateTime.Now;
-            CompletedServiceDate = DateTime.Now;
-            HoursToComplete = 0.0;
-            OpenedAt = DateTime.Now;
-            TimeToOpen = new TimeSpan(0);
-            // CompletedAt = DateTime.Now;
-            TimeToComplete = new TimeSpan(0);
-
-            Checklists = new ChecklistDto();
+            RepairDescription = "";
+            WorkHours = 0;
+            Checklists = new ChecklistDTO();
+            Customer = new Customer();
         }
-        // DISPLAYED ON SERIVCE ORDER TICKETS IN MECH VIEW (Views > ServiceOrder > Index.cshtml)
-        [Required]
-        [Display(Name = "Order Number")]
-        public int OrderNumber { get; set; }
 
-        [Required]
-        [StringLength(100)]
-        [Display(Name = "Product Name")]
-        public string ProductName { get; set; }
-
-        [Required]
-        [StringLength(100)]
-        [Display(Name = "Product Type")]
-        public string ProductType { get; set; }
-
-        [Required]
-        [Display(Name = "Week Number")]
-        public int WeekNumber { get; set; }
-
-        [Required]
-        [Display(Name = "Day of the Week")]
-        public string DayOfWeek { get; set; }
-
-        [Required]
-        [Display(Name = "Order Status")]
-        public string OrderStatus { get; set; }
-
-        // DISPLAYED AFTER OPENING SERVICE ORDER
-        // Left Section
-        [Required]
-        [Display(Name = "Customer's Name or Company")]
-        public string ContactPerson { get; set; }
-
-        [Required]
-        [Display(Name = "Address")]
-        public string Address { get; set; }
-
-        [Required]
-        [Display(Name = "Phone/Mobile Number")]
-        public string PhoneNumber { get; set; }
-
-        [Display(Name = "Email Address")]
-        public string Email { get; set; }
-
-        // Right Section
+        [Display(Name = "Serviceorder ID")] // Primary Key
+        public int ServiceOrderID { get; set; }
+        [Display(Name = "Serviceorder Status")]
+        public string? ServiceOrderStatus { get; set; }
+        [Display(Name = "Order Received")]
+        public DateTime OrderRecieved { get; set; }
+        [Display(Name = "Agreed Finished Date")]
         public DateTime AgreedFinishedDate { get; set; }
-        public DateTime AgreedDeliveryDate { get; set; }
-        public DateTime ReceivedProductDate { get; set; }
-        public DateTime CompletedServiceDate { get; set; }
-        public double HoursToComplete { get; set; }
+        [Display(Name = "Order Completed")]
+        public DateTime OrderCompleted { get; set; }
+        [Display(Name = "Product Name")]
+        public string? ProductName { get; set; }
+        [Display(Name = "Product Type")]
+        public string? ProductType { get; set; }
+        [Display(Name = "Serial Number")]
+        public int SerialNumber { get; set; }
+        [Display(Name = "Model Year")]
+        public string? ModelYear { get; set; }
+        [Display(Name = "Warranty Type")]
+        public WarrantyType Warranty { get; set; }
+        [Display(Name = "Customer Comment")]
+        public string? CustomerComment { get; set; }
+        [Display(Name = "Description of Repair")]
+        public string? RepairDescription { get; set; }
+        [Display(Name = "Working Hours")]
+        public int WorkHours { get; set; }
 
-        // ViewOrder.cshtml: Under Left- and Right Sections
-        [Required]
-        [Display(Name = "Customer's Description of Problem")]
-        public string CustomerComment { get; set; }
+        // Reference to Customer
+        public Customer Customer { get; set; }
 
-        // Checklist Items Radio Options (Under Customer's Description)
-        public ChecklistDto Checklists { get; set; }
+        // Reference to Checklist (DTO folder)
+        public ChecklistDTO Checklists { get; set; }
+    }
 
-        // Mechanics Commentary and Signature
-        [Required]
-        [Display(Name = "Mechanics Comments")]
-        public string MechanicCommentary { get; set; }
+    // Enum for Warranty
+    public enum WarrantyType
+    {
+        None,
+        Limited,
+        Full
+    }
 
-        [Required]
-        [Display(Name = "Mechanics Signature")]
-        public string Signature { get; set; }
-
-        // ACTION INFORMATION ON SERVICE ORDERS (Invisible & for generating reports only)
-        public DateTime OpenedAt { get; set; } // When was it opened
-        public TimeSpan TimeToOpen { get; set; } // Difference between creating it and opening it
-        // public DateTime CompletedAt { get; set; } // When was it finished (checklist submit)
-        public TimeSpan TimeToComplete { get; set; } // Difference between opening and submitting.
+    //Information about Customer
+    public class Customer
+    {
+        public int? CustomerID { get; set; }
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
+        public string? StreetAddress { get; set; }
+        public int? ZipCode { get; set; }
+        public string? City { get; set; }
+        public string? Email { get; set; }
+        public string? Phone { get; set; }
     }
 }

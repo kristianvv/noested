@@ -1,62 +1,55 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Noested.Models;
-using Noested.Models.DTOs;
 using Noested.Data;
 using Noested.Services;
-using System.Net.Http.Json;
-using System.Text.Json;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Noested.Controllers
 {
     public class ServiceOrderController : Controller
     {
-        /* dependency injection variables */
         private readonly ILogger<ServiceOrderController> _logger;
         private readonly IServiceOrderRepository _repository;
         private readonly ServiceOrderService _service;
 
-        public ServiceOrderController(IServiceOrderRepository repository, ILogger<ServiceOrderController> logger, ServiceOrderService service) // interacts with repository through interface
+        public ServiceOrderController(IServiceOrderRepository repository, ILogger<ServiceOrderController> logger, ServiceOrderService service)
         {
             _repository = repository;
             _logger = logger;
             _service = service;
         }
 
-        /* Returns: All Service Orders from repository */
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var allServiceOrders = _repository.GetAllServiceOrders();
+            var allServiceOrders = await _repository.GetAllServiceOrdersAsync();
             if (allServiceOrders == null || !allServiceOrders.Any())
             {
                 var errorViewModel = new ErrorViewModel
                 {
                     RequestId = "Null or no ServiceOrders in database"
                 };
-                return View("Error", errorViewModel); // Error.cshtml in Views folder.
+                return View("Error", errorViewModel);
             }
             return View(allServiceOrders);
-
         }
 
-        /* Summary: Service Personell Viewscreen for Creating a New Service Order.
-         * Returns: View > ServiceOrder > Create.cshtml */
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            // Passes existing customers to view's (Create.cshtml) dropdown list 
+            var existingCustomers = await _repository.GetAllCustomersAsync(); // fetch
+            ViewBag.ExistingCustomers = new SelectList(existingCustomers, "CustomerID", "FirstName"); // pass
             return View();
         }
 
-        /* Summary: Submits a New Service Order to the database (Service Personell)
-         * Param name="newOrder" – Accepts formdata (Create.cshtml) based on model.
-         * Returns: To the Mechanics view (if valid) or back to same view (if validation errors)  */
         [HttpPost]
-        public IActionResult Create(ServiceOrderModel newOrder)
+        public async Task<IActionResult> Create(ServiceOrderModel newOrder, int? existingCustomerId)
         {
-            _logger.LogInformation("Successfully called Create Method"); // Invoking Create Method
+            _logger.LogInformation("Successfully called Create Method");
             if (!ModelState.IsValid)
             {
-                foreach (var modelState in ModelState)  // Loop through ModelState, Log validation errors.
+                foreach (var modelState in ModelState)
                 {
                     if (modelState.Value.Errors.Count > 0)
                     {
@@ -65,24 +58,37 @@ namespace Noested.Controllers
                 }
                 return View(newOrder);
             }
+            else
+            {
+                _logger.LogInformation("Model state is valid.");
+                if (existingCustomerId.HasValue) // using existing customer
+                {
+                    newOrder.Customer!.CustomerID = existingCustomerId.Value;
+                }
+                else
+                {
+                    if (newOrder.Customer != null && newOrder.Customer.CustomerID.HasValue) // null checks for CS8604 on adding
+                    {
+                        await _repository.AddCustomerAsync(newOrder.Customer); // adds new customer
+                        newOrder.Customer!.CustomerID = newOrder.Customer.CustomerID.Value; // update foreign key
+                    }
+                    else
+                    {
+                        _logger.LogError("Customer information is incomplete or null.");
+                        return View(newOrder);
+                    }
+                }
 
-            // Log valid model state
-            _logger.LogInformation("Model state is valid.");
-
-            // Add new Service Order and log the action
-            _repository.AddServiceOrder(newOrder);
-            _logger.LogInformation("New order added and redirecting to Index.");
-
-            // Redirect to the Mechanics view
-            return RedirectToAction("Index");
+                await _repository.AddServiceOrderAsync(newOrder);
+                _logger.LogInformation("New order added and redirecting to Index.");
+                return RedirectToAction("Index");
+            }
         }
 
-        /* Summary: Opens a Service Order from Mechanics' Viewscreen.
-         * Param name="id" – Identifies Service Order based on OrderNumber.
-         * Returns: Single Service Order from database to View (if found) or nullcheck "order not found" */
-        public IActionResult ViewOrder(int id)
+
+        public async Task<IActionResult> ViewOrder(int id)
         {
-            var order = _repository.GetOrderById(id);
+            var order = await _repository.GetOrderByIdAsync(id);
             if (order == null)
             {
                 return NotFound("Order not found");
@@ -90,46 +96,29 @@ namespace Noested.Controllers
             return View(order);
         }
 
-        /* Summary: Saves Completed Service Order and Updates its Status.
-         * Param=name"openedOrder" – Service Order that has been Opened for Completion
-         * Param=name"form" – Form Collection Containing Checklist Items (serviceorder.js)
-         * Returns: The Action Result.
-         */
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult SaveCompletedOrder(CompletedOrderDto completedOrderDto)
+        public async Task<IActionResult> SaveCompletedOrder(CompletedOrderDTO completedOrderDto)
         {
             _logger.LogInformation("Successfully called SaveCompletedOrder()");
-            _logger.LogInformation($"Received DTO: {JsonSerializer.Serialize(completedOrderDto)}");
-
-
-            // Validate incoming data
             if (completedOrderDto == null || completedOrderDto.CompletedOrder == null)
             {
-                _logger.LogError("Either completedOrderDto or completedOrderDto.CompletedOrder is null.");
-                return BadRequest("Invalid Data");
+                return BadRequest("Invalid payload");
             }
 
             if (!ModelState.IsValid)
             {
-                _logger.LogError("ModelState is not valid. ModelState: {ModelState}", ModelState);
-                return Json(new { status = "error", message = "ModelState is not valid." });
+                return View(completedOrderDto.CompletedOrder);
             }
 
-            // Get existing Service Order for update
-            var existingOrder = _repository.GetOrderById(completedOrderDto.CompletedOrder.OrderNumber);
+            var existingOrder = await _repository.GetOrderByIdAsync(completedOrderDto.CompletedOrder.ServiceOrderID);
             if (existingOrder == null)
             {
-                return Json(new { status = "error", message = "Requested Order Does Not Exist (Not Found)" });
+                return NotFound("Requested Order Does Not Exist (Not Found)");
             }
 
-            // Update existing Service Order
-            _service.UpdateExistingOrder(existingOrder, completedOrderDto.CompletedOrder, completedOrderDto.Form);  // Root>Services>ServiceOrderServices.cs
-            return Json(new { status = "success", message = "The order has been successfully saved." });
+            await _service.UpdateExistingOrderAsync(existingOrder, completedOrderDto.CompletedOrder, completedOrderDto.Form);
 
-            // Redirect to Mechanics view
-            // return RedirectToAction("Index");
+            return RedirectToAction("Index");
         }
     }
 }
-

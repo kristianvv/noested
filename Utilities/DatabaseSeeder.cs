@@ -1,64 +1,113 @@
-﻿using System;
-using System.Collections.Generic;
-using Noested.Data;
-using Noested.Models;
+﻿using NoostRevamp.Data;
+using NoostRevamp.Models;
 
-namespace Noested.Utilities
+namespace NoostRevamp.Utilities
 {
-
     public static class DatabaseSeeder
     {
-        public static void SeedServiceOrders(ServiceOrderDatabase dbContext)
+        public static void SeedServiceOrders(IServiceOrderRepository dbContext)
         {
             List<ServiceOrderModel> serviceOrders = new()
             {
                 new ServiceOrderModel
                 {
-                    OrderNumber = 1,
+                    OrderRecieved = DateTime.Now,
+                    OrderCompleted = DateTime.Now,
+                    ServiceOrderStatus = "Uåpnet",
+                    SerialNumber = 12345,
                     ProductName = "IGLAND 5002 Pento TL",
                     ProductType = "Vinsj",
-                    WeekNumber = 22,
-                    DayOfWeek = "Mandag",
-                    ContactPerson = "John Doe",
-                    Address = "Univeien 20, 5034",
-                    PhoneNumber = "85429854",
-                    Email = "john.doe@gmail.com",
-                    OrderStatus = "Uåpnet",
-                    CustomerComment = "Motor lager ulyder"
+                    ModelYear = "2022",
+                    Warranty = WarrantyType.Full,
+                    CustomerComment = "Problem with motor",
+                    Checklists = new ChecklistDTO(),
+                    Customer = new Customer
+                    {
+                        CustomerID = 1,
+                        FirstName = "John",
+                        LastName = "Doe",
+                        StreetAddress = "Univeien 20",
+                        ZipCode = 5034,
+                        City = "Cityville",
+                        Email = "john.doe@gmail.com",
+                        Phone = "85429854"
+                    }
                 },
                 new ServiceOrderModel
                 {
-                    OrderNumber = 2,
+                    OrderRecieved = DateTime.Now,
+                    OrderCompleted = DateTime.Now,
+                    ServiceOrderStatus = "Uåpnet",
+                    SerialNumber = 54321,
                     ProductName = "IGLAND 6002 Pronto TLP",
                     ProductType = "Vinsj",
-                    WeekNumber = 23,
-                    DayOfWeek = "Onsdag",
-                    ContactPerson = "Jane Doe",
-                    Address = "Univeien 20, 5034",
-                    PhoneNumber = "45978643",
-                    Email = "jane.doe@gmail.com",
-                    OrderStatus = "Uåpnet",
-                    CustomerComment = "Dårlig trekkraft og lukter svidd ved bruk"
+                    ModelYear = "2023",
+                    Warranty = WarrantyType.Limited,
+                    CustomerComment = "Problem with traction",
+                    Checklists = new ChecklistDTO(),
+                    Customer = new Customer
+                    {
+                        CustomerID = 2,
+                        FirstName = "Jane",
+                        LastName = "Doe",
+                        StreetAddress = "Univeien 20",
+                        ZipCode = 5034,
+                        City = "Cityville",
+                        Email = "jane.doe@gmail.com",
+                        Phone = "45978643"
+                    }
                 },
                 new ServiceOrderModel
                 {
-                    OrderNumber = 3,
+                    OrderRecieved = DateTime.Now,
+                    OrderCompleted = DateTime.Now,
+                    ServiceOrderStatus = "Uåpnet",
+                    SerialNumber = 98765,
                     ProductName = "Igland 2501",
                     ProductType = "Vinsj",
-                    WeekNumber = 24,
-                    DayOfWeek = "Fredag",
-                    ContactPerson = "Oluf Snøvla",
-                    Address = "Birkegata 12, 5524",
-                    PhoneNumber = "86543354",
-                    Email = "oluf.snovla@gmail.com",
-                    OrderStatus = "Uåpnet",
-                    CustomerComment = "Problem med sjetting"
+                    ModelYear = "2021",
+                    Warranty = WarrantyType.None,
+                    CustomerComment = "Ulyder i motoren og svidd lukt",
+                    Checklists = new ChecklistDTO(),
+                    Customer = new Customer
+                    {
+                        CustomerID = 3,
+                        FirstName = "Oluf",
+                        LastName = "Snøvla",
+                        StreetAddress = "Birkegata 12",
+                        ZipCode = 5524,
+                        City = "Snowtown",
+                        Email = "oluf.snovla@gmail.com",
+                        Phone = "86543354"
+                    }
                 }
             };
-
-            foreach (var order in serviceOrders)
+            // Legger ordrene til databasen
+            foreach (ServiceOrderModel order in serviceOrders)
             {
-                dbContext.AddServiceOrder(order);
+                dbContext.AddServiceOrderAsync(order);
+            }
+
+            // Legger kundeinfo fra ServiceOrdrene inn i egen liste i db
+            List<Customer> existingCustomers = dbContext.GetAllCustomersAsync().Result.ToList();
+            foreach (ServiceOrderModel order in serviceOrders)
+            {
+                Customer customer = order.Customer;
+
+                // Validerer at CustomerID and Email er unike
+                if (existingCustomers != null && customer != null)
+                {
+                    if (existingCustomers.Any(c => c != null && (c.CustomerID == customer.CustomerID || c.Email == customer.Email)))
+                    {
+                        // logger feil, kunne  ikke bruke Ilogger her.
+                        Console.WriteLine($"Warning: Duplicate CustomerID or Email found for CustomerID: {customer.CustomerID}, Email: {customer.Email}");
+                    }
+                    else
+                    {
+                        dbContext.AddCustomerAsync(customer); // Oppdaterer listen med kunder.  
+                    }
+                }
+
             }
         }
     }

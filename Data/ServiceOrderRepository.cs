@@ -1,43 +1,57 @@
-﻿using Noested.Models;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Noested.Models;
+using Noested.Controllers;
 
 namespace Noested.Data
 {
     public interface IServiceOrderRepository
     {
-        List<ServiceOrderModel> GetAllServiceOrders();
-        ServiceOrderModel? GetOrderById(int id);
-        void AddServiceOrder(ServiceOrderModel newOrder);
-        void UpdateOrder(ServiceOrderModel updatedOrder);
+        Task<IEnumerable<ServiceOrderModel>> GetAllServiceOrdersAsync();
+        Task<ServiceOrderModel?> GetOrderByIdAsync(int id);
+        Task AddServiceOrderAsync(ServiceOrderModel newOrder);
+        Task UpdateOrderAsync(ServiceOrderModel updatedOrder);
+        Task<IEnumerable<Customer>> GetAllCustomersAsync();
+        Task AddCustomerAsync(Customer newCustomer);
     }
 
     public class ServiceOrderRepository : IServiceOrderRepository
     {
-        private readonly ServiceOrderDatabase _database; // Mock database to be replaced
+        private readonly ServiceOrderDatabase _database;
 
         public ServiceOrderRepository(ServiceOrderDatabase database)
         {
             _database = database;
         }
-
-        public List<ServiceOrderModel> GetAllServiceOrders()
+        // For ServiceOrders: GetAll
+        public async Task<IEnumerable<ServiceOrderModel>> GetAllServiceOrdersAsync()
         {
-            return (List<ServiceOrderModel>)_database.GetAllServiceOrders();
+            return await _database.GetAllServiceOrdersAsync();
         }
-
-        public ServiceOrderModel? GetOrderById(int id)
+        // GetById
+        public async Task<ServiceOrderModel?> GetOrderByIdAsync(int id)
         {
-            return _database.GetOrderById(id);
+            return await _database.GetOrderByIdAsync(id);
         }
-
-        public void AddServiceOrder(ServiceOrderModel newOrder)
+        // Add
+        public async Task AddServiceOrderAsync(ServiceOrderModel newOrder)
         {
-            _database.AddServiceOrder(newOrder);
+            await _database.AddServiceOrderAsync(newOrder);
         }
-
-        // Update Existing Service Orders
-        public void UpdateOrder(ServiceOrderModel updatedOrder)
+        // Update
+        public async Task UpdateOrderAsync(ServiceOrderModel updatedOrder)
         {
-            _database.UpdateOrder(updatedOrder);
+            await _database.UpdateOrderAsync(updatedOrder);
+        }
+        // For Customers: GetAll
+        public async Task<IEnumerable<Customer>> GetAllCustomersAsync()
+        {
+            return await _database.GetAllCustomersAsync();
+        }
+        // Add
+        public async Task AddCustomerAsync(Customer newCustomer)
+        {
+            await _database.AddCustomerAsync(newCustomer);
         }
     }
 }
