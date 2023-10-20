@@ -1,7 +1,7 @@
-﻿using NoostRevamp.Data;
-using NoostRevamp.Models;
+﻿using Noested.Data;
+using Noested.Models;
 
-namespace NoostRevamp.Utilities
+namespace Noested.Utilities
 {
     public static class DatabaseSeeder
     {

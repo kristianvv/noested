@@ -23,21 +23,24 @@
                 @foreach (var order in Model)
                 {
                     <section class="service-order-item">
-                        <a href="@Url.Action("ViewOrder", "ServiceOrder", new { id = order.OrderNumber })">
-                            <div class="order-number">
-                                Order No: @order.OrderNumber
+                        <a href="@Url.Action("ViewOrder", "ServiceOrder", new { id = order.ServiceOrderID })">
+                            <div>
+                                Ordre opprettet: @order.OrderRecieved
                             </div>
-                            <div class="customer-name">
-                                Customer: @order.ContactPerson
+                            <div>
+                                Ordrenummer: @order.ServiceOrderID
                             </div>
-                            <div class="product-details">
-                                Product: @order.ProductName (@order.ProductType)
+                            <div>
+                                Kundenummer: @order.Customer!.CustomerID.
                             </div>
-                            <div class="date-details">
-                                Week: @order.WeekNumber, Day: @order.DayOfWeek
+                            <div>
+                                Produktnavn: @order.ProductName (@order.ProductName)
                             </div>
-                            <div class="status">
-                                Status: @order.OrderStatus
+                            <div>
+                                Produkttype: @order.ProductType (@order.ProductType)
+                            </div>
+                            <div>
+                                Ordrestatus: @order.ServiceOrderStatus
                             </div>
                         </a>
                     </section>
@@ -49,3 +52,8 @@
         <div class="col-md-2"></div>
     </div>
 </div>
+
+
+@section Scripts {
+    <script src="~/js/..."></script>
+}

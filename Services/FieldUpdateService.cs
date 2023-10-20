@@ -2,39 +2,34 @@
 
 namespace Noested.Services
 {
-    public static class FieldUpdateService
-    {
-        /// Summary: Helper method to update the fields of an existing order based on a completed order.
-        /// <param name="existingOrder">The existing order to update.</param>
-        /// <param name="completedOrder">The completed order with new data.</param>
-        public static void UpdateFields(ServiceOrderModel existingOrder, ServiceOrderModel completedOrder)
+	public class FieldUpdateService
+	{
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="existingOrder"></param>
+        /// <param name="completedOrder"></param>
+        public static async Task UpdateFieldsAsync(ServiceOrderModel existingOrder, ServiceOrderModel completedOrder)
         {
             if (existingOrder == null || completedOrder == null)
             {
                 throw new ArgumentException("Existing order or completed order cannot be null");
             }
 
-            existingOrder.ProductName = completedOrder.ProductName;
-            existingOrder.ProductType = completedOrder.ProductType;
-            existingOrder.WeekNumber = completedOrder.WeekNumber;
-            existingOrder.DayOfWeek = completedOrder.DayOfWeek;
-            existingOrder.OrderStatus = completedOrder.OrderStatus;
-            existingOrder.ContactPerson = completedOrder.ContactPerson;
-            existingOrder.Address = completedOrder.Address;
-            existingOrder.PhoneNumber = completedOrder.PhoneNumber;
-            existingOrder.Email = completedOrder.Email;
-            existingOrder.CustomerComment = completedOrder.CustomerComment;
-            existingOrder.AgreedDeliveryDate = completedOrder.AgreedDeliveryDate;
-            existingOrder.AgreedFinishedDate = completedOrder.AgreedFinishedDate;
-            existingOrder.ReceivedProductDate = completedOrder.ReceivedProductDate;
-            existingOrder.CompletedServiceDate = completedOrder.CompletedServiceDate;
-            existingOrder.HoursToComplete = completedOrder.HoursToComplete;
-            existingOrder.OpenedAt = completedOrder.OpenedAt;
-            existingOrder.TimeToOpen = completedOrder.TimeToOpen;
-            // existingOrder.CompletedAt = completedOrder.CompletedAt;
-            existingOrder.TimeToComplete = completedOrder.TimeToComplete;
+            existingOrder.ServiceOrderID = completedOrder.ServiceOrderID;
+            existingOrder.ServiceOrderStatus = completedOrder.ServiceOrderStatus;
+            existingOrder.OrderRecieved = completedOrder.OrderRecieved;
+            existingOrder.OrderCompleted = completedOrder.OrderCompleted;
+            existingOrder.SerialNumber = completedOrder.SerialNumber;
+            existingOrder.ModelYear = completedOrder.ModelYear;
+            existingOrder.Warranty = completedOrder.Warranty;
+            existingOrder.RepairDescription = completedOrder.RepairDescription;
+            existingOrder.WorkHours = completedOrder.WorkHours;
+            existingOrder.Customer = completedOrder.Customer;
+            existingOrder.Customer!.CustomerID = completedOrder.Customer!.CustomerID;
             existingOrder.Checklists = completedOrder.Checklists;
+
+            await Task.CompletedTask;
         }
     }
-
 }

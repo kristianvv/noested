@@ -8,78 +8,51 @@
 }
 
 
-<form id="serviceOrderForm" asp-action="SaveCompletedOrder" method="post">
+<form asp-action="SaveCompletedOrder" method="post">
     <!-- Display Static Order Info -->
     <section class="order-info">
         <section class="left-panel">
             <!-- Left panel -->
             <div>
-                <label>
-                    Order Number
-                    <input type="text" name="OrderNumber" readonly value="@Model.OrderNumber" />
-                </label>
+                <label>Serviceordre ID</label> <!-- Serviceordre ID (int) -->
+                <input type="text" readonly value="@Model.ServiceOrderID" />
             </div>
 
             <div>
-                <label>
-                    Contact Person
-                    <input type="text" name="ContactPerson" readonly value="@Model.ContactPerson" />
-                </label>
+                <label>Kunde ID</label> <!-- Kunde ID (int)-->
+                <input type="text" readonly value="@Model.Customer!.CustomerID" />
             </div>
 
             <div>
-                <label>
-                    Contact Email
-                    <input autocomplete="on" type="text" name="Email" readonly value="@Model.Email" />
-                </label>
+                <label>Produktnavn</label> <!-- Produktnavn (f.eks "Igland 2501") -->
+                <input type="text" readonly value="@Model.ProductName" />
             </div>
 
             <div>
-                <label>
-                    Product Name
-                    <input type="text" name="ProductName" readonly value="@Model.ProductName" />
-                </label>
-            </div>
-
-            <div>
-                <label>
-                    Product Type
-                    <input type="text" name="ProductType" readonly value="@Model.ProductType" />
-                </label>
+                <label>Produkttype</label> <!-- Produkttype (f.eks "Vinsj") -->
+                <input type="text" readonly value="@Model.ProductType" />
             </div>
         </section>
         <!-- Right panel -->
         <section class="right-panel">
             <div>
-                <label>
-                    Week of the Year
-                    <input type="text" name="WeekNumber" readonly value="@Model.WeekNumber" />
-                </label>
+                <label>Status for Serviceordre</label> <!-- Ordrestatus (f.eks 'Uåpnet' eller 'Fullført')-->
+                <input type="text" readonly value="@Model.ServiceOrderStatus" />
             </div>
-
             <div>
-                <label>
-                    Day of the Week
-                    <input type="text" name="DayOfWeek" readonly value="@Model.DayOfWeek" />
-                </label>
+                <label>Mottatt Ordre Dato</label> <!-- Opprettet Dato -->
+                <input type="text" readonly value="@Model.OrderRecieved" />
             </div>
-
             <div>
-                <label>
-                    Service Order Completion Status
-                    <input type="text" name="OrderStatus" readonly value="@Model.OrderStatus" />
-                </label>
+                <label>Ordre Utført Dato</label> <!-- Utført Dato -->
+                <input type="text" readonly value="@Model.OrderCompleted" />
             </div>
-
-            <!-- More/other? -->
-
         </section>
     </section>
-
-    <!-- Customer Comments or Problems -->
+    
     <section class="customer-comments">
-        <h2>Customer Comments</h2>
-        <textarea readonly name="CustomerComment">@Model.CustomerComment</textarea>
+        <h2>Kundens Problembeskrivelse</h2> <!-- Kundens  -->
+        <textarea readonly>@Model.CustomerComment</textarea>
     </section>
 
     <!-- Checklist Section -->
@@ -101,20 +74,12 @@
 
         <!-- Mekaniker kommentar -->
         <div class="mb-3">
-            <label for="mechanicsCommentary" class="form-label">Kommentar</label>
-            <textarea class="form-control" name="MechanicCommentary" id="mechanicsCommentary"></textarea>
-        </div>
-
-        <!-- Dato og Signatur -->
-        <div class="row mb-3">
-            <div class="col">
-                <label for="signature" class="form-label">Signatur</label>
-                <input type="text" class="form-control" name="Signature" id="signature">
-            </div>
+            <label for="RepairDescription" class="form-label">Beskrivelse av Reparasjoner</label>
+            <textarea class="form-control" id="RepairDescription" name="RepairDescription"></textarea>
         </div>
     </section>
 
-    <button type="submit" class="btn btn-success">Complete Order</button>
+    <button type="submit" class="btn btn-success">Ferdigstill Ordre</button>
 </form>
 
 
