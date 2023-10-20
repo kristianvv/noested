@@ -1,6 +1,6 @@
 ﻿using Noestedp.Controllers;
 using Noested.Data;
-using Noestedp.Models;
+using Noested.Models;
 
 namespace Noested.Services
 {

@@ -1,1 +1,4 @@
 *.dll
+Views/.DS_Store
+wwwroot/.DS_Store
+.DS_Store
