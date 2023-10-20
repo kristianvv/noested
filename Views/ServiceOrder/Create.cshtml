@@ -1,108 +1,103 @@
-﻿<!-- A form to create a new service order.
-    For service personnel: The Create action method will load the Create.cshtml View. -->
+﻿@model ServiceOrderModel
 
-@model ServiceOrderModel
+    @section Styles {
+        <link rel="stylesheet" href="~/css/CreateServiceOrder.css">
+    }
 
-@section Styles {
-    <link rel="stylesheet" href="~/css/CreateServiceOrder.css">
-}
+    <h1>Create New Service Order</h1>
 
-<h1>Create New Service Order</h1>
+    <form asp-action="Create" asp-controller="ServiceOrder" method="post">
+        <!-- REQUIRED FIELDS -->
+        <container>
+            <section class="left-section">
+                <!-- Existing Customer Dropdown -->
+                <div class="form-group">
+                    <label for="existingCustomer">Select Existing Customer</label>
+                    <select id="existingCustomer" class="form-control" asp-for="Customer.CustomerID" asp-items="ViewBag.ExistingCustomers" onchange="toggleNewCustomerSection()">
+                        <option value="">-- Create New Customer --</option>
+                    </select>
+                </div>
+                <!-- Warranty -->
+                <div class="form-group">
+                    <label asp-for="Warranty" title="Produktgaranti type"></label>
+                    <select asp-for="Warranty" class="form-control">
+                        <option value="None">None</option>
+                        <option value="Limited">Limited</option>
+                        <option value="Full">Full</option>
+                    </select>
+                </div>
+                <!-- Product Name -->
+                <div class="form-group">
+                    <label asp-for="ProductName" title="Produktnavnet"></label>
+                    <input asp-for="ProductName" class="form-control" required placeholder="f.eks 'IGLAND 5002 Pento TL'" />
+                </div>
+                <!-- Product Type -->
+                <div class="form-group">
+                    <label asp-for="ProductType" title="Produkttypen"></label>
+                    <input asp-for="ProductType" class="form-control" required placeholder="f.eks 'Vinsj'" />
+                </div>
+                <!-- Serial Number -->
+                <div class="form-group">
+                    <label asp-for="SerialNumber" title="Produktets Serienummer"></label>
+                    <input asp-for="SerialNumber" class="form-control" required pattern="\d+" title="Bare nummer er tillatt" />
+                </div>
+                <!-- Model Year -->
+                <div class="form-group">
+                    <label asp-for="ModelYear" title="Produktets Årsmodell"></label>
+                    <input asp-for="ModelYear" class="form-control" pattern="\d{4}" title="Fire-sifret årsformat" />
+                    <small class="form-text text-muted">Legg inn ÅÅÅÅ format (YYYY)</small>
+                </div>
 
-<form asp-action="Create" asp-controller="ServiceOrder" method="post">
-    <!-- REQUIRED FIELDS -->
-    <section class="left-section">
-        <!-- Order Number -->
-        <div class="form-group">
-            <label asp-for="OrderNumber"></label>
-            <input asp-for="OrderNumber" class="form-control" required />
-        </div>
-        <!-- Order Status -->
-        <div class="form-group">
-            <label asp-for="OrderStatus"></label>
-            <input asp-for="OrderStatus" class="form-control" required />
-        </div>
-        <!-- Product -->
-        <div class="form-group">
-            <label asp-for="ProductName"></label>
-            <input asp-for="ProductName" class="form-control" required />
-        </div>
-        <!-- Product Type -->
-        <div class="form-group">
-            <label asp-for="ProductType"></label>
-            <input asp-for="ProductType" class="form-control" required />
-        </div>
-        <!-- WeekNumber Order is created -->
-        <div class="form-group">
-            <label asp-for="WeekNumber"></label>
-            <input asp-for="WeekNumber" class="form-control" required />
-        </div>
-        <!-- DayOfWeek Order is created -->
-        <div class="form-group">
-            <label asp-for="DayOfWeek"></label>
-            <input asp-for="DayOfWeek" class="form-control" required />
-        </div>
-        <!-- Customer's Name -->
-        <div class="form-group">
-            <label asp-for="ContactPerson"></label>
-            <input asp-for="ContactPerson" class="form-control" required />
-        </div>
-        <!-- Customer's Address -->
-        <div class="form-group">
-            <label asp-for="Address"></label>
-            <input asp-for="Address" class="form-control" required />
-        </div>
-        <!-- Customer's Phonenumber -->
-        <div class="form-group">
-            <label asp-for="PhoneNumber"></label>
-            <input asp-for="PhoneNumber" class="form-control" required />
-        </div>
-        <!-- Customer's Email -->
-        <div class="form-group">
-            <label asp-for="Email"></label>
-            <input asp-for="Email" type="email" class="form-control" required />
-        </div>
-    </section>
+                <div class="form-group">
+                    <label asp-for="CustomerComment" title="Kundens Problembeskrivelse"></label>
+                    <input asp-for="CustomerComment" class="form-control" required placeholder="Kundens ønsker eller beskrivelse av problemet" />
+                </div>
+                <!-- ... Add other fields here ... -->
+            </section>
 
-    <!-- ADDITIONAL FIELDS -->
-    <section class="right-section">
-        <!-- Agreed-upon Finish Date -->
-        <div class="form-group">
-            <label asp-for="AgreedFinishedDate"></label>
-            <input asp-for="AgreedFinishedDate" type="date" class="form-control" />
-        </div>
+            <!-- New Customer Section -->
+            <section id="newCustomerSection" class="right-section" style="display: none;">
+                <!-- Customer's First Name -->
+                <div class="form-group">
+                    <label asp-for="Customer!.FirstName"></label>
+                    <input asp-for="Customer!.FirstName" class="form-control" />
+                </div>
+                <!-- Customer's Last Name -->
+                <div class="form-group">
+                    <label asp-for="Customer!.LastName"></label>
+                    <input asp-for="Customer!.LastName" class="form-control" />
+                </div>
+                <!-- Customer's Street Address -->
+                <div class="form-group">
+                    <label asp-for="Customer!.StreetAddress"></label>
+                    <input asp-for="Customer!.StreetAddress" class="form-control" />
+                </div>
+                <!-- Customer's Zip Code -->
+                <div class="form-group">
+                    <label asp-for="Customer!.ZipCode"></label>
+                    <input asp-for="Customer!.ZipCode" class="form-control" />
+                </div>
+                <!-- Customer's City -->
+                <div class="form-group">
+                    <label asp-for="Customer!.City"></label>
+                    <input asp-for="Customer!.City" class="form-control" />
+                </div>
+                <!-- Customer's Email -->
+                <div class="form-group">
+                    <label asp-for="Customer!.Email"></label>
+                    <input asp-for="Customer!.Email" class="form-control" />
+                </div>
+                <!-- Customer's Phone -->
+                <div class="form-group">
+                    <label asp-for="Customer!.Phone"></label>
+                    <input asp-for="Customer!.Phone" class="form-control" />
+                </div>
+            </section>
+        </container>
 
-        <!-- Agreed-upon Delivery Date-->
-        <div class="form-group">
-            <label asp-for="AgreedDeliveryDate"></label>
-            <input asp-for="AgreedDeliveryDate" type="date" class="form-control" />
-        </div>
+        <button type="submit" class="btn btn-primary create-button">Create</button>
+    </form>
 
-        <!-- Date Product was Received for Service (filled by Mechanic) -->
-        <div class="form-group">
-            <label asp-for="ReceivedProductDate"></label>
-            <input asp-for="ReceivedProductDate" type="date" class="form-control" />
-        </div>
-
-        <!-- Date Service on Product was Completed (filled by Mechanic) -->
-        <div class="form-group">
-            <label asp-for="CompletedServiceDate"></label>
-            <input asp-for="CompletedServiceDate" type="date" class="form-control" />
-        </div>
-
-        <!-- Working hours it took to complete the service (filled by Mechanic)-->
-        <div class="form-group">
-            <label asp-for="HoursToComplete"></label>
-            <input asp-for="HoursToComplete" class="form-control" />
-        </div>
-    </section>
-
-    <section class="full-width-section">
-        <!-- Customer Comment -->
-        <div class="form-group">
-            <label asp-for="CustomerComment"></label>
-            <textarea asp-for="CustomerComment" class="form-control"></textarea>
-        </div>
-    </section>
-    <button type="submit" onclick="" class="btn btn-primary create-button">Create</button>
-</form>
+    @section Scripts {
+        <script src="~/js/createServiceOrder.js"></script>
+    }

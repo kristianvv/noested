@@ -1,29 +1,26 @@
-﻿using Noested.Controllers;
-using Noested.Models;
-using Noested.Models.DTOs;
+﻿using Noestedp.Controllers;
 using Noested.Data;
+using Noested.Models;
 
 namespace Noested.Services
 {
-    public class ChecklistService
-    {
+	public class ChecklistService
+	{
         private readonly ILogger<ServiceOrderController> _logger;
 
         public ChecklistService(ILogger<ServiceOrderController> logger)
-        {
+		{
             _logger = logger;
         }
 
-
-        public void PopulateChecklistFromForm(ServiceOrderModel order, IFormCollection form)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="order"></param>
+        /// <param name="form"></param>
+        public static async Task PopulateChecklistFromForm(ServiceOrderModel order, IFormCollection form)
         {
-            _logger.LogInformation($"Received form data: {form}");
-            if (order == null || form == null)
-            {
-                throw new ArgumentException("Order or form cannot be null.");
-            }
-
-            order.Checklists = new ChecklistDto();
+            order.Checklists = new ChecklistDTO();
             foreach (var key in form.Keys)
             {
                 if (key.StartsWith("item_"))
@@ -42,6 +39,8 @@ namespace Noested.Services
 
                     var item = new Item { Name = itemName, Status = status };
                     categoryObj.Items.Add(item);
+
+                    await Task.CompletedTask;
                 }
             }
         }

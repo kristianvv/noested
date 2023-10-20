@@ -1,139 +1,99 @@
-﻿using Noested.Controllers;
-using Noested.Data;
+﻿using Noested.Data;
 using Noested.Models;
-using Noested.Models.DTOs;
-using Noested.Services;
 
 namespace Noested.Services
 {
     public class ServiceOrderService
     {
         private readonly IServiceOrderRepository _repository;
-        private readonly ILogger<ServiceOrderController> _logger;
-        private readonly ChecklistService _checklistService;
 
-        public ServiceOrderService(IServiceOrderRepository repository, ILogger<ServiceOrderController> logger, ChecklistService checklistService)
+        public ServiceOrderService(IServiceOrderRepository repository)
         {
             _repository = repository;
-            _logger = logger;
-            _checklistService = checklistService;
         }
 
-        public void UpdateExistingOrder(ServiceOrderModel existingOrder, ServiceOrderModel completedOrder, IFormCollection form)
+        //
+        public async Task UpdateExistingOrderAsync(ServiceOrderModel existingOrder, ServiceOrderModel completedOrder, IFormCollection form)
         {
-            // Validation
-            if (existingOrder == null || completedOrder == null || form == null)
-            {
-                _logger.LogError("Error: existingOrder, completedOrder, or form is NULL");
-                throw new ArgumentException("existingOrder, completedOrder or form cannot be NULL");
-            }
-
-            try
-            {
-                UpdateOrderStatus(existingOrder, "Completed");
-                // UpdateCompletedAt(existingOrder, DateTime.Now);
-                _checklistService.PopulateChecklistFromForm(completedOrder, form);
-                UpdateChecklist(existingOrder, completedOrder.Checklists);
-                // UpdateTimeToComplete(existingOrder, existingOrder.CompletedAt - existingOrder.OpenedAt);
-
-                FieldUpdateService.UpdateFields(existingOrder, completedOrder);
-
-                _repository.UpdateOrder(existingOrder);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"An error occurred while updating the order: {ex.Message}");
-            }
+            await UpdateOrderStatusAsync(existingOrder, "Completed");
+            await UpdateOrderCompletedAsync(existingOrder, DateTime.Now);
+            await ChecklistService.PopulateChecklistFromForm(completedOrder, form);
+            await UpdateChecklistsAsync(existingOrder, completedOrder.Checklists);
+            await FieldUpdateService.UpdateFieldsAsync(existingOrder, completedOrder);
+            await _repository.UpdateOrderAsync(existingOrder);
         }
 
-        public void UpdateProductName(ServiceOrderModel order, string newProductName)
+        //
+        public async Task UpdateServiceOrderIDAsync(ServiceOrderModel order, int newServiceOrderID)
         {
-            order.ProductName = newProductName;
+            order.ServiceOrderID = newServiceOrderID;
+            await Task.CompletedTask;
         }
 
-        public void UpdateProductType(ServiceOrderModel order, string newProductType)
+        public async Task UpdateOrderStatusAsync(ServiceOrderModel order, string newOrderStatus)
         {
-            order.ProductType = newProductType;
+            order.ServiceOrderStatus = newOrderStatus;
+            await Task.CompletedTask;
         }
 
-        public void UpdateWeekNumber(ServiceOrderModel order, int newWeekNumber)
+        public async Task UpdateOrderRecievedAsync(ServiceOrderModel order, DateTime newOrderRecieved)
         {
-            order.WeekNumber = newWeekNumber;
+            order.OrderRecieved = newOrderRecieved;
+            await Task.CompletedTask;
         }
 
-        public void UpdateDayOfWeek(ServiceOrderModel order, string newDayOfWeek)
+        public async Task UpdateOrderCompletedAsync(ServiceOrderModel order, DateTime newOrderCompleted)
         {
-            order.DayOfWeek = newDayOfWeek;
+            order.OrderCompleted = newOrderCompleted;
+            await Task.CompletedTask;
         }
 
-        public void UpdateOrderStatus(ServiceOrderModel order, string newOrderStatus)
+        public async Task UpdateSerialNumberAsync(ServiceOrderModel order, int newSerialNumber)
         {
-            order.OrderStatus = newOrderStatus;
+            order.SerialNumber = newSerialNumber;
+            await Task.CompletedTask;
         }
 
-        public void UpdateContactPerson(ServiceOrderModel order, string newContactPerson)
+        public async Task UpdateModelYearAsync(ServiceOrderModel order, string newModelYear)
         {
-            order.ContactPerson = newContactPerson;
+            order.ModelYear = newModelYear;
+            await Task.CompletedTask;
         }
 
-        public void UpdateAddress(ServiceOrderModel order, string newAddress)
+        public async Task UpdateWarrantyAsync(ServiceOrderModel order, WarrantyType newWarranty)
         {
-            order.Address = newAddress;
+            order.Warranty = newWarranty;
+            await Task.CompletedTask;
         }
 
-        public void UpdatePhoneNumber(ServiceOrderModel order, string newPhoneNumber)
+        public async Task UpdateRepairDescriptionAsync(ServiceOrderModel order, string newRepairDescription)
         {
-            order.PhoneNumber = newPhoneNumber;
+            order.RepairDescription = newRepairDescription;
+            await Task.CompletedTask;
         }
 
-        public void UpdateEmail(ServiceOrderModel order, string newEmail)
+        public async Task UpdateWorkHoursAsync(ServiceOrderModel order, int newWorkHours)
         {
-            order.Email = newEmail;
+            order.WorkHours = newWorkHours;
+            await Task.CompletedTask;
         }
 
-        public void UpdateAgreedFinishedDate(ServiceOrderModel order, DateTime newDate)
+        public async Task UpdateCustomerAsync(ServiceOrderModel order, Customer newCustomer)
         {
-            order.AgreedFinishedDate = newDate;
+            order.Customer = newCustomer;
+            await Task.CompletedTask;
         }
 
-        public void UpdateAgreedDeliveryDate(ServiceOrderModel order, DateTime newDate)
+        public async Task UpdateCustomerIDAsync(ServiceOrderModel order, int newCustomerID)
         {
-            order.AgreedDeliveryDate = newDate;
+            order.Customer!.CustomerID = newCustomerID;
+            await Task.CompletedTask;
         }
 
-        public void UpdateReceivedProductDate(ServiceOrderModel order, DateTime newDate)
+        public async Task UpdateChecklistsAsync(ServiceOrderModel order, ChecklistDTO newChecklists)
         {
-            order.ReceivedProductDate = newDate;
-        }
-
-        public void UpdateCompletedServiceDate(ServiceOrderModel order, DateTime newDate)
-        {
-            order.CompletedServiceDate = newDate;
-        }
-
-        public void UpdateHoursToComplete(ServiceOrderModel order, double newHours)
-        {
-            order.HoursToComplete = newHours;
-        }
-
-        public void UpdateCustomerComment(ServiceOrderModel order, string newComment)
-        {
-            order.CustomerComment = newComment;
-        }
-
-        public void UpdateChecklist(ServiceOrderModel order, ChecklistDto newChecklist)
-        {
-            order.Checklists = newChecklist;
-        }
-
-        /* public void UpdateCompletedAt(ServiceOrderModel order, DateTime newCompletedAt)
-        {
-            order.CompletedAt = newCompletedAt;
-        } */
-
-        public void UpdateTimeToComplete(ServiceOrderModel order, TimeSpan newTimeToComplete)
-        {
-            order.TimeToComplete = newTimeToComplete;
+            order.Checklists = newChecklists;
+            await Task.CompletedTask;
         }
     }
 }

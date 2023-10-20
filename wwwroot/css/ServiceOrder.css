@@ -27,6 +27,6 @@
         background-color: #ffff66; /* Brighter yellow when clicked */
     }
 
-.order-number, .customer-name, .product-details, .date-details, .status {
+div {
     margin-bottom: 10px;
 }
