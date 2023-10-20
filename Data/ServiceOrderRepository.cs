@@ -53,5 +53,12 @@ namespace Noested.Data
         {
             await _database.AddCustomerAsync(newCustomer);
         }
+
+        // Alt under her kommer fra AppDbContext
+
+
+
+
+
     }
 }

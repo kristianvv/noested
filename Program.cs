@@ -1,29 +1,20 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Noested.Data;
-
 using Noested.Services;
 using Noested.Utilities;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Register AppDbContext with in-memory database for testing
-builder.Services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("TestDatabase"));
-
 // var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 var connectionString = builder.Configuration.GetConnectionString("NoestedContext");
-
-// Register NoestedContext with SQL Server database
-builder.Services.AddDbContext<NoestedContext>(options => options.UseSqlServer(connectionString));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
-builder.Services.AddSingleton<ServiceOrderDatabase>();
-builder.Services.AddScoped<ServiceOrderService>();
-builder.Services.AddScoped<IServiceOrderRepository, ServiceOrderRepository>();
-builder.Services.AddScoped<ChecklistService>();
+builder.Services.AddSingleton<ServiceOrderDatabase>(); // Daniel (AppDbContext (EFCore) og NoestedContext (SQL) test variabler flyttet hit)
+builder.Services.AddScoped<IServiceOrderRepository, ServiceOrderRepository>(); // Daniel repository pattern for in-mem DB
+builder.Services.AddScoped<ServiceOrderService>(); // Daniel
+builder.Services.AddScoped<ChecklistService>(); // Daniel
 
 
 //Login og logout
@@ -42,13 +33,13 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 
 var app = builder.Build();
 
-/* Retrieve the ServiceOrderDatabase instance from the service provider */
+/* Get the Repo instance (Repository Pattern) from the service provider for Daniel DbSeeder... */
 using (var serviceScope = app.Services.CreateScope())
 {
-    // Retrieve instance of database
-    var serviceOrderDatabase = serviceScope.ServiceProvider.GetRequiredService<ServiceOrderDatabase>();
+    // ...with this line...
+    var serviceOrderDatabase = serviceScope.ServiceProvider.GetRequiredService<IServiceOrderRepository>();
 
-    // Seed the database with hardcoded service orders
+    // ... and seed DB with hardcoded service orders
     DatabaseSeeder.SeedServiceOrders(serviceOrderDatabase);
 }
 

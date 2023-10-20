@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
 using Noested.Data;
 using Noested.Models;
 
@@ -12,9 +6,9 @@ namespace Noested.Controllers
 {
     public class TestsController : Controller
     {
-        private readonly NoestedContext _context;
+        private readonly ServiceOrderDatabase _context;
 
-        public TestsController(NoestedContext context)
+        public TestsController(ServiceOrderDatabase context)
         {
             _context = context;
         }
@@ -22,21 +16,21 @@ namespace Noested.Controllers
         // GET: Tests
         public async Task<IActionResult> Index()
         {
-              return _context.Test != null ? 
-                          View(await _context.Test.ToListAsync()) :
-                          Problem("Entity set 'NoestedContext.Test'  is null.");
+            var tests = await _context.GetAllTestsAsync();
+            return tests != null && tests.Any() ?
+                View(tests) :
+                Problem("Entity set 'ServiceOrderDatabase.Test' is null.");
         }
 
         // GET: Tests/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Test == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var test = await _context.Test
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var test = await _context.GetTestByIdAsync(id.Value);
             if (test == null)
             {
                 return NotFound();
@@ -52,16 +46,13 @@ namespace Noested.Controllers
         }
 
         // POST: Tests/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,ReleaseDate,Genre,Price")] Test test)
+        public async Task<IActionResult> Create(Test test)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(test);
-                await _context.SaveChangesAsync();
+                await _context.AddTestAsync(test);
                 return RedirectToAction(nameof(Index));
             }
             return View(test);
@@ -70,12 +61,12 @@ namespace Noested.Controllers
         // GET: Tests/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Test == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var test = await _context.Test.FindAsync(id);
+            var test = await _context.GetTestByIdAsync(id.Value);
             if (test == null)
             {
                 return NotFound();
@@ -84,11 +75,9 @@ namespace Noested.Controllers
         }
 
         // POST: Tests/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,ReleaseDate,Genre,Price")] Test test)
+        public async Task<IActionResult> Edit(int id, Test test)
         {
             if (id != test.Id)
             {
@@ -97,22 +86,7 @@ namespace Noested.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(test);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!TestExists(test.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                await _context.UpdateTestAsync(test);
                 return RedirectToAction(nameof(Index));
             }
             return View(test);
@@ -121,13 +95,12 @@ namespace Noested.Controllers
         // GET: Tests/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Test == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var test = await _context.Test
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var test = await _context.GetTestByIdAsync(id.Value);
             if (test == null)
             {
                 return NotFound();
@@ -141,23 +114,8 @@ namespace Noested.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Test == null)
-            {
-                return Problem("Entity set 'NoestedContext.Test'  is null.");
-            }
-            var test = await _context.Test.FindAsync(id);
-            if (test != null)
-            {
-                _context.Test.Remove(test);
-            }
-            
-            await _context.SaveChangesAsync();
+            await _context.DeleteTestAsync(id);
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool TestExists(int id)
-        {
-          return (_context.Test?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

@@ -10,7 +10,7 @@ using Noested.Data;
 
 namespace Noested.Migrations
 {
-    [DbContext(typeof(NoestedContext))]
+    [DbContext(typeof(ServiceOrderDatabase))]
     partial class NoestedContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

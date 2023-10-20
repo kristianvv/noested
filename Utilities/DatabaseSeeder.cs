@@ -1,5 +1,6 @@
 ﻿using Noested.Data;
 using Noested.Models;
+using Noested.Models.DTOs;
 
 namespace Noested.Utilities
 {

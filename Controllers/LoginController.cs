@@ -11,8 +11,9 @@ namespace Noested.Controllers;
 
 public class LoginController : Controller
     {
-        private readonly AppDbContext _context;
-        public LoginController(AppDbContext context)
+        private readonly ServiceOrderDatabase _context;
+
+        public LoginController(ServiceOrderDatabase context)
         {
             _context = context;
         }
@@ -36,7 +37,6 @@ public class LoginController : Controller
         };
 
         _context.Users.Add(user);
-        _context.SaveChanges();
 
         return RedirectToAction("Index", "Login"); // Redirect to login page after successful registration
     }

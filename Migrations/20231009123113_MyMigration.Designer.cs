@@ -11,7 +11,7 @@ using Noested.Data;
 
 namespace Noested.Migrations
 {
-    [DbContext(typeof(NoestedContext))]
+    [DbContext(typeof(ServiceOrderDatabase))]
     [Migration("20231009123113_MyMigration")]
     partial class MyMigration
     {

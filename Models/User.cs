@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Relocated use of this class from deleted DB context to ServiceOrderDatabase.cs
+
+using System;
 namespace Noested.Models
 {
     public class User
@@ -7,7 +9,7 @@ namespace Noested.Models
         public int EmployeeNumber { get; set; }
         public required string Password { get; set; }
         public UserRole Role { get; set; }
-        public string Email { get; set; }
+        public string? Email { get; set; }
     }
 
     public enum UserRole
