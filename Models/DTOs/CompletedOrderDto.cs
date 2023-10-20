@@ -10,7 +10,7 @@ using Noested.Models;
 namespace Noested.Models.DTOs
 {
 
-    public class CompletedOrderDto
+    public class CompletedOrderDTO
     {
         public ServiceOrderModel? CompletedOrder { get; set; }
         public IFormCollection? Form { get; set; }

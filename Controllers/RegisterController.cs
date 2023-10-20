@@ -8,8 +8,8 @@ namespace Noested.Controllers
 {
     public class RegisterController : Controller
     {
-        private readonly AppDbContext _context;
-        public RegisterController(AppDbContext context)
+        private readonly ServiceOrderDatabase _context;
+        public RegisterController(ServiceOrderDatabase context)
         {
             _context = context;
         }
@@ -35,7 +35,6 @@ namespace Noested.Controllers
             };
 
             _context.Users.Add(user);
-            _context.SaveChanges();
 
             return RedirectToAction("Index", "Login"); // Redirect to home page after successful registration
         }

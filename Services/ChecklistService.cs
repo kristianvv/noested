@@ -1,6 +1,6 @@
-﻿using Noestedp.Controllers;
-using Noested.Data;
+﻿using Noested.Controllers;
 using Noested.Models;
+using Noested.Models.DTOs;
 
 namespace Noested.Services
 {
@@ -18,7 +18,7 @@ namespace Noested.Services
         /// </summary>
         /// <param name="order"></param>
         /// <param name="form"></param>
-        public static async Task PopulateChecklistFromForm(ServiceOrderModel order, IFormCollection form)
+        public static async Task PopulateChecklistFromForm(ServiceOrderModel order, IFormCollection? form)
         {
             order.Checklists = new ChecklistDTO();
             foreach (var key in form.Keys)

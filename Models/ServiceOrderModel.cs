@@ -1,7 +1,7 @@
 ﻿// To Remain POCO. Update methods in Services > ServiceOrderService.cs
-using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using Noested.Data;
+using Noested.Models.DTOs;
 
 namespace Noested.Models
 {
@@ -79,5 +79,21 @@ namespace Noested.Models
         public string? City { get; set; }
         public string? Email { get; set; }
         public string? Phone { get; set; }
+    }
+
+    // !!! UNRELATED TO MODEL !!! MOVED FROM DummyServiceOrderModel.cs –– TO BE DELETED? Related functions in ServiceOrderDatabase.cs 
+    public class DummyServiceOrder
+    {
+        [Key] // This annotation specifies the primary key
+        public int ServiceOrderID { get; set; }
+
+        [DisplayName("Ordrenummer")]
+        public int OrderNum { get; set; }
+        [DisplayName("Ordredato")]
+        public DateTime OrderDate { get; set; }
+        [DisplayName("Fornavn")]
+        public string? CustomerFirstname { get; set; }
+        [DisplayName("Etternavn")]
+        public string? CustomerLastname { get; set; }
     }
 }

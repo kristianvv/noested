@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Noested.Models;
+using Noested.Models.DTOs;
 using Noested.Data;
 using Noested.Services;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -12,15 +13,22 @@ namespace Noested.Controllers
         private readonly IServiceOrderRepository _repository;
         private readonly ServiceOrderService _service;
 
-        public ServiceOrderController(IServiceOrderRepository repository, ILogger<ServiceOrderController> logger, ServiceOrderService service)
+        /* Midlertidig for controller-funksjoner fra slettede controllere */
+        private readonly ServiceOrderDatabase _inMemoryDb;  // For DummyServiceOrdersController
+
+        // Uses dependency injection to receive instance of db, Ilogger and a custom service
+        public ServiceOrderController(IServiceOrderRepository repository, ILogger<ServiceOrderController> logger, ServiceOrderService service, /*midlertidig*/ ServiceOrderDatabase inMemoryDb) 
         {
             _repository = repository;
             _logger = logger;
             _service = service;
+
+            _inMemoryDb = inMemoryDb; // Midlertidig DummyServiceOrdersController
         }
 
+        //
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index() // Class inherits from base Controller class to handle HTTP requests/responses
         {
             var allServiceOrders = await _repository.GetAllServiceOrdersAsync();
             if (allServiceOrders == null || !allServiceOrders.Any())
@@ -33,7 +41,7 @@ namespace Noested.Controllers
             }
             return View(allServiceOrders);
         }
-
+        //
         [HttpGet]
         public async Task<IActionResult> Create()
         {
@@ -42,7 +50,7 @@ namespace Noested.Controllers
             ViewBag.ExistingCustomers = new SelectList(existingCustomers, "CustomerID", "FirstName"); // pass
             return View();
         }
-
+        //
         [HttpPost]
         public async Task<IActionResult> Create(ServiceOrderModel newOrder, int? existingCustomerId)
         {
@@ -84,8 +92,7 @@ namespace Noested.Controllers
                 return RedirectToAction("Index");
             }
         }
-
-
+        //
         public async Task<IActionResult> ViewOrder(int id)
         {
             var order = await _repository.GetOrderByIdAsync(id);
@@ -95,7 +102,7 @@ namespace Noested.Controllers
             }
             return View(order);
         }
-
+        //
         [HttpPost]
         public async Task<IActionResult> SaveCompletedOrder(CompletedOrderDTO completedOrderDto)
         {
@@ -119,6 +126,111 @@ namespace Noested.Controllers
             await _service.UpdateExistingOrderAsync(existingOrder, completedOrderDto.CompletedOrder, completedOrderDto.Form);
 
             return RedirectToAction("Index");
+        }
+
+        // REFAKTORERTE METODER fra DummyServiceOrdersController
+        // Index
+        public async Task<IActionResult> DummyIndex()
+        {
+            return _inMemoryDb.DummyServiceOrder != null ?
+                          View(await Task.FromResult(_inMemoryDb.DummyServiceOrder)) :
+                          Problem("Entity set 'ServiceOrderDatabase.DummyServiceOrder' is null.");
+        }
+        // Details
+        public async Task<IActionResult> DummyDetails(int? id)
+        {
+            if (id == null || _inMemoryDb.DummyServiceOrder == null)
+            {
+                return NotFound();
+            }
+
+            var dummyServiceOrder = await Task.FromResult(_inMemoryDb.DummyServiceOrder.FirstOrDefault(m => m.ServiceOrderID == id));
+            if (dummyServiceOrder == null)
+            {
+                return NotFound();
+            }
+
+            return View(dummyServiceOrder);
+        }
+        // Create
+        public IActionResult DummyCreate()
+        {
+            return View();
+        }
+        // Create(DummyServiceOrder)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DummyCreate(DummyServiceOrder dummyServiceOrder)
+        {
+            if (ModelState.IsValid)
+            {
+                _inMemoryDb.DummyServiceOrder.Add(dummyServiceOrder);
+                await Task.FromResult(0);  // Simulate async operation
+                return RedirectToAction("DummyIndex");
+            }
+            return View(dummyServiceOrder);
+        }
+        // Edit(int? id)
+        public async Task<IActionResult> DummyEdit(int? id)
+        {
+            if (id == null || _inMemoryDb.DummyServiceOrder == null)
+            {
+                return NotFound();
+            }
+
+            var dummyServiceOrder = await Task.FromResult(_inMemoryDb.DummyServiceOrder.FirstOrDefault(m => m.ServiceOrderID == id));
+            if (dummyServiceOrder == null)
+            {
+                return NotFound();
+            }
+            return View(dummyServiceOrder);
+        }
+        // Edit(int id, DummyServiceOrder var)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DummyEdit(int id, DummyServiceOrder dummyServiceOrder)
+        {
+            if (id != dummyServiceOrder.ServiceOrderID)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                // Update logic here
+                await Task.FromResult(0);  // Simulate async operation
+                return RedirectToAction("DummyIndex");
+            }
+            return View(dummyServiceOrder);
+        }
+        // Delete (int? id)
+        public async Task<IActionResult> DummyDelete(int? id)
+        {
+            if (id == null || _inMemoryDb.DummyServiceOrder == null)
+            {
+                return NotFound();
+            }
+
+            var dummyServiceOrder = await Task.FromResult(_inMemoryDb.DummyServiceOrder.FirstOrDefault(m => m.ServiceOrderID == id));
+            if (dummyServiceOrder == null)
+            {
+                return NotFound();
+            }
+            return View(dummyServiceOrder);
+        }
+        // DeleteConfirmed
+        [HttpPost, ActionName("DummyDelete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DummyDeleteConfirmed(int id)
+        {
+            var dummyServiceOrder = await Task.FromResult(_inMemoryDb.DummyServiceOrder.FirstOrDefault(m => m.ServiceOrderID == id));
+            if (dummyServiceOrder != null)
+            {
+                _inMemoryDb.DummyServiceOrder.Remove(dummyServiceOrder);
+            }
+
+            await Task.FromResult(0);  // Simulate async operation
+            return RedirectToAction("DummyIndex");
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿// Relocated use of this class from deleted DB context to ServiceOrderDatabase.cs
+
+using System.ComponentModel.DataAnnotations;
 
 namespace Noested.Models
 {

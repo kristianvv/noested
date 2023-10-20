@@ -1,5 +1,6 @@
 ﻿using Noested.Data;
 using Noested.Models;
+using Noested.Models.DTOs;
 
 namespace Noested.Services
 {
@@ -13,7 +14,7 @@ namespace Noested.Services
         }
 
         //
-        public async Task UpdateExistingOrderAsync(ServiceOrderModel existingOrder, ServiceOrderModel completedOrder, IFormCollection form)
+        public async Task UpdateExistingOrderAsync(ServiceOrderModel existingOrder, ServiceOrderModel completedOrder, IFormCollection? form)
         {
             await UpdateOrderStatusAsync(existingOrder, "Completed");
             await UpdateOrderCompletedAsync(existingOrder, DateTime.Now);

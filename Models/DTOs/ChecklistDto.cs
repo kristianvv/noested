@@ -8,10 +8,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Noested.Models.DTOs
 {
-    public class ChecklistDto
+    public class ChecklistDTO
     {
         public List<Category> Categories { get; set; }
-        public ChecklistDto()
+        public ChecklistDTO()
         {
             Categories = new List<Category>();
         }

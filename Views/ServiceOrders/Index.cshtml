@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Noested.Models.ServiceOrder>
+﻿@model IEnumerable<Noested.Models.ServiceOrderModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -28,22 +28,10 @@
                 @Html.DisplayNameFor(model => model.Warranty)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CustomerAgreement)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.RepairDescription)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ExpiredParts)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.WorkHours)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ReplacedPartsReturned)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ShippingMethod)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Customer)
@@ -70,22 +58,10 @@
                 @Html.DisplayFor(modelItem => item.Warranty)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CustomerAgreement)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.RepairDescription)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ExpiredParts)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.WorkHours)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReplacedPartsReturned)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ShippingMethod)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Customer.CustomerID)
