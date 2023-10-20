@@ -1,72 +1,78 @@
 ﻿using Noested.Models;
-using Noested.Models.DTOs;
-
 
 namespace Noested.Data
 {
     public class ServiceOrderDatabase
     {
-        public List<ServiceOrderModel> ServiceOrders { get; private set; } = new List<ServiceOrderModel>();
-        public List<ChecklistDto> ChecklistsDto { get; private set; } = new List<ChecklistDto>();
-        public int LastOrderNumber { get; set; } = 0;
+        private List<ServiceOrderModel> ServiceOrders { get; set; } = new List<ServiceOrderModel>();
+        private List<ChecklistDTO> ChecklistsDto { get; set; } = new List<ChecklistDTO>();
+        private List<Customer> Customers { get; set; } = new List<Customer>();
+        private int LastOrderNumber { get; set; } = 0;
 
-        /// Summary: Adds a checklist to the database.
-        /// <param name="model">The checklist model.</param>
-        public void AddChecklist(ChecklistDto model)
+        // For ServiceOrders: GetById
+        public Task<ServiceOrderModel?> GetOrderByIdAsync(int id)
         {
-            ChecklistsDto.Add(model);
+            var result = ServiceOrders.Find(o => o.ServiceOrderID == id);
+            return Task.FromResult(result);
         }
 
-        /// Summary: Retrieves all checklists from the database.
-        /// Returns: An IEnumerable of ChecklistDto.</returns>
-        public IEnumerable<ChecklistDto> GetAllChecklists()
+        // GetAll
+        public Task<IEnumerable<ServiceOrderModel>> GetAllServiceOrdersAsync()
         {
-            return ChecklistsDto;
+            return Task.FromResult<IEnumerable<ServiceOrderModel>>(ServiceOrders);
         }
-
-        /// Summary: Retrieves all service orders from the database.
-        /// Returns: An IEnumerable of ServiceOrderModel.</returns>
-        public IEnumerable<ServiceOrderModel> GetAllServiceOrders()
-        {
-            return ServiceOrders;
-        }
-
-        /// Summary: Adds a service order to the database and updates its OrderNumber.
-        /// <param name="order">The service order model.</param>
-        public void AddServiceOrder(ServiceOrderModel order)
+        // Add
+        public Task AddServiceOrderAsync(ServiceOrderModel order)
         {
             LastOrderNumber++;
-            order.OrderNumber = LastOrderNumber;
+            order.OrderRecieved = DateTime.Now;
+            order.ServiceOrderID = LastOrderNumber;
             ServiceOrders.Add(order);
+            return Task.FromResult(0);
         }
-
-        /// Summary: Retrieves a service order by its OrderNumber.
-        /// <param name="id">The OrderNumber.</param>
-        /// Returns: A ServiceOrderModel or null.</returns>
-        public ServiceOrderModel? GetOrderById(int id)
+        // Update
+        public Task UpdateOrderAsync(ServiceOrderModel updatedOrder)
         {
-            return ServiceOrders.FirstOrDefault(o => o.OrderNumber == id);
-        }
-
-        /// Summary: Updates an existing service order.
-        /// <param name="updatedOrder">The updated service order model.</param>
-        public void UpdateOrder(ServiceOrderModel updatedOrder)
-        {
-            var existingOrder = ServiceOrders.FirstOrDefault(o => o.OrderNumber == updatedOrder.OrderNumber);
+            var existingOrder = ServiceOrders.Find(o => o.ServiceOrderID == updatedOrder.ServiceOrderID);
             if (existingOrder != null)
             {
-                foreach (var property in existingOrder.GetType().GetProperties())
-                {
-                    if (property.CanWrite)
-                    {
-                        var newValue = property.GetValue(updatedOrder);
-                        if (newValue != null)
-                        {
-                            property.SetValue(existingOrder, newValue);
-                        }
-                    }
-                }
+                existingOrder.OrderCompleted = updatedOrder.OrderCompleted;
+                existingOrder.SerialNumber = updatedOrder.SerialNumber;
+                existingOrder.ModelYear = updatedOrder.ModelYear;
+                existingOrder.Warranty = updatedOrder.Warranty;
+                existingOrder.RepairDescription = updatedOrder.RepairDescription;
+                existingOrder.WorkHours = updatedOrder.WorkHours;
+                existingOrder.Customer = updatedOrder.Customer;
+                existingOrder.Customer!.CustomerID = updatedOrder.Customer!.CustomerID;
+                existingOrder.Checklists = updatedOrder.Checklists;
             }
+            return Task.FromResult(0);
+        }
+
+        // For Checklists: Add
+        public Task AddChecklistAsync(ChecklistDTO model)
+        {
+            ChecklistsDto.Add(model);
+            return Task.FromResult(0);
+        }
+
+        // GetAll
+        public Task<IEnumerable<ChecklistDTO>> GetAllChecklistsAsync()
+        {
+            return Task.FromResult<IEnumerable<ChecklistDTO>>(ChecklistsDto);
+        }
+
+        // For Customers: Add
+        public Task AddCustomerAsync(Customer newCustomer)
+        {
+            Customers.Add(newCustomer);
+            return Task.FromResult(0);
+        }
+
+        // GetAll
+        public Task<IEnumerable<Customer>> GetAllCustomersAsync()
+        {
+            return Task.FromResult<IEnumerable<Customer>>(Customers);
         }
     }
 }
