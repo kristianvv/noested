@@ -6,11 +6,10 @@ namespace Noested.Controllers;
 
 public class PrivacyController : Controller
 {
-   
+
     public IActionResult PrivacyPage()
     {
         return View();
     }
 
 }
-

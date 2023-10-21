@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const serviceOrderForm = document.getElementById('serviceOrderForm');
 
-    serviceOrderForm.addEventListener('submit', function (event) {
+    serviceOrderForm.addEventListener('submit', function (event) { /* Think there's a problem here "cannot read properties of null"'*/
         console.log('Submit event triggered');  // Log to ensure this is only being called once
         event.preventDefault();  // Prevent the default form submission
 

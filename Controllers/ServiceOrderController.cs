@@ -57,6 +57,7 @@ namespace Noested.Controllers
             _logger.LogInformation("Successfully called Create Method");
             if (!ModelState.IsValid)
             {
+                _logger.LogError("Model state is not valid");
                 foreach (var modelState in ModelState)
                 {
                     if (modelState.Value.Errors.Count > 0)
@@ -71,14 +72,15 @@ namespace Noested.Controllers
                 _logger.LogInformation("Model state is valid.");
                 if (existingCustomerId.HasValue) // using existing customer
                 {
-                    newOrder.Customer!.CustomerID = existingCustomerId.Value;
+                    newOrder.Customer.CustomerID = existingCustomerId.Value;
+                    _logger.LogInformation("Existing customer was selected from menu");
                 }
                 else
                 {
-                    if (newOrder.Customer != null && newOrder.Customer.CustomerID.HasValue) // null checks for CS8604 on adding
+                    if (newOrder.Customer != null) // null check for CS8604 on adding
                     {
                         await _repository.AddCustomerAsync(newOrder.Customer); // adds new customer
-                        newOrder.Customer!.CustomerID = newOrder.Customer.CustomerID.Value; // update foreign key
+                        _logger.LogInformation("New Customer was added to database"); // CustomerID incremented by database logic
                     }
                     else
                     {
@@ -128,7 +130,11 @@ namespace Noested.Controllers
             return RedirectToAction("Index");
         }
 
-        // REFAKTORERTE METODER fra DummyServiceOrdersController
+
+
+
+
+        // !!!!!!!!!!!!!!!!!! REFAKTORERTE METODER fra DummyServiceOrdersController !!!!!!!!!!!!!!!!!!!!!!!!
         // Index
         public async Task<IActionResult> DummyIndex()
         {

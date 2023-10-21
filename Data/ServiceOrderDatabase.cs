@@ -10,12 +10,27 @@ namespace Noested.Data
         private List<ChecklistDTO> ChecklistsDto { get; set; } = new List<ChecklistDTO>();
         private List<Customer> Customers { get; set; } = new List<Customer>();
         private int LastOrderNumber { get; set; } = 0;
+        private int LastCustomerID { get; set; } = 0;
 
         public required ISet<User> Users { get; set; } = new HashSet<User>();// For testing purposes (From AppDbContext.cs – To be deleted?)
         public List<Test> Test { get; set; } = new List<Test>(); // (From NoestedContext.cs - To be deleted?)
         public ISet<ServiceOrderModel>? ServiceOrder { get; set; } = new HashSet<ServiceOrderModel>(); // (From NoestedContext.cs - To be deleted?)
         public ISet<DummyServiceOrder> DummyServiceOrder { get; set; } = new HashSet<DummyServiceOrder>(); // (From NoestedContext.cs - To be deleted?)
 
+        // For Customers: Add
+        public Task AddCustomerAsync(Customer newCustomer)
+        {
+            LastCustomerID++; // Increment the last CustomerID
+            newCustomer.CustomerID = LastCustomerID; // Set the increment as new ID.
+            Customers.Add(newCustomer);
+            return Task.FromResult(0);
+        }
+
+        // GetAll
+        public Task<IEnumerable<Customer>> GetAllCustomersAsync()
+        {
+            return Task.FromResult<IEnumerable<Customer>>(Customers);
+        }
 
         // For ServiceOrders: GetById
         public Task<ServiceOrderModel?> GetOrderByIdAsync(int id)
@@ -32,9 +47,9 @@ namespace Noested.Data
         // Add
         public Task AddServiceOrderAsync(ServiceOrderModel order)
         {
-            LastOrderNumber++;
+            LastOrderNumber++; // Increment the last ServiceOrderID
             order.OrderRecieved = DateTime.Now;
-            order.ServiceOrderID = LastOrderNumber;
+            order.ServiceOrderID = LastOrderNumber; // Set the increment as new ID
             ServiceOrders.Add(order);
             return Task.FromResult(0);
         }
@@ -70,18 +85,7 @@ namespace Noested.Data
             return Task.FromResult<IEnumerable<ChecklistDTO>>(ChecklistsDto);
         }
 
-        // For Customers: Add
-        public Task AddCustomerAsync(Customer newCustomer)
-        {
-            Customers.Add(newCustomer);
-            return Task.FromResult(0);
-        }
-
-        // GetAll
-        public Task<IEnumerable<Customer>> GetAllCustomersAsync()
-        {
-            return Task.FromResult<IEnumerable<Customer>>(Customers);
-        }
+        
 
 
 

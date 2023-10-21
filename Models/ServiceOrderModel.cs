@@ -71,7 +71,18 @@ namespace Noested.Models
     //Information about Customer
     public class Customer
     {
-        public int? CustomerID { get; set; }
+        public Customer()
+        {
+            CustomerID = 0;
+            FirstName = "";
+            LastName = "";
+            StreetAddress = "";
+            ZipCode = 0;
+            City = "";
+            Email = "";
+            Phone = "";
+        }
+        public int CustomerID { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public string? StreetAddress { get; set; }
