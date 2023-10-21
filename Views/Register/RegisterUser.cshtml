@@ -7,51 +7,53 @@
     ViewData["Title"] = "Register";
 }
 
+@using (Html.BeginForm("RegisterUser", "Login", FormMethod.Post))
+    {
+    <body class="Registrering-side">
+        @Html.AntiForgeryToken()
+        <form method="post" asp-action="RegisterUser">
 
-<body class="Registrering-side">
+            <p></p>
+            <div class="col-md-20 text-center">
+                <h3 class="font-weight-normal">Registrer ny Nøsted Konto.</h3>
 
-<form method="post" asp-action="RegisterUser">
+            </div>
+            <p></p>
+            <p></p>
+            <p></p>
 
-    <p></p>
-    <div class="col-md-20 text-center">
-            <h3 class="font-weight-normal">Registrer ny Nøsted Konto.</h3>
-       
-    </div>
-    <p></p>
-    <p></p>
-    <p></p>
+            <div class="form-group">
+                <label for="employeeNumber">Ansattnummer</label>
+                <input type="text" class="form-control" asp-for="EmployeeNumber" required>
+            </div>
+            <p></p>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" asp-for="Email" required>
+            </div>
+            <p></p>
+            <div class="form-group">
+                <label for="password">Passord</label>
+                <input type="password" class="form-control" asp-for="Password" required>
+            </div>
+            <p></p>
+            <div class="form-group">
+                <label for="confirmPassword">Bekreft passord</label>
+                <input type="password" class="form-control" asp-for="ConfirmPassword" required>
+            </div>
+            <p></p>
+            <div class="form-group">
+                <label for="role">Rolle</label>
+                <select class="form-control" id="role" name="Role" required>
+                    <option value="Service">Service</option>
+                    <option value="Mechanic">Mekaniker</option>
+                    <option value="Administrator">Administrator</option>
+                </select>
+            </div>
+            <p></p>
+            <P></P>
+            <button type="submit" class="btn btn-primary">Registrer</button>
+        </form>
 
-    <div class="form-group">
-        <label for="employeeNumber">Ansattnummer</label>
-        <input type="text" class="form-control" asp-for="EmployeeNumber" required>
-    </div>
-    <p></p>
-    <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" class="form-control" asp-for="Email" required>
-    </div>
-    <p></p>
-    <div class="form-group">
-        <label for="password">Passord</label>
-        <input type="password" class="form-control" asp-for="Password" required>
-    </div>
-    <p></p>
-    <div class="form-group">
-        <label for="confirmPassword">Bekreft passord</label>
-        <input type="password" class="form-control" asp-for="ConfirmPassword" required>
-    </div>
-    <p></p>
-    <div class="form-group">
-        <label for="role">Rolle</label>
-        <select class="form-control" id="role" name="Role" required>
-            <option value="Service">Service</option>
-            <option value="Mechanic">Mekaniker</option>
-            <option value="Administrator">Administrator</option>
-        </select>
-    </div>
-    <p></p>
-    <P></P>
-    <button type="submit" class="btn btn-primary">Registrer</button>
-</form>
-
-</body>
+    </body>
+    }

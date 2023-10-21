@@ -51,7 +51,7 @@ public class LoginController : Controller
                 switch (user.Role)
                 {
                     case UserRole.Service:
-                        return RedirectToAction("Index", "ServiceOrders");
+                        return RedirectToAction("Index", "ServiceOrder");
                     case UserRole.Mechanic:
                         return RedirectToAction("MechanicPage", "Mechanic");
                     case UserRole.Administrator:

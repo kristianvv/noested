@@ -21,6 +21,7 @@ namespace Noested.Controllers
 
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult RegisterUser(RegistreringViewModel model)
         {
             // Convert role string to enum
