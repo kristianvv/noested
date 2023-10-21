@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Authentication.Cookies;
+﻿using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Antiforgery;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Noested;
 using Noested.Data;
 
 using Noested.Services;
@@ -39,6 +42,10 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.SlidingExpiration = true;
     });
 
+builder.Services.AddAntiforgery(options =>
+{
+    options.HeaderName = "X-CSRF-TOKEN"; // Velg et passende navn for headeren?
+});
 
 var app = builder.Build();
 
@@ -63,6 +70,22 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 
+app.Use(next => context =>
+{
+    var antiforgery = context.RequestServices.GetService<IAntiforgery>();
+
+    // Send Antiforgery cookie token as a response header
+    var tokens = antiforgery.GetAndStoreTokens(context);
+    context.Response.Cookies.Append("X-CSRF-TOKEN", tokens.RequestToken, new CookieOptions
+    {
+        HttpOnly = false, // Make the cookie accessible via JavaScript
+        Secure = true, // Send only over HTTPS if possible
+        SameSite = SameSiteMode.None // Allow cross-origin cookies
+    });
+
+    return next(context);
+});
+
 app.UseAuthorization();
 
 app.MapControllerRoute(
@@ -81,5 +104,10 @@ app.MapRazorPages();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Login}/{action=Index}/{id?}");
+
+WebHost.CreateDefaultBuilder(args)
+    .ConfigureKestrel(c => c.AddServerHeader = false)
+    .UseStartup<Startup>()
+    .Build();
 
 app.Run();
