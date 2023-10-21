@@ -6,13 +6,17 @@ document.addEventListener("DOMContentLoaded", function () {
 function toggleNewCustomerSection() {
     const dropdown = document.getElementById('existingCustomer');
     const newCustomerSection = document.getElementById('newCustomerSection');
-    const inputs = newCustomerSection.querySelectorAll('input');
+    const inputElements = newCustomerSection.querySelectorAll('input');
 
-    if (dropdown.value === "") {
-        newCustomerSection.style.display = 'block';
-        inputs.forEach(input => input.required = true);
+    if (dropdown.value === "0") {
+        inputElements.forEach((input) => {
+            input.classList.remove("greyed-out");
+            input.required = true;
+        });
     } else {
-        newCustomerSection.style.display = 'none';
-        inputs.forEach(input => input.required = false);
+        inputElements.forEach((input) => {
+            input.classList.add("greyed-out");
+            input.required = false;
+        });
     }
 }

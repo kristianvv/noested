@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Noested.Models;
-using Noested.Controllers;
+﻿using Noested.Models;
 
 namespace Noested.Data
 {
@@ -53,9 +50,6 @@ namespace Noested.Data
         {
             await _database.AddCustomerAsync(newCustomer);
         }
-
-        // Alt under her kommer fra AppDbContext
-
 
 
 

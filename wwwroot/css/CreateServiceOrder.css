@@ -54,10 +54,16 @@ container {
 
 /* Style for the new customer section when it's hidden */
 .new-customer-section {
-    display: none;
     background-color: #f9f9f9;
     padding: 15px;
     border: 1px solid #ccc;
     border-radius: 4px;
     margin-top: 10px;
+}
+
+.greyed-out {
+    opacity: 0.5;
+    pointer-events: none;
+    background-color: grey;
+    cursor: not-allowed;
 }

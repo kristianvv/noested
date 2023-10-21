@@ -14,7 +14,7 @@
                 <div class="form-group">
                     <label for="existingCustomer">Select Existing Customer</label>
                     <select id="existingCustomer" class="form-control" asp-for="Customer.CustomerID" asp-items="ViewBag.ExistingCustomers" onchange="toggleNewCustomerSection()">
-                        <option value="">-- Create New Customer --</option>
+                        <option value="0">-- Create New Customer --</option>
                     </select>
                 </div>
                 <!-- Warranty -->
@@ -44,8 +44,7 @@
                 <!-- Model Year -->
                 <div class="form-group">
                     <label asp-for="ModelYear" title="Produktets Årsmodell"></label>
-                    <input asp-for="ModelYear" class="form-control" pattern="\d{4}" title="Fire-sifret årsformat" />
-                    <small class="form-text text-muted">Legg inn ÅÅÅÅ format (YYYY)</small>
+                    <input asp-for="ModelYear" class="form-control" pattern="\d{4}" placeholder="f.eks '1991'" />
                 </div>
 
                 <div class="form-group">
@@ -56,7 +55,7 @@
             </section>
 
             <!-- New Customer Section -->
-            <section id="newCustomerSection" class="right-section" style="display: none;">
+            <section id="newCustomerSection" class="right-section">
                 <!-- Customer's First Name -->
                 <div class="form-group">
                     <label asp-for="Customer!.FirstName"></label>
