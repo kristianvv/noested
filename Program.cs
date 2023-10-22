@@ -2,6 +2,10 @@
 using Noested.Data;
 using Noested.Services;
 using Noested.Utilities;
+using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Antiforgery;
+using Noested;
+using Microsoft.AspNetCore.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +19,10 @@ builder.Services.AddSingleton<ServiceOrderDatabase>(); // Daniel (AppDbContext (
 builder.Services.AddScoped<IServiceOrderRepository, ServiceOrderRepository>(); // Daniel repository pattern for in-mem DB
 builder.Services.AddScoped<ServiceOrderService>(); // Daniel
 builder.Services.AddScoped<ChecklistService>(); // Daniel
-
+builder.Services.AddAntiforgery(options =>
+{
+    options.HeaderName = "X-CSRF-TOKEN"; // Velg et passende navn for headeren?
+});
 
 //Login og logout
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -54,13 +61,40 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 
+app.Use(next => context =>
+{
+    var antiforgery = context.RequestServices.GetService<IAntiforgery>();
+    // Send Antiforgery cookie token as a response header
+    var tokens = antiforgery.GetAndStoreTokens(context);
+    context.Response.Cookies.Append("X-CSRF-TOKEN", tokens.RequestToken, new CookieOptions
+    {
+        HttpOnly = false, // Make the cookie accessible via JavaScript
+        Secure = true, // Send only over HTTPS if possible
+        SameSite = SameSiteMode.None // Allow cross-origin cookies
+    });
+    return next(context);
+});
+
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "login",
     pattern: "/login",
-    defaults: new { controller = "Login", action = "Index" }
-);
+    defaults: new { controller = "Login", action = "Index" });
+
+
+/*app.MapControllerRoute(
+name: "mechanicLogin",
+pattern: "/login/mechanic",
+defaults: new { controller = "Mechanic", action = "Login" });
+
+    app.MapControllerRoute(
+    name: "serviceLogin",
+    pattern: "/serviceorder/login",
+    defaults: new { controller = "ServiceOrders", action = "Login" }
+
+
+);*/
 
 app.MapControllerRoute(
     name: "register",
@@ -72,5 +106,10 @@ app.MapRazorPages();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Login}/{action=Index}/{id?}");
+
+WebHost.CreateDefaultBuilder(args)
+    .ConfigureKestrel(c => c.AddServerHeader = false)
+    .UseStartup<Startup>()
+    .Build();
 
 app.Run();

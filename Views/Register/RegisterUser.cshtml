@@ -1,59 +1,56 @@
-﻿@using Noested.Models;
-@namespace Noested.Views.Account
-
+﻿@using System;
+@using System.Text.Encodings.Web;
+@namespace Noested.Views.Login
 @model RegistreringViewModel
 
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "Logg inn";
+    Layout = "~/Views/Login/_LoginLayout.cshtml";
 }
 
-@using (Html.BeginForm("RegisterUser", "Login", FormMethod.Post))
+<body class="login-side">
+    <div class="col-md-20">
+        <section>
+            @using (Html.BeginForm("Index", "Login", FormMethod.Post))
+            {
+                <form method="post" asp-action="Login">
+                    @Html.AntiForgeryToken()
+                    <div class="col-md-20 text-center">
+                        <h3 class="font-weight-normal">
+                            Bruk din Nøsted konto for å logge inn. @HtmlEncoder.Default.Encode(ViewBag.Term)
+                        </h3>
+                    </div>
+                    <hr />
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="employeeNumber" name="employeeNumber" placeholder="Ansattnummer" required>
+                        <label for="employeeNumber">Ansattnummer</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Passord" required>
+                        <label for="password">@HtmlEncoder.Default.Encode("@InputType.Password")</label>
+                    </div>
+                    <div class="checkbox mb-3">
+                        <input class="form-check-input" type="checkbox" />
+                        <a>Husk meg?</a>
+                    </div>
+                    <div>
+                        <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Logg inn</button>
+                    </div>
+                    <div class="mt-5">
+                        <p>
+                            <a>Glemt passord? Kontakt en Administrator for tilbakestilling.</a>
+                        </p>
+                        <hr />
+                    </div>
+                </form>
+            }
+        </section>
+        <a></a>
+    </div>
+    @if (ViewBag.ErrorMessage != null)
     {
-    <body class="Registrering-side">
-        @Html.AntiForgeryToken()
-        <form method="post" asp-action="RegisterUser">
-
-            <p></p>
-            <div class="col-md-20 text-center">
-                <h3 class="font-weight-normal">Registrer ny Nøsted Konto.</h3>
-
-            </div>
-            <p></p>
-            <p></p>
-            <p></p>
-
-            <div class="form-group">
-                <label for="employeeNumber">Ansattnummer</label>
-                <input type="text" class="form-control" asp-for="EmployeeNumber" required>
-            </div>
-            <p></p>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" class="form-control" asp-for="Email" required>
-            </div>
-            <p></p>
-            <div class="form-group">
-                <label for="password">Passord</label>
-                <input type="password" class="form-control" asp-for="Password" required>
-            </div>
-            <p></p>
-            <div class="form-group">
-                <label for="confirmPassword">Bekreft passord</label>
-                <input type="password" class="form-control" asp-for="ConfirmPassword" required>
-            </div>
-            <p></p>
-            <div class="form-group">
-                <label for="role">Rolle</label>
-                <select class="form-control" id="role" name="Role" required>
-                    <option value="Service">Service</option>
-                    <option value="Mechanic">Mekaniker</option>
-                    <option value="Administrator">Administrator</option>
-                </select>
-            </div>
-            <p></p>
-            <P></P>
-            <button type="submit" class="btn btn-primary">Registrer</button>
-        </form>
-
-    </body>
+        <div class="alert alert-danger mt-3" role="alert">
+            @HtmlEncoder.Default.Encode(ViewBag.ErrorMessage)
+        </div>
     }
+</body>

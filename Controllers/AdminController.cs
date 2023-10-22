@@ -2,6 +2,7 @@
 
 namespace Noested.Controllers
 {
+   
     public class AdminController : Controller
     {
        
@@ -10,6 +11,8 @@ namespace Noested.Controllers
             return View();
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult CreateNewUser()
         {
             return RedirectToAction("RegisterUser", "Account");

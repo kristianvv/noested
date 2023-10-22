@@ -52,6 +52,7 @@ namespace Noested.Controllers
         }
         //
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ServiceOrderModel newOrder, int? existingCustomerId)
         {
             _logger.LogInformation("Successfully called Create Method");
@@ -106,6 +107,7 @@ namespace Noested.Controllers
         }
         //
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> SaveCompletedOrder(CompletedOrderDTO completedOrderDto)
         {
             _logger.LogInformation("Successfully called SaveCompletedOrder()");

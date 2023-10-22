@@ -1,13 +1,17 @@
 ﻿@model ServiceOrderModel
 
-    @section Styles {
-        <link rel="stylesheet" href="~/css/CreateServiceOrder.css">
-    }
+@section Styles {
+    <link rel="stylesheet" href="~/css/CreateServiceOrder.css">
+}
 
-    <h1>Create New Service Order</h1>
+<h1>Create New Service Order</h1>
+
+@using (Html.BeginForm("Create", "ServiceOrder", FormMethod.Post))
+    {
 
     <form asp-action="Create" asp-controller="ServiceOrder" method="post">
         <!-- REQUIRED FIELDS -->
+        @Html.AntiForgeryToken()
         <container>
             <section class="left-section">
                 <!-- Existing Customer Dropdown -->
@@ -96,7 +100,7 @@
 
         <button type="submit" class="btn btn-primary create-button">Create</button>
     </form>
-
-    @section Scripts {
-        <script src="~/js/createServiceOrder.js"></script>
     }
+@section Scripts {
+    <script src="~/js/createServiceOrder.js"></script>
+}

@@ -1,4 +1,5 @@
 ﻿
+using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using Noested.Data;
 using Noested.Models;
@@ -31,7 +32,7 @@ namespace Noested.Controllers
             {
                 EmployeeNumber = model.EmployeeNumber,
                 Email = model.Email,
-                Password = model.Password,
+                Password = HashPassword(model.Password),
                 Role = userRole
             };
 
@@ -40,6 +41,14 @@ namespace Noested.Controllers
             return RedirectToAction("Index", "Login"); // Redirect to home page after successful registration
         }
 
+        private static string HashPassword(string password)
+        {
+            using (var sha256 = System.Security.Cryptography.SHA256.Create())
+            {
+                byte[] hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                return BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
+            }
+        }
     }
 
 }
