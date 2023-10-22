@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="~/css/ServiceOrder.css">
 }
 
-<h1>Service Orders</h1>
+<h1>Alle Serviceordre</h1>
 <div class="container-fluid">
     <div class="row">
         <!-- Left Empty Column -->
@@ -23,9 +23,9 @@
                 @foreach (var order in Model)
                 {
                     <section class="service-order-item">
-                        <a href="@Url.Action("ViewOrder", "ServiceOrder", new { id = order.ServiceOrderID })">
+                        <a href="@Url.Action("ViewOrder", "Mechanic", new { id = order.ServiceOrderID })"> <!-- "ViewNavn(.cshtml)", "View") -->
                             <div>
-                                Ordre opprettet: @order.OrderRecieved
+                                Ordre opprettet: @order.OrderReceived
                             </div>
                             <div>
                                 Ordrenummer: @order.ServiceOrderID

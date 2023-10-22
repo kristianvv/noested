@@ -56,12 +56,14 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+// Login
 app.MapControllerRoute(
     name: "login",
     pattern: "/login",
     defaults: new { controller = "Login", action = "Index" }
 );
 
+// Register
 app.MapControllerRoute(
     name: "register",
     pattern: "/register",
@@ -69,6 +71,8 @@ app.MapControllerRoute(
 );
 
 app.MapRazorPages();
+
+// Default
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Login}/{action=Index}/{id?}");

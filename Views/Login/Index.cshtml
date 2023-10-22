@@ -1,4 +1,4 @@
-﻿@using System;
+﻿
 @namespace Noested.Views.Login
 
 @Model
@@ -13,7 +13,7 @@
 
 <div class="col-md-20">
     <section>
-        <form method="post" asp-action="Login">
+        <form asp-controller="Login" asp-action="Login" method="post">
             <div class="col-md-20 text-center">
                 <h3 class="font-weight-normal">Bruk din Nøsted konto for å logge inn.</h3>
 

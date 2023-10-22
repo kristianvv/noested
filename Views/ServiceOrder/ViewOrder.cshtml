@@ -8,52 +8,56 @@
 }
 
 
-<form asp-action="SaveCompletedOrder" method="post">
+<form id="serviceOrderForm" asp-controller="Mechanic" asp-action="SaveCompletedOrder" method="post">
     <!-- Display Static Order Info -->
     <section class="order-info">
         <section class="left-panel">
             <!-- Left panel -->
             <div>
                 <label>Serviceordre ID</label> <!-- Serviceordre ID (int) -->
-                <input type="text" readonly value="@Model.ServiceOrderID" />
+                <input id="service_order_id" type="text" name="ServiceOrderID" readonly value="@Model.ServiceOrderID" />
             </div>
 
             <div>
                 <label>Kunde ID</label> <!-- Kunde ID (int)-->
-                <input type="text" readonly value="@Model.Customer!.CustomerID" />
+                <input id="customer_id" type="text" name="CustomerID" readonly value="@Model.Customer!.CustomerID" />
             </div>
 
             <div>
                 <label>Produktnavn</label> <!-- Produktnavn (f.eks "Igland 2501") -->
-                <input type="text" readonly value="@Model.ProductName" />
+                <input id="product_name" type="text" name="ProductName" readonly value="@Model.ProductName" />
             </div>
 
             <div>
                 <label>Produkttype</label> <!-- Produkttype (f.eks "Vinsj") -->
-                <input type="text" readonly value="@Model.ProductType" />
+                <input id="product_type" type="text" name="ProductType" readonly value="@Model.ProductType" />
             </div>
         </section>
         <!-- Right panel -->
         <section class="right-panel">
             <div>
                 <label>Status for Serviceordre</label> <!-- Ordrestatus (f.eks 'Uåpnet' eller 'Fullført')-->
-                <input type="text" readonly value="@Model.ServiceOrderStatus" />
+                <input id="service_order_status" type="text" name="ServiceOrderStatus" readonly value="@Model.ServiceOrderStatus" />
             </div>
             <div>
                 <label>Mottatt Ordre Dato</label> <!-- Opprettet Dato -->
-                <input type="text" readonly value="@Model.OrderRecieved" />
-            </div>
-            <div>
-                <label>Ordre Utført Dato</label> <!-- Utført Dato -->
-                <input type="text" readonly value="@Model.OrderCompleted" />
+                <input id="order_received" type="text" name="OrderReceived" readonly value="@Model.OrderReceived" />
             </div>
         </section>
     </section>
-    
+
     <section class="customer-comments">
         <h2>Kundens Problembeskrivelse</h2> <!-- Kundens  -->
-        <textarea readonly>@Model.CustomerComment</textarea>
+        <textarea id="customer_comments" name="CustomerComment" readonly>@Model.CustomerComment</textarea>
     </section>
+
+    <!-- Skjulte felt -->
+    <input id="order_completed" type="hidden" name="OrderCompleted" readonly value="@Model.OrderCompleted" />
+    <input id="agreed_finished_date" type="hidden" name="AgreedFinishedDate" readonly value="@Model.AgreedFinishedDate">
+    <input id="serial_number" type="hidden" name="SerialNumber" readonly value="@Model.SerialNumber">
+    <input id="model_year" type="hidden" name="ModelYear" readonly value="@Model.ModelYear">
+    <input id="warranty" type="hidden" name="Warranty" readonly value="@Model.Warranty">
+    <input id="work_hours" type="hidden" name="WorkHours" readonly value="@Model.WorkHours">
 
     <!-- Checklist Section -->
     <section id="checklistSection">
@@ -67,7 +71,7 @@
                     <th>Defekt</th>
                 </tr>
             </thead>
-            <tbody id="itemRows">
+            <tbody id="itemRows" name="Checklists">
                 <!-- Genereres av JS-filen-->
             </tbody>
         </table>
@@ -87,3 +91,6 @@
     <script src="~/js/categoryitems.js"></script>
     <script src="/js/serviceorder.js"></script>
 }
+
+
+

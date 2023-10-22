@@ -20,7 +20,6 @@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Login" asp-action="Index">Noested</a>
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Noested</a>
                 <!-- Navigation toggler for smaller screens -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -29,26 +28,21 @@
                 <!-- Main Navigation Items -->
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="ServiceOrders" asp-action="Index">Serviceordre side</a>
-                        </li>
-                        <li class ="nav item">
+
+                        <li class="nav item">
                             <a class="nav-link text-dark" asp-controller="Admin" asp-action="AdminPage">Administrator side</a>
+                        </li>
+                        <li class="nav item">
+                            <a class="nav-link text-dark" asp-controller="ServicePersonell" asp-action="ServicePersonellPage">Servicepersonell side</a>
                         </li>
                         <li class="nav item">
                             <a class="nav-link text-dark" asp-controller="Mechanic" asp-action="MechanicPage">Mekaniker side</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Privacy" asp-action="PrivacyPage">Privacy</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="Register" asp-action="RegisterUser">Registrering</a>
                         </li>
                         <li>
-                            <a class="nav-link text-dark" asp-controller="ServiceOrder" asp-action="Create">Create New Service Order</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="ServiceOrder" asp-action="Index">View All Service Orders</a>
+                            <a class="nav-link text-dark" asp-controller="ServicePersonell" asp-action="Create">Opprette Ny ServiceOrdre</a>
                         </li>
                         <li>
                             <a href="/login" class="btn btn-danger">Logg ut</a>

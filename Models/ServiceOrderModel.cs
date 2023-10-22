@@ -1,7 +1,6 @@
 ﻿// To Remain POCO. Update methods in Services > ServiceOrderService.cs
-using System.ComponentModel;
+using Noested.Services;
 using System.ComponentModel.DataAnnotations;
-using Noested.Models.DTOs;
 
 namespace Noested.Models
 {
@@ -9,19 +8,19 @@ namespace Noested.Models
     {
         public ServiceOrderModel()
         {
-            ServiceOrderID = 0;
-            ServiceOrderStatus = "";
-            OrderRecieved = DateTime.MinValue;
-            AgreedFinishedDate = DateTime.MinValue;
-            OrderCompleted = DateTime.MinValue;
-            ProductName = "";
-            ProductType = "";
-            SerialNumber = 0;
-            ModelYear = null;
-            Warranty = WarrantyType.None;
-            CustomerComment = "";
-            RepairDescription = "";
-            WorkHours = 0;
+            ServiceOrderID = 0; // is on form
+            ServiceOrderStatus = ""; // is on form
+            OrderReceived = DateTime.MinValue; // is on form
+            AgreedFinishedDate = DateTime.MinValue; // is on form hidden
+            OrderCompleted = DateTime.MinValue; // is on form hidden
+            ProductName = ""; // is on form
+            ProductType = ""; // is on form
+            SerialNumber = 0; // is on form hidden
+            ModelYear = null; // is on form hidden
+            Warranty = WarrantyType.None; // is on form hidden
+            CustomerComment = ""; // is on form hidden
+            RepairDescription = ""; // is on form
+            WorkHours = 0; // is on form hidden
             Checklists = new ChecklistDTO();
             Customer = new Customer();
         }
@@ -29,17 +28,17 @@ namespace Noested.Models
         [Display(Name = "Serviceorder ID")] // Primary Key
         public int ServiceOrderID { get; set; }
         [Display(Name = "Serviceorder Status")]
-        public string? ServiceOrderStatus { get; set; }
+        public string ServiceOrderStatus { get; set; }
         [Display(Name = "Order Received")]
-        public DateTime OrderRecieved { get; set; }
+        public DateTime OrderReceived { get; set; }
         [Display(Name = "Agreed Finished Date")]
-        public DateTime AgreedFinishedDate { get; set; }
+        public DateTime? AgreedFinishedDate { get; set; }
         [Display(Name = "Order Completed")]
-        public DateTime OrderCompleted { get; set; }
+        public DateTime? OrderCompleted { get; set; }
         [Display(Name = "Product Name")]
-        public string? ProductName { get; set; }
+        public string ProductName { get; set; }
         [Display(Name = "Product Type")]
-        public string? ProductType { get; set; }
+        public string ProductType { get; set; }
         [Display(Name = "Serial Number")]
         public int SerialNumber { get; set; }
         [Display(Name = "Model Year")]
@@ -47,9 +46,9 @@ namespace Noested.Models
         [Display(Name = "Warranty Type")]
         public WarrantyType Warranty { get; set; }
         [Display(Name = "Customer Comment")]
-        public string? CustomerComment { get; set; }
+        public string CustomerComment { get; set; }
         [Display(Name = "Description of Repair")]
-        public string? RepairDescription { get; set; }
+        public string RepairDescription { get; set; }
         [Display(Name = "Working Hours")]
         public int WorkHours { get; set; }
 
@@ -83,28 +82,13 @@ namespace Noested.Models
             Phone = "";
         }
         public int CustomerID { get; set; }
-        public string? FirstName { get; set; }
+        public string FirstName { get; set; }
         public string? LastName { get; set; }
         public string? StreetAddress { get; set; }
         public int? ZipCode { get; set; }
         public string? City { get; set; }
-        public string? Email { get; set; }
-        public string? Phone { get; set; }
+        public string Email { get; set; }
+        public string Phone { get; set; }
     }
 
-    // !!! UNRELATED TO MODEL !!! MOVED FROM DummyServiceOrderModel.cs –– TO BE DELETED? Related functions in ServiceOrderDatabase.cs 
-    public class DummyServiceOrder
-    {
-        [Key] // This annotation specifies the primary key
-        public int ServiceOrderID { get; set; }
-
-        [DisplayName("Ordrenummer")]
-        public int OrderNum { get; set; }
-        [DisplayName("Ordredato")]
-        public DateTime OrderDate { get; set; }
-        [DisplayName("Fornavn")]
-        public string? CustomerFirstname { get; set; }
-        [DisplayName("Etternavn")]
-        public string? CustomerLastname { get; set; }
-    }
 }
