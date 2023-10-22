@@ -6,7 +6,6 @@ using Noested.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using System.Security.Claims;
 
 namespace Noested.Controllers;
 
@@ -43,44 +42,25 @@ public class LoginController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> Login(int employeeNumber, string password)
-    {
-        var user = _context.Users.FirstOrDefault(u => u.EmployeeNumber == employeeNumber && u.Password == password);
-
-        if (user != null)
+        public IActionResult Login(int employeeNumber, string password)
         {
-            // Create claims
-            var claims = new[]
+            var user = _context.Users.FirstOrDefault(u => u.EmployeeNumber == employeeNumber && u.Password == password);
+
+            if (user != null)
             {
-            new Claim(ClaimTypes.Name, user.EmployeeNumber.ToString()),
-            new Claim(ClaimTypes.Role, user.Role.ToString())
-      
-        };
-
-            // Create identity
-            var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-
-            // Create principal
-            var principal = new ClaimsPrincipal(identity);
-
-            // Sign in the user
-            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
-
-            switch (user.Role)
-            {
-                case UserRole.Service:
-                    return RedirectToAction("Index", "ServiceOrder");
-                case UserRole.Mechanic:
-                    return RedirectToAction("MechanicPage", "Mechanic");
-                case UserRole.Administrator:
-                    return RedirectToAction("AdminPage", "Admin");
+                switch (user.Role)
+                {
+                    case UserRole.Service:
+                        return RedirectToAction("Index", "ServiceOrder");
+                    case UserRole.Mechanic:
+                        return RedirectToAction("MechanicPage", "Mechanic");
+                    case UserRole.Administrator:
+                        return RedirectToAction("AdminPage", "Admin");
+                }
             }
+            ViewBag.ErrorMessage = "Feil ansattnummer eller passord";
+            return View("Index");
         }
-
-        ViewBag.ErrorMessage = "Feil ansattnummer eller passord";
-        return View("Index");
-    }
-
 
     public IActionResult Logout()
     {

@@ -11397,19 +11397,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\felix\\.nuget\\packages\\": {}
+    "C:\\Users\\timef\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\felix\\Documents\\realnøsted\\noested\\Noested.csproj",
+      "projectUniqueName": "C:\\Users\\timef\\Source\\Repos\\noested\\Noested.csproj",
       "projectName": "Noested",
-      "projectPath": "C:\\Users\\felix\\Documents\\realnøsted\\noested\\Noested.csproj",
-      "packagesPath": "C:\\Users\\felix\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\felix\\Documents\\realnøsted\\noested\\obj\\",
+      "projectPath": "C:\\Users\\timef\\Source\\Repos\\noested\\Noested.csproj",
+      "packagesPath": "C:\\Users\\timef\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\timef\\Source\\Repos\\noested\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\felix\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\timef\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -11477,7 +11477,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }
