@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Noested.Controllers
 {
+    [Authorize]
     public class ServiceOrderController : Controller
     {
         private readonly ILogger<ServiceOrderController> _logger;
@@ -28,7 +29,6 @@ namespace Noested.Controllers
         }
 
         //
-        [Authorize]
         [HttpGet]
         public async Task<IActionResult> Index() // Class inherits from base Controller class to handle HTTP requests/responses
         {
@@ -44,7 +44,6 @@ namespace Noested.Controllers
             return View(allServiceOrders);
         }
         //
-        [Authorize]
         [HttpGet]
         public async Task<IActionResult> Create()
         {
@@ -54,7 +53,6 @@ namespace Noested.Controllers
             return View();
         }
         //
-        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Create(ServiceOrderModel newOrder, int? existingCustomerId)
         {
@@ -213,6 +211,7 @@ namespace Noested.Controllers
             }
             return View(dummyServiceOrder);
         }
+
         // Delete (int? id)
         public async Task<IActionResult> DummyDelete(int? id)
         {

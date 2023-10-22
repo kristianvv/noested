@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Noested.Controllers;
 
@@ -41,6 +42,14 @@ public class LoginController : Controller
 
         return RedirectToAction("Index", "Login"); // Redirect to login page after successful registration
     }
+
+    [AllowAnonymous]
+    public IActionResult AccessDenied()
+    {
+        ViewData["ErrorMessage"] = "Access Denied";
+        return View();
+    }
+
 
     [HttpPost]
     public async Task<IActionResult> Login(int employeeNumber, string password)

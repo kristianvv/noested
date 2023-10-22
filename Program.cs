@@ -23,6 +23,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     {
         options.LoginPath = "/login"; // Set the login path
         options.LogoutPath = "/logout"; // Set the logout path
+        options.AccessDeniedPath = "/Login/AccessDenied"; // Set the access denied path
         options.Cookie.HttpOnly = true;
         options.Cookie.SameSite = SameSiteMode.Strict;
         options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
@@ -67,6 +68,12 @@ app.MapControllerRoute(
     name: "register",
     pattern: "/register",
     defaults: new { controller = "Register", action = "RegisterUser" }
+);
+
+app.MapControllerRoute(
+    name: "accessdenied",
+    pattern: "/Account/AccessDenied",
+    defaults: new { controller = "Account", action = "AccessDenied" }
 );
 
 app.MapRazorPages();
