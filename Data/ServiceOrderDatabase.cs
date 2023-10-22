@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
-using Noested.Models;
-using Noested.Models.DTOs;
+﻿using Noested.Models;
+using Noested.Services;
 
 namespace Noested.Data
 {
@@ -14,9 +13,7 @@ namespace Noested.Data
 
         public required ISet<User> Users { get; set; } = new HashSet<User>();// For testing purposes (From AppDbContext.cs – To be deleted?)
         public List<Test> Test { get; set; } = new List<Test>(); // (From NoestedContext.cs - To be deleted?)
-        public ISet<ServiceOrderModel>? ServiceOrder { get; set; } = new HashSet<ServiceOrderModel>(); // (From NoestedContext.cs - To be deleted?)
-        public ISet<DummyServiceOrder> DummyServiceOrder { get; set; } = new HashSet<DummyServiceOrder>(); // (From NoestedContext.cs - To be deleted?)
-
+        
         // For Customers: Add
         public Task AddCustomerAsync(Customer newCustomer)
         {
@@ -48,7 +45,7 @@ namespace Noested.Data
         public Task AddServiceOrderAsync(ServiceOrderModel order)
         {
             LastOrderNumber++; // Increment the last ServiceOrderID
-            order.OrderRecieved = DateTime.Now;
+            order.OrderReceived = DateTime.Now;
             order.ServiceOrderID = LastOrderNumber; // Set the increment as new ID
             ServiceOrders.Add(order);
             return Task.FromResult(0);

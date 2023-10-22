@@ -1,100 +1,112 @@
 ﻿using Noested.Data;
 using Noested.Models;
-using Noested.Models.DTOs;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Linq;
 
 namespace Noested.Services
 {
     public class ServiceOrderService
     {
         private readonly IServiceOrderRepository _repository;
+        private readonly ILogger<ServiceOrderService> _logger;
 
-        public ServiceOrderService(IServiceOrderRepository repository)
+        public ServiceOrderService(IServiceOrderRepository repository, ILogger<ServiceOrderService> logger)
         {
             _repository = repository;
+            _logger = logger;
         }
 
         //
-        public async Task UpdateExistingOrderAsync(ServiceOrderModel existingOrder, ServiceOrderModel completedOrder, IFormCollection? form)
+        public async Task<IEnumerable<ServiceOrderModel>> FetchAllServiceOrdersAsync()
         {
-            await UpdateOrderStatusAsync(existingOrder, "Completed");
-            await UpdateOrderCompletedAsync(existingOrder, DateTime.Now);
-            await ChecklistService.PopulateChecklistFromForm(completedOrder, form);
-            await UpdateChecklistsAsync(existingOrder, completedOrder.Checklists);
-            await FieldUpdateService.UpdateFieldsAsync(existingOrder, completedOrder);
-            await _repository.UpdateOrderAsync(existingOrder);
+            _logger.LogInformation("FetchAllServiceOrdersAsync(): Called");
+            var allServiceOrders = await _repository.GetAllServiceOrdersAsync();
+            if (allServiceOrders == null || !allServiceOrders.Any())
+            {
+                throw new InvalidOperationException("Null or no ServiceOrders in database");
+            }
+            return allServiceOrders;
         }
 
         //
-        public async Task UpdateServiceOrderIDAsync(ServiceOrderModel order, int newServiceOrderID)
+        public async Task<IEnumerable<Customer>> FetchAllCustomersAsync()
         {
-            order.ServiceOrderID = newServiceOrderID;
-            await Task.CompletedTask;
+            _logger.LogInformation("FetchAllCustomersAsync(): Called");
+            var existingCustomers = await _repository.GetAllCustomersAsync();
+            if (existingCustomers == null || !existingCustomers.Any())
+            {
+                throw new InvalidOperationException("No existing customers found in the database.");
+            }
+            return existingCustomers;
         }
 
-        public async Task UpdateOrderStatusAsync(ServiceOrderModel order, string newOrderStatus)
+        //
+        public async Task<bool> CreateNewServiceOrderAsync(ServiceOrderModel newOrder, int? existingCustomerId)
         {
-            order.ServiceOrderStatus = newOrderStatus;
-            await Task.CompletedTask;
+            _logger.LogInformation("CreateNewServiceOrderAsync(): Called");
+            if (existingCustomerId.HasValue)
+            {
+                newOrder.Customer.CustomerID = existingCustomerId.Value;
+            }
+            else
+            {
+                if (newOrder.Customer != null)
+                {
+                    await _repository.AddCustomerAsync(newOrder.Customer);
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            await _repository.AddServiceOrderAsync(newOrder);
+            return true;
         }
 
-        public async Task UpdateOrderRecievedAsync(ServiceOrderModel order, DateTime newOrderRecieved)
+        //
+        public async Task<ServiceOrderModel> FetchServiceOrderByIdAsync(int id)
         {
-            order.OrderRecieved = newOrderRecieved;
-            await Task.CompletedTask;
+            _logger.LogInformation("FetchServiceOrderByIdAsync(id): Called");
+            var order = await _repository.GetOrderByIdAsync(id);
+            if (order == null)
+            {
+                throw new InvalidOperationException("Order not found");
+            }
+            return order;
         }
 
-        public async Task UpdateOrderCompletedAsync(ServiceOrderModel order, DateTime newOrderCompleted)
+        //
+        public async Task<bool> UpdateCompletedOrderAsync(ServiceOrderModel completedOrder, IFormCollection? form)
         {
-            order.OrderCompleted = newOrderCompleted;
-            await Task.CompletedTask;
-        }
+            _logger.LogInformation("UpdateCompletedOrderAsync(): Called");
 
-        public async Task UpdateSerialNumberAsync(ServiceOrderModel order, int newSerialNumber)
-        {
-            order.SerialNumber = newSerialNumber;
-            await Task.CompletedTask;
-        }
+            if (completedOrder == null)
+            {
+                _logger.LogError("UpdateCompletedOrderAsync(): completedOrder is null");
+                return false;
+            }
 
-        public async Task UpdateModelYearAsync(ServiceOrderModel order, string newModelYear)
-        {
-            order.ModelYear = newModelYear;
-            await Task.CompletedTask;
-        }
+            if (form == null)
+            {
+                _logger.LogError("UpdateCompletedOrderAsync(): form is null");
+                return false;
+            }
 
-        public async Task UpdateWarrantyAsync(ServiceOrderModel order, WarrantyType newWarranty)
-        {
-            order.Warranty = newWarranty;
-            await Task.CompletedTask;
-        }
+            var existingOrder = await _repository.GetOrderByIdAsync(completedOrder.ServiceOrderID);
+            if (existingOrder == null)
+            {
+                _logger.LogError("UpdateCompletedOrderAsync(): Requested Order Does Not Exist");
+                return false;
+            }
 
-        public async Task UpdateRepairDescriptionAsync(ServiceOrderModel order, string newRepairDescription)
-        {
-            order.RepairDescription = newRepairDescription;
-            await Task.CompletedTask;
-        }
+            await FieldUpdateService.UpdateFieldsAsync(existingOrder, completedOrder, form);
 
-        public async Task UpdateWorkHoursAsync(ServiceOrderModel order, int newWorkHours)
-        {
-            order.WorkHours = newWorkHours;
-            await Task.CompletedTask;
-        }
-
-        public async Task UpdateCustomerAsync(ServiceOrderModel order, Customer newCustomer)
-        {
-            order.Customer = newCustomer;
-            await Task.CompletedTask;
-        }
-
-        public async Task UpdateCustomerIDAsync(ServiceOrderModel order, int newCustomerID)
-        {
-            order.Customer!.CustomerID = newCustomerID;
-            await Task.CompletedTask;
-        }
-
-        public async Task UpdateChecklistsAsync(ServiceOrderModel order, ChecklistDTO newChecklists)
-        {
-            order.Checklists = newChecklists;
-            await Task.CompletedTask;
+            _logger.LogInformation("UpdateCompletedOrderAsync(): Order updated successfully");
+            return true;
         }
     }
 }

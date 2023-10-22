@@ -40,7 +40,6 @@ function generateChecklist() {
                 row.appendChild(categoryCell);
             }
 
-
             // Hidden input for each item's category
             const hiddenInput = document.createElement("input");
             hiddenInput.type = "hidden";
@@ -78,34 +77,39 @@ function sanitize(name) {
     return name.replace(/\s+/g, '_').toLowerCase();
 }
 
-
 document.addEventListener('DOMContentLoaded', function () {
     generateChecklist();
 
     const serviceOrderForm = document.getElementById('serviceOrderForm');
 
-    serviceOrderForm.addEventListener('submit', function (event) { /* Think there's a problem here "cannot read properties of null"'*/
-        console.log('Submit event triggered');  // Log to ensure this is only being called once
-        event.preventDefault();  // Prevent the default form submission
+    if (serviceOrderForm !== null) {
+        serviceOrderForm.addEventListener('submit', function (event) {
+            console.log('Submit event triggered');  // Log to ensure this is only being called once
+            event.preventDefault();  // Prevent the default form submission
 
-        // Set each select option to its matching status
-        const selects = document.querySelectorAll("select");
-        selects.forEach((select) => {
-            const status = select.getAttribute('data-status');
-            select.value = status;
+            // Set each select option to its matching status
+            const selects = document.querySelectorAll("select");
+            selects.forEach((select) => {
+                const status = select.getAttribute('data-status');
+                select.value = status;
+            });
+
+            // Oppdatere OrderCompleted and ServiceOrderStatus
+            const now = new Date();
+            // document.getElementById('service_order_id').value = 
+            document.getElementById('order_completed').value = now.toISOString();
+            document.getElementById('service_order_status').value = "Completed"; // Erstatt med Status for «fullført»
+
+            // Log the form data
+            const formData = new FormData(serviceOrderForm);
+            for (const [key, value] of formData.entries()) {
+                console.log(key, value);  // Log each form field and its value
+            }
+
+            // Perform the actual form submission
+            serviceOrderForm.submit();
         });
-
-        // Add current DateTime to hidden input field
-        const now = new Date();
-        document.getElementById('date_time').value = now.toISOString();
-
-        // Log the form data
-        const formData = new FormData(serviceOrderForm);
-        for (const [key, value] of formData.entries()) {
-            console.log(key, value);  // Log each form field and its value
-        }
-
-        // Perform the actual form submission
-        serviceOrderForm.submit();
-    });
+    } else {
+        console.error("Element with ID 'serviceOrderForm' not found");
+    }
 });

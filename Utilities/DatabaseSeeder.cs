@@ -1,6 +1,6 @@
 ﻿using Noested.Data;
 using Noested.Models;
-using Noested.Models.DTOs;
+using Noested.Services;
 
 namespace Noested.Utilities
 {
@@ -12,7 +12,7 @@ namespace Noested.Utilities
             {
                 new ServiceOrderModel
                 {
-                    OrderRecieved = DateTime.Now,
+                    OrderReceived = DateTime.Now,
                     OrderCompleted = DateTime.Now,
                     ServiceOrderStatus = "Uåpnet",
                     SerialNumber = 12345,
@@ -36,7 +36,7 @@ namespace Noested.Utilities
                 },
                 new ServiceOrderModel
                 {
-                    OrderRecieved = DateTime.Now,
+                    OrderReceived = DateTime.Now,
                     OrderCompleted = DateTime.Now,
                     ServiceOrderStatus = "Uåpnet",
                     SerialNumber = 54321,
@@ -60,7 +60,7 @@ namespace Noested.Utilities
                 },
                 new ServiceOrderModel
                 {
-                    OrderRecieved = DateTime.Now,
+                    OrderReceived = DateTime.Now,
                     OrderCompleted = DateTime.Now,
                     ServiceOrderStatus = "Uåpnet",
                     SerialNumber = 98765,

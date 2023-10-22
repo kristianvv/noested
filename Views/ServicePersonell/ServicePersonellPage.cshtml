@@ -1,0 +1,11 @@
+﻿@namespace Noested.Views.Home
+@{
+    ViewData["Title"] = "Servicepersonell Side";
+}
+
+<h1>Servicepersonell Side</h1>
+
+<a href="@Url.Action("Create", "ServicePersonell")" class="btn btn-primary">Registrer ny Serviceordre</a>
+<!-- Omdir til View/Filename -->
+<a href="@Url.Action("SeAlleOrdre", "ServicePersonell")" class="btn btn-primary">Se status på serviceordre</a> <!-- Må lages rapport side.. /ServicePersonell/ViewOrders -->
+<a href="#" class="btn btn-primary">Registrer ny Kunde</a> <!-- Må lages funksjon for å registrere ny kunde uavhengig av serviceordre -->

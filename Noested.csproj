@@ -24,14 +24,16 @@
 
   <ItemGroup>
     <None Remove="Services\" />
-    <None Remove="Models\DTOs\" />
     <None Remove="Utilities\" />
     <None Remove="Views\ServiceOrder\" />
+    <None Remove="Views\ServicePersonell\" />
+    <None Remove="Services\DTOs\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />
-    <Folder Include="Models\DTOs\" />
     <Folder Include="Utilities\" />
     <Folder Include="Views\ServiceOrder\" />
+    <Folder Include="Views\ServicePersonell\" />
+    <Folder Include="Services\DTOs\" />
   </ItemGroup>
 </Project>
