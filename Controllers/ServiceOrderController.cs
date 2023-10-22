@@ -4,7 +4,6 @@ using Noested.Models.DTOs;
 using Noested.Data;
 using Noested.Services;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Authorization;
 
 namespace Noested.Controllers
 {
@@ -28,7 +27,6 @@ namespace Noested.Controllers
         }
 
         //
-        [Authorize]
         [HttpGet]
         public async Task<IActionResult> Index() // Class inherits from base Controller class to handle HTTP requests/responses
         {
@@ -44,7 +42,6 @@ namespace Noested.Controllers
             return View(allServiceOrders);
         }
         //
-        [Authorize]
         [HttpGet]
         public async Task<IActionResult> Create()
         {
@@ -54,7 +51,6 @@ namespace Noested.Controllers
             return View();
         }
         //
-        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Create(ServiceOrderModel newOrder, int? existingCustomerId)
         {
