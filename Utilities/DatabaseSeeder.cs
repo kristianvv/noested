@@ -12,12 +12,14 @@ namespace Noested.Utilities
             {
                 new ServiceOrderModel
                 {
-                    OrderReceived = DateTime.Now,
-                    OrderCompleted = DateTime.Now,
+                    ServiceOrderID = 1,
+                    CustomerID = 1,
                     ServiceOrderStatus = "Uåpnet",
-                    SerialNumber = 12345,
+                    OrderReceived = DateTime.Now,
+                    AgreedFinishedDate = DateTime.MinValue,
                     ProductName = "IGLAND 5002 Pento TL",
                     ProductType = "Vinsj",
+                    SerialNumber = 12345,
                     ModelYear = "2022",
                     Warranty = WarrantyType.Full,
                     CustomerComment = "Problem with motor",
@@ -36,12 +38,14 @@ namespace Noested.Utilities
                 },
                 new ServiceOrderModel
                 {
-                    OrderReceived = DateTime.Now,
-                    OrderCompleted = DateTime.Now,
+                    ServiceOrderID = 2,
+                    CustomerID = 2,
                     ServiceOrderStatus = "Uåpnet",
-                    SerialNumber = 54321,
+                    OrderReceived = DateTime.Now,
+                    AgreedFinishedDate = DateTime.MinValue,
                     ProductName = "IGLAND 6002 Pronto TLP",
                     ProductType = "Vinsj",
+                    SerialNumber = 54321,
                     ModelYear = "2023",
                     Warranty = WarrantyType.Limited,
                     CustomerComment = "Problem with traction",
@@ -60,12 +64,14 @@ namespace Noested.Utilities
                 },
                 new ServiceOrderModel
                 {
-                    OrderReceived = DateTime.Now,
-                    OrderCompleted = DateTime.Now,
+                    ServiceOrderID = 3,
+                    CustomerID = 3,
                     ServiceOrderStatus = "Uåpnet",
-                    SerialNumber = 98765,
+                    OrderReceived = DateTime.Now,
+                    AgreedFinishedDate = DateTime.MinValue,
                     ProductName = "Igland 2501",
                     ProductType = "Vinsj",
+                    SerialNumber = 98765,
                     ModelYear = "2021",
                     Warranty = WarrantyType.None,
                     CustomerComment = "Ulyder i motoren og svidd lukt",

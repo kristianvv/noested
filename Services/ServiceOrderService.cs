@@ -1,10 +1,5 @@
 ﻿using Noested.Data;
 using Noested.Models;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Linq;
 
 namespace Noested.Services
 {
@@ -19,7 +14,34 @@ namespace Noested.Services
             _logger = logger;
         }
 
-        //
+        // Oppdaterer utfylt sjekkliste (Model, Form)
+        public async Task<bool> UpdateCompletedOrderAsync(ServiceOrderModel completedOrder, IFormCollection? form)
+        {
+            _logger.LogInformation("UpdateCompletedOrderAsync(): Called");
+
+            if (completedOrder == null)
+            {
+                return false;
+            }
+
+            if (form == null)
+            {
+                return false;
+            }
+
+            var existingOrder = await _repository.GetOrderByIdAsync(completedOrder.ServiceOrderID);
+            if (existingOrder == null)
+            {
+                return false;
+            }
+
+            await FieldUpdateService.UpdateFieldsAsync(existingOrder, completedOrder, form);
+
+            _logger.LogInformation("UpdateCompletedOrderAsync(): Order updated successfully");
+            return true;
+        }
+
+        // Henter alle serviceordre
         public async Task<IEnumerable<ServiceOrderModel>> FetchAllServiceOrdersAsync()
         {
             _logger.LogInformation("FetchAllServiceOrdersAsync(): Called");
@@ -31,43 +53,24 @@ namespace Noested.Services
             return allServiceOrders;
         }
 
-        //
-        public async Task<IEnumerable<Customer>> FetchAllCustomersAsync()
-        {
-            _logger.LogInformation("FetchAllCustomersAsync(): Called");
-            var existingCustomers = await _repository.GetAllCustomersAsync();
-            if (existingCustomers == null || !existingCustomers.Any())
-            {
-                throw new InvalidOperationException("No existing customers found in the database.");
-            }
-            return existingCustomers;
-        }
-
-        //
-        public async Task<bool> CreateNewServiceOrderAsync(ServiceOrderModel newOrder, int? existingCustomerId)
+        // Oppretter ny serviceordre
+        public async Task<bool> CreateNewServiceOrderAsync(ServiceOrderModel newOrder)
         {
             _logger.LogInformation("CreateNewServiceOrderAsync(): Called");
-            if (existingCustomerId.HasValue)
+
+            if (newOrder.CustomerID == 0) // If "New Customer" was selected from dropdown...
             {
-                newOrder.Customer.CustomerID = existingCustomerId.Value;
-            }
-            else
-            {
-                if (newOrder.Customer != null)
-                {
-                    await _repository.AddCustomerAsync(newOrder.Customer);
-                }
-                else
-                {
-                    return false;
-                }
+                await _repository.AddCustomerAsync(newOrder.Customer); // Create a new Customer && update Customer.CustomerID.
+
+                // Update the S.O.model CustomerID to the updated Customer.CustomerID value (Maintain integrity for DB)
+                newOrder.CustomerID = newOrder.Customer.CustomerID;
             }
 
             await _repository.AddServiceOrderAsync(newOrder);
             return true;
         }
 
-        //
+        // Henter en serviceordre med ID (int)
         public async Task<ServiceOrderModel> FetchServiceOrderByIdAsync(int id)
         {
             _logger.LogInformation("FetchServiceOrderByIdAsync(id): Called");
@@ -79,34 +82,20 @@ namespace Noested.Services
             return order;
         }
 
-        //
-        public async Task<bool> UpdateCompletedOrderAsync(ServiceOrderModel completedOrder, IFormCollection? form)
+
+
+        /*
+        // Henter alle kunder
+        public async Task<IEnumerable<Customer>> FetchAllCustomersAsync()
         {
-            _logger.LogInformation("UpdateCompletedOrderAsync(): Called");
-
-            if (completedOrder == null)
+            _logger.LogInformation("FetchAllCustomersAsync(): Called");
+            var existingCustomers = await _repository.GetAllCustomersAsync();
+            if (existingCustomers == null || !existingCustomers.Any())
             {
-                _logger.LogError("UpdateCompletedOrderAsync(): completedOrder is null");
-                return false;
+                throw new InvalidOperationException("No existing customers found in the database.");
             }
-
-            if (form == null)
-            {
-                _logger.LogError("UpdateCompletedOrderAsync(): form is null");
-                return false;
-            }
-
-            var existingOrder = await _repository.GetOrderByIdAsync(completedOrder.ServiceOrderID);
-            if (existingOrder == null)
-            {
-                _logger.LogError("UpdateCompletedOrderAsync(): Requested Order Does Not Exist");
-                return false;
-            }
-
-            await FieldUpdateService.UpdateFieldsAsync(existingOrder, completedOrder, form);
-
-            _logger.LogInformation("UpdateCompletedOrderAsync(): Order updated successfully");
-            return true;
+            return existingCustomers;
         }
+        */
     }
 }

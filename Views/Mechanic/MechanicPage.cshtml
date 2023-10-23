@@ -38,13 +38,13 @@
                                 Ordrenummer: @order.ServiceOrderID
                             </div>
                             <div>
-                                Kundenummer: @order.Customer!.CustomerID.
+                                Kundenummer: @order.CustomerID <!-- Viser null med model.CustomerID alle steder -->
                             </div>
                             <div>
-                                Produktnavn: @order.ProductName (@order.ProductName)
+                                Produktnavn: @order.ProductName
                             </div>
                             <div>
-                                Produkttype: @order.ProductType (@order.ProductType)
+                                Produkttype: @order.ProductType
                             </div>
                             <div>
                                 Ordrestatus: @order.ServiceOrderStatus

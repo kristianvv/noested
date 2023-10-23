@@ -24,35 +24,6 @@ public class LoginController : Controller
         return View();
     }
 
-    // Seede ferdig bruker i DB for å unngå å måtte registrere (Presentasjon) (123, 123)
-    [HttpPost]
-    public IActionResult Login(int employeeNumber, string password)
-    {
-        var user = _context.Users.FirstOrDefault(u => u.EmployeeNumber == employeeNumber && u.Password == password);
-
-        if (user != null)
-        {
-            switch (user.Role)
-            {
-                case UserRole.Service:
-                    return RedirectToAction("ServicePersonellPage", "ServicePersonell");
-                case UserRole.Mechanic:
-                    return RedirectToAction("MechanicPage", "Mechanic");
-                case UserRole.Administrator:
-                    return RedirectToAction("AdminPage", "Admin");
-            }
-        }
-        ViewBag.ErrorMessage = "Feil ansattnummer eller passord";
-        return View("Index");
-    }
-    //
-    public IActionResult Logout()
-    {
-        // Perform logout logic
-        HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-        return RedirectToAction("Login", "Login"); // Redirect to login page
-    }
-
     [HttpPost]
     public IActionResult RegisterUser(RegistreringViewModel model)
     {
@@ -71,25 +42,24 @@ public class LoginController : Controller
         return RedirectToAction("Index", "Login"); // Redirect to login page after successful registration
     }
 
-<<<<<<< Updated upstream
     [HttpPost]
         public IActionResult Login(int employeeNumber, string password)
         {
             var user = _context.Users.FirstOrDefault(u => u.EmployeeNumber == employeeNumber && u.Password == password);
 
-            if (user != null)
+        if (user != null)
+        {
+            switch (user.Role)
             {
-                switch (user.Role)
-                {
-                    case UserRole.Service:
-                        return RedirectToAction("Index", "ServiceOrder");
-                    case UserRole.Mechanic:
-                        return RedirectToAction("MechanicPage", "Mechanic");
-                    case UserRole.Administrator:
-                        return RedirectToAction("AdminPage", "Admin");
-                }
+                case UserRole.Service:
+                    return RedirectToAction("ServicePersonellPage", "ServicePersonell");
+                case UserRole.Mechanic:
+                    return RedirectToAction("MechanicPage", "Mechanic");
+                case UserRole.Administrator:
+                    return RedirectToAction("AdminPage", "Admin");
             }
-            ViewBag.ErrorMessage = "Feil ansattnummer eller passord";
+        }
+        ViewBag.ErrorMessage = "Feil ansattnummer eller passord";
             return View("Index");
         }
 
@@ -99,9 +69,6 @@ public class LoginController : Controller
         HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         return RedirectToAction("Login", "Login"); // Redirect to login page
     }
-=======
-    
->>>>>>> Stashed changes
 }
 
 

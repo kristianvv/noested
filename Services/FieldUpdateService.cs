@@ -28,7 +28,7 @@ namespace Noested.Services
             }
 
 
-            // Validate and update individual fields
+            // Validere og oppdatere individuelle felt
             await ValidateAndUpdateFields(existingOrder, completedOrder, form);
 
             await Task.CompletedTask;
@@ -36,67 +36,67 @@ namespace Noested.Services
 
         private static async Task ValidateAndUpdateFields(ServiceOrderModel existingOrder, ServiceOrderModel completedOrder, IFormCollection form)
         {
-            // Validate and update ServiceOrderID
+            // Validere og oppdatere ServiceOrderID
             if (completedOrder.ServiceOrderID != 0)
             {
                 existingOrder.ServiceOrderID = completedOrder.ServiceOrderID;
             }
 
-            // Validate and update ServiceOrderStatus
+            // Validere og oppdatere ServiceOrderStatus
             if (!string.IsNullOrEmpty(completedOrder.ServiceOrderStatus))
             {
                 existingOrder.ServiceOrderStatus = completedOrder.ServiceOrderStatus;
             }
 
-            // Validate and update OrderRecieved
+            // Validere og oppdatere OrderRecieved
             if (completedOrder.OrderReceived != DateTime.MinValue)
             {
                 existingOrder.OrderReceived = completedOrder.OrderReceived;
             }
 
-            // Validate and update OrderCompleted
+            // Validere og oppdatere OrderCompleted
             if (completedOrder.OrderCompleted != DateTime.MinValue)
             {
                 existingOrder.OrderCompleted = completedOrder.OrderCompleted;
             }
 
-            // Validate and update SerialNumber
+            // Validere og oppdatere SerialNumber
             if (completedOrder.SerialNumber != 0)
             {
                 existingOrder.SerialNumber = completedOrder.SerialNumber;
             }
 
-            // Validate and update ModelYear
+            // Validere og oppdatere ModelYear
             if (!string.IsNullOrEmpty(completedOrder.ModelYear))
             {
                 existingOrder.ModelYear = completedOrder.ModelYear;
             }
 
-            // Validate and update Warranty
+            // Validere og oppdatere Warranty
             if (completedOrder.Warranty != WarrantyType.None)
             {
                 existingOrder.Warranty = completedOrder.Warranty;
             }
 
-            // Validate and update RepairDescription
+            // Validere og oppdatere RepairDescription
             if (!string.IsNullOrEmpty(completedOrder.RepairDescription))
             {
                 existingOrder.RepairDescription = completedOrder.RepairDescription;
             }
 
-            // Validate and update WorkHours
+            // Validere og oppdatere WorkHours
             if (completedOrder.WorkHours != 0)
             {
                 existingOrder.WorkHours = completedOrder.WorkHours;
             }
 
-            // Validate and update Customer
+            // Validere og oppdatere Customer
             if (completedOrder.Customer != null && completedOrder.Customer.CustomerID != 0)
             {
                 existingOrder.Customer = completedOrder.Customer;
             }
 
-            // Validate and update Checklists
+            // Validere og oppdatere Checklists
             if (form != null)
             {
                 await ChecklistService.PopulateChecklistFromForm(completedOrder, form);

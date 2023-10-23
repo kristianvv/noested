@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // If existing customer isn't chosen from dropdown, then new customer fields show in form and are required.
 function toggleNewCustomerSection() {
-    const dropdown = document.getElementById('existingCustomer');
+    const dropdown = document.getElementById('CustomerID');
     const newCustomerSection = document.getElementById('newCustomerSection');
     const inputElements = newCustomerSection.querySelectorAll('input');
 
