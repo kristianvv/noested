@@ -25,19 +25,19 @@
                     <section class="service-order-item">
                         <a href="@Url.Action("ViewOrder", "Mechanic", new { id = order.ServiceOrderID })"> <!-- "ViewNavn(.cshtml)", "View") -->
                             <div>
-                                Ordre opprettet: @order.OrderReceived
+                                Ordre Opprettet: @order.OrderReceived
                             </div>
                             <div>
                                 Ordrenummer: @order.ServiceOrderID
                             </div>
                             <div>
-                                Kundenummer: @order.Customer!.CustomerID.
+                                Kundenummer: @order.CustomerID
                             </div>
                             <div>
-                                Produktnavn: @order.ProductName (@order.ProductName)
+                                Produktnavn: @order.ProductName
                             </div>
                             <div>
-                                Produkttype: @order.ProductType (@order.ProductType)
+                                Produkttype: @order.ProductType
                             </div>
                             <div>
                                 Ordrestatus: @order.ServiceOrderStatus

@@ -44,6 +44,7 @@ namespace Noested.Data
         // Add
         public Task AddServiceOrderAsync(ServiceOrderModel order)
         {
+            // Update the CustomerID of order to the CustomerID of Customer.CustomerID?
             LastOrderNumber++; // Increment the last ServiceOrderID
             order.OrderReceived = DateTime.Now;
             order.ServiceOrderID = LastOrderNumber; // Set the increment as new ID
@@ -56,6 +57,7 @@ namespace Noested.Data
             var existingOrder = ServiceOrders.Find(o => o.ServiceOrderID == updatedOrder.ServiceOrderID);
             if (existingOrder != null)
             {
+                existingOrder.CustomerID = updatedOrder.CustomerID;
                 existingOrder.OrderCompleted = updatedOrder.OrderCompleted;
                 existingOrder.SerialNumber = updatedOrder.SerialNumber;
                 existingOrder.ModelYear = updatedOrder.ModelYear;
@@ -63,7 +65,6 @@ namespace Noested.Data
                 existingOrder.RepairDescription = updatedOrder.RepairDescription;
                 existingOrder.WorkHours = updatedOrder.WorkHours;
                 existingOrder.Customer = updatedOrder.Customer;
-                existingOrder.Customer!.CustomerID = updatedOrder.Customer!.CustomerID;
                 existingOrder.Checklists = updatedOrder.Checklists;
             }
             return Task.FromResult(0);

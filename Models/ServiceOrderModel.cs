@@ -9,6 +9,7 @@ namespace Noested.Models
         public ServiceOrderModel()
         {
             ServiceOrderID = 0; // is on form
+            CustomerID = 0;
             ServiceOrderStatus = ""; // is on form
             OrderReceived = DateTime.MinValue; // is on form
             AgreedFinishedDate = DateTime.MinValue; // is on form hidden
@@ -25,8 +26,10 @@ namespace Noested.Models
             Customer = new Customer();
         }
 
-        [Display(Name = "Serviceorder ID")] // Primary Key
-        public int ServiceOrderID { get; set; }
+        [Display(Name = "Serviceorder ID")] 
+        public int ServiceOrderID { get; set; } // Primary Key
+        [Display(Name = "Customer ID")] 
+        public int CustomerID { get; set; } // Foreign Key
         [Display(Name = "Serviceorder Status")]
         public string ServiceOrderStatus { get; set; }
         [Display(Name = "Order Received")]
@@ -82,13 +85,13 @@ namespace Noested.Models
             Phone = "";
         }
         public int CustomerID { get; set; }
-        public string FirstName { get; set; }
+        public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public string? StreetAddress { get; set; }
         public int? ZipCode { get; set; }
         public string? City { get; set; }
-        public string Email { get; set; }
-        public string Phone { get; set; }
+        public string? Email { get; set; }
+        public string? Phone { get; set; }
     }
 
 }

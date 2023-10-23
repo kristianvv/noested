@@ -50,9 +50,5 @@ namespace Noested.Data
         {
             await _database.AddCustomerAsync(newCustomer);
         }
-
-
-
-
     }
 }
