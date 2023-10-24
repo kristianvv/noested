@@ -93,6 +93,7 @@ public class LoginController : Controller
 
     public IActionResult Logout()
     {
+
         // Perform logout logic
         HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         return RedirectToAction("Login", "Login"); // Redirect to login page

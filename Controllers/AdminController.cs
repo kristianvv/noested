@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Noested.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Administrator")]
     public class AdminController : Controller
     {
        

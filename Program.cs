@@ -15,6 +15,13 @@ builder.Services.AddSingleton<ServiceOrderDatabase>(); // Daniel (AppDbContext (
 builder.Services.AddScoped<IServiceOrderRepository, ServiceOrderRepository>(); // Daniel repository pattern for in-mem DB
 builder.Services.AddScoped<ServiceOrderService>(); // Daniel
 builder.Services.AddScoped<ChecklistService>(); // Daniel
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("Admin", policy => policy.RequireRole("Administrator"));
+    options.AddPolicy("Mechanic", policy => policy.RequireRole("Mechanic"));
+    options.AddPolicy("Service", policy => policy.RequireRole("Service"));
+});
+
 
 
 //Login og logout
@@ -61,7 +68,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "login",
     pattern: "/login",
-    defaults: new { controller = "Login", action = "Index" }
+    defaults: new { controller = "Login", action = "Login" }
 );
 
 app.MapControllerRoute(
@@ -73,7 +80,7 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "accessdenied",
     pattern: "/Account/AccessDenied",
-    defaults: new { controller = "Account", action = "AccessDenied" }
+    defaults: new { controller = "Login", action = "AccessDenied" }
 );
 
 app.MapRazorPages();

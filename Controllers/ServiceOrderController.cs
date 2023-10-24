@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Noested.Controllers
 {
-    [Authorize]
+    [Authorize(Roles ="Service,Administrator,Mechanic")]
     public class ServiceOrderController : Controller
     {
         private readonly ILogger<ServiceOrderController> _logger;
