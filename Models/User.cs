@@ -10,6 +10,7 @@ namespace Noested.Models
         public required string Password { get; set; }
         public UserRole Role { get; set; }
         public string? Email { get; set; }
+        public bool IsLoggedIn { get; set; }
     }
 
     public enum UserRole
