@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Noested.Models;
 using Noested.Services;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Noested.Controllers
 {
+    [Authorize (Roles = "Mechanic,Service,Administrator")]
     public class MechanicController : Controller
     {
         private readonly ILogger<MechanicController> _logger;

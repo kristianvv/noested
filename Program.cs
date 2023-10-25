@@ -18,6 +18,12 @@ builder.Services.AddSingleton<ServiceOrderDatabase>(); // Daniel (AppDbContext (
 builder.Services.AddScoped<ServiceOrderService>(); // Daniel
 builder.Services.AddScoped<ChecklistService>(); // Daniel
 builder.Services.AddScoped<CustomerService>(); // Daniel
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("Admin", policy => policy.RequireRole("Administrator"));
+    options.AddPolicy("Mechanic", policy => policy.RequireRole("Mechanic"));
+    options.AddPolicy("Service", policy => policy.RequireRole("Service"));
+});
 
 //Login og logout
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -25,6 +31,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     {
         options.LoginPath = "/login"; // Set the login path
         options.LogoutPath = "/logout"; // Set the logout path
+        options.AccessDeniedPath = "/Login/AccessDenied"; // Set the access denied path
         options.Cookie.HttpOnly = true;
         options.Cookie.SameSite = SameSiteMode.Strict;
         options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
@@ -56,6 +63,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 // Login
@@ -78,6 +86,13 @@ app.MapRazorPages();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Login}/{action=Index}/{id?}");
+
+// Access denied
+app.MapControllerRoute(
+    name: "accessdenied",
+    pattern: "/Account/AccessDenied",
+    defaults: new { controller = "Login", action = "AccessDenied" }
+);
 
 // Headers beskyttelse
 

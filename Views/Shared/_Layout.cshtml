@@ -44,9 +44,14 @@
                         <li>
                             <a class="nav-link text-dark" asp-controller="ServicePersonell" asp-action="Create">Opprette Ny ServiceOrdre</a>
                         </li>
-                        <li>
-                            <a href="/login" class="btn btn-danger">Logg ut</a>
-                        </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="ms-auto">
+                                <form id="logoutForm" asp-controller="Login" asp-action="Logout" method="post">
+                                    <button type="submit" class="btn btn-danger">Logg ut</button>
+                                </form>
+                            </li>
+                        }
                         <!-- Additional menu items? -->
                     </ul>
                 </div>

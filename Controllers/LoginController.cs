@@ -6,6 +6,8 @@ using Noested.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace Noested.Controllers;
 
@@ -42,13 +44,34 @@ public class LoginController : Controller
         return RedirectToAction("Index", "Login"); // Redirect to login page after successful registration
     }
 
+    [AllowAnonymous]
+    public IActionResult AccessDenied()
+    {
+        ViewData["ErrorMessage"] = "Access Denied";
+        return View();
+    }
+
     [HttpPost]
-        public IActionResult Login(int employeeNumber, string password)
-        {
-            var user = _context.Users.FirstOrDefault(u => u.EmployeeNumber == employeeNumber && u.Password == password);
+    public async Task<IActionResult> Login(int employeeNumber, string password)
+    {
+        var user = _context.Users.FirstOrDefault(u => u.EmployeeNumber == employeeNumber && u.Password == password);
 
         if (user != null)
         {
+            // Create claims
+            var claims = new[]
+            {
+            new Claim(ClaimTypes.Name, user.EmployeeNumber.ToString()),
+            new Claim(ClaimTypes.Role, user.Role.ToString())
+
+        };
+            // Create identity
+            var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            // Create principal
+            var principal = new ClaimsPrincipal(identity);
+            // Sign in the user
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+
             switch (user.Role)
             {
                 case UserRole.Service:
@@ -60,15 +83,16 @@ public class LoginController : Controller
             }
         }
         ViewBag.ErrorMessage = "Feil ansattnummer eller passord";
-            return View("Index");
-        }
+        return View("Index");
+    }
 
     public IActionResult Logout()
     {
         // Perform logout logic
         HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-        return RedirectToAction("Login", "Login"); // Redirect to login page
+        return RedirectToAction("Index", "Login"); // Redirect to login page
     }
+
 }
 
 
