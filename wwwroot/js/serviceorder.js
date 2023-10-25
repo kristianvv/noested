@@ -24,50 +24,48 @@ function generateChecklist() {
     const form = document.querySelector("form");
     const table = document.querySelector("#checklistTable");
 
+    /* For each category within the categories array */
     categories.forEach((category, categoryIndex) => {
-        const tbody = document.createElement("tbody");
-        table.appendChild(tbody);
+        const tbody = document.createElement("tbody"); // Creates a tbody element
+        table.appendChild(tbody); // Appends it to the table #checkListTable
 
-        let categoryCell;
+        /* First Task = For Each Item Within Each Category */
+        let categoryCell; 
         category.items.forEach((item, index) => {
-            const row = document.createElement("tr");
+            const row = document.createElement("tr"); // Creates a row element
 
+            /* 1.1) Sub-task (Add Category TD) */ 
             if (index === 0) {
-                categoryCell = document.createElement("td");
-                categoryCell.rowSpan = category.items.length;
-                categoryCell.textContent = category.name;
-                categoryCell.classList.add("category-header");
-                row.appendChild(categoryCell);
+                categoryCell = document.createElement("td"); // extra <td> first to display the category cell in view
+                categoryCell.rowSpan = category.items.length; // 'rowSpan' ensures cell covers all associated items in view
+                categoryCell.textContent = category.name; // 'textContent' displays category name in view
+                categoryCell.classList.add("category-header"); // needed to separate from rows in update functions
+                row.appendChild(categoryCell); // Add to <tr>
             }
 
-            // Hidden input for each item's category
-            const hiddenInput = document.createElement("input");
-            hiddenInput.type = "hidden";
-            hiddenInput.name = `category_${sanitize(item)}`;
-            hiddenInput.value = category.name;
-            form.appendChild(hiddenInput);
-
-            // Item cell
+            /* 1.2) Sub-task (Add Item TD) */
             const itemCell = document.createElement("td");
-            itemCell.textContent = item;
-            row.appendChild(itemCell);
+            itemCell.textContent = item; // Displays to user name of item (categories.category.items.item)
+            row.appendChild(itemCell); // Add to row
 
-            ['OK', 'Bør Skiftes', 'Defekt'].forEach(status => {
-                const statusCell = document.createElement("td");
-                const radio = document.createElement("input");
+            /* 1.3) Sub-task (Add Three Radio Options) */
+            ['OK', 'Bør Skiftes', 'Defekt'].forEach(status => { // define status values, for each option...
+                const statusCell = document.createElement("td"); // ... creating a td element to contain...
+                const radio = document.createElement("input"); // ... the input ...
                 radio.type = "radio";
-                radio.name = `item_${sanitize(item)}`;
-                radio.value = status;
-                radio.addEventListener('change', () => {
-                    updateRowColor(row, status);
-                    updateCategoryColor(tbody, categoryCell);
+                radio.value = status; // Payload value
+                radio.name = `item_${sanitize(item)}_category_${sanitize(category.name)}`; // Payload key
+                
+                radio.addEventListener('change', () => { // if checked
+                    updateRowColor(row, status); // adds class to all <td> in <tr> besides the category
+                    updateCategoryColor(tbody, categoryCell); // changes category <td> if all rows in tbody checked
                 });
 
-                // Status cell
-                statusCell.appendChild(radio);
-                row.appendChild(statusCell);
+                statusCell.appendChild(radio); // Loop appends each radio-input to their respective statusCell <td>...
+                row.appendChild(statusCell); // ... and each statusCell to the row.
             });
-            tbody.appendChild(row);
+
+        tbody.appendChild(row); // Finished row appended to the tbody (for category).
         });
     });
 }
@@ -77,36 +75,22 @@ function sanitize(name) {
     return name.replace(/\s+/g, '_').toLowerCase();
 }
 
+// Pageload
 document.addEventListener('DOMContentLoaded', function () {
-    generateChecklist();
+    generateChecklist(); // Generate the checklist
 
     const serviceOrderForm = document.getElementById('serviceOrderForm');
 
-    if (serviceOrderForm !== null) {
-        serviceOrderForm.addEventListener('submit', function (event) {
-            console.log('Submit event triggered');  // Log to ensure this is only being called once
-            event.preventDefault();  // Prevent the default form submission
+    if (serviceOrderForm !== null) { // if not null
+        serviceOrderForm.addEventListener('submit', function (event) { // Listen for Submit
+            event.preventDefault(); // pause submit process
 
-            // Set each select option to its matching status
-            const selects = document.querySelectorAll("select");
-            selects.forEach((select) => {
-                const status = select.getAttribute('data-status');
-                select.value = status;
-            });
-
-            // Oppdatere OrderCompleted and ServiceOrderStatus
+            // Update OrderCompleted and ServiceOrderStatus first
             const now = new Date();
-            // document.getElementById('service_order_id').value = 
             document.getElementById('order_completed').value = now.toISOString();
-            document.getElementById('service_order_status').value = "Completed"; // Erstatt med Status for «fullført»
+            document.getElementById('service_order_status').value = "Fullført";
 
-            // Log the form data
-            const formData = new FormData(serviceOrderForm);
-            for (const [key, value] of formData.entries()) {
-                console.log(key, value);  // Log each form field and its value
-            }
-
-            // Perform the actual form submission
+            // Continue form submission
             serviceOrderForm.submit();
         });
     } else {
