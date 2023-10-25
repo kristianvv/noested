@@ -14,40 +14,40 @@
         <section class="left-panel">
             <!-- Left panel -->
             <div>
-                <label>Serviceordre ID</label> <!-- Serviceordre ID (int) -->
+                <label for="ServiceOrderID">Serviceordre ID</label> <!-- Serviceordre ID (int) -->
                 <input id="service_order_id" type="text" name="ServiceOrderID" readonly value="@Model.ServiceOrderID" />
             </div>
 
             <div>
-                <label>Kunde ID</label> <!-- Kunde ID (int)-->
+                <label for="CustomerID">Kunde ID</label> <!-- Kunde ID (int)-->
                 <input id="customer_id" type="text" name="CustomerID" readonly value="@Model.CustomerID" />
             </div>
 
             <div>
-                <label>Produktnavn</label> <!-- Produktnavn (f.eks "Igland 2501") -->
+                <label for="ProductName">Produktnavn</label> <!-- Produktnavn (f.eks "Igland 2501") -->
                 <input id="product_name" type="text" name="ProductName" readonly value="@Model.ProductName" />
             </div>
 
             <div>
-                <label>Produkttype</label> <!-- Produkttype (f.eks "Vinsj") -->
+                <label for="ProductType">Produkttype</label> <!-- Produkttype (f.eks "Vinsj") -->
                 <input id="product_type" type="text" name="ProductType" readonly value="@Model.ProductType" />
             </div>
         </section>
         <!-- Right panel -->
         <section class="right-panel">
             <div>
-                <label>Status for Serviceordre</label> <!-- Ordrestatus (f.eks 'Uåpnet' eller 'Fullført')-->
+                <label for="ServiceOrderStatus">Status for Serviceordre</label> <!-- Ordrestatus (f.eks 'Uåpnet' eller 'Fullført')-->
                 <input id="service_order_status" type="text" name="ServiceOrderStatus" readonly value="@Model.ServiceOrderStatus" />
             </div>
             <div>
-                <label>Mottatt Ordre Dato</label> <!-- Opprettet Dato -->
+                <label for="OrderReceived">Mottatt Ordre Dato</label> <!-- Opprettet Dato -->
                 <input id="order_received" type="text" name="OrderReceived" readonly value="@Model.OrderReceived" />
             </div>
         </section>
     </section>
 
     <section class="customer-comments">
-        <h2>Kundens Problembeskrivelse</h2> <!-- Kundens  -->
+        <label for="CustomerComments">Kundens Problembeskrivelse</label> <!-- Kundens  -->
         <textarea id="customer_comments" name="CustomerComment" readonly>@Model.CustomerComment</textarea>
     </section>
 
@@ -57,11 +57,11 @@
     <input id="serial_number" type="hidden" name="SerialNumber" readonly value="@Model.SerialNumber">
     <input id="model_year" type="hidden" name="ModelYear" readonly value="@Model.ModelYear">
     <input id="warranty" type="hidden" name="Warranty" readonly value="@Model.Warranty">
-    <input id="work_hours" type="hidden" name="WorkHours" readonly value="@Model.WorkHours">
 
     <!-- Checklist Section -->
     <section id="checklistSection">
         <table class="table table-bordered mb-3" id="checklistTable">
+            <!-- generateChecklist() (js) -->
             <thead>
                 <tr>
                     <th>Kategorier</th>
@@ -71,17 +71,20 @@
                     <th>Defekt</th>
                 </tr>
             </thead>
-            <tbody id="itemRows" name="Checklists">
-                <!-- Genereres av JS-filen-->
-            </tbody>
         </table>
 
-        <!-- Mekaniker kommentar -->
+        <!-- Mekaniker kommentar og brukte arbeidstimer -->
         <div class="mb-3">
             <label for="RepairDescription" class="form-label">Beskrivelse av Reparasjoner</label>
             <textarea class="form-control" id="RepairDescription" name="RepairDescription"></textarea>
         </div>
+        <div class="mb-3">
+            <label for="WorkHours">Arbeidstimer brukt</label>
+            <input type="number" placeholder="Antall(x) brukte timer (f.eks: 2)" class="form-control" id="work_hours" name="WorkHours">
+        </div>
     </section>
+
+    
 
     <button type="submit" class="btn btn-success">Ferdigstill Ordre</button>
 </form>

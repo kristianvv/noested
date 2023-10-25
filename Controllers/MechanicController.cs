@@ -20,11 +20,9 @@ namespace Noested.Controllers
 
         public async Task<IActionResult> MechanicPage()
         {
-            _logger.LogInformation("MechanicPage(): Called");
             try
             {
                 var allServiceOrders = await _serviceOrderService.FetchAllServiceOrdersAsync();
-                _logger.LogInformation("MechanicPage(): Retrieved all service orders");
                 return View(allServiceOrders);
             }
             catch (InvalidOperationException ex)
@@ -43,7 +41,6 @@ namespace Noested.Controllers
             try
             {
                 var order = await _serviceOrderService.FetchServiceOrderByIdAsync(id);
-                _logger.LogInformation("ViewOrder(): Retrieved order");
                 return View("~/Views/ServiceOrder/ViewOrder.cshtml", order);
             }
             catch (InvalidOperationException ex)
@@ -55,20 +52,6 @@ namespace Noested.Controllers
         [HttpPost]
         public async Task<IActionResult> SaveCompletedOrder(ServiceOrderModel completedOrder, IFormCollection form)
         {
-            Request.EnableBuffering();
-
-            // Read the request body
-            var buffer = new byte[Convert.ToInt32(Request.ContentLength)];
-            await Request.Body.ReadAsync(buffer, 0, buffer.Length);
-            var requestBody = Encoding.UTF8.GetString(buffer);
-
-            // Log the request body
-            _logger.LogInformation($"Request Body: {requestBody}");
-
-            // Reset the request body stream position
-            Request.Body.Position = 0;
-
-
             _logger.LogInformation("SaveCompletedOrder(): Called");
 
             var validationResult = await _serviceOrderService.UpdateCompletedOrderAsync(completedOrder, form);

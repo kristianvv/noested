@@ -80,13 +80,13 @@ namespace Noested.Controllers
         }
 
 
-        // Registrere ny kunde uavhengig av serviceordre
+        /* Registrere ny kunde uavhengig av serviceordre
         [HttpGet]
         public async Task<IActionResult> RegisterCustomer()
         {
             return View();
         }
-
+        */
 
         // Se alle eksisterende ordre // må lages nytt view
         [HttpGet]

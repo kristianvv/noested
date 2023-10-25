@@ -1,71 +1,60 @@
-﻿using Noested.Models;
-using Microsoft.Extensions.Logging;
-using System.Threading.Tasks;
+﻿using System.Net.NetworkInformation;
+using Noested.Models;
 
 namespace Noested.Services
 {
     public class ChecklistService
     {
-
-
-        /// <summary>
-        ///     Brukes for å behandle ferdigutfylt sjekkliste fra mekaniker.
-        /// </summary>
-        /// <param name="order">Serviceordren som ble hentet fra DB</param>
-        /// <param name="form">Den ferdigutfylte sjekklisten generert av JS-filen</param>
-        /// <returns></returns>
-        /// <exception cref="ArgumentNullException"></exception>
         public static async Task PopulateChecklistFromForm(ServiceOrderModel order, IFormCollection? form)
         {
-
             if (order == null || form == null)
             {
                 throw new ArgumentNullException("Order/Form CANNOT be null");
             }
+                
+            order.Checklists = new ChecklistDTO(); // Initialize new checklist
 
-            order.Checklists = new ChecklistDTO(); // Initialisere ny sjekkliste
-
-            foreach (var key in form.Keys) // Finne alle item_ nøkler i formen for å fylle ut sjekkelementene i lista
+            foreach (var key in form.Keys) // Find all item_ keys in the form to populate the checklist items
             {
                 if (key.StartsWith("item_"))
                 {
+                    // _logger.LogInformation($"Processing form key: {key}");
                     await PopulateItemFromFormKey(order, form, key);
                 }
             }
         }
 
-        // Hjelpemetode for å fylle sjekklisteelementene basert på item_ nøkler fra formen
         private static async Task PopulateItemFromFormKey(ServiceOrderModel order, IFormCollection form, string key)
         {
-            // Hente ut elementnøkkel, kategorinøkkel og status fra formen
-            string itemName = ExtractItemName(key); // Hjelpemetode under (1)
-            string category = ExtractCategory(form, itemName); // Hjelpemetode under (2)
-            string status = ExtractStatus(form, key); // Hjelpemetode under (3)
+            System.Diagnostics.Debug.WriteLine($"FORM KEY: {key}"); // Lage Item Basert På Denne Nøkkelen
 
-            // Finne eller opprette kategori for å legge element til
-            var categoryObj = FindOrCreateCategory(order.Checklists, category);
+            var parts = key.Split(new[] { "_category_" }, StringSplitOptions.None); // dele stringen
+            System.Diagnostics.Debug.WriteLine($"PARTS: '{parts[0]}' og '{parts[1]}'");
 
-            // Lage nytt element og legg til i kategori
+            string itemName = ExtractItemName(parts[0]); // første del er item navnet
+            System.Diagnostics.Debug.WriteLine($"ITEM NAME {itemName}");
+
+            string categoryName = parts.Length > 1 ? parts[1].Replace('_', ' ') : "Unknown";
+            System.Diagnostics.Debug.WriteLine($"CATEGORY NAME {categoryName}"); // andre del er kategorinavnet
+
+            string status = ExtractStatus(form, key); // value ligger i form, hentes ut med nøkkelen
+            System.Diagnostics.Debug.WriteLine($"STATUS: {status}"); //
+
+
+            var categoryObj = FindOrCreateCategory(order.Checklists, categoryName);
+
+            // Create a new item and add it to the category
             var item = new Item { Name = itemName, Status = status };
             categoryObj.Items.Add(item);
 
             await Task.CompletedTask;
         }
 
-        // Hjelpemetode (1) – Hente navn fra formnøkkel.
         private static string ExtractItemName(string key)
         {
-            return key.Substring(5).Replace('_', ' '); // "item_"
+            return key.Substring(5).Replace('_', ' '); // Remove "item_" prefix and replace underscores with spaces
         }
 
-        // Hjelpemetode (2) – Utvinne kategorinavnet assosiert med et item_ fra formen
-        private static string ExtractCategory(IFormCollection form, string itemName)
-        {
-            string categoryKey = $"category_{itemName.Replace(' ', '_')}";
-            return form.ContainsKey(categoryKey) ? form[categoryKey].ToString() : "Unknown";
-        }
-
-        // Hjelpemetode (3) – Utvinne status (radio) for elementet 
         private static string ExtractStatus(IFormCollection form, string key)
         {
             return form[key].ToString() ?? "Unknown";
@@ -78,6 +67,8 @@ namespace Noested.Services
             {
                 categoryObj = new Category { Name = categoryName };
                 checklists.Categories.Add(categoryObj);
+                System.Diagnostics.Debug.WriteLine($"CATEGORY SAVED IN CHECKLISTS.CATEGORY.NAME {categoryObj.Name}");
+
             }
             return categoryObj;
         }
