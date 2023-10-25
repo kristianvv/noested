@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authentication.Cookies;
+﻿using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Hosting;
 using Noested.Data;
 using Noested.Services;
 using Noested.Utilities;
@@ -56,15 +58,6 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-// XSS beskyttelse
-
-app.Use(async (context, next) =>
-{
-    context.Response.Headers.Add("X-Xss-Protection", "1");
-    Console.WriteLine("X-Xss-Protection header added");
-    await next();
-});
-
 // Login
 app.MapControllerRoute(
     name: "login",
@@ -85,5 +78,12 @@ app.MapRazorPages();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Login}/{action=Index}/{id?}");
+
+// Headers beskyttelse
+
+WebHost.CreateDefaultBuilder(args)
+    .ConfigureKestrel(c => c.AddServerHeader = false)
+    .UseStartup<Noested.Startup>()
+    .Build();
 
 app.Run();
