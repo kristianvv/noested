@@ -17,7 +17,6 @@ builder.Services.AddScoped<ServiceOrderService>(); // Daniel
 builder.Services.AddScoped<ChecklistService>(); // Daniel
 builder.Services.AddScoped<CustomerService>(); // Daniel
 
-
 //Login og logout
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
@@ -56,6 +55,15 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+// XSS beskyttelse
+
+app.Use(async (context, next) =>
+{
+    context.Response.Headers.Add("X-Xss-Protection", "1");
+    Console.WriteLine("X-Xss-Protection header added");
+    await next();
+});
 
 // Login
 app.MapControllerRoute(

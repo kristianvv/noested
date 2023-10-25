@@ -9,125 +9,93 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Noested
 build_property.RootNamespace = Noested
-build_property.ProjectDir = C:\Users\timef\Source\Repos\noested\
+build_property.ProjectDir = C:\Users\timef\noested\
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\timef\Source\Repos\noested
+build_property.MSBuildProjectDirectory = C:\Users\timef\noested
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/timef/Source/Repos/noested/Views/Admin/AdminPage.cshtml]
+[C:/Users/timef/noested/Views/Admin/AdminPage.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRtaW5QYWdlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/timef/Source/Repos/noested/Views/DummyServiceOrders/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRHVtbXlTZXJ2aWNlT3JkZXJzXENyZWF0ZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/timef/Source/Repos/noested/Views/DummyServiceOrders/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRHVtbXlTZXJ2aWNlT3JkZXJzXERlbGV0ZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/timef/Source/Repos/noested/Views/DummyServiceOrders/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRHVtbXlTZXJ2aWNlT3JkZXJzXERldGFpbHMuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/timef/Source/Repos/noested/Views/DummyServiceOrders/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRHVtbXlTZXJ2aWNlT3JkZXJzXEVkaXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/timef/Source/Repos/noested/Views/DummyServiceOrders/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRHVtbXlTZXJ2aWNlT3JkZXJzXEluZGV4LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/timef/Source/Repos/noested/Views/Login/Index.cshtml]
+[C:/Users/timef/noested/Views/Login/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/timef/Source/Repos/noested/Views/Login/_LoginLayout.cshtml]
+[C:/Users/timef/noested/Views/Login/_LoginLayout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cX0xvZ2luTGF5b3V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/timef/Source/Repos/noested/Views/Mechanic/MechanicPage.cshtml]
+[C:/Users/timef/noested/Views/Mechanic/MechanicPage.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVjaGFuaWNcTWVjaGFuaWNQYWdlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/timef/Source/Repos/noested/Views/Privacy/PrivacyPage.cshtml]
+[C:/Users/timef/noested/Views/Privacy/PrivacyPage.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJpdmFjeVxQcml2YWN5UGFnZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/timef/Source/Repos/noested/Views/Register/RegisterUser.cshtml]
+[C:/Users/timef/noested/Views/Register/RegisterUser.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVnaXN0ZXJcUmVnaXN0ZXJVc2VyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/timef/Source/Repos/noested/Views/ServiceOrders/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmljZU9yZGVyc1xDcmVhdGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/timef/Source/Repos/noested/Views/ServiceOrders/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmljZU9yZGVyc1xEZWxldGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/timef/Source/Repos/noested/Views/ServiceOrders/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmljZU9yZGVyc1xEZXRhaWxzLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/timef/Source/Repos/noested/Views/ServiceOrders/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmljZU9yZGVyc1xFZGl0LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/timef/Source/Repos/noested/Views/ServiceOrders/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmljZU9yZGVyc1xJbmRleC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/timef/Source/Repos/noested/Views/ServiceOrder/Create.cshtml]
+[C:/Users/timef/noested/Views/ServiceOrder/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmljZU9yZGVyXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/timef/Source/Repos/noested/Views/ServiceOrder/Index.cshtml]
+[C:/Users/timef/noested/Views/ServiceOrder/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmljZU9yZGVyXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/timef/Source/Repos/noested/Views/ServiceOrder/ViewOrder.cshtml]
+[C:/Users/timef/noested/Views/ServiceOrder/ViewOrder.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmljZU9yZGVyXFZpZXdPcmRlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/timef/Source/Repos/noested/Views/Shared/Error.cshtml]
+[C:/Users/timef/noested/Views/ServicePersonell/RegisterCustomer.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmljZVBlcnNvbmVsbFxSZWdpc3RlckN1c3RvbWVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/timef/noested/Views/ServicePersonell/ServicePersonellPage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmljZVBlcnNvbmVsbFxTZXJ2aWNlUGVyc29uZWxsUGFnZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/timef/noested/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/timef/Source/Repos/noested/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/timef/noested/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/timef/Source/Repos/noested/Views/Tests/Create.cshtml]
+[C:/Users/timef/noested/Views/Tests/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVzdHNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/timef/Source/Repos/noested/Views/Tests/Delete.cshtml]
+[C:/Users/timef/noested/Views/Tests/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVzdHNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/timef/Source/Repos/noested/Views/Tests/Details.cshtml]
+[C:/Users/timef/noested/Views/Tests/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVzdHNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/timef/Source/Repos/noested/Views/Tests/Edit.cshtml]
+[C:/Users/timef/noested/Views/Tests/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVzdHNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/timef/Source/Repos/noested/Views/Tests/Index.cshtml]
+[C:/Users/timef/noested/Views/Tests/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVzdHNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/timef/Source/Repos/noested/Views/_ViewImports.cshtml]
+[C:/Users/timef/noested/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/timef/Source/Repos/noested/Views/_ViewStart.cshtml]
+[C:/Users/timef/noested/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/timef/Source/Repos/noested/Views/Shared/_Layout.cshtml]
+[C:/Users/timef/noested/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-jefttkelwh
