@@ -1,0 +1,157 @@
+﻿@model Noested.Models.Checklist
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Rediger sjekkliste</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ChecklistID" />
+            <div class="form-group">
+                <label asp-for="OrderID" class="control-label"></label>
+                <input asp-for="OrderID" class="form-control" />
+                <span asp-validation-for="OrderID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ServiceProcedure" class="control-label"></label>
+                <input asp-for="ServiceProcedure" class="form-control" />
+                <span asp-validation-for="ServiceProcedure" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ApprovedBy" class="control-label"></label>
+                <input asp-for="ApprovedBy" class="form-control" />
+                <span asp-validation-for="ApprovedBy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PreparedBy" class="control-label"></label>
+                <input asp-for="PreparedBy" class="form-control" />
+                <span asp-validation-for="PreparedBy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MechBrakes" class="control-label"></label>
+                <select asp-for="MechBrakes" class="form-control"></select>
+                <span asp-validation-for="MechBrakes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MechDrumBearing" class="control-label"></label>
+                <select asp-for="MechDrumBearing" class="form-control"></select>
+                <span asp-validation-for="MechDrumBearing" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MechStoragePTO" class="control-label"></label>
+                <select asp-for="MechStoragePTO" class="form-control"></select>
+                <span asp-validation-for="MechStoragePTO" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MechWire" class="control-label"></label>
+                <select asp-for="MechWire" class="form-control"></select>
+                <span asp-validation-for="MechWire" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MechChainTensioner" class="control-label"></label>
+                <select asp-for="MechChainTensioner" class="form-control"></select>
+                <span asp-validation-for="MechChainTensioner" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MechPinionBearing" class="control-label"></label>
+                <select asp-for="MechPinionBearing" class="form-control"></select>
+                <span asp-validation-for="MechPinionBearing" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MechClutch" class="control-label"></label>
+                <select asp-for="MechClutch" class="form-control"></select>
+                <span asp-validation-for="MechClutch" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MechSprocketWedges" class="control-label"></label>
+                <select asp-for="MechSprocketWedges" class="form-control"></select>
+                <span asp-validation-for="MechSprocketWedges" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HydCylinder" class="control-label"></label>
+                <select asp-for="HydCylinder" class="form-control"></select>
+                <span asp-validation-for="HydCylinder" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HydHydraulicBlock" class="control-label"></label>
+                <select asp-for="HydHydraulicBlock" class="form-control"></select>
+                <span asp-validation-for="HydHydraulicBlock" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HydTankOil" class="control-label"></label>
+                <select asp-for="HydTankOil" class="form-control"></select>
+                <span asp-validation-for="HydTankOil" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HydGearboxOil" class="control-label"></label>
+                <select asp-for="HydGearboxOil" class="form-control"></select>
+                <span asp-validation-for="HydGearboxOil" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HydBrakeCylinder" class="control-label"></label>
+                <select asp-for="HydBrakeCylinder" class="form-control"></select>
+                <span asp-validation-for="HydBrakeCylinder" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ElCableNetwork" class="control-label"></label>
+                <select asp-for="ElCableNetwork" class="form-control"></select>
+                <span asp-validation-for="ElCableNetwork" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ElRadio" class="control-label"></label>
+                <select asp-for="ElRadio" class="form-control"></select>
+                <span asp-validation-for="ElRadio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ElButtonBox" class="control-label"></label>
+                <select asp-for="ElButtonBox" class="form-control"></select>
+                <span asp-validation-for="ElButtonBox" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TensionCheckBar" class="control-label"></label>
+                <select asp-for="TensionCheckBar" class="form-control"></select>
+                <span asp-validation-for="TensionCheckBar" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TestWinch" class="control-label"></label>
+                <select asp-for="TestWinch" class="form-control"></select>
+                <span asp-validation-for="TestWinch" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TestTraction" class="control-label"></label>
+                <select asp-for="TestTraction" class="form-control"></select>
+                <span asp-validation-for="TestTraction" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Comment" class="control-label"></label>
+                <input asp-for="Comment" class="form-control" />
+                <span asp-validation-for="Comment" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MechSignature" class="control-label"></label>
+                <input asp-for="MechSignature" class="form-control" />
+                <span asp-validation-for="MechSignature" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateCompleted" class="control-label"></label>
+                <input asp-for="DateCompleted" class="form-control" />
+                <span asp-validation-for="DateCompleted" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

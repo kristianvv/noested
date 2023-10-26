@@ -1,0 +1,185 @@
+﻿@model IEnumerable<Noested.Models.Checklist>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Sjekklisteoversikt</h1>
+
+<p>
+    <a asp-action="Create">Ny sjekkliste</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ServiceProcedure)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ApprovedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PreparedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MechBrakes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MechDrumBearing)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MechStoragePTO)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MechWire)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MechChainTensioner)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MechPinionBearing)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MechClutch)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MechSprocketWedges)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HydCylinder)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HydHydraulicBlock)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HydTankOil)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HydGearboxOil)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HydBrakeCylinder)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ElCableNetwork)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ElRadio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ElButtonBox)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TensionCheckBar)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TestWinch)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TestTraction)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MechSignature)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateCompleted)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ServiceProcedure)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApprovedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PreparedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MechBrakes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MechDrumBearing)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MechStoragePTO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MechWire)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MechChainTensioner)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MechPinionBearing)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MechClutch)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MechSprocketWedges)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HydCylinder)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HydHydraulicBlock)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HydTankOil)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HydGearboxOil)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HydBrakeCylinder)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ElCableNetwork)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ElRadio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ElButtonBox)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TensionCheckBar)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TestWinch)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TestTraction)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MechSignature)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateCompleted)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ChecklistID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ChecklistID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ChecklistID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
