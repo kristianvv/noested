@@ -1,113 +1,54 @@
 ﻿@model IEnumerable<Noested.Models.ServiceOrder>
+<!-- Displays all service orders for mechanics to view.
+    For mechanics: The Index action method will load the Index.cshtml View where all the Service Orders will be listed.
+    Each of these will have a link to open it in a new window using the ViewOrder action,
+    which will load the ViewOrder.cshtml view, complete with the checklist.-->
 
-@{
-    ViewData["Title"] = "Index";
+@section Styles {
+    <link rel="stylesheet" href="~/css/serviceOrder.css">
 }
 
-<h1>Serviceordre</h1>
+<h1>Alle Serviceordre</h1>
+<div class="container-fluid">
+    <div class="row">
+        <!-- Left Empty Column -->
+        <div class="col-md-2"></div>
 
-<p>
-    <a asp-action="Create">Ny serviceordre</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.OrderID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CustomerID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OrderRecieved)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OrderCompleted)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OrderStatus)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ModelYear)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SerialNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Warranty)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CustomerAgreement)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OrderDescription)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DiscardedParts)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ReplacedPartsReturned)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Shipping)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsActive)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                 @Html.DisplayFor(modelItem => item.OrderID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CustomerID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderRecieved)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderCompleted)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderStatus)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ModelYear)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SerialNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Warranty)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CustomerAgreement)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DiscardedParts)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReplacedPartsReturned)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Shipping)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsActive)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.OrderID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.OrderID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.OrderID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+        <!-- Middle Column -->
+        <div class="col-md-8">
+            <h1>Service Orders</h1>
+            <div class="service-order-list overflow-auto">
+                <!-- Service order loop -->
+                @foreach (var order in Model)
+                {
+                    <section class="service-order-item">
+                        <a href="@Url.Action("ViewOrder", "ServiceOrders", new { id = order.OrderId })">
+                            <!-- "ViewNavn(.cshtml)", "View") -->
+                            <div>
+                                Ordre Opprettet: @order.OrderReceived
+                            </div>
+                            <div>
+                                Ordrenummer: @order.OrderId
+                            </div>
+                            <div>
+                                Kundenummer: @order.CustomerId
+                            </div>
+                            <div>
+                                Produktnavn: @order.ProductName
+                            </div>
+                            <div>
+                                Produkttype: @order.ProductType
+                            </div>
+                            <div>
+                                Ordrestatus: @order.Status
+                            </div>
+                        </a>
+                    </section>
+                }
+            </div>
+        </div>
+
+        <!-- Right Empty Column -->
+        <div class="col-md-2"></div>
+    </div>
+</div>

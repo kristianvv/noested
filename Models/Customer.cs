@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Noested.Models
 {
     public class Customer
     {
-        [Key] // Setter primærnøkkel
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Display(Name = "Kundenr")]
         public int CustomerId { get; set; }
         [Required]
@@ -28,5 +30,7 @@ namespace Noested.Models
         [Required]
         [Display(Name = "Telefon")]
         public string? Phone { get; set; }
+
+        public virtual ICollection<ServiceOrder>? ServiceOrders { get; set; }
     }
 }

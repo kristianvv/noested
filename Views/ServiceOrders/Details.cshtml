@@ -11,16 +11,16 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CustomerID)
+            @Html.DisplayNameFor(model => model.CustomerId)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CustomerID)
+            @Html.DisplayFor(model => model.CustomerId)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.OrderRecieved)
+            @Html.DisplayNameFor(model => model.OrderReceived)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.OrderRecieved)
+            @Html.DisplayFor(model => model.OrderReceived)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.OrderCompleted)
@@ -29,10 +29,10 @@
             @Html.DisplayFor(model => model.OrderCompleted)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.OrderStatus)
+            @Html.DisplayNameFor(model => model.Status)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.OrderStatus)
+            @Html.DisplayFor(model => model.Status)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.ModelYear)
@@ -91,6 +91,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.OrderID">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model?.OrderId">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>

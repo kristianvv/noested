@@ -22,9 +22,9 @@ namespace Noested.Controllers
         // GET: Checklists
         public async Task<IActionResult> Index()
         {
-              return _context.Checklist != null ? 
-                          View(await _context.Checklist.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Checklist'  is null.");
+            return _context.Checklist != null ?
+                        View(await _context.Checklist.ToListAsync()) :
+                        Problem("Entity set 'ApplicationDbContext.Checklist'  is null.");
         }
 
         // GET: Checklists/Details/5
@@ -36,7 +36,7 @@ namespace Noested.Controllers
             }
 
             var checklist = await _context.Checklist
-                .FirstOrDefaultAsync(m => m.ChecklistID == id);
+                .FirstOrDefaultAsync(m => m.ChecklistId == id);
             if (checklist == null)
             {
                 return NotFound();
@@ -54,7 +54,7 @@ namespace Noested.Controllers
         // POST: Checklists/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ChecklistID,OrderID,ServiceProcedure,ApprovedBy,PreparedBy,MechBrakes,MechDrumBearing,MechStoragePTO,MechWire,MechChainTensioner,MechPinionBearing,MechClutch,MechSprocketWedges,HydCylinder,HydHydraulicBlock,HydTankOil,HydGearboxOil,HydBrakeCylinder,ElCableNetwork,ElRadio,ElButtonBox,TensionCheckBar,TestWinch,TestTraction,Comment,MechSignature,DateCompleted")] Checklist checklist)
+        public async Task<IActionResult> Create([Bind("ChecklistId,OrderId,ServiceProcedure,ApprovedBy,PreparedBy,MechBrakes,MechDrumBearing,MechStoragePTO,MechWire,MechChainTensioner,MechPinionBearing,MechClutch,MechSprocketWedges,HydCylinder,HydHydraulicBlock,HydTankOil,HydGearboxOil,HydBrakeCylinder,ElCableNetwork,ElRadio,ElButtonBox,TensionCheckBar,TestWinch,TestTraction,TestBrakes,RepairComment,MechSignature,DateCompleted")] Checklist checklist)
         {
             if (ModelState.IsValid)
             {
@@ -84,9 +84,9 @@ namespace Noested.Controllers
         // POST: Checklists/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ChecklistID,OrderID,ServiceProcedure,ApprovedBy,PreparedBy,MechBrakes,MechDrumBearing,MechStoragePTO,MechWire,MechChainTensioner,MechPinionBearing,MechClutch,MechSprocketWedges,HydCylinder,HydHydraulicBlock,HydTankOil,HydGearboxOil,HydBrakeCylinder,ElCableNetwork,ElRadio,ElButtonBox,TensionCheckBar,TestWinch,TestTraction,Comment,MechSignature,DateCompleted")] Checklist checklist)
+        public async Task<IActionResult> Edit(int id, [Bind("ChecklistId,OrderId,ServiceProcedure,ApprovedBy,PreparedBy,MechBrakes,MechDrumBearing,MechStoragePTO,MechWire,MechChainTensioner,MechPinionBearing,MechClutch,MechSprocketWedges,HydCylinder,HydHydraulicBlock,HydTankOil,HydGearboxOil,HydBrakeCylinder,ElCableNetwork,ElRadio,ElButtonBox,TensionCheckBar,TestWinch,TestTraction,TestBrakes,RepairComment,MechSignature,DateCompleted")] Checklist checklist)
         {
-            if (id != checklist.ChecklistID)
+            if (id != checklist.ChecklistId)
             {
                 return NotFound();
             }
@@ -100,7 +100,7 @@ namespace Noested.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ChecklistExists(checklist.ChecklistID))
+                    if (!ChecklistExists(checklist.ChecklistId))
                     {
                         return NotFound();
                     }
@@ -123,7 +123,7 @@ namespace Noested.Controllers
             }
 
             var checklist = await _context.Checklist
-                .FirstOrDefaultAsync(m => m.ChecklistID == id);
+                .FirstOrDefaultAsync(m => m.ChecklistId == id);
             if (checklist == null)
             {
                 return NotFound();
@@ -146,14 +146,14 @@ namespace Noested.Controllers
             {
                 _context.Checklist.Remove(checklist);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ChecklistExists(int id)
         {
-          return (_context.Checklist?.Any(e => e.ChecklistID == id)).GetValueOrDefault();
+            return (_context.Checklist?.Any(e => e.ChecklistId == id)).GetValueOrDefault();
         }
     }
 }

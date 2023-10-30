@@ -1,60 +1,69 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Noested.Data;
 using Noested.Models;
+using Noested.Services;
 
 namespace Noested.Controllers
 {
     public class ServiceOrdersController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly ILogger<ServiceOrdersController> _logger;
+        private readonly CustomerService _customerService;
+        private readonly ServiceOrderService _serviceOrderService;
 
-        public ServiceOrdersController(ApplicationDbContext context)
+        public ServiceOrdersController(ApplicationDbContext context, ILogger<ServiceOrdersController> logger, CustomerService customerService, ServiceOrderService serviceOrderService)
         {
             _context = context;
+            _logger = logger;
+            _customerService = customerService;
+            _serviceOrderService = serviceOrderService;
         }
 
-        // GET: ServiceOrders
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
-              return _context.ServiceOrder != null ? 
-                          View(await _context.ServiceOrder.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.ServiceOrder'  is null.");
+            try
+            {
+                var allServiceOrders = await _serviceOrderService.FetchAllServiceOrdersAsync();
+                return View(allServiceOrders);
+            }
+            catch (InvalidOperationException ex)
+            {
+                var errorViewModel = new ErrorViewModel
+                {
+                    RequestId = ex.Message
+                };
+                return View("Error", errorViewModel);
+            }
         }
 
-        // GET: ServiceOrders/Details/5
-        public async Task<IActionResult> Details(int? id)
+        [HttpGet]
+        public async Task<IActionResult> CreateOrder()
         {
-            if (id == null || _context.ServiceOrder == null)
+            try
             {
-                return NotFound();
+                var existingCustomers = await _customerService.FetchAllCustomersAsync(); // bruke service
+                ViewBag.ExistingCustomers = new SelectList(existingCustomers, "CustomerID", "FirstName");
+                _logger.LogInformation("Successfully populated data from service into ViewBag, sending to View");
+                return View();
             }
-
-            var serviceOrder = await _context.ServiceOrder
-                .FirstOrDefaultAsync(m => m.OrderID == id);
-            if (serviceOrder == null)
+            catch (InvalidOperationException ex)
             {
-                return NotFound();
+                var errorViewModel = new ErrorViewModel
+                {
+                    RequestId = ex.Message
+                };
+                return View("Error", errorViewModel);
             }
-
-            return View(serviceOrder);
-        }
-
-        // GET: ServiceOrders/Create
-        public IActionResult Create()
-        {
-            return View();
         }
 
         // POST: ServiceOrders/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("OrderID,CustomerID,OrderRecieved,OrderCompleted,OrderStatus,ModelYear,SerialNumber,Warranty,CustomerAgreement,OrderDescription,DiscardedParts,ReplacedPartsReturned,Shipping,IsActive")] ServiceOrder serviceOrder)
+        public async Task<IActionResult> CreateOrder([Bind("OrderId,CustomerId,ChecklistId,isActive,OrderRecieved,OrderCompleted,Status,AgreedFinishedDate,ProductName,ProductType,ModelYear,SerialNumber,Warranty,CustomerAgreement,OrderDescription,DiscardedParts,ReplacedPartsReturned,Shipping,WorkHours")] ServiceOrder serviceOrder)
         {
             if (ModelState.IsValid)
             {
@@ -84,9 +93,9 @@ namespace Noested.Controllers
         // POST: ServiceOrders/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("OrderID,CustomerID,OrderRecieved,OrderCompleted,OrderStatus,ModelYear,SerialNumber,Warranty,CustomerAgreement,OrderDescription,DiscardedParts,ReplacedPartsReturned,Shipping,IsActive")] ServiceOrder serviceOrder)
+        public async Task<IActionResult> Edit(int id, [Bind("OrderId,CustomerId,ChecklistId,isActive,OrderRecieved,OrderCompleted,Status,AgreedFinishedDate,ProductName,ProductType,ModelYear,SerialNumber,Warranty,CustomerAgreement,OrderDescription,DiscardedParts,ReplacedPartsReturned,Shipping,WorkHours")] ServiceOrder serviceOrder)
         {
-            if (id != serviceOrder.OrderID)
+            if (id != serviceOrder.OrderId)
             {
                 return NotFound();
             }
@@ -100,7 +109,7 @@ namespace Noested.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ServiceOrderExists(serviceOrder.OrderID))
+                    if (!ServiceOrderExists(serviceOrder.OrderId))
                     {
                         return NotFound();
                     }
@@ -123,7 +132,7 @@ namespace Noested.Controllers
             }
 
             var serviceOrder = await _context.ServiceOrder
-                .FirstOrDefaultAsync(m => m.OrderID == id);
+                .FirstOrDefaultAsync(m => m.OrderId == id);
             if (serviceOrder == null)
             {
                 return NotFound();
@@ -146,14 +155,36 @@ namespace Noested.Controllers
             {
                 _context.ServiceOrder.Remove(serviceOrder);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ServiceOrderExists(int id)
         {
-          return (_context.ServiceOrder?.Any(e => e.OrderID == id)).GetValueOrDefault();
+            return (_context.ServiceOrder?.Any(e => e.OrderId == id)).GetValueOrDefault();
+        }
+
+
+        
+    
+
+        // GET: ServiceOrders/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null || _context.ServiceOrder == null)
+            {
+                return NotFound();
+            }
+
+            var serviceOrder = await _context.ServiceOrder
+                .FirstOrDefaultAsync(m => m.OrderId == id);
+            if (serviceOrder == null)
+            {
+                return NotFound();
+            }
+
+            return View(serviceOrder);
         }
     }
 }

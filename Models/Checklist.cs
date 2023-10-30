@@ -9,16 +9,19 @@ namespace Noested.Models
         NeedsReplacement,
         Defective
     }
+
     public class Checklist
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ChecklistID { get; set; }
+        public int ChecklistId { get; set; }
 
         [ForeignKey("ServiceOrder")]
         [Required]
         [Display(Name = "Ordrenummer")]
-        public int OrderID { get; set; }
+        public int OrderId { get; set; }
+
+        public virtual ICollection<ServiceOrder>? ServiceOrders { get; set; }  // Navigation property
 
         [Required]
         [Display(Name = "Prosedyre")]
@@ -35,6 +38,7 @@ namespace Noested.Models
         [MaxLength(50)]
         public string? PreparedBy { get; set; }
 
+        // Komponenter skal utvides her for å tilpasse ulike typer maskiner
         [Required]
         [Display(Name = "Bremser")]
         public ComponentStatus MechBrakes { get; set; }
@@ -111,11 +115,14 @@ namespace Noested.Models
         [Display(Name = "Trekkraft")]
         public ComponentStatus TestTraction { get; set; }
 
+        [Required]
+        [Display(Name = "Bremsekraft")]
+        public ComponentStatus TestBrakes { get; set; }
+
         [Display(Name = "Kommentar")]
         [MaxLength(200)]
-        public string? Comment { get; set; }
+        public string? RepairComment { get; set; }
 
-        [Required]
         [Display(Name = "Signatur")]
         [MaxLength(50)]
         public string? MechSignature { get; set; }

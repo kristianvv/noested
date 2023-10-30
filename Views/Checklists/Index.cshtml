@@ -13,7 +13,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.OrderID)
+                @Html.DisplayNameFor(model => model.OrderId)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ServiceProcedure)
@@ -82,7 +82,7 @@
                 @Html.DisplayNameFor(model => model.TestTraction)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Comment)
+                @Html.DisplayNameFor(model => model.RepairComment)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.MechSignature)
@@ -97,7 +97,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.OrderID)
+                @Html.DisplayFor(modelItem => item.OrderId)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ServiceProcedure)
@@ -166,7 +166,7 @@
                 @Html.DisplayFor(modelItem => item.TestTraction)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Comment)
+                @Html.DisplayFor(modelItem => item.RepairComment)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.MechSignature)
@@ -175,9 +175,9 @@
                 @Html.DisplayFor(modelItem => item.DateCompleted)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ChecklistID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ChecklistID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ChecklistID">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.ChecklistId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ChecklistId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ChecklistId">Delete</a>
             </td>
         </tr>
 }
