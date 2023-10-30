@@ -1,23 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Noested.Data;
+﻿using Noested.Data;
 using Noested.Models;
 
 public static class DatabaseSeeder
 {
     public static async Task SeedServiceOrders(IServiceOrderRepository dbContext)
     {
-        try
-        {
-            List<ServiceOrder> serviceOrders = new()
+        List<ServiceOrder> serviceOrders = new()
             {
                 new ServiceOrder
                 {
-                    OrderId = 1,
-                    CustomerId = 1,
+                    CustomerId = 0,
                     IsActive = true,
                     OrderReceived = DateTime.Now,
                     OrderCompleted = null,
@@ -36,7 +28,6 @@ public static class DatabaseSeeder
                     WorkHours = 0,
                     Customer = new Customer
                     {
-                        CustomerId = 1,
                         FirstName = "John",
                         LastName = "Doe",
                         Street = "Univeien 20",
@@ -48,6 +39,7 @@ public static class DatabaseSeeder
                 },
                 new ServiceOrder
                 {
+                    CustomerId = 0,
                     IsActive = true,
                     OrderReceived = DateTime.Now,
                     OrderCompleted = null,
@@ -77,6 +69,7 @@ public static class DatabaseSeeder
                 },
                 new ServiceOrder
                 {
+                    CustomerId = 0,
                     IsActive = true,
                     OrderReceived = DateTime.Now,
                     OrderCompleted = null,
@@ -106,17 +99,44 @@ public static class DatabaseSeeder
                 }
             };
 
-            // Adding orders to the database
-            foreach (ServiceOrder order in serviceOrders)
+        foreach (ServiceOrder order in serviceOrders)
+        {
+            IEnumerable<Customer> allCustomers = await dbContext.GetAllCustomersAsync();
+            IEnumerable<ServiceOrder> allServiceOrders = await dbContext.GetAllServiceOrdersAsync();
+
+            // Ny eller eksisterende serviceordre
+            var duplicateOrder = allServiceOrders.FirstOrDefault(o =>
+                o.ProductName == order.ProductName &&
+                o.SerialNumber == order.SerialNumber &&
+                o.OrderReceived.Date == order.OrderReceived.Date // Samme dag
+            );
+
+            if (duplicateOrder != null)
+            {
+                Console.WriteLine("Duplicate ServiceOrder found. Skipping this order.");
+                continue;
+            }
+
+            // Ny eller eksisterende kunde
+            if (order.CustomerId != 0)
             {
                 await dbContext.AddServiceOrderAsync(order);
-                await dbContext.AddCustomerAsync(order.Customer!);
             }
-        }
-        catch (Exception ex)
-        {
-            // Log the exception
-            Console.WriteLine($"An error occurred while seeding the database: {ex.Message}");
+            else
+            {
+                Customer? existingCustomer = allCustomers.FirstOrDefault(c => c.Email == order.Customer!.Email);
+                if (existingCustomer != null)
+                {
+                    order.CustomerId = existingCustomer.CustomerId;
+                }
+                else
+                {
+                    await dbContext.AddCustomerAsync(order.Customer!);
+                    order.CustomerId = order.Customer!.CustomerId;
+                }
+
+                await dbContext.AddServiceOrderAsync(order);
+            }
         }
     }
 }

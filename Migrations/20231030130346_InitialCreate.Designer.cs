@@ -2,17 +2,20 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Noested.Data;
 
 #nullable disable
 
-namespace Noested.Data.Migrations
+namespace Noested.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231030130346_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -217,7 +220,7 @@ namespace Noested.Data.Migrations
 
             modelBuilder.Entity("Noested.Models.Checklist", b =>
                 {
-                    b.Property<int>("ChecklistID")
+                    b.Property<int>("ChecklistId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -225,10 +228,6 @@ namespace Noested.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("varchar(50)");
-
-                    b.Property<string>("Comment")
-                        .HasMaxLength(200)
-                        .HasColumnType("varchar(200)");
 
                     b.Property<DateTime>("DateCompleted")
                         .HasColumnType("datetime(6)");
@@ -273,7 +272,6 @@ namespace Noested.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("MechSignature")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("varchar(50)");
 
@@ -286,13 +284,17 @@ namespace Noested.Data.Migrations
                     b.Property<int>("MechWire")
                         .HasColumnType("int");
 
-                    b.Property<int>("OrderID")
+                    b.Property<int>("OrderId")
                         .HasColumnType("int");
 
                     b.Property<string>("PreparedBy")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("varchar(50)");
+
+                    b.Property<string>("RepairComment")
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
 
                     b.Property<string>("ServiceProcedure")
                         .IsRequired()
@@ -302,13 +304,16 @@ namespace Noested.Data.Migrations
                     b.Property<int>("TensionCheckBar")
                         .HasColumnType("int");
 
+                    b.Property<int>("TestBrakes")
+                        .HasColumnType("int");
+
                     b.Property<int>("TestTraction")
                         .HasColumnType("int");
 
                     b.Property<int>("TestWinch")
                         .HasColumnType("int");
 
-                    b.HasKey("ChecklistID");
+                    b.HasKey("ChecklistId");
 
                     b.ToTable("Checklist");
                 });
@@ -320,24 +325,31 @@ namespace Noested.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("City")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("FirstName")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("LastName")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Phone")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("PostalCode")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Street")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("CustomerId");
@@ -347,16 +359,21 @@ namespace Noested.Data.Migrations
 
             modelBuilder.Entity("Noested.Models.ServiceOrder", b =>
                 {
-                    b.Property<int>("OrderID")
+                    b.Property<int>("OrderId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<DateTime?>("AgreedFinishedDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int?>("ChecklistId")
+                        .HasColumnType("int");
+
                     b.Property<string>("CustomerAgreement")
-                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("varchar(200)");
 
-                    b.Property<int>("CustomerID")
+                    b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
                     b.Property<string>("DiscardedParts")
@@ -367,7 +384,6 @@ namespace Noested.Data.Migrations
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("ModelYear")
-                        .IsRequired()
                         .HasMaxLength(4)
                         .HasColumnType("varchar(4)");
 
@@ -375,34 +391,45 @@ namespace Noested.Data.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("OrderDescription")
-                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("varchar(200)");
 
-                    b.Property<DateTime>("OrderRecieved")
+                    b.Property<DateTime>("OrderReceived")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("OrderStatus")
-                        .HasColumnType("int");
+                    b.Property<string>("ProductName")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ProductType")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("ReplacedPartsReturned")
                         .HasMaxLength(200)
                         .HasColumnType("varchar(200)");
 
-                    b.Property<string>("SerialNumber")
-                        .IsRequired()
+                    b.Property<int>("SerialNumber")
+                        .HasMaxLength(50)
+                        .HasColumnType("int");
+
+                    b.Property<string>("Shipping")
                         .HasMaxLength(50)
                         .HasColumnType("varchar(50)");
 
-                    b.Property<string>("Shipping")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.Property<int>("Warranty")
                         .HasColumnType("int");
 
-                    b.HasKey("OrderID");
+                    b.Property<int>("WorkHours")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrderId");
+
+                    b.HasIndex("ChecklistId");
+
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("ServiceOrder");
                 });
@@ -456,6 +483,33 @@ namespace Noested.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Noested.Models.ServiceOrder", b =>
+                {
+                    b.HasOne("Noested.Models.Checklist", "Checklist")
+                        .WithMany("ServiceOrders")
+                        .HasForeignKey("ChecklistId");
+
+                    b.HasOne("Noested.Models.Customer", "Customer")
+                        .WithMany("ServiceOrders")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Checklist");
+
+                    b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("Noested.Models.Checklist", b =>
+                {
+                    b.Navigation("ServiceOrders");
+                });
+
+            modelBuilder.Entity("Noested.Models.Customer", b =>
+                {
+                    b.Navigation("ServiceOrders");
                 });
 #pragma warning restore 612, 618
         }

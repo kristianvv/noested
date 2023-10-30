@@ -41,23 +41,9 @@ namespace Noested.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> CreateOrder()
+        public IActionResult CreateOrder()
         {
-            try
-            {
-                var existingCustomers = await _customerService.FetchAllCustomersAsync(); // bruke service
-                ViewBag.ExistingCustomers = new SelectList(existingCustomers, "CustomerID", "FirstName");
-                _logger.LogInformation("Successfully populated data from service into ViewBag, sending to View");
-                return View();
-            }
-            catch (InvalidOperationException ex)
-            {
-                var errorViewModel = new ErrorViewModel
-                {
-                    RequestId = ex.Message
-                };
-                return View("Error", errorViewModel);
-            }
+            return View();
         }
 
         // POST: ServiceOrders/Create

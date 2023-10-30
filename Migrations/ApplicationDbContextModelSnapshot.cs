@@ -2,20 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Noested.Data;
 
 #nullable disable
 
-namespace Noested.Data.Migrations
+namespace Noested.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231022113621_InitalMySQLSetup")]
-    partial class InitalMySQLSetup
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -218,6 +215,222 @@ namespace Noested.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Noested.Models.Checklist", b =>
+                {
+                    b.Property<int>("ChecklistId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("ApprovedBy")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<DateTime>("DateCompleted")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("ElButtonBox")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ElCableNetwork")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ElRadio")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HydBrakeCylinder")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HydCylinder")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HydGearboxOil")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HydHydraulicBlock")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HydTankOil")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MechBrakes")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MechChainTensioner")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MechClutch")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MechDrumBearing")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MechPinionBearing")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MechSignature")
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<int>("MechSprocketWedges")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MechStoragePTO")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MechWire")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PreparedBy")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("RepairComment")
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
+
+                    b.Property<string>("ServiceProcedure")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
+
+                    b.Property<int>("TensionCheckBar")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TestBrakes")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TestTraction")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TestWinch")
+                        .HasColumnType("int");
+
+                    b.HasKey("ChecklistId");
+
+                    b.ToTable("Checklist");
+                });
+
+            modelBuilder.Entity("Noested.Models.Customer", b =>
+                {
+                    b.Property<int>("CustomerId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("PostalCode")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Street")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("CustomerId");
+
+                    b.ToTable("Customer");
+                });
+
+            modelBuilder.Entity("Noested.Models.ServiceOrder", b =>
+                {
+                    b.Property<int>("OrderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("AgreedFinishedDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int?>("ChecklistId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CustomerAgreement")
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("DiscardedParts")
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("ModelYear")
+                        .HasMaxLength(4)
+                        .HasColumnType("varchar(4)");
+
+                    b.Property<DateTime?>("OrderCompleted")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("OrderDescription")
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
+
+                    b.Property<DateTime>("OrderReceived")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("ProductName")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ProductType")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ReplacedPartsReturned")
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
+
+                    b.Property<int>("SerialNumber")
+                        .HasMaxLength(50)
+                        .HasColumnType("int");
+
+                    b.Property<string>("Shipping")
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Warranty")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WorkHours")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrderId");
+
+                    b.HasIndex("ChecklistId");
+
+                    b.HasIndex("CustomerId");
+
+                    b.ToTable("ServiceOrder");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -267,6 +480,33 @@ namespace Noested.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Noested.Models.ServiceOrder", b =>
+                {
+                    b.HasOne("Noested.Models.Checklist", "Checklist")
+                        .WithMany("ServiceOrders")
+                        .HasForeignKey("ChecklistId");
+
+                    b.HasOne("Noested.Models.Customer", "Customer")
+                        .WithMany("ServiceOrders")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Checklist");
+
+                    b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("Noested.Models.Checklist", b =>
+                {
+                    b.Navigation("ServiceOrders");
+                });
+
+            modelBuilder.Entity("Noested.Models.Customer", b =>
+                {
+                    b.Navigation("ServiceOrders");
                 });
 #pragma warning restore 612, 618
         }
