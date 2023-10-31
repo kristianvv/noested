@@ -7,7 +7,7 @@ namespace Noested.Models
     {
         public enum OrderStatus
         {
-            Recieved,
+            Received,
             InProgress,
             Completed
         }
@@ -67,7 +67,7 @@ namespace Noested.Models
 
         [MaxLength(50)]
         [Display(Name = "Serienummer")]
-        public int SerialNumber { get; set; }
+        public string? SerialNumber { get; set; }
 
         [Required]
         [Display(Name = "Garanti")]

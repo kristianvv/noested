@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections;
-using Noested.Data;
+﻿using Noested.Data;
 using Noested.Models;
-using NuGet.Protocol.Core.Types;
 
 namespace Noested.Services
 {
@@ -18,9 +15,8 @@ namespace Noested.Services
         }
 
         // Hente alle kunder
-        public async Task<IEnumerable<Customer>> FetchAllCustomersAsync()
+        public async Task<IEnumerable<Customer>> GetAllCustomersAsync()
         {
-            _logger.LogInformation("FetchAllCustomersAsync(): Called");
             var existingCustomers = await _repository.GetAllCustomersAsync();
             if (existingCustomers == null || !existingCustomers.Any())
             {
@@ -32,7 +28,6 @@ namespace Noested.Services
         // Legge til nye kunder
         public async Task AddNewCustomerAsync(Customer newCustomer)
         {
-            _logger.LogInformation("AddNewCustomerAsync(): Called");
             if (newCustomer == null)
             {
                 throw new ArgumentNullException("newCustomer cannot be null");

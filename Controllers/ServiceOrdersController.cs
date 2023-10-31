@@ -39,25 +39,61 @@ namespace Noested.Controllers
                 return View("Error", errorViewModel);
             }
         }
-
-        [HttpGet]
-        public IActionResult CreateOrder()
+        
+        [HttpGet] // ServiceOrders/CreateOrder
+        public async Task<IActionResult> CreateOrder()
         {
-            return View();
+            try
+            {
+                var existingCustomers = await _customerService.GetAllCustomersAsync();
+                ViewBag.ExistingCustomers = new SelectList(existingCustomers, "CustomerId", "FirstName");
+                _logger.LogInformation("Successfully populated data from service into ViewBag, sending to View");
+               /* var viewModel = new CreateOrderViewModel
+                {
+                    NewServiceOrder = new ServiceOrder(),
+                    NewCustomer = new Customer()
+                };
+               */
+                return View("CreateOrder");
+            }
+            catch (InvalidOperationException ex)
+            {
+                var errorViewModel = new ErrorViewModel
+                {
+                    RequestId = ex.Message
+                };
+                return View("Error", errorViewModel);
+            }
         }
 
-        // POST: ServiceOrders/Create
+        // Lage ny Serviceordre med eller uten eksisterende kunde
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateOrder([Bind("OrderId,CustomerId,ChecklistId,isActive,OrderRecieved,OrderCompleted,Status,AgreedFinishedDate,ProductName,ProductType,ModelYear,SerialNumber,Warranty,CustomerAgreement,OrderDescription,DiscardedParts,ReplacedPartsReturned,Shipping,WorkHours")] ServiceOrder serviceOrder)
+        public async Task<IActionResult> CreateOrder(CreateOrderViewModel viewModel)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                _context.Add(serviceOrder);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                foreach (var modelState in ModelState)
+                {
+                    if (modelState.Value.Errors.Count > 0)
+                    {
+                        _logger.LogError($"Error in field {modelState.Key}: {modelState.Value.Errors[0].ErrorMessage}");
+                    }
+                }
+                return View("CreateOrder", viewModel);
             }
-            return View(serviceOrder);
+            else
+            {
+                bool isSuccessful = await _serviceOrderService.CreateNewServiceOrderAsync(viewModel);
+                if (isSuccessful)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Failed to create new service order.");
+                    return View(viewModel);
+                }
+            }
         }
 
         // GET: ServiceOrders/Edit/5

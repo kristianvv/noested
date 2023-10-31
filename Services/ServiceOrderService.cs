@@ -26,11 +26,65 @@ namespace Noested.Services
             }
             return allServiceOrders;
         }
+        
+        // CreateOrder (POST) for ServiceOrdersController
+        public async Task<bool> CreateNewServiceOrderAsync(CreateOrderViewModel viewModel)
+        {
+            ServiceOrder? newOrder = viewModel.NewServiceOrder;
+            Customer? newCustomer = viewModel.NewCustomer;
+
+            IEnumerable<ServiceOrder> allServiceOrders = await _repository.GetAllServiceOrdersAsync(); // Duplicate Order?
+            var duplicateOrder = allServiceOrders.FirstOrDefault(o =>
+                o.ProductName == newOrder!.ProductName &&
+                o.SerialNumber == newOrder!.SerialNumber &&
+                o.OrderReceived.Date == newOrder!.OrderReceived.Date // Same day?
+            );
+                
+            if (duplicateOrder != null)
+            {
+                _logger.LogError("Duplicate ServiceOrder found. Skipping this order.");
+                return false;
+            }
+            
+            if (newOrder!.CustomerId == 0 && newCustomer == null) // New Customer selected but fields are null
+            {
+                _logger.LogError("Customer information is incomplete or null.");
+                return false;
+            }
+            
+            if (newOrder.CustomerId != 0) // Existing Customer Selected
+            {
+                _logger.LogInformation("Existing Customer Selected");
+                await _repository.AddServiceOrderAsync(newOrder);
+            }
+            else // Selected to Register New Customer
+            {
+                _logger.LogInformation("Attempting to Register New Customer");
+                IEnumerable<Customer> allCustomers = await _repository.GetAllCustomersAsync();
+                Customer? existingCustomer = allCustomers.FirstOrDefault(c => c.Email == newCustomer!.Email); 
+                if (existingCustomer != null) 
+                {
+                    _logger.LogInformation("Found Existing Customer in Database with the same Email as the New Customer");
+                    newCustomer!.CustomerId = existingCustomer.CustomerId;
+                }
+                else
+                {
+                    _logger.LogInformation("Attempting to add new customer");
+                    await _repository.AddCustomerAsync(newCustomer!);
+                    newOrder.CustomerId = newCustomer!.CustomerId;
+                }
+                await _repository.AddServiceOrderAsync(newOrder);
+            }
+
+            _logger.LogInformation("CreateNewServiceOrderAsync(): Order created successfully");
+            return true;
+        }
 
 
 
 
 
+        // 
         public async Task<bool> UpdateCompletedOrderAsync(ServiceOrder completedOrder, IFormCollection? form)
         {
             _logger.LogInformation("UpdateCompletedOrderAsync(): Called");
@@ -55,22 +109,8 @@ namespace Noested.Services
             _logger.LogInformation("UpdateCompletedOrderAsync(): Order updated successfully");
             return true;
         }
-        
-        //
-        public async Task<bool> CreateNewServiceOrderAsync(ServiceOrder newOrder)
-        {
-            _logger.LogInformation("CreateNewServiceOrderAsync(): Called");
 
-            if (newOrder.CustomerId == 0)
-            {
-                await _repository.AddCustomerAsync(newOrder.Customer!);
-                newOrder.CustomerId = newOrder.Customer!.CustomerId;
-            }
 
-            await _repository.AddServiceOrderAsync(newOrder);
-            _logger.LogInformation("CreateNewServiceOrderAsync(): Order created successfully");
-            return true;
-        }
         //
         public async Task<ServiceOrder> FetchServiceOrderByIdAsync(int id)
         {

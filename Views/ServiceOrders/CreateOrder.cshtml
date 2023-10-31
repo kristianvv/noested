@@ -1,101 +1,149 @@
-﻿@model Noested.Models.ServiceOrder
+﻿@model Noested.Models.CreateOrderViewModel
 
 @{
     ViewData["Title"] = "CreateOrder";
 }
 
+@section Styles {
+    <link rel="stylesheet" href="~/css/createServiceOrder.css">
+}
 <h1>Opprett serviceordre</h1>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="CreateOrder" asp-controller="ServiceOrders" method="post">
+<form id="create_order_form" asp-action="CreateOrder" asp-controller="ServiceOrders" method="post">
+    <!-- REQUIRED FIELDS -->
+    <container>
+        <section class="left-section">
+            <!-- Existing Customer Dropdown -->
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
             <div class="form-group">
-                <label asp-for="CustomerId" class="control-label"></label>
-                <input asp-for="CustomerId" class="form-control" />
-                <span asp-validation-for="CustomerId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="OrderReceived" class="control-label"></label>
-                <input asp-for="OrderReceived" class="form-control" />
-                <span asp-validation-for="OrderReceived" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="OrderCompleted" class="control-label"></label>
-                <input asp-for="OrderCompleted" class="form-control" />
-                <span asp-validation-for="OrderCompleted" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Status" class="control-label"></label>
-                <select asp-for="Status" class="form-control">
-                    <option value="">Choose Condition</option>
-                    <option value="Recieved">Mottatt</option>
-                    <option value="InProgress">Under arbeid</option>
-                    <option value="Completed">Ferdigstilt</option>
+                <label asp-for="NewServiceOrder!.CustomerId">Velg Eksisterende Kunde</label>
+                <select id="CustomerId" asp-for="NewServiceOrder!.CustomerId" asp-items="ViewBag.ExistingCustomers" class="form-control" onchange="toggleNewCustomerSection()">
+                    <option value="0">-- Opprett Ny Bruker (Nedtrekksmeny) --</option>
                 </select>
-                <span asp-validation-for="Status" class="text-danger"></span>
+                <span asp-validation-for="NewServiceOrder!.CustomerId" class="text-danger"></span>
             </div>
+            <!-- Garanti -->
             <div class="form-group">
-                <label asp-for="ModelYear" class="control-label"></label>
-                <input asp-for="ModelYear" class="form-control" />
-                <span asp-validation-for="ModelYear" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SerialNumber" class="control-label"></label>
-                <input asp-for="SerialNumber" class="form-control" />
-                <span asp-validation-for="SerialNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Warranty" class="control-label"></label>
-                <select asp-for="Warranty" class="form-control">
+                <label asp-for="NewServiceOrder!.Warranty" class="control-label"></label>
+                <select asp-for="NewServiceOrder!.Warranty" class="form-control">
                     <option value="">Chose Condition</option>
                     <option value="Full">Full</option>
                     <option value="Limited">Delvis</option>
                     <option value="None">Ingen</option>
                 </select>
-                <span asp-validation-for="Warranty" class="text-danger"></span>
+                <span asp-validation-for="NewServiceOrder!.Warranty" class="text-danger"></span>
+            </div>
+            <!-- Kundeavtale -->
+            <div class="form-group">
+                <label asp-for="NewServiceOrder!.CustomerAgreement" class="control-label"></label>
+                <input asp-for="NewServiceOrder!.CustomerAgreement" class="form-control" />
+                <span asp-validation-for="NewServiceOrder!.CustomerAgreement" class="text-danger"></span>
+            </div>
+            <!-- Ordrebeskrivelse -->
+            <div class="form-group">
+                <label asp-for="NewServiceOrder!.OrderDescription" class="control-label"></label>
+                <input asp-for="NewServiceOrder!.OrderDescription" class="form-control" />
+                <span asp-validation-for="NewServiceOrder!.OrderDescription" class="text-danger"></span>
+            </div>
+            <!-- Produktnavn -->
+            <div class="form-group">
+                <label asp-for="NewServiceOrder!.ProductName" title="Produktnavn">Produktnavn</label>
+                <input asp-for="NewServiceOrder!.ProductName" class="form-control" required placeholder="f.eks 'IGLAND 5002 Pento TL'" />
+                <span asp-validation-for="NewServiceOrder!.ProductName" class="text-danger"></span>
+            </div>
+            <!-- Produkttype -->
+            <div class="form-group">
+                <label asp-for="NewServiceOrder!.ProductType" title="Produkttype">Produkttype</label>
+                <input asp-for="NewServiceOrder!.ProductType" class="form-control" required placeholder="f.eks 'Vinsj'" />
+                <span asp-validation-for="NewServiceOrder!.ProductType" class="text-danger"></span>
+            </div>
+            <!-- Serienummer -->
+            <div class="form-group">
+                <label asp-for="NewServiceOrder!.SerialNumber" class="control-label"></label>
+                <input asp-for="NewServiceOrder!.SerialNumber" class="form-control" />
+                <span asp-validation-for="NewServiceOrder!.SerialNumber" class="text-danger"></span>
+            </div>
+            <!-- Årsmodell -->
+            <div class="form-group">
+                <label asp-for="NewServiceOrder!.ModelYear" class="control-label"></label>
+                <input asp-for="NewServiceOrder!.ModelYear" class="form-control" />
+                <span asp-validation-for="NewServiceOrder!.ModelYear" class="text-danger"></span>
+            </div>
+            <!-- Bruktdeler -->
+            <div class="form-group">
+                <label asp-for="NewServiceOrder!.DiscardedParts" class="control-label"></label>
+                <input asp-for="NewServiceOrder!.DiscardedParts" class="form-control" />
+                <span asp-validation-for="NewServiceOrder!.DiscardedParts" class="text-danger"></span>
+            </div>
+            <!-- Erstatningsdeler -->
+            <div class="form-group">
+                <label asp-for="NewServiceOrder!.ReplacedPartsReturned" class="control-label"></label>
+                <input asp-for="NewServiceOrder!.ReplacedPartsReturned" class="form-control" />
+                <span asp-validation-for="NewServiceOrder!.ReplacedPartsReturned" class="text-danger"></span>
+            </div>
+            <!-- Shipping -->
+            <div class="form-group">
+                <label asp-for="NewServiceOrder!.Shipping" class="control-label"></label>
+                <input asp-for="NewServiceOrder!.Shipping" class="form-control" />
+                <span asp-validation-for="NewServiceOrder!.Shipping" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CustomerAgreement" class="control-label"></label>
-                <input asp-for="CustomerAgreement" class="form-control" />
-                <span asp-validation-for="CustomerAgreement" class="text-danger"></span>
+                <label asp-for="NewServiceOrder!.IsActive" class="form-check-label"></label>
+                <input asp-for="NewServiceOrder!.IsActive" class="form-check-input" />
             </div>
+        </section>
+        <!-- NEW CUSTOMER SECTION -->
+        <section id="newCustomerSection" class="right-section">
+            <!-- Customer's First Name -->
             <div class="form-group">
-                <label asp-for="OrderDescription" class="control-label"></label>
-                <input asp-for="OrderDescription" class="form-control" />
-                <span asp-validation-for="OrderDescription" class="text-danger"></span>
+                <label asp-for="NewCustomer!.FirstName">Fornavn</label>
+                <input asp-for="NewCustomer!.FirstName" class="form-control" />
             </div>
+            <!-- Customer's Last Name -->
             <div class="form-group">
-                <label asp-for="DiscardedParts" class="control-label"></label>
-                <input asp-for="DiscardedParts" class="form-control" />
-                <span asp-validation-for="DiscardedParts" class="text-danger"></span>
+                <label asp-for="NewCustomer!.LastName">Etternavn</label>
+                <input asp-for="NewCustomer!.LastName" class="form-control" />
             </div>
+            <!-- Customer's Street Address -->
             <div class="form-group">
-                <label asp-for="ReplacedPartsReturned" class="control-label"></label>
-                <input asp-for="ReplacedPartsReturned" class="form-control" />
-                <span asp-validation-for="ReplacedPartsReturned" class="text-danger"></span>
+                <label asp-for="NewCustomer!.Street">Gateadresse</label>
+                <input asp-for="NewCustomer!.Street" class="form-control" />
             </div>
+            <!-- Customer's Postal Code -->
             <div class="form-group">
-                <label asp-for="Shipping" class="control-label"></label>
-                <input asp-for="Shipping" class="form-control" />
-                <span asp-validation-for="Shipping" class="text-danger"></span>
+                <label asp-for="NewCustomer!.PostalCode">Postnummer</label>
+                <input asp-for="NewCustomer!.PostalCode" class="form-control" />
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
-                </label>
-            </div>
+            <!-- Customer's City -->
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <label asp-for="NewCustomer!.City">By</label>
+                <input asp-for="NewCustomer!.City" class="form-control" />
             </div>
-        </form>
-    </div>
-</div>
+            <!-- Customer's Email -->
+            <div class="form-group">
+                <label asp-for="NewCustomer!.Email">Email</label>
+                <input asp-for="NewCustomer!.Email" class="form-control" />
+            </div>
+            <!-- Customer's Phone -->
+            <div class="form-group">
+                <label asp-for="NewCustomer!.Phone">Telefon</label>
+                <input asp-for="NewCustomer!.Phone" class="form-control" />
+            </div>
+            <!-- Hidden value -->
+            <input type="hidden" asp-for="NewCustomer!.CustomerId" value="0">
+        </section>
+    </container>
+
+    <button type="submit" class="btn btn-primary create-button">Opprett</button>
+</form>
+
 
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
+    
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/createServiceOrder.js"></script>
 }
