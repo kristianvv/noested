@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\chris\\Desktop\\noested_221023\\Noested\\Noested.csproj": {}
+    "/Users/christine/Desktop/T2_Noested/noested/Noested.csproj": {}
   },
   "projects": {
-    "C:\\Users\\chris\\Desktop\\noested_221023\\Noested\\Noested.csproj": {
+    "/Users/christine/Desktop/T2_Noested/noested/Noested.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\chris\\Desktop\\noested_221023\\Noested\\Noested.csproj",
+        "projectUniqueName": "/Users/christine/Desktop/T2_Noested/noested/Noested.csproj",
         "projectName": "Noested",
-        "projectPath": "C:\\Users\\chris\\Desktop\\noested_221023\\Noested\\Noested.csproj",
-        "packagesPath": "C:\\Users\\chris\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\chris\\Desktop\\noested_221023\\Noested\\obj\\",
+        "projectPath": "/Users/christine/Desktop/T2_Noested/noested/Noested.csproj",
+        "packagesPath": "/Users/christine/.nuget/packages/",
+        "outputPath": "/Users/christine/Desktop/T2_Noested/noested/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\chris\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/christine/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -88,7 +86,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.400/RuntimeIdentifierGraph.json"
         }
       }
     }
