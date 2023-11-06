@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Noested.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -66,51 +66,6 @@ namespace Noested.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "Checklist",
-                columns: table => new
-                {
-                    ChecklistId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    OrderId = table.Column<int>(type: "int", nullable: false),
-                    ServiceProcedure = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ApprovedBy = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    PreparedBy = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    MechBrakes = table.Column<int>(type: "int", nullable: false),
-                    MechDrumBearing = table.Column<int>(type: "int", nullable: false),
-                    MechStoragePTO = table.Column<int>(type: "int", nullable: false),
-                    MechWire = table.Column<int>(type: "int", nullable: false),
-                    MechChainTensioner = table.Column<int>(type: "int", nullable: false),
-                    MechPinionBearing = table.Column<int>(type: "int", nullable: false),
-                    MechClutch = table.Column<int>(type: "int", nullable: false),
-                    MechSprocketWedges = table.Column<int>(type: "int", nullable: false),
-                    HydCylinder = table.Column<int>(type: "int", nullable: false),
-                    HydHydraulicBlock = table.Column<int>(type: "int", nullable: false),
-                    HydTankOil = table.Column<int>(type: "int", nullable: false),
-                    HydGearboxOil = table.Column<int>(type: "int", nullable: false),
-                    HydBrakeCylinder = table.Column<int>(type: "int", nullable: false),
-                    ElCableNetwork = table.Column<int>(type: "int", nullable: false),
-                    ElRadio = table.Column<int>(type: "int", nullable: false),
-                    ElButtonBox = table.Column<int>(type: "int", nullable: false),
-                    TensionCheckBar = table.Column<int>(type: "int", nullable: false),
-                    TestWinch = table.Column<int>(type: "int", nullable: false),
-                    TestTraction = table.Column<int>(type: "int", nullable: false),
-                    TestBrakes = table.Column<int>(type: "int", nullable: false),
-                    RepairComment = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    MechSignature = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    DateCompleted = table.Column<DateTime>(type: "datetime(6)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Checklist", x => x.ChecklistId);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -269,6 +224,25 @@ namespace Noested.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "Checklist",
+                columns: table => new
+                {
+                    ChecklistId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    OrderId = table.Column<int>(type: "int", nullable: true),
+                    ProductType = table.Column<int>(type: "int", nullable: false),
+                    PreparedBy = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ServiceProcedure = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Checklist", x => x.ChecklistId);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "ServiceOrder",
                 columns: table => new
                 {
@@ -276,19 +250,21 @@ namespace Noested.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     CustomerId = table.Column<int>(type: "int", nullable: false),
                     ChecklistId = table.Column<int>(type: "int", nullable: true),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    ApprovedBy = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     IsActive = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    Warranty = table.Column<int>(type: "int", nullable: false),
                     OrderReceived = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     OrderCompleted = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    Status = table.Column<int>(type: "int", nullable: false),
                     AgreedFinishedDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     ProductName = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ProductType = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Product = table.Column<int>(type: "int", nullable: false),
                     ModelYear = table.Column<string>(type: "varchar(4)", maxLength: 4, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    SerialNumber = table.Column<int>(type: "int", maxLength: 50, nullable: false),
-                    Warranty = table.Column<int>(type: "int", nullable: false),
+                    SerialNumber = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     CustomerAgreement = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     OrderDescription = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: true)
@@ -314,6 +290,49 @@ namespace Noested.Migrations
                         column: x => x.CustomerId,
                         principalTable: "Customer",
                         principalColumn: "CustomerId",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "WinchChecklist",
+                columns: table => new
+                {
+                    ChecklistId = table.Column<int>(type: "int", nullable: false),
+                    MechSignature = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    RepairComment = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    DateCompleted = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    MechBrakes = table.Column<int>(type: "int", nullable: false),
+                    MechDrumBearing = table.Column<int>(type: "int", nullable: false),
+                    MechStoragePTO = table.Column<int>(type: "int", nullable: false),
+                    MechWire = table.Column<int>(type: "int", nullable: false),
+                    MechChainTensioner = table.Column<int>(type: "int", nullable: false),
+                    MechPinionBearing = table.Column<int>(type: "int", nullable: false),
+                    MechClutch = table.Column<int>(type: "int", nullable: false),
+                    MechSprocketWedges = table.Column<int>(type: "int", nullable: false),
+                    HydCylinder = table.Column<int>(type: "int", nullable: false),
+                    HydHydraulicBlock = table.Column<int>(type: "int", nullable: false),
+                    HydTankOil = table.Column<int>(type: "int", nullable: false),
+                    HydGearboxOil = table.Column<int>(type: "int", nullable: false),
+                    HydBrakeCylinder = table.Column<int>(type: "int", nullable: false),
+                    ElCableNetwork = table.Column<int>(type: "int", nullable: false),
+                    ElRadio = table.Column<int>(type: "int", nullable: false),
+                    ElButtonBox = table.Column<int>(type: "int", nullable: false),
+                    TensionCheckBar = table.Column<int>(type: "int", nullable: false),
+                    TestWinch = table.Column<int>(type: "int", nullable: false),
+                    TestTraction = table.Column<int>(type: "int", nullable: false),
+                    TestBrakes = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WinchChecklist", x => x.ChecklistId);
+                    table.ForeignKey(
+                        name: "FK_WinchChecklist_Checklist_ChecklistId",
+                        column: x => x.ChecklistId,
+                        principalTable: "Checklist",
+                        principalColumn: "ChecklistId",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
@@ -356,6 +375,12 @@ namespace Noested.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Checklist_OrderId",
+                table: "Checklist",
+                column: "OrderId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ServiceOrder_ChecklistId",
                 table: "ServiceOrder",
                 column: "ChecklistId");
@@ -364,11 +389,22 @@ namespace Noested.Migrations
                 name: "IX_ServiceOrder_CustomerId",
                 table: "ServiceOrder",
                 column: "CustomerId");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Checklist_ServiceOrder_OrderId",
+                table: "Checklist",
+                column: "OrderId",
+                principalTable: "ServiceOrder",
+                principalColumn: "OrderId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Checklist_ServiceOrder_OrderId",
+                table: "Checklist");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -385,13 +421,16 @@ namespace Noested.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "ServiceOrder");
+                name: "WinchChecklist");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "ServiceOrder");
 
             migrationBuilder.DropTable(
                 name: "Checklist");

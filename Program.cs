@@ -23,7 +23,7 @@ builder.Services.AddScoped<CustomerService>(); // Daniel
 var app = builder.Build();
 
 
-// Seed the database
+
 using (var serviceScope = app.Services.CreateScope())
 {
     var serviceOrderDatabase = serviceScope.ServiceProvider.GetRequiredService<IServiceOrderRepository>();

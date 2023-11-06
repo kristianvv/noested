@@ -9,17 +9,16 @@ public static class DatabaseSeeder
             {
                 new ServiceOrder
                 {
-                    CustomerId = 0,
                     IsActive = true,
                     OrderReceived = DateTime.Now,
                     OrderCompleted = null,
-                    Status = ServiceOrder.OrderStatus.Received,
+                    Status = OrderStatus.Received,
                     AgreedFinishedDate = DateTime.Now.AddDays(7),
                     ProductName = "IGLAND 5002 Pento TL",
-                    ProductType = "Vinsj",
+                    Product = ProductType.Winch,
                     ModelYear = "2022",
                     SerialNumber = "12345",
-                    Warranty = ServiceOrder.WarrantyType.Full,
+                    Warranty = WarrantyType.Full,
                     CustomerAgreement = "Standard Agreement",
                     OrderDescription = "Problem with motor",
                     DiscardedParts = "",
@@ -35,21 +34,26 @@ public static class DatabaseSeeder
                         City = "Cityville",
                         Email = "john.doe@gmail.com",
                         Phone = "85429854"
+                    },
+                    Checklist = new WinchChecklist
+                    {
+                        ProductType = ProductType.Winch,
+                        ServiceProcedure = "Standard",
+                        PreparedBy = "DAN",
                     }
                 },
                 new ServiceOrder
                 {
-                    CustomerId = 0,
                     IsActive = true,
                     OrderReceived = DateTime.Now,
                     OrderCompleted = null,
-                    Status = ServiceOrder.OrderStatus.Received,
+                    Status = OrderStatus.Received,
                     AgreedFinishedDate = DateTime.Now.AddDays(7),
                     ProductName = "IGLAND 6002 Pento TL",
-                    ProductType = "Vinsj",
+                    Product = ProductType.Winch,
                     ModelYear = "2021",
                     SerialNumber = "67890",
-                    Warranty = ServiceOrder.WarrantyType.Limited,
+                    Warranty = WarrantyType.Limited,
                     CustomerAgreement = "Premium Agreement",
                     OrderDescription = "Problem with cable",
                     DiscardedParts = "",
@@ -65,21 +69,26 @@ public static class DatabaseSeeder
                         City = "Cityville",
                         Email = "jane.doe@gmail.com",
                         Phone = "85429855"
+                    },
+                    Checklist = new WinchChecklist
+                    {
+                        ProductType = ProductType.Winch,
+                        ServiceProcedure = "Special",
+                        PreparedBy = "MIM",
                     }
                 },
                 new ServiceOrder
                 {
-                    CustomerId = 0,
                     IsActive = true,
                     OrderReceived = DateTime.Now,
                     OrderCompleted = null,
-                    Status = ServiceOrder.OrderStatus.Received,
+                    Status = OrderStatus.Received,
                     AgreedFinishedDate = DateTime.Now.AddDays(7),
                     ProductName = "IGLAND 7002 Pento TL",
-                    ProductType = "Vinsj",
+                    Product = ProductType.Winch,
                     ModelYear = "2020",
                     SerialNumber = "11111",
-                    Warranty = ServiceOrder.WarrantyType.None,
+                    Warranty = WarrantyType.None,
                     CustomerAgreement = "Basic Agreement",
                     OrderDescription = "Problem with remote",
                     DiscardedParts = "",
@@ -95,14 +104,21 @@ public static class DatabaseSeeder
                         City = "Cityville",
                         Email = "emily.smith@gmail.com",
                         Phone = "85429856"
+                    },
+                    Checklist = new WinchChecklist
+                    {
+                        ProductType = ProductType.Winch,
+                        ServiceProcedure = "Grand Overhaul",
+                        PreparedBy = "KRISS",
                     }
                 }
             };
 
         foreach (ServiceOrder order in serviceOrders)
         {
-            IEnumerable<Customer> allCustomers = await dbContext.GetAllCustomersAsync();
             IEnumerable<ServiceOrder> allServiceOrders = await dbContext.GetAllServiceOrdersAsync();
+            IEnumerable<Customer> allCustomers = await dbContext.GetAllCustomersAsync();
+            
 
             // Ny eller eksisterende serviceordre
             var duplicateOrder = allServiceOrders.FirstOrDefault(o =>
@@ -117,10 +133,11 @@ public static class DatabaseSeeder
                 continue;
             }
 
-            // Ny eller eksisterende kunde
+            // Ny eller eksisterende kunde 
             if (order.CustomerId != 0)
             {
-                await dbContext.AddServiceOrderAsync(order);
+                await dbContext.AddCustomerAsync(order.Customer!);
+                order.CustomerId = order.Customer!.CustomerId;
             }
             else
             {
@@ -136,7 +153,13 @@ public static class DatabaseSeeder
                 }
 
                 await dbContext.AddServiceOrderAsync(order);
+
+                if (order.Checklist != null)
+                {
+                    order.Checklist.ChecklistId = order.OrderId;
+                }
             }
         }
     }
 }
+

@@ -18,19 +18,27 @@ namespace Noested.Data
 
         Task<IEnumerable<Checklist>> GetAllCheckListsAsync();
         Task<Checklist?> GetChecklistByIdAsync(int id);
-        Task AddChecklistAsync(Checklist newChecklist); // Spesielle tilfeller hvor maskinen leveres og sjekkes mens ordren opprettes?
+        Task AddChecklistAsync(Checklist newChecklist);
         Task UpdateChecklistAsync(Checklist updatedChecklist);
+
+        Task<IEnumerable<WinchChecklist>> GetAllWinchChecklistsAsync();
+        Task<WinchChecklist?> GetWinchChecklistByIdAsync(int id);
+        Task AddWinchChecklistAsync(WinchChecklist newWinchChecklist);
+        Task UpdateWinchChecklistAsync(WinchChecklist updatedWinchChecklist);
     }
 
     public class ServiceOrderRepository : IServiceOrderRepository
     {
         private readonly ApplicationDbContext _database;
+        private readonly ILogger<ServiceOrderRepository> _logger;
 
-        public ServiceOrderRepository(ApplicationDbContext database)
+        public ServiceOrderRepository(ApplicationDbContext database, ILogger<ServiceOrderRepository> logger)
         {
             _database = database;
+            _logger = logger;
         }
-        // ServiceOrders
+
+        // SERVICE ORDERS
         public async Task<IEnumerable<ServiceOrder>> GetAllServiceOrdersAsync()
         {
             return await _database.ServiceOrder.ToListAsync();
@@ -52,7 +60,7 @@ namespace Noested.Data
             _database.ServiceOrder.Update(updatedOrder);
             await _database.SaveChangesAsync();
         }
-        // Customers
+        // CUSTOMERS
         public async Task<IEnumerable<Customer>> GetAllCustomersAsync()
         {
             return await _database.Customer.ToListAsync();
@@ -74,7 +82,7 @@ namespace Noested.Data
             _database.Customer.Update(updatedCustomer);
             await _database.SaveChangesAsync();
         }
-        // Checklists
+        // CHECKLISTS
         public async Task<IEnumerable<Checklist>> GetAllCheckListsAsync()
         {
             return await _database.Checklist.ToListAsync();
@@ -94,6 +102,28 @@ namespace Noested.Data
         public async Task UpdateChecklistAsync(Checklist updatedChecklist)
         {
             _database.Checklist.Update(updatedChecklist);
+            await _database.SaveChangesAsync();
+        }
+        // WINCHCHECKLISTS
+        public async Task<IEnumerable<WinchChecklist>> GetAllWinchChecklistsAsync()
+        {
+            return await _database.WinchChecklist.ToListAsync();
+        }
+
+        public async Task<WinchChecklist?> GetWinchChecklistByIdAsync(int id)
+        {
+            return await _database.WinchChecklist.FindAsync(id);
+        }
+
+        public async Task AddWinchChecklistAsync(WinchChecklist newWinchChecklist)
+        {
+            _database.WinchChecklist.Add(newWinchChecklist);
+            await _database.SaveChangesAsync();
+        }
+
+        public async Task UpdateWinchChecklistAsync(WinchChecklist updatedWinchChecklist)
+        {
+            _database.Entry(updatedWinchChecklist).State = EntityState.Modified;
             await _database.SaveChangesAsync();
         }
     }

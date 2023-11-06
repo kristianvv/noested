@@ -1,4 +1,4 @@
-﻿@model ErrorViewModel
+﻿@model Noested.Models.ErrorViewModel
 @{
     ViewData["Title"] = "Error";
 }
@@ -13,10 +13,24 @@
     </p>
 }
 
+@if (Model.ViewModel != null)
+{
+    <h3>Submitted Data</h3>
+    <pre>@Json.Serialize(Model.ViewModel)</pre>
+}
+
+@if (!string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    <p class="text-danger">
+        <strong>Error Message:</strong> @Model.ErrorMessage
+    </p>
+}
+
 <h3>Development Mode</h3>
 <p>
     Swapping to <strong>Development</strong> environment will display more detailed information about the error that occurred.
 </p>
+
 <p>
     <strong>The Development environment shouldn't be enabled for deployed applications.</strong>
     It can result in displaying sensitive information from exceptions to end users.

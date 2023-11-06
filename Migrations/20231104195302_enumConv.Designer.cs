@@ -11,8 +11,8 @@ using Noested.Data;
 namespace Noested.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231030224526_danielmig2")]
-    partial class danielmig2
+    [Migration("20231104195302_enumConv")]
+    partial class enumConv
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -221,101 +221,25 @@ namespace Noested.Migrations
             modelBuilder.Entity("Noested.Models.Checklist", b =>
                 {
                     b.Property<int>("ChecklistId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("ApprovedBy")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
-
-                    b.Property<DateTime>("DateCompleted")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("ElButtonBox")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ElCableNetwork")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ElRadio")
-                        .HasColumnType("int");
-
-                    b.Property<int>("HydBrakeCylinder")
-                        .HasColumnType("int");
-
-                    b.Property<int>("HydCylinder")
-                        .HasColumnType("int");
-
-                    b.Property<int>("HydGearboxOil")
-                        .HasColumnType("int");
-
-                    b.Property<int>("HydHydraulicBlock")
-                        .HasColumnType("int");
-
-                    b.Property<int>("HydTankOil")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MechBrakes")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MechChainTensioner")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MechClutch")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MechDrumBearing")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MechPinionBearing")
-                        .HasColumnType("int");
-
-                    b.Property<string>("MechSignature")
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
-
-                    b.Property<int>("MechSprocketWedges")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MechStoragePTO")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MechWire")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OrderId")
                         .HasColumnType("int");
 
                     b.Property<string>("PreparedBy")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("varchar(50)");
 
-                    b.Property<string>("RepairComment")
-                        .HasMaxLength(200)
-                        .HasColumnType("varchar(200)");
+                    b.Property<string>("ProductType")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("ServiceProcedure")
-                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("varchar(200)");
-
-                    b.Property<int>("TensionCheckBar")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TestBrakes")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TestTraction")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TestWinch")
-                        .HasColumnType("int");
 
                     b.HasKey("ChecklistId");
 
                     b.ToTable("Checklist");
+
+                    b.UseTptMappingStrategy();
                 });
 
             modelBuilder.Entity("Noested.Models.Customer", b =>
@@ -366,8 +290,9 @@ namespace Noested.Migrations
                     b.Property<DateTime?>("AgreedFinishedDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int?>("ChecklistId")
-                        .HasColumnType("int");
+                    b.Property<string>("ApprovedBy")
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("CustomerAgreement")
                         .HasMaxLength(200)
@@ -397,11 +322,11 @@ namespace Noested.Migrations
                     b.Property<DateTime>("OrderReceived")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("ProductName")
+                    b.Property<string>("Product")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("ProductType")
-                        .IsRequired()
+                    b.Property<string>("ProductName")
                         .HasColumnType("longtext");
 
                     b.Property<string>("ReplacedPartsReturned")
@@ -416,22 +341,121 @@ namespace Noested.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("varchar(50)");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
-                    b.Property<int>("Warranty")
-                        .HasColumnType("int");
+                    b.Property<string>("Warranty")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<int>("WorkHours")
                         .HasColumnType("int");
 
                     b.HasKey("OrderId");
 
-                    b.HasIndex("ChecklistId");
-
                     b.HasIndex("CustomerId");
 
                     b.ToTable("ServiceOrder");
+                });
+
+            modelBuilder.Entity("Noested.Models.WinchChecklist", b =>
+                {
+                    b.HasBaseType("Noested.Models.Checklist");
+
+                    b.Property<DateTime>("DateCompleted")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("ElButtonBox")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ElCableNetwork")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ElRadio")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("HydBrakeCylinder")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("HydCylinder")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("HydGearboxOil")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("HydHydraulicBlock")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("HydTankOil")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("MechBrakes")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("MechChainTensioner")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("MechClutch")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("MechDrumBearing")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("MechPinionBearing")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("MechSignature")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("MechSprocketWedges")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("MechStoragePTO")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("MechWire")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("RepairComment")
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
+
+                    b.Property<string>("TensionCheckBar")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("TestBrakes")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("TestTraction")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("TestWinch")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.ToTable("WinchChecklist");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -485,31 +509,45 @@ namespace Noested.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Noested.Models.Checklist", b =>
+                {
+                    b.HasOne("Noested.Models.ServiceOrder", "ServiceOrder")
+                        .WithOne("Checklist")
+                        .HasForeignKey("Noested.Models.Checklist", "ChecklistId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ServiceOrder");
+                });
+
             modelBuilder.Entity("Noested.Models.ServiceOrder", b =>
                 {
-                    b.HasOne("Noested.Models.Checklist", "Checklist")
-                        .WithMany("ServiceOrders")
-                        .HasForeignKey("ChecklistId");
-
                     b.HasOne("Noested.Models.Customer", "Customer")
                         .WithMany("ServiceOrders")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Checklist");
-
                     b.Navigation("Customer");
                 });
 
-            modelBuilder.Entity("Noested.Models.Checklist", b =>
+            modelBuilder.Entity("Noested.Models.WinchChecklist", b =>
                 {
-                    b.Navigation("ServiceOrders");
+                    b.HasOne("Noested.Models.Checklist", null)
+                        .WithOne()
+                        .HasForeignKey("Noested.Models.WinchChecklist", "ChecklistId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Noested.Models.Customer", b =>
                 {
                     b.Navigation("ServiceOrders");
+                });
+
+            modelBuilder.Entity("Noested.Models.ServiceOrder", b =>
+                {
+                    b.Navigation("Checklist");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,127 +1,195 @@
-﻿using Noested.Data;
+﻿using System.Text.Json;
+using Microsoft.EntityFrameworkCore;
+using Noested.Data;
 using Noested.Models;
+using static Noested.Models.ServiceOrder;
 
 namespace Noested.Services
 {
     public class ServiceOrderService
     {
         private readonly IServiceOrderRepository _repository;
+        private readonly ChecklistService _checklistService;
         private readonly ILogger<ServiceOrderService> _logger;
 
-        public ServiceOrderService(IServiceOrderRepository repository, ILogger<ServiceOrderService> logger)
+        public ServiceOrderService(IServiceOrderRepository repository, ChecklistService checklistService, ILogger<ServiceOrderService> logger)
         {
             _repository = repository;
             _logger = logger;
+            _checklistService = checklistService;
         }
 
-        // Index for ServiceOrdersController
-        public async Task<IEnumerable<ServiceOrder>> FetchAllServiceOrdersAsync()
+        // GET SO
+        public async Task<ServiceOrder> GetOrderByIdAsync(int id)
         {
-            _logger.LogInformation("FetchAllServiceOrdersAsync(): Called");
-            var allServiceOrders = await _repository.GetAllServiceOrdersAsync();
-            if (allServiceOrders == null || !allServiceOrders.Any())
+            var order = await _repository.GetOrderByIdAsync(id);
+            return order ?? throw new InvalidOperationException($"SERVICE ORDER ({id}) NOT FOUND");
+        }
+
+        // VIEW FOR OPEN SO
+        public async Task<OrderViewModel> PopulateOrderViewModel(int id)
+        {
+            var order = await GetOrderByIdAsync(id);
+            int checklistId = order.OrderId;
+
+            var viewModel = new OrderViewModel
             {
-                _logger.LogError("FetchAllServiceOrdersAsync(): No ServiceOrders found");
-                throw new InvalidOperationException("Null or no ServiceOrders in database");
-            }
-            return allServiceOrders;
-        }
-        
-        // CreateOrder (POST) for ServiceOrdersController
-        public async Task<bool> CreateNewServiceOrderAsync(CreateOrderViewModel viewModel)
-        {
-            ServiceOrder? newOrder = viewModel.NewServiceOrder;
-            Customer? newCustomer = viewModel.NewCustomer;
+                FillOrder = order,
+                NewChecklist = await GetChecklistSubClass(order.Product, checklistId)
+            };
 
+            return viewModel;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="productType"></param>
+        /// <param name="checklistId"></param>
+        /// <returns></returns>
+        private async Task<Checklist> GetChecklistSubClass(ProductType productType, int checklistId)
+        {
+            Checklist checklistDetails = new();
+
+            switch (productType)
+            {
+                case ProductType.Winch:
+                    checklistDetails = await _checklistService.GetWinchChecklistByIdAsync(checklistId);
+                    break;
+                case ProductType.LiftEquip:
+                    _logger.LogError("NEED TO ADD THIS CHECKLIST TO MODEL, DbSET & PARTIAL VIEW");
+                    break;
+                case ProductType.WoodEquip:
+                    _logger.LogError("NEED TO ADD THIS CHECKLIST TO MODEL, DbSET & PARTIAL VIEW");
+                    break;
+                case ProductType.TractorShears:
+                    _logger.LogError("NEED TO ADD THIS CHECKLIST TO MODEL, DbSET & PARTIAL VIEW");
+                    break;
+                case ProductType.TimberTrailer:
+                    _logger.LogError("NEED TO ADD THIS CHECKLIST TO MODEL, DbSET & PARTIAL VIEW");
+                    break;
+                case ProductType.SandBlaster:
+                    _logger.LogError("NEED TO ADD THIS CHECKLIST TO MODEL, DbSET & PARTIAL VIEW");
+                    break;
+                case ProductType.SnowBloPlo:
+                    _logger.LogError("NEED TO ADD THIS CHECKLIST TO MODEL, DbSET & PARTIAL VIEW");
+                    break;
+                // Add cases for other product types
+                default:
+                    _logger.LogError($"No checklist implemented for product type: {productType}");
+                    break;
+            }
+
+            return checklistDetails;
+        }
+
+
+        /// <summary>
+        ///     CREATE SERVICE ORDER
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns></returns>
+        public async Task<bool> CreateNewServiceOrderAsync(OrderViewModel viewModel)
+        {
             IEnumerable<ServiceOrder> allServiceOrders = await _repository.GetAllServiceOrdersAsync(); // Duplicate Order?
+            IEnumerable<Customer> allCustomers = await _repository.GetAllCustomersAsync(); // Duplicate Customer?
+
+            ServiceOrder? newOrder = viewModel.FillOrder;
+            Customer? newCustomer = viewModel.NewCustomer;
+            Checklist? newChecklist = viewModel.NewChecklist;
+
+            if (newOrder == null || newChecklist == null)
+            {
+                throw new InvalidOperationException("CreateNewSOA: Order or Checklist is Null!");
+            }
+
+            var viewModelJson = JsonSerializer.Serialize(viewModel, new JsonSerializerOptions { WriteIndented = true }); // Debug
+            _logger.LogInformation("CreateOrder ViewModel: {ViewModelJson}", viewModelJson); // Debug
+
             var duplicateOrder = allServiceOrders.FirstOrDefault(o =>
-                o.ProductName == newOrder!.ProductName &&
-                o.SerialNumber == newOrder!.SerialNumber &&
-                o.OrderReceived.Date == newOrder!.OrderReceived.Date // Same day?
+                newOrder != null &&
+                o.ProductName == newOrder.ProductName &&
+                o.SerialNumber == newOrder.SerialNumber &&
+                o.OrderReceived.Date == newOrder.OrderReceived.Date // Same day?
             );
-                
+
             if (duplicateOrder != null)
             {
                 _logger.LogError("Duplicate ServiceOrder found. Skipping this order.");
                 return false;
             }
-            
-            if (newOrder!.CustomerId == 0 && newCustomer == null) // New Customer selected but fields are null
+
+            if (newOrder!.CustomerId == 0) // New customer?
             {
-                _logger.LogError("Customer information is incomplete or null.");
-                return false;
-            }
-            
-            if (newOrder.CustomerId != 0) // Existing Customer Selected
-            {
-                _logger.LogInformation("Existing Customer Selected");
-                await _repository.AddServiceOrderAsync(newOrder);
-            }
-            else // Selected to Register New Customer
-            {
-                _logger.LogInformation("Attempting to Register New Customer");
-                IEnumerable<Customer> allCustomers = await _repository.GetAllCustomersAsync();
-                Customer? existingCustomer = allCustomers.FirstOrDefault(c => c.Email == newCustomer!.Email); 
-                if (existingCustomer != null) 
+                Customer? existingCustomer = allCustomers.FirstOrDefault(c => c.Email == newCustomer!.Email);
+                if (existingCustomer != null)
                 {
-                    _logger.LogInformation("Found Existing Customer in Database with the same Email as the New Customer");
-                    newCustomer!.CustomerId = existingCustomer.CustomerId;
+                    newOrder.CustomerId = existingCustomer.CustomerId;
                 }
                 else
                 {
-                    _logger.LogInformation("Attempting to add new customer");
                     await _repository.AddCustomerAsync(newCustomer!);
                     newOrder.CustomerId = newCustomer!.CustomerId;
                 }
-                await _repository.AddServiceOrderAsync(newOrder);
             }
+                switch (newOrder.Product)
+                {
+                    case ProductType.Winch:
+                        var winchChecklist = new WinchChecklist();
+                        {
+                            winchChecklist.ProductType = newChecklist!.ProductType;
+                            winchChecklist.PreparedBy = newChecklist.PreparedBy;
+                            winchChecklist.ServiceProcedure = newChecklist.ServiceProcedure;
+                        };
+                        newOrder.Checklist = winchChecklist;
+                        break;
+                        // case ProductType.LiftEquip:
+                }
+            
 
-            _logger.LogInformation("CreateNewServiceOrderAsync(): Order created successfully");
+            await _repository.AddServiceOrderAsync(newOrder); // Save order
+
+
+            _logger.LogInformation("CreateOrder ViewModel: {ViewModelJson}", viewModelJson); // Debug
             return true;
+
         }
-
-
-
-
-
-        // 
-        public async Task<bool> UpdateCompletedOrderAsync(ServiceOrder completedOrder, IFormCollection? form)
+        /// <summary>
+        /// ALL SERVICEORDERS
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="InvalidOperationException"></exception>
+        public async Task<IEnumerable<ServiceOrder>> GetAllServiceOrdersAsync()
         {
-            _logger.LogInformation("UpdateCompletedOrderAsync(): Called");
-
-            if (completedOrder == null || form == null)
+            var allServiceOrders = await _repository.GetAllServiceOrdersAsync();
+            if (allServiceOrders == null || !allServiceOrders.Any())
             {
-                _logger.LogError("UpdateCompletedOrderAsync(): Null arguments");
+                throw new InvalidOperationException("Null or no ServiceOrders in database");
+            }
+            return allServiceOrders;
+        }
+        
+
+        
+
+        // UPDATE SERVICE ORDER
+        public async Task<bool> UpdateCompletedOrderAsync(OrderViewModel completedOrder)
+        {
+            if (completedOrder == null)
+            {
                 return false;
             }
 
-            var existingOrder = await _repository.GetOrderByIdAsync(completedOrder.OrderId);
+            var existingOrder = await _repository.GetOrderByIdAsync(completedOrder.FillOrder!.OrderId);
             if (existingOrder == null)
             {
-                _logger.LogError("UpdateCompletedOrderAsync(): Order not found");
                 return false;
             }
-
-            // await FieldUpdateService.UpdateFieldsAsync(existingOrder, completedOrder, form);
-
             await _repository.UpdateOrderAsync(existingOrder);
 
-            _logger.LogInformation("UpdateCompletedOrderAsync(): Order updated successfully");
             return true;
         }
 
-
-        //
-        public async Task<ServiceOrder> FetchServiceOrderByIdAsync(int id)
-        {
-            _logger.LogInformation($"FetchServiceOrderByIdAsync({id}): Called");
-            var order = await _repository.GetOrderByIdAsync(id);
-            if (order == null)
-            {
-                _logger.LogError($"FetchServiceOrderByIdAsync({id}): Order not found");
-                throw new InvalidOperationException("Order not found");
-            }
-            return order;
-        }
+       
     }
 }

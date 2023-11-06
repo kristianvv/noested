@@ -1,0 +1,76 @@
+﻿@model OrderViewModel
+
+<h1>View Service Order</h1>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/checklist.css" asp-append-version="true">
+}
+
+<form id="serviceOrderForm" asp-controller="ServiceOrders" asp-action="SaveFilledOrder" method="post">
+    <!-- Display Static Order Info -->
+    <section class="order-info">
+        <section class="left-panel">
+            <!-- Left panel -->
+            <div>
+                <label asp-for="FillOrder!.OrderId">Serviceordre ID</label> <!-- Serviceordre ID (int) -->
+                <input asp-for="FillOrder!.OrderId" id="service_order_id" readonly value="@Model.FillOrder!.OrderId" />
+            </div>
+
+            <div>
+                <label asp-for="FillOrder!.CustomerId">Kunde ID</label> <!-- Kunde ID (int)-->
+                <input asp-for="FillOrder!.CustomerId" readonly value="@Model.FillOrder!.CustomerId" />
+            </div>
+
+            <div>
+                <label asp-for="FillOrder!.ProductName">Produktnavn</label> <!-- Produktnavn (f.eks "Igland 2501") -->
+                <input asp-for="FillOrder!.ProductName" readonly value="@Model.FillOrder!.ProductName" />
+            </div>
+
+            <div>
+                <label asp-for="FillOrder!.Product">Produkttype</label> <!-- Produkttype (f.eks "Vinsj") -->
+                <input asp-for="FillOrder!.Product" readonly value="@Model.FillOrder!.Product" />
+            </div>
+        </section>
+        <!-- Right panel -->
+        <section class="right-panel">
+            <div>
+                <label asp-for="FillOrder!.Status">Status for Serviceordre</label> <!-- Ordrestatus (f.eks 'Uåpnet' eller 'Fullført')-->
+                <input id="service_order_status" asp-for="FillOrder!.Status" readonly value="@Model.FillOrder!.Status" />
+            </div>
+            <div>
+                <label for="OrderReceived">Mottatt Ordre Dato</label> <!-- Opprettet Dato -->
+                <input id="order_received" asp-for="FillOrder!.OrderReceived" readonly value="@Model.FillOrder!.OrderReceived" />
+            </div>
+            <div>
+                <label asp-for="FillOrder!.CustomerAgreement">Kundens Problembeskrivelse</label> <!-- Kundens  -->
+                <input asp-for="FillOrder!.CustomerAgreement" readonly value="@Model.FillOrder!.CustomerAgreement" />
+            </div>
+        </section>
+    </section>
+
+    <!-- HER ER SJEKKLISTEN -->
+    <section id="checklistSection">
+        @{ ViewData.TemplateInfo.HtmlFieldPrefix = "NewChecklist"; }
+        <partial name="_WinchChecklistPartial" model="@Model.NewChecklist" /> 
+
+        <!-- Mekaniker kommentar og brukte arbeidstimer -->
+        <div class="mb-3">
+            <label for="RepairDescription" class="form-label">Beskrivelse av Reparasjoner</label>
+            <textarea class="form-control" id="RepairDescription" name="RepairDescription"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="WorkHours">Arbeidstimer brukt</label>
+            <input type="number" placeholder="X-antall timer" class="form-control" id="work_hours" name="WorkHours">
+        </div>
+    </section>
+
+    <!-- Skjulte felt -->
+    <input id="order_completed" asp-for="FillOrder!.OrderCompleted" readonly value="@Model.FillOrder!.OrderCompleted" />
+    <input id="checklist_init" asp-for="FillOrder!.Checklist!.ChecklistId" readonly value="@Model.FillOrder!.Checklist!.ChecklistId" />
+
+    <button type="submit" class="btn btn-success">Ferdigstill Ordre</button>
+</form>
+
+@section Scripts {
+    <script src="/js/serviceorder.js"></script>
+}

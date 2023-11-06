@@ -1,4 +1,4 @@
-﻿@model Noested.Models.CreateOrderViewModel
+﻿@model Noested.Models.OrderViewModel
 
 @{
     ViewData["Title"] = "CreateOrder";
@@ -9,131 +9,20 @@
 }
 <h1>Opprett serviceordre</h1>
 <form id="create_order_form" asp-action="CreateOrder" asp-controller="ServiceOrders" method="post">
-    <!-- REQUIRED FIELDS -->
     <container>
-        <section class="left-section">
-            <!-- Existing Customer Dropdown -->
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-            <div class="form-group">
-                <label asp-for="NewServiceOrder!.CustomerId">Velg Eksisterende Kunde</label>
-                <select id="CustomerId" asp-for="NewServiceOrder!.CustomerId" asp-items="ViewBag.ExistingCustomers" class="form-control" onchange="toggleNewCustomerSection()">
-                    <option value="0">-- Opprett Ny Bruker (Nedtrekksmeny) --</option>
-                </select>
-                <span asp-validation-for="NewServiceOrder!.CustomerId" class="text-danger"></span>
-            </div>
-            <!-- Garanti -->
-            <div class="form-group">
-                <label asp-for="NewServiceOrder!.Warranty" class="control-label"></label>
-                <select asp-for="NewServiceOrder!.Warranty" class="form-control">
-                    <option value="">Chose Condition</option>
-                    <option value="Full">Full</option>
-                    <option value="Limited">Delvis</option>
-                    <option value="None">Ingen</option>
-                </select>
-                <span asp-validation-for="NewServiceOrder!.Warranty" class="text-danger"></span>
-            </div>
-            <!-- Kundeavtale -->
-            <div class="form-group">
-                <label asp-for="NewServiceOrder!.CustomerAgreement" class="control-label"></label>
-                <input asp-for="NewServiceOrder!.CustomerAgreement" class="form-control" />
-                <span asp-validation-for="NewServiceOrder!.CustomerAgreement" class="text-danger"></span>
-            </div>
-            <!-- Ordrebeskrivelse -->
-            <div class="form-group">
-                <label asp-for="NewServiceOrder!.OrderDescription" class="control-label"></label>
-                <input asp-for="NewServiceOrder!.OrderDescription" class="form-control" />
-                <span asp-validation-for="NewServiceOrder!.OrderDescription" class="text-danger"></span>
-            </div>
-            <!-- Produktnavn -->
-            <div class="form-group">
-                <label asp-for="NewServiceOrder!.ProductName" title="Produktnavn">Produktnavn</label>
-                <input asp-for="NewServiceOrder!.ProductName" class="form-control" required placeholder="f.eks 'IGLAND 5002 Pento TL'" />
-                <span asp-validation-for="NewServiceOrder!.ProductName" class="text-danger"></span>
-            </div>
-            <!-- Produkttype -->
-            <div class="form-group">
-                <label asp-for="NewServiceOrder!.ProductType" title="Produkttype">Produkttype</label>
-                <input asp-for="NewServiceOrder!.ProductType" class="form-control" required placeholder="f.eks 'Vinsj'" />
-                <span asp-validation-for="NewServiceOrder!.ProductType" class="text-danger"></span>
-            </div>
-            <!-- Serienummer -->
-            <div class="form-group">
-                <label asp-for="NewServiceOrder!.SerialNumber" class="control-label"></label>
-                <input asp-for="NewServiceOrder!.SerialNumber" class="form-control" />
-                <span asp-validation-for="NewServiceOrder!.SerialNumber" class="text-danger"></span>
-            </div>
-            <!-- Årsmodell -->
-            <div class="form-group">
-                <label asp-for="NewServiceOrder!.ModelYear" class="control-label"></label>
-                <input asp-for="NewServiceOrder!.ModelYear" class="form-control" />
-                <span asp-validation-for="NewServiceOrder!.ModelYear" class="text-danger"></span>
-            </div>
-            <!-- Bruktdeler -->
-            <div class="form-group">
-                <label asp-for="NewServiceOrder!.DiscardedParts" class="control-label"></label>
-                <input asp-for="NewServiceOrder!.DiscardedParts" class="form-control" />
-                <span asp-validation-for="NewServiceOrder!.DiscardedParts" class="text-danger"></span>
-            </div>
-            <!-- Erstatningsdeler -->
-            <div class="form-group">
-                <label asp-for="NewServiceOrder!.ReplacedPartsReturned" class="control-label"></label>
-                <input asp-for="NewServiceOrder!.ReplacedPartsReturned" class="form-control" />
-                <span asp-validation-for="NewServiceOrder!.ReplacedPartsReturned" class="text-danger"></span>
-            </div>
-            <!-- Shipping -->
-            <div class="form-group">
-                <label asp-for="NewServiceOrder!.Shipping" class="control-label"></label>
-                <input asp-for="NewServiceOrder!.Shipping" class="form-control" />
-                <span asp-validation-for="NewServiceOrder!.Shipping" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NewServiceOrder!.IsActive" class="form-check-label"></label>
-                <input asp-for="NewServiceOrder!.IsActive" class="form-check-input" />
-            </div>
+        <section id="newServiceOrderSection" class="left-section">
+            @{ ViewData.TemplateInfo.HtmlFieldPrefix = "FillOrder"; }
+            <partial name="_ServiceOrderPartial" model="@Model.FillOrder" />
         </section>
-        <!-- NEW CUSTOMER SECTION -->
         <section id="newCustomerSection" class="right-section">
-            <!-- Customer's First Name -->
-            <div class="form-group">
-                <label asp-for="NewCustomer!.FirstName">Fornavn</label>
-                <input asp-for="NewCustomer!.FirstName" class="form-control" />
-            </div>
-            <!-- Customer's Last Name -->
-            <div class="form-group">
-                <label asp-for="NewCustomer!.LastName">Etternavn</label>
-                <input asp-for="NewCustomer!.LastName" class="form-control" />
-            </div>
-            <!-- Customer's Street Address -->
-            <div class="form-group">
-                <label asp-for="NewCustomer!.Street">Gateadresse</label>
-                <input asp-for="NewCustomer!.Street" class="form-control" />
-            </div>
-            <!-- Customer's Postal Code -->
-            <div class="form-group">
-                <label asp-for="NewCustomer!.PostalCode">Postnummer</label>
-                <input asp-for="NewCustomer!.PostalCode" class="form-control" />
-            </div>
-            <!-- Customer's City -->
-            <div class="form-group">
-                <label asp-for="NewCustomer!.City">By</label>
-                <input asp-for="NewCustomer!.City" class="form-control" />
-            </div>
-            <!-- Customer's Email -->
-            <div class="form-group">
-                <label asp-for="NewCustomer!.Email">Email</label>
-                <input asp-for="NewCustomer!.Email" class="form-control" />
-            </div>
-            <!-- Customer's Phone -->
-            <div class="form-group">
-                <label asp-for="NewCustomer!.Phone">Telefon</label>
-                <input asp-for="NewCustomer!.Phone" class="form-control" />
-            </div>
-            <!-- Hidden value -->
-            <input type="hidden" asp-for="NewCustomer!.CustomerId" value="0">
+            @{ ViewData.TemplateInfo.HtmlFieldPrefix = "NewCustomer"; }
+            <partial name="_CustomerPartial" model="@Model.NewCustomer" />
         </section>
     </container>
-
+    <div id="newChecklistSection" style="display:none;">
+        @{ ViewData.TemplateInfo.HtmlFieldPrefix = "NewChecklist"; }
+        <partial name="_ChecklistPartial" model="@Model.NewChecklist" />
+    </div>
     <button type="submit" class="btn btn-primary create-button">Opprett</button>
 </form>
 
@@ -143,7 +32,7 @@
 </div>
 
 @section Scripts {
-    
+
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script src="~/js/createServiceOrder.js"></script>
 }

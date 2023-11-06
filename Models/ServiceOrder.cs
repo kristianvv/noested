@@ -3,42 +3,59 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Noested.Models
 {
+    public enum OrderStatus
+    {
+        Received,
+        InProgress,
+        Completed,
+        Billed
+    }
+    public enum WarrantyType
+    {
+        None,
+        Limited,
+        Full
+    }
+    public enum ProductType
+    {
+        Winch,
+        TimberTrailer,
+        TractorShears,
+        LiftEquip,
+        WoodEquip,
+        SnowBloPlo,
+        SandBlaster
+    }
+
     public class ServiceOrder
     {
-        public enum OrderStatus
-        {
-            Received,
-            InProgress,
-            Completed
-        }
-
-        public enum WarrantyType
-        {
-            None,
-            Limited,
-            Full
-        }
-
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Display(Name = "Ordrenr")]
         public int OrderId { get; set; }
 
-        [ForeignKey("CustomerId")]
+        [ForeignKey("Customer")]
         [Display(Name = "Kundenr")]
         public int CustomerId { get; set; }
 
         public virtual Customer? Customer { get; set; } // nav
-
-        [ForeignKey("ChecklistId")]
-        [Display(Name = "Sjekklistenr")]
-        public int? ChecklistId { get; set; }
-
         public virtual Checklist? Checklist { get; set; } // nav
-        //
+        
+        [Required]
+        [Display(Name = "Ordrestatus")]
+        public OrderStatus Status { get; set; }
+
+        [Display(Name = "Godkjent av")]
+        [MaxLength(50)]
+        public string? ApprovedBy { get; set; }
+
         [Required]
         [Display(Name = "Aktiv")]
         public bool IsActive { get; set; }
+
+        [Required]
+        [Display(Name = "Garanti")]
+        public WarrantyType Warranty { get; set; }
 
         [Required]
         [Display(Name = "Mottatt")]
@@ -47,19 +64,15 @@ namespace Noested.Models
         [Display(Name = "Fullført")]
         public DateTime? OrderCompleted { get; set; }
 
-        [Required]
-        [Display(Name = "Ordrestatus")]
-        public OrderStatus Status { get; set; }
-
         [Display(Name = "Agreed Finished Date")]
         public DateTime? AgreedFinishedDate { get; set; }
 
-        [Display(Name = "Product Name")]
+        [Display(Name = "Produktnavn")]
         public string? ProductName { get; set; }
 
         [Required]
-        [Display(Name = "Product Type")]
-        public string? ProductType { get; set; }
+        [Display(Name = "Produkttype")]
+        public ProductType Product { get; set; }
 
         [MaxLength(4)]
         [Display(Name = "Årsmodell")]
@@ -68,10 +81,6 @@ namespace Noested.Models
         [MaxLength(50)]
         [Display(Name = "Serienummer")]
         public string? SerialNumber { get; set; }
-
-        [Required]
-        [Display(Name = "Garanti")]
-        public WarrantyType Warranty { get; set; }
 
         [MaxLength(200)]
         [Display(Name = "Kundeavtale")]
@@ -95,6 +104,8 @@ namespace Noested.Models
 
         [Display(Name = "Working Hours")]
         public int WorkHours { get; set; }
+
+        
     }
 }
 
