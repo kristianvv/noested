@@ -1,8 +1,6 @@
 ﻿using System.Text.Json;
-using Microsoft.EntityFrameworkCore;
 using Noested.Data;
 using Noested.Models;
-using static Noested.Models.ServiceOrder;
 
 namespace Noested.Services
 {
@@ -27,16 +25,28 @@ namespace Noested.Services
         }
 
         // VIEW FOR OPEN SO
-        public async Task<OrderViewModel> PopulateOrderViewModel(int id)
+        public async Task<FillOrderModel> PopulateOrderViewModel(int id)
         {
             var order = await GetOrderByIdAsync(id);
-            int checklistId = order.OrderId;
 
-            var viewModel = new OrderViewModel
+            var viewModel = new FillOrderModel
             {
-                FillOrder = order,
-                NewChecklist = await GetChecklistSubClass(order.Product, checklistId)
+                OrderId = order.OrderId,
+                CustomerId = order.CustomerId,
+                ProductName = order.ProductName,
+                ProductT = order.Product,
+                OrderStatus = order.Status,
+                OrderReceived = order.OrderReceived,
+                OrderDescription = order.OrderDescription,
+                NewChecklist = await GetChecklistSubClass(order.Product, id)
             };
+
+            _logger.LogInformation("ORDERID {OrderId} found.", viewModel.OrderId);
+            _logger.LogInformation("PRODUCTT {ProductT} found.", viewModel.ProductT);
+            _logger.LogInformation("ORDERSTATUS {OrderStatus} found.", viewModel.OrderStatus);
+            _logger.LogInformation("Checklist {@NewChecklist} found.", viewModel.NewChecklist);
+            _logger.LogInformation("CHECK {MechDrumBearing}", viewModel.NewChecklist);
+
 
             return viewModel;
         }
@@ -84,17 +94,13 @@ namespace Noested.Services
         }
 
 
-        /// <summary>
-        ///     CREATE SERVICE ORDER
-        /// </summary>
-        /// <param name="viewModel"></param>
-        /// <returns></returns>
+        
         public async Task<bool> CreateNewServiceOrderAsync(OrderViewModel viewModel)
         {
             IEnumerable<ServiceOrder> allServiceOrders = await _repository.GetAllServiceOrdersAsync(); // Duplicate Order?
             IEnumerable<Customer> allCustomers = await _repository.GetAllCustomersAsync(); // Duplicate Customer?
 
-            ServiceOrder? newOrder = viewModel.FillOrder;
+            ServiceOrder? newOrder = viewModel.NewOrder;
             Customer? newCustomer = viewModel.NewCustomer;
             Checklist? newChecklist = viewModel.NewChecklist;
 
@@ -155,7 +161,7 @@ namespace Noested.Services
 
         }
         /// <summary>
-        /// ALL SERVICEORDERS
+        ///     ALL SERVICEORDERS
         /// </summary>
         /// <returns></returns>
         /// <exception cref="InvalidOperationException"></exception>
@@ -168,28 +174,69 @@ namespace Noested.Services
             }
             return allServiceOrders;
         }
-        
 
-        
-
-        // UPDATE SERVICE ORDER
-        public async Task<bool> UpdateCompletedOrderAsync(OrderViewModel completedOrder)
+        /// <summary>
+        ///     Updates Checklist in an existing order
+        /// </summary>
+        /// <param name="form"></param>
+        /// <returns></returns>
+        public async Task<bool> UpdateCompletedOrderAsync(FillOrderModel form)
         {
-            if (completedOrder == null)
+            var viewModelJson = JsonSerializer.Serialize(form, new JsonSerializerOptions { WriteIndented = true }); // Debug
+            _logger.LogInformation("UPDATE COMPLETED ORDER: {ViewModelJson}", viewModelJson); // Debug
+
+            ServiceOrder? DbOrder = await _repository.GetOrderByIdAsync(form.OrderId);
+            Checklist? DbChecklist = await _repository.GetChecklistByIdAsync(form.OrderId);
+
+            if (DbOrder == null || DbChecklist == null)
             {
+                _logger.LogError("Neither Order or Checklist with ID {OrderId} found.", form.OrderId);
                 return false;
             }
 
-            var existingOrder = await _repository.GetOrderByIdAsync(completedOrder.FillOrder!.OrderId);
-            if (existingOrder == null)
+            if (DbChecklist is WinchChecklist DbWinch)
             {
-                return false;
+                if (form.NewChecklist is not WinchChecklist updCheck)
+                {
+                    _logger.LogError("Checklist ({NewChecklist}) is not of type Winch", form.NewChecklist);
+                    return false;
+                }
+
+                DbWinch.MechSignature = updCheck!.MechSignature;
+                DbWinch.RepairComment = updCheck.RepairComment;
+                DbWinch.DateCompleted = updCheck.DateCompleted;
+                DbWinch.MechBrakes = updCheck.MechBrakes;
+                DbWinch.MechDrumBearing = updCheck.MechDrumBearing;
+                DbWinch.MechStoragePTO = updCheck.MechStoragePTO;
+                DbWinch.MechWire = updCheck.MechWire;
+                DbWinch.MechChainTensioner = updCheck.MechChainTensioner;
+                DbWinch.MechPinionBearing = updCheck.MechPinionBearing;
+                DbWinch.MechClutch = updCheck.MechClutch;
+                DbWinch.MechSprocketWedges = updCheck.MechSprocketWedges;
+                DbWinch.HydCylinder = updCheck.HydCylinder;
+                DbWinch.HydHydraulicBlock = updCheck.HydHydraulicBlock;
+                DbWinch.HydTankOil = updCheck.HydTankOil;
+                DbWinch.HydGearboxOil = updCheck.HydGearboxOil;
+                DbWinch.HydBrakeCylinder = updCheck.HydBrakeCylinder;
+                DbWinch.ElCableNetwork = updCheck.ElCableNetwork;
+                DbWinch.ElRadio = updCheck.ElRadio;
+                DbWinch.ElButtonBox = updCheck.ElButtonBox;
+                DbWinch.TensionCheckBar = updCheck.TensionCheckBar;
+                DbWinch.TestWinch = updCheck.TestWinch;
+                DbWinch.TestTraction = updCheck.TestTraction;
+                DbWinch.TestBrakes = updCheck.TestBrakes;
+
+                await _repository.UpdateChecklistAsync(DbWinch);
             }
-            await _repository.UpdateOrderAsync(existingOrder);
+
+            DbOrder.WorkHours = form.WorkHours;
+            DbOrder.Status = form.OrderStatus;
+            DbOrder.OrderCompleted = form.OrderCompleted;
+
+
+            await _repository.UpdateOrderAsync(DbOrder);
 
             return true;
         }
-
-       
     }
 }

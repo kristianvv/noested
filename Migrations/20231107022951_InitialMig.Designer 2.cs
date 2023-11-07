@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Noested.Data;
 
@@ -10,9 +11,11 @@ using Noested.Data;
 namespace Noested.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231107022951_InitialMig")]
+    partial class InitialMig
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -231,8 +234,9 @@ namespace Noested.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("varchar(50)");
 
-                    b.Property<int>("ProductType")
-                        .HasColumnType("int");
+                    b.Property<string>("ProductType")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("RepairComment")
                         .HasMaxLength(200)
@@ -329,8 +333,9 @@ namespace Noested.Migrations
                     b.Property<DateTime>("OrderReceived")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("Product")
-                        .HasColumnType("int");
+                    b.Property<string>("Product")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("ProductName")
                         .HasColumnType("longtext");
@@ -347,11 +352,13 @@ namespace Noested.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("varchar(50)");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
-                    b.Property<int>("Warranty")
-                        .HasColumnType("int");
+                    b.Property<string>("Warranty")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<int>("WorkHours")
                         .HasColumnType("int");
@@ -367,65 +374,85 @@ namespace Noested.Migrations
                 {
                     b.HasBaseType("Noested.Models.Checklist");
 
-                    b.Property<int>("ElButtonBox")
-                        .HasColumnType("int");
+                    b.Property<string>("ElButtonBox")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
-                    b.Property<int>("ElCableNetwork")
-                        .HasColumnType("int");
+                    b.Property<string>("ElCableNetwork")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
-                    b.Property<int>("ElRadio")
-                        .HasColumnType("int");
+                    b.Property<string>("ElRadio")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
-                    b.Property<int>("HydBrakeCylinder")
-                        .HasColumnType("int");
+                    b.Property<string>("HydBrakeCylinder")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
-                    b.Property<int>("HydCylinder")
-                        .HasColumnType("int");
+                    b.Property<string>("HydCylinder")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
-                    b.Property<int>("HydGearboxOil")
-                        .HasColumnType("int");
+                    b.Property<string>("HydGearboxOil")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
-                    b.Property<int>("HydHydraulicBlock")
-                        .HasColumnType("int");
+                    b.Property<string>("HydHydraulicBlock")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
-                    b.Property<int>("HydTankOil")
-                        .HasColumnType("int");
+                    b.Property<string>("HydTankOil")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
-                    b.Property<int>("MechBrakes")
-                        .HasColumnType("int");
+                    b.Property<string>("MechBrakes")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
-                    b.Property<int>("MechChainTensioner")
-                        .HasColumnType("int");
+                    b.Property<string>("MechChainTensioner")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
-                    b.Property<int>("MechClutch")
-                        .HasColumnType("int");
+                    b.Property<string>("MechClutch")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
-                    b.Property<int>("MechDrumBearing")
-                        .HasColumnType("int");
+                    b.Property<string>("MechDrumBearing")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
-                    b.Property<int>("MechPinionBearing")
-                        .HasColumnType("int");
+                    b.Property<string>("MechPinionBearing")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
-                    b.Property<int>("MechSprocketWedges")
-                        .HasColumnType("int");
+                    b.Property<string>("MechSprocketWedges")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
-                    b.Property<int>("MechStoragePTO")
-                        .HasColumnType("int");
+                    b.Property<string>("MechStoragePTO")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
-                    b.Property<int>("MechWire")
-                        .HasColumnType("int");
+                    b.Property<string>("MechWire")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
-                    b.Property<int>("TensionCheckBar")
-                        .HasColumnType("int");
+                    b.Property<string>("TensionCheckBar")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
-                    b.Property<int>("TestBrakes")
-                        .HasColumnType("int");
+                    b.Property<string>("TestBrakes")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
-                    b.Property<int>("TestTraction")
-                        .HasColumnType("int");
+                    b.Property<string>("TestTraction")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
-                    b.Property<int>("TestWinch")
-                        .HasColumnType("int");
+                    b.Property<string>("TestWinch")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.ToTable("WinchChecklist");
                 });

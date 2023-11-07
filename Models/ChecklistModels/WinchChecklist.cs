@@ -7,19 +7,6 @@ namespace Noested.Models
     public class WinchChecklist : Checklist
 	{
         [Required]
-        [Display(Name = "Signatur")]
-        [MaxLength(50)]
-        public string? MechSignature { get; set; } = "Not Entered Yet";
-
-        [Display(Name = "Kommentar")]
-        [MaxLength(200)]
-        public string? RepairComment { get; set; }
-
-        [Required]
-        [Display(Name = "Dato fullført")]
-        public DateTime DateCompleted { get; set; } = DateTime.Now;
-
-        [Required]
         [Display(Name = "Bremser")]
         public ComponentStatus MechBrakes { get; set; } = ComponentStatus.Unchecked;
 

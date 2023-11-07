@@ -11,8 +11,8 @@
 <form id="create_order_form" asp-action="CreateOrder" asp-controller="ServiceOrders" method="post">
     <container>
         <section id="newServiceOrderSection" class="left-section">
-            @{ ViewData.TemplateInfo.HtmlFieldPrefix = "FillOrder"; }
-            <partial name="_ServiceOrderPartial" model="@Model.FillOrder" />
+            @{ ViewData.TemplateInfo.HtmlFieldPrefix = "NewOrder"; }
+            <partial name="_ServiceOrderPartial" model="@Model.NewOrder" />
         </section>
         <section id="newCustomerSection" class="right-section">
             @{ ViewData.TemplateInfo.HtmlFieldPrefix = "NewCustomer"; }

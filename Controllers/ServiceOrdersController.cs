@@ -49,9 +49,9 @@ namespace Noested.Controllers
         {
             try
             {
-                var viewModel = await _serviceOrderService.PopulateOrderViewModel(id);
+                var fillOrderModel = await _serviceOrderService.PopulateOrderViewModel(id);
 
-                return View("OpenOrder", viewModel);
+                return View("OpenOrder", fillOrderModel);
             }
             catch (InvalidOperationException ex)
             {
@@ -59,10 +59,25 @@ namespace Noested.Controllers
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
+        // ServiceOrders/SaveFilledOrder
+        [HttpPost]
+        public async Task<IActionResult> SaveFilledOrder(FillOrderModel fillOrder)
+        {
+
+            var viewModelJson = JsonSerializer.Serialize(fillOrder, new JsonSerializerOptions { WriteIndented = true });
+            _logger.LogInformation("ONE!!! SAVE FILLED ORDER: {ViewModelJson}", viewModelJson);
+
+            fillOrder.OrderCompleted = DateTime.Now;
+
+            await _serviceOrderService.UpdateCompletedOrderAsync(fillOrder);
+
+            return View("Details");
+        }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <returns></returns>
         [HttpGet] // ServiceOrders/CreateOrder
         public async Task<IActionResult> CreateOrder()
         {
@@ -70,10 +85,11 @@ namespace Noested.Controllers
             {
                 var viewModel = new OrderViewModel
                 {
-                    FillOrder = new ServiceOrder(),
+                    NewOrder = new ServiceOrder(),
                     NewCustomer = new Customer(),
                     NewChecklist = new Checklist()
                 };
+
                 var existingCustomers = await _customerService.GetAllCustomersAsync();
                 ViewBag.ExistingCustomers = new SelectList(existingCustomers, "CustomerId", "FirstName");
                 _logger.LogInformation("Successfully populated data from service into ViewBag, sending to View");
@@ -123,26 +139,8 @@ namespace Noested.Controllers
                 }
             }
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="filledOrder"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public async Task<IActionResult> SaveFilledOrder(OrderViewModel filledOrder)
-        {
-            var validationResult = await _serviceOrderService.UpdateCompletedOrderAsync(filledOrder);
-
-            if (validationResult)
-            {
-                _logger.LogInformation("SaveCompletedOrder(): Success");
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                return View("Error", new ErrorViewModel { RequestId = "Failed to save completed order" });
-            }
-        }
+        
+        
 
 
 

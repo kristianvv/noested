@@ -1,5 +1,7 @@
 ﻿@model Noested.Models.WinchChecklist
 
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
 <table class="table table-bordered mb-3" id="checklistTable">
     <thead>
         <tr>
@@ -18,7 +20,6 @@
             <td><input asp-for="MechBrakes" type="radio" value="OK" class="form-check-input" /></td>
             <td><input asp-for="MechBrakes" type="radio" value="NeedsReplacement" class="form-check-input" /></td>
             <td><input asp-for="MechBrakes" type="radio" value="Defective" class="form-check-input" /></td>
-            <td><span asp-validation-for="MechBrakes" class="text-danger"></span></td>
         </tr>
         <!-- MechDrumBearing Row -->
         <tr>
@@ -26,7 +27,6 @@
             <td><input asp-for="MechDrumBearing" type="radio" value="OK" class="form-check-input" /></td>
             <td><input asp-for="MechDrumBearing" type="radio" value="NeedsReplacement" class="form-check-input" /></td>
             <td><input asp-for="MechDrumBearing" type="radio" value="Defective" class="form-check-input" /></td>
-            <td><span asp-validation-for="MechDrumBearing" class="text-danger"></span></td>
         </tr>
         <!-- MechStoragePTO Row -->
         <tr>
@@ -34,7 +34,6 @@
             <td><input asp-for="MechStoragePTO" type="radio" value="OK" class="form-check-input" /></td>
             <td><input asp-for="MechStoragePTO" type="radio" value="NeedsReplacement" class="form-check-input" /></td>
             <td><input asp-for="MechStoragePTO" type="radio" value="Defective" class="form-check-input" /></td>
-            <td><span asp-validation-for="MechStoragePTO" class="text-danger"></span></td>
         </tr>
         <!-- MechWire Row -->
         <tr>
@@ -42,7 +41,6 @@
             <td><input asp-for="MechWire" type="radio" value="OK" class="form-check-input" /></td>
             <td><input asp-for="MechWire" type="radio" value="NeedsReplacement" class="form-check-input" /></td>
             <td><input asp-for="MechWire" type="radio" value="Defective" class="form-check-input" /></td>
-            <td><span asp-validation-for="MechWire" class="text-danger"></span></td>
         </tr>
         <!-- MechChainTensioner Row -->
         <tr>
@@ -50,7 +48,6 @@
             <td><input asp-for="MechChainTensioner" type="radio" value="OK" class="form-check-input" /></td>
             <td><input asp-for="MechChainTensioner" type="radio" value="NeedsReplacement" class="form-check-input" /></td>
             <td><input asp-for="MechChainTensioner" type="radio" value="Defective" class="form-check-input" /></td>
-            <td><span asp-validation-for="MechChainTensioner" class="text-danger"></span></td>
         </tr>
         <!-- MechPinionBearing Row -->
         <tr>
@@ -58,7 +55,6 @@
             <td><input asp-for="MechPinionBearing" type="radio" value="OK" class="form-check-input" /></td>
             <td><input asp-for="MechPinionBearing" type="radio" value="NeedsReplacement" class="form-check-input" /></td>
             <td><input asp-for="MechPinionBearing" type="radio" value="Defective" class="form-check-input" /></td>
-            <td><span asp-validation-for="MechPinionBearing" class="text-danger"></span></td>
         </tr>
         <!-- MechClutch Row -->
         <tr>
@@ -66,7 +62,6 @@
             <td><input asp-for="MechClutch" type="radio" value="OK" class="form-check-input" /></td>
             <td><input asp-for="MechClutch" type="radio" value="NeedsReplacement" class="form-check-input" /></td>
             <td><input asp-for="MechClutch" type="radio" value="Defective" class="form-check-input" /></td>
-            <td><span asp-validation-for="MechClutch" class="text-danger"></span></td>
         </tr>
         <!-- MechSprocketWedges Row -->
         <tr>
@@ -74,7 +69,6 @@
             <td><input asp-for="MechSprocketWedges" type="radio" value="OK" class="form-check-input" /></td>
             <td><input asp-for="MechSprocketWedges" type="radio" value="NeedsReplacement" class="form-check-input" /></td>
             <td><input asp-for="MechSprocketWedges" type="radio" value="Defective" class="form-check-input" /></td>
-            <td><span asp-validation-for="MechSprocketWedges" class="text-danger"></span></td>
         </tr>
     </tbody>
     <!-- HydCylinder Row -->
@@ -85,7 +79,6 @@
             <td><input asp-for="HydCylinder" type="radio" value="OK" class="form-check-input" /></td>
             <td><input asp-for="HydCylinder" type="radio" value="NeedsReplacement" class="form-check-input" /></td>
             <td><input asp-for="HydCylinder" type="radio" value="Defective" class="form-check-input" /></td>
-            <td><span asp-validation-for="HydCylinder" class="text-danger"></span></td>
         </tr>
         <!-- HydHydraulicBlock Row -->
         <tr>
@@ -93,7 +86,6 @@
             <td><input asp-for="HydHydraulicBlock" type="radio" value="OK" class="form-check-input" /></td>
             <td><input asp-for="HydHydraulicBlock" type="radio" value="NeedsReplacement" class="form-check-input" /></td>
             <td><input asp-for="HydHydraulicBlock" type="radio" value="Defective" class="form-check-input" /></td>
-            <td><span asp-validation-for="HydHydraulicBlock" class="text-danger"></span></td>
         </tr>
         <!-- HydTankOil Row -->
         <tr>
@@ -101,7 +93,6 @@
             <td><input asp-for="HydTankOil" type="radio" value="OK" class="form-check-input" /></td>
             <td><input asp-for="HydTankOil" type="radio" value="NeedsReplacement" class="form-check-input" /></td>
             <td><input asp-for="HydTankOil" type="radio" value="Defective" class="form-check-input" /></td>
-            <td><span asp-validation-for="HydTankOil" class="text-danger"></span></td>
         </tr>
         <!-- HydGearboxOil Row -->
         <tr>
@@ -109,7 +100,6 @@
             <td><input asp-for="HydGearboxOil" type="radio" value="OK" class="form-check-input" /></td>
             <td><input asp-for="HydGearboxOil" type="radio" value="NeedsReplacement" class="form-check-input" /></td>
             <td><input asp-for="HydGearboxOil" type="radio" value="Defective" class="form-check-input" /></td>
-            <td><span asp-validation-for="HydGearboxOil" class="text-danger"></span></td>
         </tr>
         <!-- HydBrakeCylinder Row -->
         <tr>
@@ -117,7 +107,6 @@
             <td><input asp-for="HydBrakeCylinder" type="radio" value="OK" class="form-check-input" /></td>
             <td><input asp-for="HydBrakeCylinder" type="radio" value="NeedsReplacement" class="form-check-input" /></td>
             <td><input asp-for="HydBrakeCylinder" type="radio" value="Defective" class="form-check-input" /></td>
-            <td><span asp-validation-for="HydBrakeCylinder" class="text-danger"></span></td>
         </tr>
     </tbody>
     <!-- ElCableNetwork Row -->
@@ -128,7 +117,6 @@
             <td><input asp-for="ElCableNetwork" type="radio" value="OK" class="form-check-input" /></td>
             <td><input asp-for="ElCableNetwork" type="radio" value="NeedsReplacement" class="form-check-input" /></td>
             <td><input asp-for="ElCableNetwork" type="radio" value="Defective" class="form-check-input" /></td>
-            <td><span asp-validation-for="ElCableNetwork" class="text-danger"></span></td>
         </tr>
         <!-- ElRadio Row -->
         <tr>
@@ -136,7 +124,6 @@
             <td><input asp-for="ElRadio" type="radio" value="OK" class="form-check-input" /></td>
             <td><input asp-for="ElRadio" type="radio" value="NeedsReplacement" class="form-check-input" /></td>
             <td><input asp-for="ElRadio" type="radio" value="Defective" class="form-check-input" /></td>
-            <td><span asp-validation-for="ElRadio" class="text-danger"></span></td>
         </tr>
         <!-- ElButtonBox Row -->
         <tr>
@@ -144,18 +131,16 @@
             <td><input asp-for="ElButtonBox" type="radio" value="OK" class="form-check-input" /></td>
             <td><input asp-for="ElButtonBox" type="radio" value="NeedsReplacement" class="form-check-input" /></td>
             <td><input asp-for="ElButtonBox" type="radio" value="Defective" class="form-check-input" />
-            <td><span asp-validation-for="ElButtonBox" class="text-danger"></span></td>
         </tr>
     </tbody>
     <!-- TensionCheckBar Row -->
     <tbody>
         <tr>
-            <td class="category-header" rowspan="1">Tension</td> <!-- Replace with actual category name -->
+            <td class="category-header" rowspan="1">Tension</td>
             <td><label asp-for="TensionCheckBar" class="control-label"></label></td>
             <td><input asp-for="TensionCheckBar" type="radio" value="OK" class="form-check-input" /></td>
             <td><input asp-for="TensionCheckBar" type="radio" value="NeedsReplacement" class="form-check-input" /></td>
             <td><input asp-for="TensionCheckBar" type="radio" value="Defective" class="form-check-input" /></td>
-            <td><span asp-validation-for="TensionCheckBar" class="text-danger"></span></td>
         </tr>
     </tbody>
     <!-- TestWinch Row -->
@@ -166,7 +151,6 @@
             <td><input asp-for="TestWinch" type="radio" value="OK" class="form-check-input" /></td>
             <td><input asp-for="TestWinch" type="radio" value="NeedsReplacement" class="form-check-input" /></td>
             <td><input asp-for="TestWinch" type="radio" value="Defective" class="form-check-input" /></td>
-            <td><span asp-validation-for="TestWinch" class="text-danger"></span></td>
         </tr>
         <!-- TestTraction Row -->
         <tr>
@@ -174,7 +158,6 @@
             <td><input asp-for="TestTraction" type="radio" value="OK" class="form-check-input" /></td>
             <td><input asp-for="TestTraction" type="radio" value="NeedsReplacement" class="form-check-input" /></td>
             <td><input asp-for="TestTraction" type="radio" value="Defective" class="form-check-input" /></td>
-            <td><span asp-validation-for="TestTraction" class="text-danger"></span></td>
         </tr>
         <!-- TestBrakes Row -->
         <tr>
@@ -182,7 +165,6 @@
             <td><input asp-for="TestBrakes" type="radio" value="OK" class="form-check-input" /></td>
             <td><input asp-for="TestBrakes" type="radio" value="NeedsReplacement" class="form-check-input" /></td>
             <td><input asp-for="TestBrakes" type="radio" value="Defective" class="form-check-input" /></td>
-            <td><span asp-validation-for="TestBrakes" class="text-danger"></span></td>
         </tr>
     </tbody>
 </table>
