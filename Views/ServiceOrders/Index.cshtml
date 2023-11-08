@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Noested.Models.ServiceOrder>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/serviceOrder.css">
+}
+
+<h1>Alle Serviceordre</h1>
+<div class="container-fluid">
+    <div class="row">
+        <!-- Left Empty Column -->
+        <div class="col-md-2"></div>
+
+        <!-- Middle Column -->
+        <div class="col-md-8">
+            <div class="service-order-list overflow-auto">
+                <!-- Service order loop -->
+                @foreach (var order in Model)
+                {
+                    <section class="service-order-item">
+                        <a href="@Url.Action("OpenOrder", "ServiceOrders", new { id = order.OrderId })">
+                            <!-- "ViewNavn(.cshtml)", "View") -->
+                            <div>
+                                Ordre Opprettet: @order.OrderReceived
+                            </div>
+                            <div>
+                                Ordrenummer: @order.OrderId
+                            </div>
+                            <div>
+                                Kundenummer: @order.CustomerId
+                            </div>
+                            <div>
+                                Produktnavn: @order.ProductName
+                            </div>
+                            <div>
+                                Produkttype: @order.Product
+                            </div>
+                            <div>
+                                Ordrestatus: @order.Status
+                            </div>
+                        </a>
+                    </section>
+                }
+            </div>
+        </div>
+
+        <!-- Right Empty Column -->
+        <div class="col-md-2"></div>
+    </div>
+</div>

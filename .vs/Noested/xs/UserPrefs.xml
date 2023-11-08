@@ -1,36 +1,25 @@
-﻿<Properties StartupConfiguration="{09206A04-8166-4A8A-A6D4-5DFC668B1821}|https">
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+﻿<Properties StartupConfiguration="{1F21596D-1676-48B3-A7DB-0ABF7DBEEBBA}|https">
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Data/DTOs/CompletedOrderDto.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="appsettings.json">
     <Files>
-      <File FileName="Program.cs" Line="5" Column="25" />
-      <File FileName="Controllers/ServiceOrderController.cs" Line="2" Column="22" />
-      <File FileName="Models/ServiceOrderModel.cs" Line="10" Column="10" />
-      <File FileName="Data/DTOs/ChecklistDto.cs" Line="12" Column="6" />
-      <File FileName="Data/DTOs/CompletedOrderDto.cs" Line="12" Column="37" />
+      <File FileName="appsettings.json" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Noested">
-            <Node name="Noested">
-              <Node name="Controllers" expanded="True" />
-              <Node name="Data" expanded="True">
-                <Node name="DTOs" expanded="True">
-                  <Node name="CompletedOrderDto.cs" selected="True" />
-                </Node>
-              </Node>
-              <Node name="Models" expanded="True" />
-              <Node name="Views" expanded="True" />
+            <Node name="Noested" expanded="True">
+              <Node name="appsettings.json" selected="True" />
             </Node>
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.ItemProperties.Noested PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Noested PreferredExecutionTarget="/Applications/Firefox.app" />
 </Properties>

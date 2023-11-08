@@ -1,121 +1,165 @@
 ﻿using Noested.Data;
 using Noested.Models;
-using Noested.Services;
 
-namespace Noested.Utilities
+public static class DatabaseSeeder
 {
-    public static class DatabaseSeeder
+    public static async Task SeedServiceOrders(IServiceOrderRepository dbContext)
     {
-        public static void SeedServiceOrders(IServiceOrderRepository dbContext)
-        {
-            List<ServiceOrderModel> serviceOrders = new()
+        List<ServiceOrder> serviceOrders = new()
             {
-                new ServiceOrderModel
+                new ServiceOrder
                 {
-                    ServiceOrderID = 1,
-                    CustomerID = 1,
-                    ServiceOrderStatus = "Uåpnet",
+                    IsActive = true,
                     OrderReceived = DateTime.Now,
-                    AgreedFinishedDate = DateTime.MinValue,
+                    OrderCompleted = null,
+                    Status = OrderStatus.Received,
+                    AgreedFinishedDate = DateTime.Now.AddDays(7),
                     ProductName = "IGLAND 5002 Pento TL",
-                    ProductType = "Vinsj",
-                    SerialNumber = 12345,
+                    Product = ProductType.Winch,
                     ModelYear = "2022",
+                    SerialNumber = "12345",
                     Warranty = WarrantyType.Full,
-                    CustomerComment = "Problem with motor",
-                    Checklists = new ChecklistDTO(),
+                    CustomerAgreement = "Standard Agreement",
+                    OrderDescription = "Problem with motor",
+                    DiscardedParts = "",
+                    ReplacedPartsReturned = "",
+                    Shipping = "",
+                    WorkHours = 0,
                     Customer = new Customer
                     {
-                        CustomerID = 1,
                         FirstName = "John",
                         LastName = "Doe",
-                        StreetAddress = "Univeien 20",
-                        ZipCode = 5034,
+                        Street = "Univeien 20",
+                        PostalCode = "5034",
                         City = "Cityville",
                         Email = "john.doe@gmail.com",
                         Phone = "85429854"
+                    },
+                    Checklist = new WinchChecklist
+                    {
+                        ProductType = ProductType.Winch,
+                        ServiceProcedure = "Standard",
+                        PreparedBy = "DAN",
                     }
                 },
-                new ServiceOrderModel
+                new ServiceOrder
                 {
-                    ServiceOrderID = 2,
-                    CustomerID = 2,
-                    ServiceOrderStatus = "Uåpnet",
+                    IsActive = true,
                     OrderReceived = DateTime.Now,
-                    AgreedFinishedDate = DateTime.MinValue,
-                    ProductName = "IGLAND 6002 Pronto TLP",
-                    ProductType = "Vinsj",
-                    SerialNumber = 54321,
-                    ModelYear = "2023",
+                    OrderCompleted = null,
+                    Status = OrderStatus.Received,
+                    AgreedFinishedDate = DateTime.Now.AddDays(7),
+                    ProductName = "IGLAND 6002 Pento TL",
+                    Product = ProductType.Winch,
+                    ModelYear = "2021",
+                    SerialNumber = "67890",
                     Warranty = WarrantyType.Limited,
-                    CustomerComment = "Problem with traction",
-                    Checklists = new ChecklistDTO(),
+                    CustomerAgreement = "Premium Agreement",
+                    OrderDescription = "Problem with cable",
+                    DiscardedParts = "",
+                    ReplacedPartsReturned = "",
+                    Shipping = "",
+                    WorkHours = 0,
                     Customer = new Customer
                     {
-                        CustomerID = 2,
                         FirstName = "Jane",
                         LastName = "Doe",
-                        StreetAddress = "Univeien 20",
-                        ZipCode = 5034,
+                        Street = "Univeien 21",
+                        PostalCode = "5035",
                         City = "Cityville",
                         Email = "jane.doe@gmail.com",
-                        Phone = "45978643"
+                        Phone = "85429855"
+                    },
+                    Checklist = new WinchChecklist
+                    {
+                        ProductType = ProductType.Winch,
+                        ServiceProcedure = "Special",
+                        PreparedBy = "MIM",
                     }
                 },
-                new ServiceOrderModel
+                new ServiceOrder
                 {
-                    ServiceOrderID = 3,
-                    CustomerID = 3,
-                    ServiceOrderStatus = "Uåpnet",
+                    IsActive = true,
                     OrderReceived = DateTime.Now,
-                    AgreedFinishedDate = DateTime.MinValue,
-                    ProductName = "Igland 2501",
-                    ProductType = "Vinsj",
-                    SerialNumber = 98765,
-                    ModelYear = "2021",
+                    OrderCompleted = null,
+                    Status = OrderStatus.Received,
+                    AgreedFinishedDate = DateTime.Now.AddDays(7),
+                    ProductName = "IGLAND 7002 Pento TL",
+                    Product = ProductType.Winch,
+                    ModelYear = "2020",
+                    SerialNumber = "11111",
                     Warranty = WarrantyType.None,
-                    CustomerComment = "Ulyder i motoren og svidd lukt",
-                    Checklists = new ChecklistDTO(),
+                    CustomerAgreement = "Basic Agreement",
+                    OrderDescription = "Problem with remote",
+                    DiscardedParts = "",
+                    ReplacedPartsReturned = "",
+                    Shipping = "",
+                    WorkHours = 0,
                     Customer = new Customer
                     {
-                        CustomerID = 3,
-                        FirstName = "Oluf",
-                        LastName = "Snøvla",
-                        StreetAddress = "Birkegata 12",
-                        ZipCode = 5524,
-                        City = "Snowtown",
-                        Email = "oluf.snovla@gmail.com",
-                        Phone = "86543354"
+                        FirstName = "Emily",
+                        LastName = "Smith",
+                        Street = "Univeien 22",
+                        PostalCode = "5036",
+                        City = "Cityville",
+                        Email = "emily.smith@gmail.com",
+                        Phone = "85429856"
+                    },
+                    Checklist = new WinchChecklist
+                    {
+                        ProductType = ProductType.Winch,
+                        ServiceProcedure = "Grand Overhaul",
+                        PreparedBy = "KRISS",
                     }
                 }
             };
-            // Legger ordrene til databasen
-            foreach (ServiceOrderModel order in serviceOrders)
+
+        foreach (ServiceOrder order in serviceOrders)
+        {
+            IEnumerable<ServiceOrder> allServiceOrders = await dbContext.GetAllServiceOrdersAsync();
+            IEnumerable<Customer> allCustomers = await dbContext.GetAllCustomersAsync();
+            
+
+            // Ny eller eksisterende serviceordre
+            var duplicateOrder = allServiceOrders.FirstOrDefault(o =>
+                o.ProductName == order.ProductName &&
+                o.SerialNumber == order.SerialNumber &&
+                o.OrderReceived.Date == order.OrderReceived.Date // Samme dag
+            );
+
+            if (duplicateOrder != null)
             {
-                dbContext.AddServiceOrderAsync(order);
+                Console.WriteLine("Duplicate ServiceOrder found. Skipping this order.");
+                continue;
             }
 
-            // Legger kundeinfo fra ServiceOrdrene inn i egen liste i db
-            List<Customer> existingCustomers = dbContext.GetAllCustomersAsync().Result.ToList();
-            foreach (ServiceOrderModel order in serviceOrders)
+            // Ny eller eksisterende kunde 
+            if (order.CustomerId != 0)
             {
-                Customer customer = order.Customer;
-
-                // Validerer at CustomerID and Email er unike
-                if (existingCustomers != null && customer != null)
+                await dbContext.AddCustomerAsync(order.Customer!);
+                order.CustomerId = order.Customer!.CustomerId;
+            }
+            else
+            {
+                Customer? existingCustomer = allCustomers.FirstOrDefault(c => c.Email == order.Customer!.Email);
+                if (existingCustomer != null)
                 {
-                    if (existingCustomers.Any(c => c != null && (c.CustomerID == customer.CustomerID || c.Email == customer.Email)))
-                    {
-                        // logger feil, kunne  ikke bruke Ilogger her.
-                        Console.WriteLine($"Warning: Duplicate CustomerID or Email found for CustomerID: {customer.CustomerID}, Email: {customer.Email}");
-                    }
-                    else
-                    {
-                        dbContext.AddCustomerAsync(customer); // Oppdaterer listen med kunder.  
-                    }
+                    order.CustomerId = existingCustomer.CustomerId;
+                }
+                else
+                {
+                    await dbContext.AddCustomerAsync(order.Customer!);
+                    order.CustomerId = order.Customer!.CustomerId;
                 }
 
+                await dbContext.AddServiceOrderAsync(order);
+
+                if (order.Checklist != null)
+                {
+                    order.Checklist.ChecklistId = order.OrderId;
+                }
             }
         }
     }
 }
+

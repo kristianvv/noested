@@ -1,76 +1,134 @@
-﻿using System.Net.NetworkInformation;
+﻿using Noested.Data;
 using Noested.Models;
 
 namespace Noested.Services
 {
     public class ChecklistService
-    {
-        public static async Task PopulateChecklistFromForm(ServiceOrderModel order, IFormCollection? form)
+	{
+        private readonly IServiceOrderRepository _repository;
+        private readonly ILogger<ChecklistService> _logger;
+
+        public ChecklistService(IServiceOrderRepository repository, ILogger<ChecklistService> logger)
+		{
+            _repository = repository;
+            _logger = logger;
+        }
+
+        /// <summary>
+        ///     GET CHECKLIST BY ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Checklist</returns>
+        /// <exception cref="InvalidOperationException"></exception>
+        public async Task<Checklist> GetChecklistByIdAsync(int id)
         {
-            if (order == null || form == null)
+            var checklist = await _repository.GetChecklistByIdAsync(id);
+            if (checklist == null)
             {
-                throw new ArgumentNullException("Order/Form CANNOT be null");
+                throw new InvalidOperationException("Checklist not found");
             }
-                
-            order.Checklists = new ChecklistDTO(); // Initialize new checklist
+            return checklist;
+        }
 
-            foreach (var key in form.Keys) // Find all item_ keys in the form to populate the checklist items
+        /// <summary>
+        ///     GET ALL CHECKLISTS
+        /// </summary>
+        /// <returns>IEnumerable of Checklist</returns>
+        public async Task<IEnumerable<Checklist>> GetAllChecklistsAsync()
+        {
+            var checklists = await _repository.GetAllCheckListsAsync();
+            if (checklists == null)
             {
-                if (key.StartsWith("item_"))
-                {
-                    // _logger.LogInformation($"Processing form key: {key}");
-                    await PopulateItemFromFormKey(order, form, key);
-                }
+                throw new InvalidOperationException("No checklists found");
             }
+            return checklists;
         }
 
-        private static async Task PopulateItemFromFormKey(ServiceOrderModel order, IFormCollection form, string key)
+        /// <summary>
+        ///     ADD CHECKLIST
+        /// </summary>
+        /// <param name="newChecklist"></param>
+        /// <returns></returns>
+        public async Task AddChecklistAsync(Checklist newChecklist)
         {
-            System.Diagnostics.Debug.WriteLine($"FORM KEY: {key}"); // Lage Item Basert På Denne Nøkkelen
-
-            var parts = key.Split(new[] { "_category_" }, StringSplitOptions.None); // dele stringen
-            System.Diagnostics.Debug.WriteLine($"PARTS: '{parts[0]}' og '{parts[1]}'");
-
-            string itemName = ExtractItemName(parts[0]); // første del er item navnet
-            System.Diagnostics.Debug.WriteLine($"ITEM NAME {itemName}");
-
-            string categoryName = parts.Length > 1 ? parts[1].Replace('_', ' ') : "Unknown";
-            System.Diagnostics.Debug.WriteLine($"CATEGORY NAME {categoryName}"); // andre del er kategorinavnet
-
-            string status = ExtractStatus(form, key); // value ligger i form, hentes ut med nøkkelen
-            System.Diagnostics.Debug.WriteLine($"STATUS: {status}"); //
-
-
-            var categoryObj = FindOrCreateCategory(order.Checklists, categoryName);
-
-            // Create a new item and add it to the category
-            var item = new Item { Name = itemName, Status = status };
-            categoryObj.Items.Add(item);
-
-            await Task.CompletedTask;
-        }
-
-        private static string ExtractItemName(string key)
-        {
-            return key.Substring(5).Replace('_', ' '); // Remove "item_" prefix and replace underscores with spaces
-        }
-
-        private static string ExtractStatus(IFormCollection form, string key)
-        {
-            return form[key].ToString() ?? "Unknown";
-        }
-
-        private static Category FindOrCreateCategory(ChecklistDTO checklists, string categoryName)
-        {
-            var categoryObj = checklists.Categories.FirstOrDefault(c => c.Name == categoryName);
-            if (categoryObj == null)
+            if (newChecklist == null)
             {
-                categoryObj = new Category { Name = categoryName };
-                checklists.Categories.Add(categoryObj);
-                System.Diagnostics.Debug.WriteLine($"CATEGORY SAVED IN CHECKLISTS.CATEGORY.NAME {categoryObj.Name}");
-
+                throw new InvalidOperationException("Checklist is null");
             }
-            return categoryObj;
+            await _repository.AddChecklistAsync(newChecklist);
+        }
+
+        /// <summary>
+        ///     UPDATE CHECKLIST
+        /// </summary>
+        /// <param name="updatedChecklist"></param>
+        /// <returns></returns>
+        public async Task UpdateChecklistAsync(Checklist updatedChecklist)
+        {
+            if (updatedChecklist == null)
+            {
+                throw new InvalidOperationException("Checklist is null");
+            }
+            await _repository.UpdateChecklistAsync(updatedChecklist);
+        }
+
+        /// <summary>
+        ///     GET WINCH-CHECKLIST BY ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>WinchChecklist</returns>
+        /// <exception cref="InvalidOperationException"></exception>
+        public async Task<WinchChecklist> GetWinchChecklistByIdAsync(int id)
+        {
+            var winchChecklist = await _repository.GetWinchChecklistByIdAsync(id);
+            if (winchChecklist == null)
+            {
+                throw new InvalidOperationException("Checklist not found");
+            }
+            return winchChecklist;
+        }
+
+        /// <summary>
+        ///     GET ALL WINCH CHECKLISTS
+        /// </summary>
+        /// <returns>IEnumerable of WinchChecklist</returns>
+        public async Task<IEnumerable<WinchChecklist>> GetAllWinchChecklistsAsync()
+        {
+            var winchChecklists = await _repository.GetAllWinchChecklistsAsync();
+            if (winchChecklists == null)
+            {
+                throw new InvalidOperationException("No winch checklists found");
+            }
+            return winchChecklists;
+        }
+
+        /// <summary>
+        ///     ADD WINCH CHECKLIST
+        /// </summary>
+        /// <param name="newWinchChecklist"></param>
+        /// <returns></returns>
+        public async Task AddWinchChecklistAsync(WinchChecklist newWinchChecklist)
+        {
+            if (newWinchChecklist == null)
+            {
+                throw new InvalidOperationException("WinchChecklist is null");
+            }
+            await _repository.AddWinchChecklistAsync(newWinchChecklist);
+        }
+
+        /// <summary>
+        ///     UPDATE WINCH CHECKLIST
+        /// </summary>
+        /// <param name="updatedWinchChecklist"></param>
+        /// <returns></returns>
+        public async Task UpdateWinchChecklistAsync(WinchChecklist updatedWinchChecklist)
+        {
+            if (updatedWinchChecklist == null)
+            {
+                throw new InvalidOperationException("WinchChecklist is null");
+            }
+            await _repository.UpdateWinchChecklistAsync(updatedWinchChecklist);
         }
     }
 }
+
