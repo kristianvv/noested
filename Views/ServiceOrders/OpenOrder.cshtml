@@ -1,4 +1,4 @@
-﻿@model FillOrderModel
+﻿@model FillOrderViewModel
 
 <h1>View Service Order</h1>
 
@@ -8,7 +8,7 @@
     <section class="order-info">
         <!-- OrderId -->
         <div>
-            <label asp-for="OrderId">Service Order ID</label>
+            <label asp-for="OrderId">Service Order ID / Checklist ID</label>
             <span>@Model.OrderId</span>
         </div>
         <!-- CustomerId -->
@@ -44,18 +44,10 @@
     </section>
 
     <form id="order_form" asp-controller="ServiceOrders" asp-action="SaveFilledOrder" method="post">
-        <input type="hidden" asp-for="OrderId" />
-        <input type="hidden" asp-for="CustomerId" />
-        <input type="hidden" asp-for="ProductName" />
-        <input type="hidden" asp-for="ProductT" />
-        <input type="hidden" asp-for="OrderStatus" />
-        <input type="hidden" asp-for="OrderReceived" />
-        <input type="hidden" asp-for="OrderCompleted" />
-        <input type="hidden" asp-for="OrderDescription" />
 
         <section id="checklistSection">
-            @{ ViewData.TemplateInfo.HtmlFieldPrefix = "NewChecklist"; }
-            <partial name="_WinchChecklistPartial" model="@Model.NewChecklist" />
+            @{ ViewData.TemplateInfo.HtmlFieldPrefix = "UpdWinchlist"; }
+            <partial name="_WinchChecklistPartial" model="@Model.UpdWinchlist" />
             @{ ViewData.TemplateInfo.HtmlFieldPrefix = ""; }
         </section>
         <!-- RepairComment -->
@@ -78,6 +70,15 @@
         </div>
 
         <button type="submit" class="btn btn-success">Ferdigstill Ordre</button>
+
+        <input type="hidden" asp-for="OrderId" />
+        <input type="hidden" asp-for="CustomerId" />
+        <input type="hidden" asp-for="ProductName" />
+        <input type="hidden" asp-for="ProductT" />
+        <input type="hidden" asp-for="OrderStatus" />
+        <input type="hidden" asp-for="OrderReceived" />
+        <input type="hidden" asp-for="OrderCompleted" />
+        <input type="hidden" asp-for="OrderDescription" />
     </form>
 
 @section Scripts {

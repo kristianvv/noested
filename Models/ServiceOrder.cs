@@ -103,7 +103,7 @@ namespace Noested.Models
         public string? Shipping { get; set; }
 
         [Display(Name = "Working Hours")]
-        public int WorkHours { get; set; }
+        public int WorkHours { get; set; } = 0;
 
         
     }

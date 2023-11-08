@@ -49,9 +49,9 @@ namespace Noested.Controllers
         {
             try
             {
-                var fillOrderModel = await _serviceOrderService.PopulateOrderViewModel(id);
+                var viewModel = await _serviceOrderService.PopulateOrderViewModel(id);
 
-                return View("OpenOrder", fillOrderModel);
+                return View("OpenOrder", viewModel);
             }
             catch (InvalidOperationException ex)
             {
@@ -61,13 +61,12 @@ namespace Noested.Controllers
 
         // ServiceOrders/SaveFilledOrder
         [HttpPost]
-        public async Task<IActionResult> SaveFilledOrder(FillOrderModel fillOrder)
+        public async Task<IActionResult> SaveFilledOrder(FillOrderViewModel fillOrder)
         {
+            fillOrder.OrderCompleted = DateTime.Now;
 
             var viewModelJson = JsonSerializer.Serialize(fillOrder, new JsonSerializerOptions { WriteIndented = true });
             _logger.LogInformation("ONE!!! SAVE FILLED ORDER: {ViewModelJson}", viewModelJson);
-
-            fillOrder.OrderCompleted = DateTime.Now;
 
             await _serviceOrderService.UpdateCompletedOrderAsync(fillOrder);
 

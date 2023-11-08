@@ -25,11 +25,11 @@ namespace Noested.Services
         }
 
         // VIEW FOR OPEN SO
-        public async Task<FillOrderModel> PopulateOrderViewModel(int id)
+        public async Task<FillOrderViewModel> PopulateOrderViewModel(int id)
         {
             var order = await GetOrderByIdAsync(id);
 
-            var viewModel = new FillOrderModel
+            var viewModel = new FillOrderViewModel
             {
                 OrderId = order.OrderId,
                 CustomerId = order.CustomerId,
@@ -38,63 +38,16 @@ namespace Noested.Services
                 OrderStatus = order.Status,
                 OrderReceived = order.OrderReceived,
                 OrderDescription = order.OrderDescription,
-                NewChecklist = await GetChecklistSubClass(order.Product, id)
+                UpdWinchlist = order.Product == ProductType.Winch ? await _checklistService.GetWinchChecklistByIdAsync(id) : null
             };
-
-            _logger.LogInformation("ORDERID {OrderId} found.", viewModel.OrderId);
-            _logger.LogInformation("PRODUCTT {ProductT} found.", viewModel.ProductT);
-            _logger.LogInformation("ORDERSTATUS {OrderStatus} found.", viewModel.OrderStatus);
-            _logger.LogInformation("Checklist {@NewChecklist} found.", viewModel.NewChecklist);
-            _logger.LogInformation("CHECK {MechDrumBearing}", viewModel.NewChecklist);
-
 
             return viewModel;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="productType"></param>
-        /// <param name="checklistId"></param>
-        /// <returns></returns>
-        private async Task<Checklist> GetChecklistSubClass(ProductType productType, int checklistId)
-        {
-            Checklist checklistDetails = new();
-
-            switch (productType)
-            {
-                case ProductType.Winch:
-                    checklistDetails = await _checklistService.GetWinchChecklistByIdAsync(checklistId);
-                    break;
-                case ProductType.LiftEquip:
-                    _logger.LogError("NEED TO ADD THIS CHECKLIST TO MODEL, DbSET & PARTIAL VIEW");
-                    break;
-                case ProductType.WoodEquip:
-                    _logger.LogError("NEED TO ADD THIS CHECKLIST TO MODEL, DbSET & PARTIAL VIEW");
-                    break;
-                case ProductType.TractorShears:
-                    _logger.LogError("NEED TO ADD THIS CHECKLIST TO MODEL, DbSET & PARTIAL VIEW");
-                    break;
-                case ProductType.TimberTrailer:
-                    _logger.LogError("NEED TO ADD THIS CHECKLIST TO MODEL, DbSET & PARTIAL VIEW");
-                    break;
-                case ProductType.SandBlaster:
-                    _logger.LogError("NEED TO ADD THIS CHECKLIST TO MODEL, DbSET & PARTIAL VIEW");
-                    break;
-                case ProductType.SnowBloPlo:
-                    _logger.LogError("NEED TO ADD THIS CHECKLIST TO MODEL, DbSET & PARTIAL VIEW");
-                    break;
-                // Add cases for other product types
-                default:
-                    _logger.LogError($"No checklist implemented for product type: {productType}");
-                    break;
-            }
-
-            return checklistDetails;
-        }
 
 
-        
+
+
         public async Task<bool> CreateNewServiceOrderAsync(OrderViewModel viewModel)
         {
             IEnumerable<ServiceOrder> allServiceOrders = await _repository.GetAllServiceOrdersAsync(); // Duplicate Order?
@@ -138,20 +91,20 @@ namespace Noested.Services
                     newOrder.CustomerId = newCustomer!.CustomerId;
                 }
             }
-                switch (newOrder.Product)
-                {
-                    case ProductType.Winch:
-                        var winchChecklist = new WinchChecklist();
-                        {
-                            winchChecklist.ProductType = newChecklist!.ProductType;
-                            winchChecklist.PreparedBy = newChecklist.PreparedBy;
-                            winchChecklist.ServiceProcedure = newChecklist.ServiceProcedure;
-                        };
-                        newOrder.Checklist = winchChecklist;
-                        break;
-                        // case ProductType.LiftEquip:
-                }
-            
+            switch (newOrder.Product)
+            {
+                case ProductType.Winch:
+                    var winchChecklist = new WinchChecklist();
+                    {
+                        winchChecklist.ProductType = newChecklist!.ProductType;
+                        winchChecklist.PreparedBy = newChecklist.PreparedBy;
+                        winchChecklist.ServiceProcedure = newChecklist.ServiceProcedure;
+                    };
+                    newOrder.Checklist = winchChecklist;
+                    break;
+                    // case ProductType.LiftEquip:
+            }
+
 
             await _repository.AddServiceOrderAsync(newOrder); // Save order
 
@@ -175,12 +128,83 @@ namespace Noested.Services
             return allServiceOrders;
         }
 
+
+        public async Task<bool> UpdateCompletedOrderAsync(FillOrderViewModel form)
+        {
+            var viewModelJson = JsonSerializer.Serialize(form, new JsonSerializerOptions { WriteIndented = true });
+            _logger.LogInformation("UPDATE COMPLETED ORDER: {ViewModelJson}", viewModelJson);
+
+            ServiceOrder? dbOrder = await _repository.GetOrderByIdAsync(form.OrderId);
+            Checklist? dbChecklist = await _repository.GetChecklistByIdAsync(form.OrderId);
+
+            if (dbOrder != null || dbChecklist != null)
+            {
+                // Checklist baseklasse
+                dbChecklist!.MechSignature = form.MechSignature;
+                dbChecklist.RepairComment = form.RepairComment;
+                dbChecklist.DateCompleted = form.OrderCompleted;
+
+                // Update Order Properties
+                dbOrder!.WorkHours = form.WorkHours;
+                dbOrder.Status = form.OrderStatus;
+                dbOrder.OrderCompleted = DateTime.Now;
+
+            } else
+            {
+                _logger.LogError("Order or Checklist with ID {OrderId} not found.", form.OrderId);
+                return false;
+            }
+
+            
+
+            // Checklist should match the one stored in DB
+            if (dbChecklist is WinchChecklist dbWinch && form.UpdWinchlist is WinchChecklist updWinch)
+            {
+                dbWinch.MechBrakes = updWinch.MechBrakes;
+                dbWinch.MechDrumBearing = updWinch.MechDrumBearing;
+                dbWinch.MechStoragePTO = updWinch.MechStoragePTO;
+                dbWinch.MechWire = updWinch.MechWire;
+                dbWinch.MechChainTensioner = updWinch.MechChainTensioner;
+                dbWinch.MechPinionBearing = updWinch.MechPinionBearing;
+                dbWinch.MechClutch = updWinch.MechClutch;
+                dbWinch.MechSprocketWedges = updWinch.MechSprocketWedges;
+                dbWinch.HydCylinder = updWinch.HydCylinder;
+                dbWinch.HydHydraulicBlock = updWinch.HydHydraulicBlock;
+                dbWinch.HydTankOil = updWinch.HydTankOil;
+                dbWinch.HydGearboxOil = updWinch.HydGearboxOil;
+                dbWinch.HydBrakeCylinder = updWinch.HydBrakeCylinder;
+                dbWinch.ElCableNetwork = updWinch.ElCableNetwork;
+                dbWinch.ElRadio = updWinch.ElRadio;
+                dbWinch.ElButtonBox = updWinch.ElButtonBox;
+                dbWinch.TensionCheckBar = updWinch.TensionCheckBar;
+                dbWinch.TestWinch = updWinch.TestWinch;
+                dbWinch.TestTraction = updWinch.TestTraction;
+                dbWinch.TestBrakes = updWinch.TestBrakes;
+
+                await _repository.UpdateWinchChecklistAsync(dbWinch);
+            }
+            else
+            {
+                _logger.LogError("Checklist with ID {OrderId} is not of type WinchChecklist.", form.OrderId);
+                return false;
+            }
+
+            
+
+            await _repository.UpdateOrderAsync(dbOrder); // Save to DB.
+
+            return true;
+        }
+    }
+}
+
+        /*
         /// <summary>
         ///     Updates Checklist in an existing order
         /// </summary>
         /// <param name="form"></param>
         /// <returns></returns>
-        public async Task<bool> UpdateCompletedOrderAsync(FillOrderModel form)
+        public async Task<bool> UpdateCompletedOrderAsync(FillOrderViewModel form)
         {
             var viewModelJson = JsonSerializer.Serialize(form, new JsonSerializerOptions { WriteIndented = true }); // Debug
             _logger.LogInformation("UPDATE COMPLETED ORDER: {ViewModelJson}", viewModelJson); // Debug
@@ -196,9 +220,9 @@ namespace Noested.Services
 
             if (DbChecklist is WinchChecklist DbWinch)
             {
-                if (form.NewChecklist is not WinchChecklist updCheck)
+                if (form.UpdWinchlist is not WinchChecklist updCheck)
                 {
-                    _logger.LogError("Checklist ({NewChecklist}) is not of type Winch", form.NewChecklist);
+                    _logger.LogError("Checklist ({NewChecklist}) is not of type Winch", form.UpdWinchlist);
                     return false;
                 }
 
@@ -238,5 +262,4 @@ namespace Noested.Services
 
             return true;
         }
-    }
-}
+  */
