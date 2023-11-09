@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\chris\\Desktop\\061123_noested\\noested\\Noested.csproj": {}
+    "C:\\Users\\timef\\noested\\Noested.csproj": {}
   },
   "projects": {
-    "C:\\Users\\chris\\Desktop\\061123_noested\\noested\\Noested.csproj": {
+    "C:\\Users\\timef\\noested\\Noested.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\chris\\Desktop\\061123_noested\\noested\\Noested.csproj",
+        "projectUniqueName": "C:\\Users\\timef\\noested\\Noested.csproj",
         "projectName": "Noested",
-        "projectPath": "C:\\Users\\chris\\Desktop\\061123_noested\\noested\\Noested.csproj",
-        "packagesPath": "C:\\Users\\chris\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\chris\\Desktop\\061123_noested\\noested\\obj\\",
+        "projectPath": "C:\\Users\\timef\\noested\\Noested.csproj",
+        "packagesPath": "C:\\Users\\timef\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\timef\\noested\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\chris\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\timef\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
