@@ -138,8 +138,33 @@ namespace Noested.Controllers
                 }
             }
         }
-        
-        
+
+        public async Task<IActionResult> Search(string query)
+        {
+            if (query == null)
+            {
+                return View("Index", await _serviceOrderService.GetAllServiceOrdersAsync());
+            }
+            try
+            {
+                var searchResults = await _serviceOrderService.Search(query);
+
+                if (searchResults == null)
+                {
+                    return View("Index", Enumerable.Empty<ServiceOrder>());
+                }
+
+                return View("Index", searchResults);
+            }
+            catch (InvalidOperationException ex)
+            {
+                var errorViewModel = new ErrorViewModel
+                {
+                    RequestId = ex.Message
+                };
+                return View("Error", errorViewModel);
+            }
+        }
 
 
 

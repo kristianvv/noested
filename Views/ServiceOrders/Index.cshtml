@@ -4,7 +4,21 @@
     <link rel="stylesheet" href="~/css/serviceOrder.css">
 }
 
+
+
+
 <h1>Alle Serviceordre</h1>
+
+<div class="service-order-list overflow-auto">
+    <form method="get" action="@Url.Action("Search", "ServiceOrders")" class="form-inline">
+        <div class="input-group">
+            <input type="text" class="form-control" name="query" placeholder="Søk på serviceordre">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="submit">Search</button>
+            </div>
+        </div>
+    </form>
+
 <div class="container-fluid">
     <div class="row">
         <!-- Left Empty Column -->
@@ -12,8 +26,18 @@
 
         <!-- Middle Column -->
         <div class="col-md-8">
-            <div class="service-order-list overflow-auto">
+
+            <!-- Search Bar -->
+            
                 <!-- Service order loop -->
+                @if (Model.Count() == 0)
+                {
+                    <p>Ingen serviceordre funnet</p>
+                }
+                else
+                {
+                    <p>Antall serviceordre: @Model.Count()</p>
+                }
                 @foreach (var order in Model)
                 {
                     <section class="service-order-item">

@@ -44,9 +44,20 @@ namespace Noested.Services
             return viewModel;
         }
 
-
-
-
+        public async Task<IEnumerable<ServiceOrder>> Search(String query)
+        {
+            _logger.LogInformation("Search(): Called");
+            if (query == null)
+            {
+                _logger.LogError("Search(): Null argument");
+            }
+            var searchResults = await _repository.Search(query);
+            if (searchResults == null || !searchResults.Any())
+            {
+                _logger.LogError("Search(): No results found");
+            }
+            return searchResults;
+        }
 
         public async Task<bool> CreateNewServiceOrderAsync(OrderViewModel viewModel)
         {

@@ -25,6 +25,8 @@ namespace Noested.Data
         Task<WinchChecklist?> GetWinchChecklistByIdAsync(int id);
         Task AddWinchChecklistAsync(WinchChecklist newWinchChecklist);
         Task UpdateWinchChecklistAsync(WinchChecklist updatedWinchChecklist);
+        Task<IEnumerable<ServiceOrder>> Search(string query);
+
     }
 
     public class ServiceOrderRepository : IServiceOrderRepository
@@ -125,6 +127,24 @@ namespace Noested.Data
         {
             _database.Entry(updatedWinchChecklist).State = EntityState.Modified;
             await _database.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<ServiceOrder>> Search(string query)
+        {
+            //Om query er et tall, returner kun ordre basert på id
+            if (int.TryParse(query, out int id))
+            {
+                return await _database.ServiceOrder.Where(o => o.OrderId == id).ToListAsync();
+            }
+
+            return await _database.ServiceOrder.Where(o =>
+                         o.Customer!.FirstName.ToLower().Contains(query) ||
+                         o.Customer!.LastName.ToLower().Contains(query) ||
+                         o.Customer!.Email.ToLower().Contains(query) ||    
+                         o.ProductName!.ToLower().Contains(query)
+                           //|| o.Product.ToString().ToLower().Contains(query)
+
+                           ).ToListAsync();
         }
     }
 }
