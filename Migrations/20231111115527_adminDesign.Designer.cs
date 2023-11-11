@@ -11,8 +11,8 @@ using Noested.Data;
 namespace Noested.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231107074520_RemoveEnumParser")]
-    partial class RemoveEnumParser
+    [Migration("20231111115527_adminDesign")]
+    partial class adminDesign
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

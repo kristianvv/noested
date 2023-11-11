@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Noested.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMig : Migration
+    public partial class adminDesign : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -230,20 +230,17 @@ namespace Noested.Migrations
                     OrderId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     CustomerId = table.Column<int>(type: "int", nullable: false),
-                    Status = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Status = table.Column<int>(type: "int", nullable: false),
                     ApprovedBy = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     IsActive = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    Warranty = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Warranty = table.Column<int>(type: "int", nullable: false),
                     OrderReceived = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     OrderCompleted = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     AgreedFinishedDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     ProductName = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Product = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Product = table.Column<int>(type: "int", nullable: false),
                     ModelYear = table.Column<string>(type: "varchar(4)", maxLength: 4, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     SerialNumber = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
@@ -277,8 +274,7 @@ namespace Noested.Migrations
                 columns: table => new
                 {
                     ChecklistId = table.Column<int>(type: "int", nullable: false),
-                    ProductType = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ProductType = table.Column<int>(type: "int", nullable: false),
                     PreparedBy = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ServiceProcedure = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: true)
@@ -306,46 +302,26 @@ namespace Noested.Migrations
                 columns: table => new
                 {
                     ChecklistId = table.Column<int>(type: "int", nullable: false),
-                    MechBrakes = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    MechDrumBearing = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    MechStoragePTO = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    MechWire = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    MechChainTensioner = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    MechPinionBearing = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    MechClutch = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    MechSprocketWedges = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    HydCylinder = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    HydHydraulicBlock = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    HydTankOil = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    HydGearboxOil = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    HydBrakeCylinder = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ElCableNetwork = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ElRadio = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ElButtonBox = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    TensionCheckBar = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    TestWinch = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    TestTraction = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    TestBrakes = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                    MechBrakes = table.Column<int>(type: "int", nullable: false),
+                    MechDrumBearing = table.Column<int>(type: "int", nullable: false),
+                    MechStoragePTO = table.Column<int>(type: "int", nullable: false),
+                    MechWire = table.Column<int>(type: "int", nullable: false),
+                    MechChainTensioner = table.Column<int>(type: "int", nullable: false),
+                    MechPinionBearing = table.Column<int>(type: "int", nullable: false),
+                    MechClutch = table.Column<int>(type: "int", nullable: false),
+                    MechSprocketWedges = table.Column<int>(type: "int", nullable: false),
+                    HydCylinder = table.Column<int>(type: "int", nullable: false),
+                    HydHydraulicBlock = table.Column<int>(type: "int", nullable: false),
+                    HydTankOil = table.Column<int>(type: "int", nullable: false),
+                    HydGearboxOil = table.Column<int>(type: "int", nullable: false),
+                    HydBrakeCylinder = table.Column<int>(type: "int", nullable: false),
+                    ElCableNetwork = table.Column<int>(type: "int", nullable: false),
+                    ElRadio = table.Column<int>(type: "int", nullable: false),
+                    ElButtonBox = table.Column<int>(type: "int", nullable: false),
+                    TensionCheckBar = table.Column<int>(type: "int", nullable: false),
+                    TestWinch = table.Column<int>(type: "int", nullable: false),
+                    TestTraction = table.Column<int>(type: "int", nullable: false),
+                    TestBrakes = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
