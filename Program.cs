@@ -26,7 +26,7 @@ builder.Services.AddScoped<CustomerService>(); // Daniel
 var app = builder.Build();
 
 
-
+// Database seeding
 using (var serviceScope = app.Services.CreateScope())
 {
     var serviceOrderDatabase = serviceScope.ServiceProvider.GetRequiredService<IServiceOrderRepository>();
@@ -46,11 +46,6 @@ else
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
-app.UseStaticFiles();
-
-app.UseRouting();
-
 // Tilpasset Middleware for Sikkerhetsheadere
 app.Use(async (context, next) =>
 {
@@ -63,18 +58,25 @@ app.Use(async (context, next) =>
         "default-src 'self'; " +
         "img-src 'self'; " +
         "font-src 'self'; " +
-        "style-src 'self'; " +
+        "style-src 'self' 'unsafe-inline' https://stackpath.bootstrapcdn.com; " +
         "script-src 'self'; " +
         "frame-src 'self'; " +
         "connect-src 'self';");
     await next();
 });
 
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+
+app.UseRouting();
+
 app.UseAuthorization();
+
+app.MapRazorPages();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-app.MapRazorPages();
+    pattern: "{controller}/{action=Index}/{id?}");
+app.MapFallbackToAreaPage("/Account/Login", "Identity");
 
 app.Run();
