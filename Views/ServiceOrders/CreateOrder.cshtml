@@ -3,14 +3,14 @@
 @{
     ViewData["Title"] = "CreateOrder";
 }
-
+ 
 @section Styles {
     <link rel="stylesheet" href="~/css/createServiceOrder.css">
 }
 <h1>Opprett serviceordre</h1>
 <form id="create_order_form" asp-action="CreateOrder" asp-controller="ServiceOrders" method="post">
     <container>
-        <section id="newServiceOrderSection" class="left-section">
+        <section id="newOrderSection" class="left-section">
             @{ ViewData.TemplateInfo.HtmlFieldPrefix = "NewOrder"; }
             <partial name="_ServiceOrderPartial" model="@Model.NewOrder" />
         </section>
@@ -36,3 +36,4 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script src="~/js/createServiceOrder.js"></script>
 }
+

@@ -4,7 +4,7 @@
 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 <div class="form-group">
     <label asp-for="CustomerId">Velg Eksisterende Kunde</label>
-    <select id="CustomerId" asp-for="CustomerId" asp-items="ViewBag.ExistingCustomers" class="form-control" onchange="toggleNewCustomerSection()">
+    <select id="CustomerId" asp-for="CustomerId" asp-items="ViewBag.ExistingCustomers" class="form-control">
         <option value="0">-- Opprett Ny Bruker (Nedtrekksmeny) --</option>
     </select>
     <span asp-validation-for="CustomerId" class="text-danger"></span>
@@ -87,3 +87,4 @@
     <label asp-for="IsActive" class="form-check-label"></label>
     <input asp-for="IsActive" class="form-check-input" />
 </div>
+

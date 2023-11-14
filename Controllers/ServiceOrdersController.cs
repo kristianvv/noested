@@ -87,7 +87,17 @@ namespace Noested.Controllers
                     NewOrder = new ServiceOrder(),
                     NewCustomer = new Customer(),
                     NewChecklist = new Checklist()
+
+                {
+                        PreparedBy = "N/A",
+                        ServiceProcedure = "Standard",
+                        
+                    }
                 };
+
+                viewModel.NewChecklist.ProductType = viewModel.NewOrder.Product;
+
+
 
                 var existingCustomers = await _customerService.GetAllCustomersAsync();
                 ViewBag.ExistingCustomers = new SelectList(existingCustomers, "CustomerId", "FirstName");
