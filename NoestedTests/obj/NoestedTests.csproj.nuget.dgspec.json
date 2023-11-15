@@ -56,6 +56,10 @@
               "target": "Package",
               "version": "[7.0.12, )"
             },
+            "Microsoft.Extensions.Logging.Console": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
             "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
               "target": "Package",
               "version": "[1.19.4, )"
@@ -142,7 +146,7 @@
           "dependencies": {
             "Microsoft.EntityFrameworkCore.InMemory": {
               "target": "Package",
-              "version": "(, )"
+              "version": "[7.0.0, )"
             },
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",

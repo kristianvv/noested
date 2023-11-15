@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "DwA8mX4B9APz0oKwh3GFqKi8WZlfkPRlZ1lY748Lwg9AyQdmw4a0OYhkKqT/zHK/xIQGDTHKDefruFHI4sxFTw==",
+  "dgSpecHash": "EkkZWlbXEZICvNC+JDxzuJZB8X+4fkSgKJGTR0O6cqhApXGLexHeoAkcAXfDflhCwG7FetvK9TId3KMpOEcq1Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\felix\\Documents\\GitHub\\noested\\NoestedTests\\NoestedTests.csproj",
   "expectedPackageFiles": [
@@ -83,23 +83,28 @@
     "C:\\Users\\felix\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\7.0.12\\microsoft.entityframeworkcore.abstractions.7.0.12.nupkg.sha512",
     "C:\\Users\\felix\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\7.0.12\\microsoft.entityframeworkcore.analyzers.7.0.12.nupkg.sha512",
     "C:\\Users\\felix\\.nuget\\packages\\microsoft.entityframeworkcore.design\\7.0.12\\microsoft.entityframeworkcore.design.7.0.12.nupkg.sha512",
-    "C:\\Users\\felix\\.nuget\\packages\\microsoft.entityframeworkcore.inmemory\\1.0.0\\microsoft.entityframeworkcore.inmemory.1.0.0.nupkg.sha512",
+    "C:\\Users\\felix\\.nuget\\packages\\microsoft.entityframeworkcore.inmemory\\7.0.0\\microsoft.entityframeworkcore.inmemory.7.0.0.nupkg.sha512",
     "C:\\Users\\felix\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\7.0.12\\microsoft.entityframeworkcore.relational.7.0.12.nupkg.sha512",
     "C:\\Users\\felix\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\7.0.12\\microsoft.entityframeworkcore.tools.7.0.12.nupkg.sha512",
     "C:\\Users\\felix\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\7.0.0\\microsoft.extensions.caching.abstractions.7.0.0.nupkg.sha512",
     "C:\\Users\\felix\\.nuget\\packages\\microsoft.extensions.caching.memory\\7.0.0\\microsoft.extensions.caching.memory.7.0.0.nupkg.sha512",
-    "C:\\Users\\felix\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\7.0.0\\microsoft.extensions.configuration.abstractions.7.0.0.nupkg.sha512",
-    "C:\\Users\\felix\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\7.0.0\\microsoft.extensions.dependencyinjection.7.0.0.nupkg.sha512",
-    "C:\\Users\\felix\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\7.0.0\\microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512",
+    "C:\\Users\\felix\\.nuget\\packages\\microsoft.extensions.configuration\\8.0.0\\microsoft.extensions.configuration.8.0.0.nupkg.sha512",
+    "C:\\Users\\felix\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\8.0.0\\microsoft.extensions.configuration.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\felix\\.nuget\\packages\\microsoft.extensions.configuration.binder\\8.0.0\\microsoft.extensions.configuration.binder.8.0.0.nupkg.sha512",
+    "C:\\Users\\felix\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\8.0.0\\microsoft.extensions.dependencyinjection.8.0.0.nupkg.sha512",
+    "C:\\Users\\felix\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
     "C:\\Users\\felix\\.nuget\\packages\\microsoft.extensions.dependencymodel\\7.0.0\\microsoft.extensions.dependencymodel.7.0.0.nupkg.sha512",
     "C:\\Users\\felix\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\7.0.0\\microsoft.extensions.fileproviders.abstractions.7.0.0.nupkg.sha512",
     "C:\\Users\\felix\\.nuget\\packages\\microsoft.extensions.fileproviders.embedded\\7.0.12\\microsoft.extensions.fileproviders.embedded.7.0.12.nupkg.sha512",
     "C:\\Users\\felix\\.nuget\\packages\\microsoft.extensions.identity.core\\7.0.12\\microsoft.extensions.identity.core.7.0.12.nupkg.sha512",
     "C:\\Users\\felix\\.nuget\\packages\\microsoft.extensions.identity.stores\\7.0.12\\microsoft.extensions.identity.stores.7.0.12.nupkg.sha512",
-    "C:\\Users\\felix\\.nuget\\packages\\microsoft.extensions.logging\\7.0.0\\microsoft.extensions.logging.7.0.0.nupkg.sha512",
-    "C:\\Users\\felix\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\7.0.0\\microsoft.extensions.logging.abstractions.7.0.0.nupkg.sha512",
-    "C:\\Users\\felix\\.nuget\\packages\\microsoft.extensions.options\\7.0.1\\microsoft.extensions.options.7.0.1.nupkg.sha512",
-    "C:\\Users\\felix\\.nuget\\packages\\microsoft.extensions.primitives\\7.0.0\\microsoft.extensions.primitives.7.0.0.nupkg.sha512",
+    "C:\\Users\\felix\\.nuget\\packages\\microsoft.extensions.logging\\8.0.0\\microsoft.extensions.logging.8.0.0.nupkg.sha512",
+    "C:\\Users\\felix\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.0\\microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\felix\\.nuget\\packages\\microsoft.extensions.logging.configuration\\8.0.0\\microsoft.extensions.logging.configuration.8.0.0.nupkg.sha512",
+    "C:\\Users\\felix\\.nuget\\packages\\microsoft.extensions.logging.console\\8.0.0\\microsoft.extensions.logging.console.8.0.0.nupkg.sha512",
+    "C:\\Users\\felix\\.nuget\\packages\\microsoft.extensions.options\\8.0.0\\microsoft.extensions.options.8.0.0.nupkg.sha512",
+    "C:\\Users\\felix\\.nuget\\packages\\microsoft.extensions.options.configurationextensions\\8.0.0\\microsoft.extensions.options.configurationextensions.8.0.0.nupkg.sha512",
+    "C:\\Users\\felix\\.nuget\\packages\\microsoft.extensions.primitives\\8.0.0\\microsoft.extensions.primitives.8.0.0.nupkg.sha512",
     "C:\\Users\\felix\\.nuget\\packages\\microsoft.net.stringtools\\17.3.2\\microsoft.net.stringtools.17.3.2.nupkg.sha512",
     "C:\\Users\\felix\\.nuget\\packages\\microsoft.net.test.sdk\\17.6.0\\microsoft.net.test.sdk.17.6.0.nupkg.sha512",
     "C:\\Users\\felix\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
@@ -217,8 +222,8 @@
     "C:\\Users\\felix\\.nuget\\packages\\system.text.encoding\\4.3.0\\system.text.encoding.4.3.0.nupkg.sha512",
     "C:\\Users\\felix\\.nuget\\packages\\system.text.encoding.codepages\\6.0.0\\system.text.encoding.codepages.6.0.0.nupkg.sha512",
     "C:\\Users\\felix\\.nuget\\packages\\system.text.encoding.extensions\\4.3.0\\system.text.encoding.extensions.4.3.0.nupkg.sha512",
-    "C:\\Users\\felix\\.nuget\\packages\\system.text.encodings.web\\7.0.0\\system.text.encodings.web.7.0.0.nupkg.sha512",
-    "C:\\Users\\felix\\.nuget\\packages\\system.text.json\\7.0.0\\system.text.json.7.0.0.nupkg.sha512",
+    "C:\\Users\\felix\\.nuget\\packages\\system.text.encodings.web\\8.0.0\\system.text.encodings.web.8.0.0.nupkg.sha512",
+    "C:\\Users\\felix\\.nuget\\packages\\system.text.json\\8.0.0\\system.text.json.8.0.0.nupkg.sha512",
     "C:\\Users\\felix\\.nuget\\packages\\system.text.regularexpressions\\4.3.0\\system.text.regularexpressions.4.3.0.nupkg.sha512",
     "C:\\Users\\felix\\.nuget\\packages\\system.threading\\4.3.0\\system.threading.4.3.0.nupkg.sha512",
     "C:\\Users\\felix\\.nuget\\packages\\system.threading.tasks\\4.3.0\\system.threading.tasks.4.3.0.nupkg.sha512",
@@ -237,16 +242,5 @@
     "C:\\Users\\felix\\.nuget\\packages\\xunit.extensibility.execution\\2.6.1\\xunit.extensibility.execution.2.6.1.nupkg.sha512",
     "C:\\Users\\felix\\.nuget\\packages\\xunit.runner.visualstudio\\2.4.5\\xunit.runner.visualstudio.2.4.5.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1604",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Project dependency Microsoft.EntityFrameworkCore.InMemory does not contain an inclusive lower bound. Include a lower bound in the dependency version to ensure consistent restore results.",
-      "libraryId": "Microsoft.EntityFrameworkCore.InMemory",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v7.0"
-      ]
-    }
-  ]
+  "logs": []
 }
