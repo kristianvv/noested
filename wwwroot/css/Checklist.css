@@ -18,15 +18,15 @@ input[type="radio"] {
     }
 
 /* For kategorifeltene */
-td.ok {
+td.status-ok {
     background-color: #e0f2e0; /* grønn */
 }
 
-td.bør-skiftes {
+td.status-needsreplacement {
     background-color: #fef4d9; /* gul */
 }
 
-td.defekt {
+td.status-defective {
     background-color: #fdecec; /* rød */
 }
 

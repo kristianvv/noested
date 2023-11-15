@@ -1,104 +1,82 @@
-﻿using Microsoft.AspNetCore;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Noested.Data;
 using Noested.Services;
-using Noested.Utilities;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-var connectionString = builder.Configuration.GetConnectionString("NoestedContext");
-
 // Add services to the container.
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseMySql(connectionString,
+    new MySqlServerVersion(new Version(10, 5, 11))));
+
+builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
-builder.Services.AddRazorPages();
-builder.Services.AddScoped<IServiceOrderRepository, ServiceOrderRepository>(); // Daniel repository pattern for in-mem DB
-builder.Services.AddSingleton<ServiceOrderDatabase>(); // Daniel (AppDbContext (EFCore) og NoestedContext (SQL) test variabler flyttet hit)
+builder.Services.AddScoped<IServiceOrderRepository, ServiceOrderRepository>(); // Daniel
 builder.Services.AddScoped<ServiceOrderService>(); // Daniel
 builder.Services.AddScoped<ChecklistService>(); // Daniel
 builder.Services.AddScoped<CustomerService>(); // Daniel
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("Admin", policy => policy.RequireRole("Administrator"));
-    options.AddPolicy("Mechanic", policy => policy.RequireRole("Mechanic"));
-    options.AddPolicy("Service", policy => policy.RequireRole("Service"));
-});
-
-//Login og logout
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(options =>
-    {
-        options.LoginPath = "/login"; // Set the login path
-        options.LogoutPath = "/logout"; // Set the logout path
-        options.AccessDeniedPath = "/Login/AccessDenied"; // Set the access denied path
-        options.Cookie.HttpOnly = true;
-        options.Cookie.SameSite = SameSiteMode.Strict;
-        options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-        options.ExpireTimeSpan = TimeSpan.FromMinutes(60); // Set the cookie expiration time
-        options.SlidingExpiration = true;
-    });
-
 
 var app = builder.Build();
 
-/* Get the Repo instance (Repository Pattern) from the service provider for Daniel DbSeeder... */
+
+// Database seeding
 using (var serviceScope = app.Services.CreateScope())
 {
-    // ...with this line...
     var serviceOrderDatabase = serviceScope.ServiceProvider.GetRequiredService<IServiceOrderRepository>();
-
-    // ... and seed DB with hardcoded service orders
-    DatabaseSeeder.SeedServiceOrders(serviceOrderDatabase);
+    await DatabaseSeeder.SeedServiceOrders(serviceOrderDatabase);
 }
 
+
 // Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
+{
+    app.UseMigrationsEndPoint();
+}
+else
 {
     app.UseExceptionHandler("/Home/Error");
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
+// Tilpasset Middleware for Sikkerhetsheadere
+app.Use(async (context, next) =>
+{
+    context.Response.Headers.Add("X-Xss-Protection", "1");
+    context.Response.Headers.Add("X-Frame-Options", "DENY");
+    context.Response.Headers.Add("Referrer-Policy", "no-referrer");
+    context.Response.Headers.Add("X-Content-Type-Options", "nosniff");
+    context.Response.Headers.Add(
+        "Content-Security-Policy",
+        "default-src 'self'; " +
+        "img-src 'self'; " +
+        "font-src 'self'; " +
+        "style-src 'self' 'unsafe-inline' https://stackpath.bootstrapcdn.com; " +
+        "script-src 'self'; " +
+        "frame-src 'self'; " +
+        "connect-src 'self';");
+    await next();
+});
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
 app.UseRouting();
 
-app.UseAuthentication();
 app.UseAuthorization();
-
-// Login
-app.MapControllerRoute(
-    name: "login",
-    pattern: "/login",
-    defaults: new { controller = "Login", action = "Index" }
-);
-
-// Register
-app.MapControllerRoute(
-    name: "register",
-    pattern: "/register",
-    defaults: new { controller = "Register", action = "RegisterUser" }
-);
 
 app.MapRazorPages();
 
-// Default
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Login}/{action=Index}/{id?}");
-
-// Access denied
-app.MapControllerRoute(
-    name: "accessdenied",
-    pattern: "/Account/AccessDenied",
-    defaults: new { controller = "Login", action = "AccessDenied" }
-);
-
-// Headers beskyttelse
-
-WebHost.CreateDefaultBuilder(args)
-    .ConfigureKestrel(c => c.AddServerHeader = false)
-    .UseStartup<Noested.Startup>()
-    .Build();
+    pattern: "{controller}/{action=Index}/{id?}");
+app.MapFallbackToAreaPage("/Account/Login", "Identity");
 
 app.Run();

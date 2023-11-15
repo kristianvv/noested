@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\timef\\noested\\Noested.csproj": {}
+    "C:\\Users\\vikfj\\Desktop\\noested_221023\\noested\\Noested.csproj": {}
   },
   "projects": {
-    "C:\\Users\\timef\\noested\\Noested.csproj": {
+    "C:\\Users\\vikfj\\Desktop\\noested_221023\\noested\\Noested.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\timef\\noested\\Noested.csproj",
+        "projectUniqueName": "C:\\Users\\vikfj\\Desktop\\noested_221023\\noested\\Noested.csproj",
         "projectName": "Noested",
-        "projectPath": "C:\\Users\\timef\\noested\\Noested.csproj",
-        "packagesPath": "C:\\Users\\timef\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\timef\\noested\\obj\\",
+        "projectPath": "C:\\Users\\vikfj\\Desktop\\noested_221023\\noested\\Noested.csproj",
+        "packagesPath": "C:\\Users\\vikfj\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\vikfj\\Desktop\\noested_221023\\noested\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\timef\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\vikfj\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -40,19 +40,21 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
-            "Microsoft.EntityFrameworkCore.InMemory": {
+            "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[7.0.11, )"
+              "version": "[7.0.12, )"
             },
-            "Microsoft.EntityFrameworkCore.SqlServer": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[7.0.10, )"
+              "version": "[7.0.12, )"
+            },
+            "Microsoft.AspNetCore.Identity.UI": {
+              "target": "Package",
+              "version": "[7.0.12, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
               "target": "Package",
-              "version": "[7.0.11, )"
+              "version": "[7.0.12, )"
             },
             "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
               "target": "Package",
@@ -61,6 +63,10 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[7.0.9, )"
+            },
+            "Pomelo.EntityFrameworkCore.MySql": {
+              "target": "Package",
+              "version": "[7.0.0, )"
             }
           },
           "imports": [
@@ -82,7 +88,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

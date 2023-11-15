@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Controllers",
+    "\\Views",
+    "\\Views\\ServiceOrders"
   ],
-  "SelectedNode": "\\Noested.sln",
+  "SelectedNode": "\\Controllers\\ServiceOrdersController.cs",
   "PreviewInSolutionExplorer": false
 }
