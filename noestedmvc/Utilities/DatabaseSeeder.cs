@@ -1,9 +1,9 @@
-﻿using Noested.Data;
+﻿using Noested.Data.Repositories;
 using Noested.Models;
 
 public static class DatabaseSeeder
 {
-    public static async Task SeedServiceOrders(IServiceOrderRepository dbContext)
+    public static async Task SeedServiceOrders(ServiceOrderRepository dbContext)
     {
         List<ServiceOrder> serviceOrders = new()
             {

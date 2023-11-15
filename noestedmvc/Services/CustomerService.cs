@@ -1,9 +1,9 @@
-﻿using Noested.Data;
+﻿using Noested.Data.Repositories;
 using Noested.Models;
 
 namespace Noested.Services
 {
-	public class CustomerService
+    public class CustomerService
 	{
         private readonly IServiceOrderRepository _repository;
         private readonly ILogger<CustomerService> _logger;

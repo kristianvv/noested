@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Noested.Data;
+using Noested.Data.Repositories;
 using Noested.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,7 +30,9 @@ var app = builder.Build();
 // Database seeding
 using (var serviceScope = app.Services.CreateScope())
 {
-    var serviceOrderDatabase = serviceScope.ServiceProvider.GetRequiredService<IServiceOrderRepository>();
+    var serviceOrderDatabase = serviceScope.ServiceProvider.GetRequiredService<ServiceOrderRepository>();
+    //For testing purposes er typen til GetRequiredService endret til ServiceOrderRepository
+
     await DatabaseSeeder.SeedServiceOrders(serviceOrderDatabase);
 }
 

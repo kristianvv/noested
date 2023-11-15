@@ -9,6 +9,7 @@ namespace Noested.Models
         InProgress,
         Completed,
         Billed
+
     }
     public enum WarrantyType
     {

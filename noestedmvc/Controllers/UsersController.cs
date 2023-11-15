@@ -14,7 +14,7 @@ namespace Noested.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var users = _userManager.Users
+           var users = _userManager.Users
                 .Select(u => new UserViewModel { UserId = u.Id, Email = u.Email })
                 .ToList();
 
