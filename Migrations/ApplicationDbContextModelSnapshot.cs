@@ -363,6 +363,22 @@ namespace Noested.Migrations
                     b.ToTable("ServiceOrder");
                 });
 
+            modelBuilder.Entity("Noested.Models.LiftEquip", b =>
+                {
+                    b.HasBaseType("Noested.Models.Checklist");
+
+                    b.Property<int>("Test")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Test2")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Test3")
+                        .HasColumnType("int");
+
+                    b.ToTable("LiftEquip");
+                });
+
             modelBuilder.Entity("Noested.Models.WinchChecklist", b =>
                 {
                     b.HasBaseType("Noested.Models.Checklist");
@@ -501,6 +517,15 @@ namespace Noested.Migrations
                         .IsRequired();
 
                     b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("Noested.Models.LiftEquip", b =>
+                {
+                    b.HasOne("Noested.Models.Checklist", null)
+                        .WithOne()
+                        .HasForeignKey("Noested.Models.LiftEquip", "ChecklistId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Noested.Models.WinchChecklist", b =>

@@ -298,6 +298,27 @@ namespace Noested.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "LiftEquip",
+                columns: table => new
+                {
+                    ChecklistId = table.Column<int>(type: "int", nullable: false),
+                    Test = table.Column<int>(type: "int", nullable: false),
+                    Test2 = table.Column<int>(type: "int", nullable: false),
+                    Test3 = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LiftEquip", x => x.ChecklistId);
+                    table.ForeignKey(
+                        name: "FK_LiftEquip_Checklist_ChecklistId",
+                        column: x => x.ChecklistId,
+                        principalTable: "Checklist",
+                        principalColumn: "ChecklistId",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "WinchChecklist",
                 columns: table => new
                 {
@@ -395,6 +416,9 @@ namespace Noested.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "LiftEquip");
 
             migrationBuilder.DropTable(
                 name: "WinchChecklist");

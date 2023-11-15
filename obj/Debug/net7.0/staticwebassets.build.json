@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "39xqTTkX6IOuX0XRJDQn081f9dqA1opcJQ5A+8qZnVk=",
+  "Hash": "PG37fZWv5TTL+MISev5DpmGSMN35BQlQ7ub4aTmuBdI=",
   "Source": "Noested",
   "BasePath": "_content/Noested",
   "Mode": "Default",
@@ -1071,12 +1071,12 @@
       "OriginalItemSpec": "C:\\Users\\vikfj\\Desktop\\noested_221023\\noested\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\Noested.bundle.scp.css"
     },
     {
-      "Identity": "C:\\Users\\vikfj\\Desktop\\noested_221023\\noested\\wwwroot\\css\\checklist.css",
+      "Identity": "C:\\Users\\vikfj\\Desktop\\noested_221023\\noested\\wwwroot\\css\\Checklist.css",
       "SourceId": "Noested",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\vikfj\\Desktop\\noested_221023\\noested\\wwwroot\\",
       "BasePath": "_content/Noested",
-      "RelativePath": "css/checklist.css",
+      "RelativePath": "css/Checklist.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -1085,15 +1085,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\checklist.css"
+      "OriginalItemSpec": "wwwroot\\css\\Checklist.css"
     },
     {
-      "Identity": "C:\\Users\\vikfj\\Desktop\\noested_221023\\noested\\wwwroot\\css\\createServiceOrder.css",
+      "Identity": "C:\\Users\\vikfj\\Desktop\\noested_221023\\noested\\wwwroot\\css\\CreateServiceOrder.css",
       "SourceId": "Noested",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\vikfj\\Desktop\\noested_221023\\noested\\wwwroot\\",
       "BasePath": "_content/Noested",
-      "RelativePath": "css/createServiceOrder.css",
+      "RelativePath": "css/CreateServiceOrder.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -1102,15 +1102,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\createServiceOrder.css"
+      "OriginalItemSpec": "wwwroot\\css\\CreateServiceOrder.css"
     },
     {
-      "Identity": "C:\\Users\\vikfj\\Desktop\\noested_221023\\noested\\wwwroot\\css\\serviceOrder.css",
+      "Identity": "C:\\Users\\vikfj\\Desktop\\noested_221023\\noested\\wwwroot\\css\\ServiceOrder.css",
       "SourceId": "Noested",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\vikfj\\Desktop\\noested_221023\\noested\\wwwroot\\",
       "BasePath": "_content/Noested",
-      "RelativePath": "css/serviceOrder.css",
+      "RelativePath": "css/ServiceOrder.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -1119,7 +1119,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\serviceOrder.css"
+      "OriginalItemSpec": "wwwroot\\css\\ServiceOrder.css"
     },
     {
       "Identity": "C:\\Users\\vikfj\\Desktop\\noested_221023\\noested\\wwwroot\\css\\site.css",

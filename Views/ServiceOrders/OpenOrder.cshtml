@@ -46,10 +46,26 @@
     <form id="order_form" asp-controller="ServiceOrders" asp-action="SaveFilledOrder" method="post">
 
         <section id="checklistSection">
-            @{ ViewData.TemplateInfo.HtmlFieldPrefix = "UpdWinchlist"; }
-            <partial name="_WinchChecklistPartial" model="@Model.UpdWinchlist" />
-            @{ ViewData.TemplateInfo.HtmlFieldPrefix = ""; }
+    
+            @if (Model.ProductT == ProductType.Winch)
+            {
+                { ViewData.TemplateInfo.HtmlFieldPrefix = "UpdWinchlist"; }
+                <partial name="_WinchChecklistPartial" model="@Model.UpdWinchlist" />
+                { ViewData.TemplateInfo.HtmlFieldPrefix = ""; }
+            }
+    
+            else if (Model.ProductT == ProductType.LiftEquip)
+    
+            {
+                { ViewData.TemplateInfo.HtmlFieldPrefix = "LiftEquip"; }
+                <partial name="_LiftEquipChecklistPartial" model="@Model.LiftEquip" />
+                { ViewData.TemplateInfo.HtmlFieldPrefix = ""; }
+    
+            }
         </section>
+
+        
+        
         <!-- RepairComment -->
         <div class="form-group">
             <label asp-for="RepairComment" class="form-label">Beskrivelse av Reparasjoner</label>

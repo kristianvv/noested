@@ -8,6 +8,7 @@ namespace Noested.Models
 	{
         public WinchChecklist? UpdWinchlist { get; set; }
 
+        public LiftEquip? LiftEquip { get; set; }
         public int OrderId { get; set; }
         public OrderStatus OrderStatus { get; set; }
         public DateTime OrderCompleted { get; set; }

@@ -1,0 +1,39 @@
+﻿@model Noested.Models.LiftEquip
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<table class="table table-bordered mb-3" id="checklistTable">
+    <thead>
+        <tr>
+            <th>Kategorier</th>
+            <th>Sjekkpunkter</th>
+            <th>OK</th>
+            <th>Bør Skiftes</th>
+            <th>Defekt</th>
+        </tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+            <td class="category-header" rowspan="8">LiftEquip</td>
+            <td><label asp-for="Test" class="control-label"></label></td>
+            <td><input asp-for="Test" type="radio" value="OK" class="form-check-input" /></td>
+            <td><input asp-for="Test" type="radio" value="NeedsReplacement" class="form-check-input" /></td>
+            <td><input asp-for="Test" type="radio" value="Defective" class="form-check-input" /></td>
+        </tr>
+      
+        <tr>
+            <td><label asp-for="Test2" class="control-label"></label></td>
+            <td><input asp-for="Test2" type="radio" value="OK" class="form-check-input" /></td>
+            <td><input asp-for="Test2" type="radio" value="NeedsReplacement" class="form-check-input" /></td>
+            <td><input asp-for="Test2" type="radio" value="Defective" class="form-check-input" /></td>
+        </tr>
+       
+        <tr>
+            <td><label asp-for="Test3" class="control-label"></label></td>
+            <td><input asp-for="Test3" type="radio" value="OK" class="form-check-input" /></td>
+            <td><input asp-for="Test3" type="radio" value="NeedsReplacement" class="form-check-input" /></td>
+            <td><input asp-for="Test3" type="radio" value="Defective" class="form-check-input" /></td>
+        </tr>
+    </tbody>
+</table>

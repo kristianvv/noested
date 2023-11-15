@@ -15,5 +15,7 @@ namespace Noested.Data
         public DbSet<ServiceOrder> ServiceOrder { get; set; } = default!;
         public DbSet<Checklist> Checklist { get; set; } = default!;
         public DbSet<WinchChecklist> WinchChecklist { get; set; } = default!;
+
+        public DbSet<LiftEquip> LiftEquip { get; set; } 
     }
 }

@@ -5,16 +5,16 @@
       "PackagePath": "staticwebassets\\Noested.bundle.scp.css"
     },
     {
-      "Id": "C:\\Users\\vikfj\\Desktop\\noested_221023\\noested\\wwwroot\\css\\checklist.css",
-      "PackagePath": "staticwebassets\\css\\checklist.css"
+      "Id": "C:\\Users\\vikfj\\Desktop\\noested_221023\\noested\\wwwroot\\css\\Checklist.css",
+      "PackagePath": "staticwebassets\\css\\Checklist.css"
     },
     {
-      "Id": "C:\\Users\\vikfj\\Desktop\\noested_221023\\noested\\wwwroot\\css\\createServiceOrder.css",
-      "PackagePath": "staticwebassets\\css\\createServiceOrder.css"
+      "Id": "C:\\Users\\vikfj\\Desktop\\noested_221023\\noested\\wwwroot\\css\\CreateServiceOrder.css",
+      "PackagePath": "staticwebassets\\css\\CreateServiceOrder.css"
     },
     {
-      "Id": "C:\\Users\\vikfj\\Desktop\\noested_221023\\noested\\wwwroot\\css\\serviceOrder.css",
-      "PackagePath": "staticwebassets\\css\\serviceOrder.css"
+      "Id": "C:\\Users\\vikfj\\Desktop\\noested_221023\\noested\\wwwroot\\css\\ServiceOrder.css",
+      "PackagePath": "staticwebassets\\css\\ServiceOrder.css"
     },
     {
       "Id": "C:\\Users\\vikfj\\Desktop\\noested_221023\\noested\\wwwroot\\css\\site.css",
