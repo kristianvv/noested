@@ -1,12 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using Noested.Data;
 using Noested.Data.Repositories;
-using Noested.Models;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Xunit;
 
 namespace NoestedTests
 {
@@ -33,14 +27,10 @@ namespace NoestedTests
 
             // Act
             var result = await repository.Search("John");
-            var resultlist = result.ToList();
-           
-           
-            // Assert
-            Assert.NotNull(result);
 
-            // Assert.Single(resultlist);
-            // Assert.Equal("John", resultlist[0].Customer.FirstName);
+            // Assert
+
+            Assert.Equal("John", result.FirstOrDefault().Customer.FirstName);
         }
     }
 }

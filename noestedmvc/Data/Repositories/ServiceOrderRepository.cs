@@ -137,6 +137,8 @@ namespace Noested.Data.Repositories
                 return await _database.ServiceOrder.Where(o => o.OrderId == id).ToListAsync();
             }
 
+            query = query.ToLower();
+
             return await _database.ServiceOrder.Where(o =>
                          o.Customer!.FirstName.ToLower().Contains(query) ||
                          o.Customer!.LastName.ToLower().Contains(query) ||
