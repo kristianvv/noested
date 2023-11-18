@@ -58,12 +58,14 @@ app.Use(async (context, next) =>
         "default-src 'self'; " +
         "img-src 'self'; " +
         "font-src 'self'; " +
-        "style-src 'self' 'unsafe-inline' https://stackpath.bootstrapcdn.com; " +
-        "script-src 'self'; " +
+        "style-src 'self' 'unsafe-inline' https://stackpath.bootstrapcdn.com https://cdn.jsdelivr.net; " +
+        "script-src 'self' https://code.jquery.com https://cdn.jsdelivr.net https://stackpath.bootstrapcdn.com; " +
         "frame-src 'self'; " +
-        "connect-src 'self';");
+        "connect-src 'self' wss://localhost:44301;");
     await next();
 });
+
+
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

@@ -86,17 +86,16 @@ input:-webkit-autofill {
     height: 50px;
 }
 
-/* Ekstra stiltilpasninger kan legges til her om nødvendig */
 .btn-custom {
-    background-color: #101820 !important; /* Bootstrap primærfarge */
+    background-color: #101820 !important; /
     width: 150%;
     color: white;
     border: none;
-    border-radius: 0 0.25rem 0.25rem 0; /* Rund av høyre hjørner */
+    border-radius: 0 0.25rem 0.25rem 0; 
 }
 
 .form-control {
-    border-radius: 0.25rem 0 0 0.25rem; /* Rund av venstre hjørner */
+    border-radius: 0.25rem 0 0 0.25rem; 
 }
 
 div.custom-margin {
@@ -160,5 +159,45 @@ div.custom-margin {
     z-index: 2;
 }
 
-/* ----- Innlogging SLUTT -----*/
+.border {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+    padding: 1rem;
+    margin-bottom: 1rem; 
+    height: 200px; 
+}
 
+@media (min-width: 768px) { 
+    .row {
+        margin-top: 0; /
+    }
+
+    .col-md-4 {
+        margin-bottom: 0; 
+    }
+}
+
+.dashboard-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    text-align: center;
+    margin: 10px;
+}
+
+    .dashboard-card:hover {
+        box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    }
+
+.dashboard-icon {
+    font-size: 50px;
+    margin-bottom: 10px;
+}
