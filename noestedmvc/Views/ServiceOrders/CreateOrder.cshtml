@@ -15,6 +15,7 @@
             <partial name="_ServiceOrderPartial" model="@Model.NewOrder" />
         </section>
         <section id="newCustomerSection" class="right-section">
+            <h4>Opprett ny kunde</h4>
             @{ ViewData.TemplateInfo.HtmlFieldPrefix = "NewCustomer"; }
             <partial name="_CustomerPartial" model="@Model.NewCustomer" />
         </section>

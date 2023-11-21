@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Noested.Migrations
 {
     /// <inheritdoc />
-    public partial class initMig : Migration
+    public partial class initTest : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

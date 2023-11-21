@@ -2,10 +2,10 @@
 
 <!-- Existing Customer Dropdown -->
 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<h4>Velg eksisterende kunde</h4>
 <div class="form-group">
-    <label asp-for="CustomerId">Velg Eksisterende Kunde</label>
     <select id="CustomerId" asp-for="CustomerId" asp-items="ViewBag.ExistingCustomers" class="form-control">
-        <option value="0">-- Opprett Ny Bruker (Nedtrekksmeny) --</option>
+        <option value="0">-- Velg --</option>
     </select>
     <span asp-validation-for="CustomerId" class="text-danger"></span>
 </div>
@@ -34,7 +34,7 @@
 </div>
 <!-- Produktnavn -->
 <div class="form-group">
-    <label asp-for="ProductName" title="Produktnavn">Produktnavn</label>
+    <label asp-for="ProductName" class="control-label title="Produktnavn">Produktnavn</label>
     <input asp-for="ProductName" class="form-control" required placeholder="f.eks 'IGLAND 5002 Pento TL'" />
     <span asp-validation-for="ProductName" class="text-danger"></span>
 </div>

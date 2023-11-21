@@ -2,16 +2,14 @@
 .form-group {
     margin-bottom: 20px;
     padding: 10px;
-    background-color: rgba(16, 24, 32, 1); /* Nosted style */
     border-radius: 5px;
-    border: 1px solid #ccc; /* Nosted style */
-    color: #ccc; /* Nosted style */
-    transition: border-color 0.3s ease; /* Nosted style */
+    border: 1px solid #ccc; 
+    transition: border-color 0.3s ease; 
 }
 
     .form-group:hover,
     .form-group:focus {
-        border-color: orange; /* Nosted style */
+        border-color: orange; 
     }
 
 /* Container for both sections */
@@ -29,9 +27,9 @@ container {
 
 /* Button Styling */
 .create-button {
-    background-color: rgba(16, 24, 32, 1); /* Nosted style */
-    color: #ccc; /* Nosted style */
-    transition: background-color 0.3s ease; /* Nosted style */
+    background-color: rgba(16, 24, 32, 1); 
+    color: #ccc; 
+    transition: background-color 0.3s ease; 
     border-radius: 4px;
     padding: 10px 20px;
     margin-top: 20px;
