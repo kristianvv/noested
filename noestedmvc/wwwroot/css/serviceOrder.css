@@ -9,22 +9,21 @@
     text-decoration: none; /* Remove default underline from anchortag */
     color: black; /* Remove default blue from anchortag */
     z-index: 1;
-    border: 2px solid #007bff;
+    border: 1px solid #b8b8b8 !important;
     margin-bottom: 20px;
     padding: 15px;
     cursor: pointer;
-    border-radius: 15px; /* Rounded Edges */
-    background-color: #e6f7ff; /* Light Blue Background */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Shadow Effect */
-    transition: all 0.3s ease; /* Transition for hover and click */
+    border-radius: 12px; /* Rounded Edges */
+    /* transition: all 0.3s ease; */
 }
 
     .service-order-item:hover {
-        background-color: #fffc00; /* Slightly yellow when hovered */
+        border: 1px solid black !important;
+        background-color: #f1f1f1 !important;
     }
 
     .service-order-item:active {
-        background-color: #ffff66; /* Brighter yellow when clicked */
+        background-color: #939393 !important; 
     }
 
 div {

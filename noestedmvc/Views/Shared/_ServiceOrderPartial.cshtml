@@ -2,7 +2,7 @@
 
 <!-- Existing Customer Dropdown -->
 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-<h4>Velg eksisterende kunde</h4>
+<div class="custom-title">Velg eksisterende kunde</div>
 <div class="form-group">
     <select id="CustomerId" asp-for="CustomerId" asp-items="ViewBag.ExistingCustomers" class="form-control">
         <option value="0">-- Velg --</option>

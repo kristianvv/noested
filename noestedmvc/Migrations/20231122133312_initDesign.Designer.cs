@@ -11,8 +11,8 @@ using Noested.Data;
 namespace Noested.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231121111134_initTest")]
-    partial class initTest
+    [Migration("20231122133312_initDesign")]
+    partial class initDesign
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

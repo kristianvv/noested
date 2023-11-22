@@ -1,47 +1,50 @@
 ﻿@model FillOrderViewModel
 
-<h1>View Service Order</h1>
+<h3>Sjekkliste</h3>
+<hr />
 
 @section Styles {
     <link rel="stylesheet" href="~/css/checklist.css" asp-append-version="true">
 }
+<div class="custom-title">Oppsummering av serviceordre</div>
     <section class="order-info">
         <!-- OrderId -->
         <div>
-            <label asp-for="OrderId">Service Order ID / Checklist ID</label>
+            <label asp-for="OrderId" class="control-label">Ordrenummer: </label>
             <span>@Model.OrderId</span>
         </div>
         <!-- CustomerId -->
         <div>
-            <label asp-for="CustomerId">Customer ID</label>
+        <label asp-for="CustomerId" class="control-label">Kundenummer: </label>
             <span>@Model.CustomerId</span>
         </div>
         <!-- Product Name -->
         <div>
-            <label asp-for="ProductName">Product Name</label>
+        <label asp-for="ProductName" class="control-label">Produktnavn: </label>
             <span>@Model.ProductName</span>
         </div>
         <!-- Product Type -->
         <div>
-            <label asp-for="ProductT">Product Type</label>
+        <label asp-for="ProductT" class="control-label">Produkttype: </label>
             <span>@Model.ProductT</span>
         </div>
         <!-- Order Status -->
         <div>
-            <label asp-for="OrderStatus">Order Status</label>
+        <label asp-for="OrderStatus" class="control-label">Ordrestatus: </label>
             <span>@Model.OrderStatus</span>
         </div>
         <!-- When was it Received? -->
         <div>
-            <label asp-for="OrderReceived">Order Received</label>
+        <label asp-for="OrderReceived" class="control-label">Ordre mottatt: </label>
             <span>@Model.OrderReceived</span>
         </div>
         <!-- Customer Comment -->
         <div>
-            <label asp-for="OrderDescription">Order Description</label>
+        <label asp-for="OrderDescription" class="control-label">Ordrebeskrivelse: </label>
             <span>@Model.OrderDescription</span>
         </div>
     </section>
+<hr />
 
     <form id="order_form" asp-controller="ServiceOrders" asp-action="SaveFilledOrder" method="post">
 
@@ -52,24 +55,24 @@
         </section>
         <!-- RepairComment -->
         <div class="form-group">
-            <label asp-for="RepairComment" class="form-label">Beskrivelse av Reparasjoner</label>
+        <label asp-for="RepairComment" class="form-label control-label">Reperasjonsbeskrivelse</label>
             <textarea class="form-control" asp-for="RepairComment"></textarea>
             <span asp-validation-for="RepairComment" class="text-danger"></span>
         </div>
         <!-- Work Hours used -->
         <div class="form-group">
-            <label asp-for="WorkHours">Arbeidstimer brukt</label>
+        <label asp-for="WorkHours" class="control-label">Arbeidstimer brukt</label>
             <input asp-for="WorkHours" class="form-control">
             <span asp-validation-for="WorkHours" class="text-danger"></span>
         </div>
         <!-- RepairComment -->
         <div class="form-group">
-            <label asp-for="MechSignature">Mekaniker Signatur</label>
+        <label asp-for="MechSignature" class="control-label">Signatur: </label>
             <input asp-for="MechSignature" class="form-control" />
             <span asp-validation-for="MechSignature" class="text-danger"></span>
         </div>
 
-        <button type="submit" class="btn btn-success">Ferdigstill Ordre</button>
+    <button type="submit" class="btn btn-success create-button">Ferdigstill Ordre</button>
 
         <input type="hidden" asp-for="OrderId" />
         <input type="hidden" asp-for="CustomerId" />

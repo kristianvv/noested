@@ -87,7 +87,7 @@ input:-webkit-autofill {
 }
 
 .btn-custom {
-    background-color: #101820 !important; /
+    background-color: #101820 !important;
     width: 150%;
     color: white;
     border: none;
@@ -96,6 +96,16 @@ input:-webkit-autofill {
 
 .form-control {
     border-radius: 0.25rem 0 0 0.25rem; 
+    border: 1px solid #BDBDBD !important;
+}
+
+.form-group {
+    border: 1px solid #bdbdbd !important;
+}
+
+.form-group:hover,
+.form-group:focus {
+    border: 1px solid black !important;
 }
 
 div.custom-margin {
@@ -200,4 +210,14 @@ div.custom-margin {
 .dashboard-icon {
     font-size: 50px;
     margin-bottom: 10px;
+}
+
+.custom-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+hr {
+    margin: 25px 0;
 }
