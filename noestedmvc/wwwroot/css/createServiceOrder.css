@@ -79,5 +79,5 @@ container {
 }
 
 .form-check-input:checked {
-    background-color: #545454 !important; /* Setter teksten til sort bare for labeler innenfor .form-group */
+    background-color: #545454 !important; 
 }

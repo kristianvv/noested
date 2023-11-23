@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="~/css/serviceOrder.css">
 }
 
-<h1>Oversikt over serviceordre</h1>
+<h1>Ordreoversikt</h1>
 <div class="container-fluid">
     <div class="row">
         <!-- Left Empty Column -->
@@ -13,16 +13,19 @@
         <!-- Middle Column -->
         <div class="col-md-8">
 
-            <!-- Search Bar -->
-            <form method="get" action="@Url.Action("Search", "ServiceOrders")" class="form-inline">
-                <div class="input-group">
-                    <input type="text" class="form-control" name="query" placeholder="Søk på serviceordre">
-                    <div class="input-group-append">
-                        <button class="btn-custom" type="submit">Søk</button>
+            <div class="search-create-container">
+                <!-- Search Bar -->
+                <form method="get" action="@Url.Action("Search", "ServiceOrders")" class="form-inline search-field">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="query" placeholder="Søk på serviceordre">
+                        <div class="input-group-append">
+                            <button class="btn-custom" type="submit">Søk</button>
+                        </div>
                     </div>
-                </div>
-            </form>
-
+                </form>
+            </div>
+            <!-- Ny Serviceordre Knapp -->
+            <a href="@Url.Action("CreateOrder", "ServiceOrders")" class="btn-create">Opprett ny serviceordre</a>
             <!-- Service order loop -->
             @if (Model.Count() == 0)
             {
@@ -30,7 +33,7 @@
             }
             else
             {
-                <p>Antall serviceordre: @Model.Count()</p>
+                <p class="p-custom-margin">Antall serviceordre: @Model.Count()</p>
             }
 
             @foreach (var order in Model)

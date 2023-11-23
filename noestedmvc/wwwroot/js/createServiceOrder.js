@@ -19,24 +19,12 @@
     document.querySelectorAll('.form-group select').forEach(selectElement => {
         selectElement.addEventListener('change', handleSelectChange);
     });
-
-    document.querySelectorAll('.form-group').forEach(formGroup => {
-        formGroup.addEventListener('mouseover', handleHoverEvent);
-    });
 });
 
 function handleFormSubmit(event) {
     event.preventDefault(); // Pause sub
 
     this.submit(); // Exe real sub
-}
-
-function handleHoverEvent() {
-    const inputs = this.querySelectorAll('input');
-    const isAnyInputDisabled = Array.from(inputs).some(input => input.disabled);
-    if (!isAnyInputDisabled) {
-        this.classList.add('form-group-grayed');
-    }
 }
 
 // If existing customer isn't chosen from dropdown, then new customer fields show in form and are required.
@@ -95,9 +83,7 @@ function handleSelectChange() {
 
 function handleFocusEvent() {
     const formGroup = this.closest('.form-group');
-    if (!this.disabled) {
-        formGroup.classList.add('form-group-grayed');
-    }
+    formGroup.classList.add('form-group-grayed');
 }
 
 function handleBlurEvent() {

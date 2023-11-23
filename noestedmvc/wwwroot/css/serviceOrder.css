@@ -22,9 +22,15 @@
     }
 
     .service-order-item:active {
-        background-color: #939393 !important; 
+        background-color: #939393 !important;
     }
 
-div {
-    margin-bottom: 10px;
+.search-create-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Justerer mellomrommet mellom elementene */
+    margin-bottom: 50px;
+
 }
+
+

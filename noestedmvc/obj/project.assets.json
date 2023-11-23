@@ -10956,19 +10956,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\vikfj\\.nuget\\packages\\": {}
+    "C:\\Users\\chris\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\vikfj\\Desktop\\noested_221023\\noested\\noestedmvc\\Noested.csproj",
+      "projectUniqueName": "C:\\Users\\chris\\Desktop\\WTF\\noested\\noestedmvc\\Noested.csproj",
       "projectName": "Noested",
-      "projectPath": "C:\\Users\\vikfj\\Desktop\\noested_221023\\noested\\noestedmvc\\Noested.csproj",
-      "packagesPath": "C:\\Users\\vikfj\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\vikfj\\Desktop\\noested_221023\\noested\\noestedmvc\\obj\\",
+      "projectPath": "C:\\Users\\chris\\Desktop\\WTF\\noested\\noestedmvc\\Noested.csproj",
+      "packagesPath": "C:\\Users\\chris\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\chris\\Desktop\\WTF\\noested\\noestedmvc\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\vikfj\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\chris\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -11042,7 +11042,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -21,12 +21,21 @@ html {
     min-height: 100%;
 }
 
+h1 {
+    margin-bottom: 1.5rem;
+}
+
 .control-label {
     font-weight: 600;
 }
 
 .p-custom-padding {
     margin-bottom: 50px !important;
+}
+
+.p-custom-margin {
+    margin-top: 75px !important;
+    font-weight: 600;
 }
 
 .img-custom-styles {
@@ -56,10 +65,10 @@ html {
     height: 50px !important;
 }
 
-.form-control:focus {
-    outline: none !important;
-    box-shadow: none !important;
-}
+    .form-control:focus {
+        outline: none !important;
+        box-shadow: none !important;
+    }
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
@@ -74,11 +83,26 @@ input:-webkit-autofill {
 }
 
 .btn {
-    margin-top: 40px !important;
-    margin-bottom: 40px !important;
+    margin: 40px 0;
     font-size: 14px !important;
-    background-color: #101820 !important;
+    background-color: #545454 !important;
     border: none !important;
+    color: white !important;
+}
+
+.btn-create {
+    font-size: 14px !important;
+    background-color: #545454 !important;
+    border: none !important;
+    border-radius: 0.25rem;
+    color: white !important;
+    padding: 10px 20px !important;
+    text-decoration: none;
+}
+
+.search-field {
+    width: 159% !important;
+    margin: 0;
 }
 
 /* Tilpasser høyden på søkefeltet og knappen */
@@ -87,21 +111,20 @@ input:-webkit-autofill {
 }
 
 .btn-custom {
-    background-color: #101820 !important;
-    width: 150%;
+    background-color: #545454 !important;
+    width: 150% !important;
     color: white;
     border: none;
-    border-radius: 0 0.25rem 0.25rem 0; 
+    border-radius: 0 0.25rem 0.25rem 0;
 }
 
 .form-control {
-    border-radius: 0.25rem 0 0 0.25rem; 
+    border-radius: 0.25rem 0 0 0.25rem;
     border: 1px solid #BDBDBD !important;
 }
 
-.form-group {
-    border: 1px solid #bdbdbd !important;
-}
+
+
 
 .form-group:hover,
 .form-group:focus {
@@ -173,19 +196,20 @@ div.custom-margin {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center; 
+    align-items: center;
     padding: 1rem;
-    margin-bottom: 1rem; 
-    height: 200px; 
+    margin-bottom: 1rem;
+    height: 200px;
 }
 
-@media (min-width: 768px) { 
+@media (min-width: 768px) {
     .row {
-        margin-top: 0; /
+        margin-top: 0;
+        /
     }
 
     .col-md-4 {
-        margin-bottom: 0; 
+        margin-bottom: 0;
     }
 }
 
