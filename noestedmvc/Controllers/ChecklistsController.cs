@@ -45,26 +45,6 @@ namespace Noested.Controllers
             return View(checklist);
         }
 
-        // GET: Checklists/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Checklists/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ChecklistId,OrderId,ServiceProcedure,ApprovedBy,PreparedBy,MechBrakes,MechDrumBearing,MechStoragePTO,MechWire,MechChainTensioner,MechPinionBearing,MechClutch,MechSprocketWedges,HydCylinder,HydHydraulicBlock,HydTankOil,HydGearboxOil,HydBrakeCylinder,ElCableNetwork,ElRadio,ElButtonBox,TensionCheckBar,TestWinch,TestTraction,TestBrakes,RepairComment,MechSignature,DateCompleted")] Checklist checklist)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(checklist);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(checklist);
-        }
-
         // GET: Checklists/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {

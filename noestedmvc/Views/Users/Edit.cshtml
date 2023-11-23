@@ -1,0 +1,34 @@
+﻿@model Noested.Models.ViewModels.UserViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h3>Rediger bruker</h3>
+
+<form asp-controller="Users" asp-action="Edit" method="post">
+    <input type="hidden" asp-for="UserId" />
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="form-floating mb-3">
+        <input asp-for="Email" class="form-control" autocomplete="username" aria-required="true" placeholder="email@example.com" />
+        <label asp-for="Email">Epost</label>
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+
+
+
+
+    <button type="submit" class="w-100 btn btn-lg btn-primary">Oppdater informasjon</button>
+
+
+    <div>
+        <a asp-action="Index">Tilbake til bruker oversikt</a>
+    </div>
+
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

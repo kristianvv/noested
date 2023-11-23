@@ -1,0 +1,28 @@
+﻿@model Noested.Models.ViewModels.UserViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h3>Bruker detaljer</h3>
+
+<dl class="row">
+    <dt class="col-sm-2">BrukerID:</dt>
+    <dd class="col-sm-10">@Model.UserId</dd>
+
+    <dt class="col-sm-2">Brukernavn:</dt>
+    <dd class="col-sm-10">@Model.UserName</dd>
+
+    <dt class="col-sm-2">Epost:</dt>
+    <dd class="col-sm-10">@Model.Email</dd>
+
+    <dt class="col-sm-2">Epost bekreftet:</dt>
+    <dd class="col-sm-10">@Model.EmailConfirmed</dd>
+
+
+
+</dl>
+
+<div>
+    <a asp-action="Index">Tilbake til bruker oversikt</a>
+</div>
