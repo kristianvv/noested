@@ -21,6 +21,28 @@ html {
     min-height: 100%;
 }
 
+.btn {
+    margin: 40px 0;
+    padding: 6px 16px !important;
+    font-size: 14px !important;
+    background-color: #545454 !important;
+    border: none !important;
+    color: white !important;
+    
+}
+
+.navbar {
+    height: 50px; 
+    overflow: hidden; 
+}
+
+.nav-item, .nav-link, .btn {
+    font-size: 1em; 
+    font-weight: 400;
+    line-height: 50px; 
+}
+
+
 h1 {
     margin-bottom: 1.5rem;
 }
@@ -82,13 +104,7 @@ input:-webkit-autofill {
     box-shadow: 0 0 0px 1000px white inset;
 }
 
-.btn {
-    margin: 40px 0;
-    font-size: 14px !important;
-    background-color: #545454 !important;
-    border: none !important;
-    color: white !important;
-}
+
 
 .btn-create {
     font-size: 14px !important;
@@ -122,9 +138,6 @@ input:-webkit-autofill {
     border-radius: 0.25rem 0 0 0.25rem;
     border: 1px solid #BDBDBD !important;
 }
-
-
-
 
 .form-group:hover,
 .form-group:focus {
