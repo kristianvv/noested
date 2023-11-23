@@ -7,11 +7,25 @@
     transition: border-color 0.3s ease; 
 }
 
-    .form-group:hover,
-    .form-group:focus {
-        border-color: black; 
-        border: 2px solid black;
-    }
+.form-group:hover,
+.form-group:focus,
+.form-group.form-group-selected {
+  background-color: #f1f1f1 !important; 
+}
+
+
+.form-group-filled {
+    background-color: #f1f1f1 !important;
+}
+
+.form-group-grayed {
+    background-color: #f1f1f1 !important;
+}
+
+.form-group-filled select {
+    background-color: #f1f1f1 !important;
+}
+
 
 /* Container for both sections */
 container {
@@ -36,10 +50,9 @@ container {
     margin-top: 20px;
     cursor: pointer;
 }
-
-    .create-button:hover {
-        background-color: orange; /* Nosted style */
-    }
+.create-button:hover {
+    background-color: orange; /* Nosted style */
+}
 
 /* Style for the dropdown */
 #existingCustomer {
@@ -60,8 +73,11 @@ container {
 
 .greyed-out {
     z-index: 1;
-    opacity: 0.5;
     pointer-events: none;
-    background-color: black;
+    background-color: #f1f1f1 !important;
     cursor: not-allowed;
+}
+
+.form-check-input:checked {
+    background-color: #545454 !important; /* Setter teksten til sort bare for labeler innenfor .form-group */
 }

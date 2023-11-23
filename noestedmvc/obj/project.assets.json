@@ -10961,11 +10961,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\chris\\Desktop\\221123_noested\\noested\\noestedmvc\\Noested.csproj",
+      "projectUniqueName": "C:\\Users\\chris\\Desktop\\231123_noested\\noested\\noestedmvc\\Noested.csproj",
       "projectName": "Noested",
-      "projectPath": "C:\\Users\\chris\\Desktop\\221123_noested\\noested\\noestedmvc\\Noested.csproj",
+      "projectPath": "C:\\Users\\chris\\Desktop\\231123_noested\\noested\\noestedmvc\\Noested.csproj",
       "packagesPath": "C:\\Users\\chris\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\chris\\Desktop\\221123_noested\\noested\\noestedmvc\\obj\\",
+      "outputPath": "C:\\Users\\chris\\Desktop\\231123_noested\\noested\\noestedmvc\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\chris\\AppData\\Roaming\\NuGet\\NuGet.Config",

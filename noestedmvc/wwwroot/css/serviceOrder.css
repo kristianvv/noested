@@ -18,7 +18,6 @@
 }
 
     .service-order-item:hover {
-        border: 1px solid black !important;
         background-color: #f1f1f1 !important;
     }
 
