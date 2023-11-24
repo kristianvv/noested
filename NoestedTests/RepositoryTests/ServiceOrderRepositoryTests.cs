@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Noested.Data;
+using Noested.Data.Repositories;
 using Noested.Models;
 
 namespace NoestedTests.RepositoryTests

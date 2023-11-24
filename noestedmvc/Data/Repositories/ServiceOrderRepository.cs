@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Noested.Models;
 
-namespace Noested.Data
+namespace Noested.Data.Repositories
 {
     public interface IServiceOrderRepository
     {
@@ -142,7 +142,7 @@ namespace Noested.Data
             return await _database.ServiceOrder.Where(o =>
                          o.Customer!.FirstName.ToLower().Contains(query) ||
                          o.Customer!.LastName.ToLower().Contains(query) ||
-                         o.Customer!.Email.ToLower().Contains(query) ||    
+                         o.Customer!.Email.ToLower().Contains(query) ||
                          o.ProductName!.ToLower().Contains(query)
                            //|| o.Product.ToString().ToLower().Contains(query)
 

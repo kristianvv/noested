@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Noested.Data;
+using Noested.Data.Repositories;
+using Noested.Repositories;
 using Noested.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,9 +18,11 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IServiceOrderRepository, ServiceOrderRepository>(); // Daniel
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ServiceOrderService>(); // Daniel
 builder.Services.AddScoped<ChecklistService>(); // Daniel
 builder.Services.AddScoped<CustomerService>(); // Daniel
@@ -72,6 +76,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
@@ -81,4 +86,42 @@ app.MapControllerRoute(
     pattern: "{controller}/{action=Index}/{id?}");
 app.MapFallbackToAreaPage("/Account/Login", "Identity");
 
-app.Run();
+using (var serviceScope = app.Services.CreateScope())
+    {
+        var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+        var roles = new[] { "Admin", "User" };
+    foreach (var role in roles)
+        {
+            if (!await roleManager.RoleExistsAsync(role))
+                {       
+            await roleManager.CreateAsync(new IdentityRole(role));
+                }
+        }
+    }
+
+// Database seeding av adminbruker
+
+using (var serviceScope = app.Services.CreateScope())
+{
+    var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+
+    string email = "admin@admin.com";
+    string password = "Admin123!";
+
+
+    if (await userManager.FindByEmailAsync(email) == null)
+    {
+        var user = new IdentityUser
+        {
+            UserName = email,
+            Email = email,
+            EmailConfirmed = true
+        };
+
+        await userManager.CreateAsync(user, password);
+        await userManager.AddToRoleAsync(user, "Admin");
+    }
+
+ }
+
+    app.Run();

@@ -11,6 +11,14 @@ namespace Noested.Data
             : base(options)
         {
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<UserEntity>().ToTable("Users").HasKey(x => x.Id);
+            base.OnModelCreating(modelBuilder);
+        }
+
+
+        public DbSet<UserEntity> Users { get; set; } = default!;
         public DbSet<Customer> Customer { get; set; } = default!;
         public DbSet<ServiceOrder> ServiceOrder { get; set; } = default!;
         public DbSet<Checklist> Checklist { get; set; } = default!;
