@@ -3,7 +3,7 @@
     margin-bottom: 20px;
     padding: 10px;
     border-radius: 5px;
-    border: 10px solid black;
+    border: 1px solid #bdbdbd;
     transition: border-color 0.3s ease; 
 }
 

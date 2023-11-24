@@ -131,7 +131,7 @@ input:-webkit-autofill {
     width: 150% !important;
     color: white;
     border: none;
-    border-radius: 0 0.25rem 0.25rem 0;
+    border-radius: 0 0.2rem 0.25rem 0;
 }
 
 .form-control {
@@ -152,10 +152,6 @@ div.custom-margin {
 
 .card-body {
     margin-right: 1rem !important;
-}
-
-.footer {
-    font-size: 14px !important;
 }
 
 /* Bilde-styling */
@@ -252,9 +248,13 @@ div.custom-margin {
 .custom-title {
     font-size: 20px;
     font-weight: 600;
-    margin-bottom: 4px;
+    margin-bottom: 16px;
 }
 
-hr {
-    margin: 25px 0;
+.custom-hr {
+    margin: 25px 0 40px 0;
 }
+hr {
+    margin: 50px 0;
+}
+

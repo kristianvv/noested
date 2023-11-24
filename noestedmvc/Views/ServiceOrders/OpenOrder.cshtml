@@ -1,7 +1,7 @@
 ﻿@model FillOrderViewModel
 
 <h3>Sjekkliste</h3>
-<hr />
+<hr class="custom-hr" />
 
 @section Styles {
     <link rel="stylesheet" href="~/css/checklist.css" asp-append-version="true">
@@ -72,7 +72,7 @@
             <span asp-validation-for="MechSignature" class="text-danger"></span>
         </div>
 
-    <button type="submit" class="btn btn-success create-button">Ferdigstill Ordre</button>
+    <button type="submit" class="btn-custom-checklist">Ferdigstill Ordre</button>
 
         <input type="hidden" asp-for="OrderId" />
         <input type="hidden" asp-for="CustomerId" />

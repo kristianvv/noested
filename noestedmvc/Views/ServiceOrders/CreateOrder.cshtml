@@ -24,12 +24,11 @@
         @{ ViewData.TemplateInfo.HtmlFieldPrefix = "NewChecklist"; }
         <partial name="_ChecklistPartial" model="@Model.NewChecklist" />
     </div>
-    <button type="submit" class="btn btn-primary create-button">Opprett</button>
+    <button type="submit" class="btn-create">Opprett</button>
 </form>
 
-
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Tilbake til oversikt</a>
 </div>
 
 @section Scripts {

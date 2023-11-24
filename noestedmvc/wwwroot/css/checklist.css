@@ -6,16 +6,16 @@ input[type="radio"] {
 }
 
 /* Sentrere innhold i feltene */
-.table td {
+/*.table td {
     vertical-align: middle;
     text-align: center;
 }
-
+*/
     /* Lik bredde på td elementer som har radioknapper */
-    .table td.radio-cell {
-        width: 1%;
-        white-space: nowrap;
-    }
+.table td.radio-cell {
+     width: 1%;
+     white-space: nowrap;
+}
 
 /* For kategorifeltene */
 td.status-ok {
@@ -34,3 +34,35 @@ td.category-header.all-checked {
     background-color: #e0f2e0 !important;
 }
 
+.btn-custom-checklist {
+    background-color: #545454 !important;
+    width: 100% !important;
+    padding: 12px 0;
+    color: white;
+    border: none;
+    border-radius: .25rem;
+    margin: 20px 0;
+}
+
+.form-group {
+    margin-bottom: 12px !important;
+}
+
+.form-group:hover, .form-group:focus {
+    border: none !important;
+}
+
+
+th.checkbox-cell {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px;
+}
+
+#markAllOk {
+    vertical-align: middle; 
+    width: 20px; 
+    height: 20px; 
+    cursor: pointer;
+}

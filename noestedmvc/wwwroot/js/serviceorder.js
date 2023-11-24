@@ -47,8 +47,41 @@ function updateCategoryColor(tbody, categoryCell) {
     }
 }
 
+// Markerer alle radioknappene som OK  
+function initMarkAllOkListener() {
+    const markAllOkCheckbox = document.getElementById('markAllOk');
+    if (markAllOkCheckbox) {
+        markAllOkCheckbox.addEventListener('change', function (e) {
+            var isChecked = e.target.checked;
+            var radios = document.querySelectorAll('input[type="radio"][value="OK"]');
+            var tds = document.querySelectorAll('#checklistTable td:not(.category-header)'); // Velg alle td-er som ikke er kategorioverskrifter
+            var categoryHeaders = document.querySelectorAll('#checklistTable .category-header'); // Velg alle kategori-overskrifter
+
+            radios.forEach(function (radio) {
+                radio.checked = isChecked;
+            });
+
+            tds.forEach(function (td) {
+                if (isChecked) {
+                    td.classList.add('status-ok');
+                } else {
+                    td.classList.remove('status-ok');
+                }
+            });
+
+            categoryHeaders.forEach(function (header) {
+                if (isChecked) {
+                    header.classList.add('all-checked');
+                } else {
+                    header.classList.remove('all-checked');
+                }
+            });
+        });
+    }
+}
+
 // Pageload
 document.addEventListener('DOMContentLoaded', function () {
     initRadioListeners();
-
+    initMarkAllOkListener();
 });

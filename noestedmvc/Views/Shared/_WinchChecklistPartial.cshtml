@@ -7,20 +7,21 @@
         <tr>
             <th>Kategorier</th>
             <th>Sjekkpunkter</th>
-            <th>OK</th>
+            <th class="checkbox-cell">OK <input type="checkbox" id="markAllOk"></th>
             <th>Bør Skiftes</th>
             <th>Defekt</th>
         </tr>
     </thead>
     <tbody>
         <!-- MechBrakes Row -->
-        <tr>
-            <td class="category-header" rowspan="8">Mechanical</td>
+         <tr>
+            <td class="category-header" rowspan="8">Mekanisk</td>
             <td><label asp-for="MechBrakes" class="control-label"></label></td>
             <td><input asp-for="MechBrakes" type="radio" value="OK" class="form-check-input" /></td>
             <td><input asp-for="MechBrakes" type="radio" value="NeedsReplacement" class="form-check-input" /></td>
             <td><input asp-for="MechBrakes" type="radio" value="Defective" class="form-check-input" /></td>
-        </tr>
+        </tr> 
+
         <!-- MechDrumBearing Row -->
         <tr>
             <td><label asp-for="MechDrumBearing" class="control-label"></label></td>
@@ -74,7 +75,7 @@
     <!-- HydCylinder Row -->
     <tbody>
         <tr>
-            <td class="category-header" rowspan="5">Hydraulic</td>
+            <td class="category-header" rowspan="5">Hydralisk</td>
             <td><label asp-for="HydCylinder" class="control-label"></label></td>
             <td><input asp-for="HydCylinder" type="radio" value="OK" class="form-check-input" /></td>
             <td><input asp-for="HydCylinder" type="radio" value="NeedsReplacement" class="form-check-input" /></td>
@@ -112,7 +113,7 @@
     <!-- ElCableNetwork Row -->
     <tbody>
         <tr>
-            <td class="category-header" rowspan="3">Electrical</td>
+            <td class="category-header" rowspan="3">Elektrisk</td>
             <td><label asp-for="ElCableNetwork" class="control-label"></label></td>
             <td><input asp-for="ElCableNetwork" type="radio" value="OK" class="form-check-input" /></td>
             <td><input asp-for="ElCableNetwork" type="radio" value="NeedsReplacement" class="form-check-input" /></td>
@@ -136,7 +137,7 @@
     <!-- TensionCheckBar Row -->
     <tbody>
         <tr>
-            <td class="category-header" rowspan="1">Tension</td>
+            <td class="category-header" rowspan="1">Trykksettinger</td>
             <td><label asp-for="TensionCheckBar" class="control-label"></label></td>
             <td><input asp-for="TensionCheckBar" type="radio" value="OK" class="form-check-input" /></td>
             <td><input asp-for="TensionCheckBar" type="radio" value="NeedsReplacement" class="form-check-input" /></td>
@@ -168,3 +169,7 @@
         </tr>
     </tbody>
 </table>
+
+@section Scripts {
+    <script src="/js/serviceorder.js"></script>
+}
