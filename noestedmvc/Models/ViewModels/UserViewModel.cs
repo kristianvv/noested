@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using Microsoft.AspNetCore.Identity;
 
 namespace Noested.Models.ViewModels
 {
@@ -26,6 +27,7 @@ namespace Noested.Models.ViewModels
         [DisplayName("Bekreftet Epost")]
         public bool? EmailConfirmed { get; set; }
 
+        public List<string>? UserRoles { get; set; }
 
         [DisplayName("Telefonnummer")]
         public string? PhoneNumber { get; set; }

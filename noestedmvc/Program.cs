@@ -89,7 +89,7 @@ app.MapFallbackToAreaPage("/Account/Login", "Identity");
 using (var serviceScope = app.Services.CreateScope())
     {
         var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-        var roles = new[] { "Admin", "User" };
+        var roles = new[] { "Admin", "User"};
     foreach (var role in roles)
         {
             if (!await roleManager.RoleExistsAsync(role))

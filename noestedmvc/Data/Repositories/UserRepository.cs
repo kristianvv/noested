@@ -12,6 +12,8 @@ public interface IUserRepository
     List<UserEntity> GetUsers();
     void Delete(string email);
     bool IsAdmin(string email);
+    void SetRole(string email, string role);
+    //string? GetUserById(string userId);
 }
 
 public class UserRepository : UserRepositoryBase, IUserRepository
@@ -64,5 +66,15 @@ public class UserRepository : UserRepositoryBase, IUserRepository
         existingUser.Name = user.Name;
         dataContext.SaveChanges();
         SetRoles(user.Email, roles);
+    }
+
+    public void SetRole(string email, string role)
+    {
+        var user = GetUserByEmail(email);
+        if (user == null)
+        {
+            throw new Exception("User not found");
+        }
+        SetRoles(email, new List<string> { role });
     }
 }

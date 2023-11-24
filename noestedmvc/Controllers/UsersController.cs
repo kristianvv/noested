@@ -1,15 +1,19 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Noested.Models.ViewModels;
 
 namespace Noested.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class UsersController : Controller
     {
         private readonly UserManager<IdentityUser> _userManager;
-        public UsersController(UserManager<IdentityUser> userManager)
+        private readonly RoleManager<IdentityRole> _roleManager;
+        public UsersController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         public async Task<IActionResult> Index()
@@ -39,27 +43,8 @@ namespace Noested.Controllers
             return RedirectToPage("/Account/Register", new { area = "Identity" });
         }
 
-        public async Task<IActionResult> Edit(string userId)
-        {
-            var user = await _userManager.FindByIdAsync(userId);
-
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            var viewModel = new UserViewModel
-            {
-                UserId = user.Id,
-                Email = user.Email,
-                UserName = user.UserName,
-                PhoneNumber = user.PhoneNumber,
-            };
-
-            return View(viewModel);
-        }
-
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(UserViewModel model)
         {
             if (ModelState.IsValid)
@@ -75,7 +60,6 @@ namespace Noested.Controllers
 
                     if (result.Succeeded)
                     {
-
                         return RedirectToAction("Index");
                     }
 
@@ -88,6 +72,65 @@ namespace Noested.Controllers
 
             return View(model);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var userRoles = await _userManager.GetRolesAsync(user);
+            ViewData["AllRoles"] = _roleManager.Roles.ToList();
+
+            var viewModel = new UserViewModel
+            {
+                UserId = user.Id,
+                Email = user.Email,
+                UserName = user.UserName,
+                PhoneNumber = user.PhoneNumber,
+                UserRoles = userRoles.ToList(),
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditRoles(UserViewModel model)
+        {
+            var user = await _userManager.FindByIdAsync(model.UserId);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            // Remove user from existing roles
+            var existingRoles = await _userManager.GetRolesAsync(user);
+            await _userManager.RemoveFromRolesAsync(user, existingRoles);
+
+            // Add user to selected roles
+            var result = await _userManager.AddToRolesAsync(user, model.UserRoles);
+
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Index");
+            }
+
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
+
+            // If the role update fails, return to the edit roles view with the user details
+            ViewData["AllRoles"] = _roleManager.Roles.ToList();
+            return View("Edit", model);
+        }
+
 
         [HttpGet]
         public async Task<IActionResult> Delete(string userId)

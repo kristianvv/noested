@@ -12,7 +12,7 @@ namespace Noested.Data.Repositories
         {
             var identity = userManager.Users.FirstOrDefault(x => x.Email == email);
             var existingRoles = userManager.GetRolesAsync(identity).Result;
-            return existingRoles.FirstOrDefault(x => x == "Administrator") != null;
+            return existingRoles.FirstOrDefault(x => x == "Admin") != null;
         }
         protected void SetRoles(string userEmail, List<string> roles)
         {

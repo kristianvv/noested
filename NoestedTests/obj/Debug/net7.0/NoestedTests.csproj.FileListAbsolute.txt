@@ -314,3 +314,4 @@ C:\Users\felix\Documents\GitHub\noested\NoestedTests\obj\Debug\net7.0\refint\Noe
 C:\Users\felix\Documents\GitHub\noested\NoestedTests\obj\Debug\net7.0\NoestedTests.pdb
 C:\Users\felix\Documents\GitHub\noested\NoestedTests\obj\Debug\net7.0\NoestedTests.genruntimeconfig.cache
 C:\Users\felix\Documents\GitHub\noested\NoestedTests\obj\Debug\net7.0\ref\NoestedTests.dll
+C:\Users\felix\Documents\GitHub\noested\NoestedTests\bin\Debug\net7.0\Microsoft.AspNet.Identity.Core.dll

@@ -3386,3 +3386,4 @@ C:\Users\felix\Documents\GitHub\noested\noestedmvc\obj\Debug\net7.0\scopedcss\pr
 C:\Users\felix\Documents\GitHub\noested\noestedmvc\obj\Debug\net7.0\Noested.csproj.CopyComplete
 C:\Users\felix\Documents\GitHub\noested\noestedmvc\obj\Debug\net7.0\Noested.genruntimeconfig.cache
 C:\Users\felix\Documents\GitHub\noested\noestedmvc\obj\Debug\net7.0\ref\Noested.dll
+C:\Users\felix\Documents\GitHub\noested\noestedmvc\bin\Debug\net7.0\Microsoft.AspNet.Identity.Core.dll

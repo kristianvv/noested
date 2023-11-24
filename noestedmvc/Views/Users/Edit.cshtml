@@ -1,32 +1,50 @@
 ﻿@model Noested.Models.ViewModels.UserViewModel
-
+@using Microsoft.AspNetCore.Identity;
 @{
     ViewData["Title"] = "Edit";
+    var allRoles = ViewData["AllRoles"] as List<IdentityRole>;
 }
 
-<h3>Rediger bruker</h3>
+<h3>Edit User</h3>
 
-<form asp-controller="Users" asp-action="Edit" method="post">
+<form asp-controller="Users" asp-action="EditRoles" method="post">
     <input type="hidden" asp-for="UserId" />
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
     <div class="form-floating mb-3">
         <input asp-for="Email" class="form-control" autocomplete="username" aria-required="true" placeholder="email@example.com" />
-        <label asp-for="Email">Epost</label>
+        <label asp-for="Email">Email</label>
         <span asp-validation-for="Email" class="text-danger"></span>
     </div>
 
-
-
-
-
-    <button type="submit" class="w-100 btn btn-lg btn-primary">Oppdater informasjon</button>
-
+    <!-- Role editing section -->
+    <h4>Edit User Roles</h4>
 
     <div>
-        <a asp-action="Index">Tilbake til bruker oversikt</a>
+        <strong>Current Roles:</strong>
+        @foreach (var role in Model.UserRoles)
+        {
+            <span>@role</span>
+        }
     </div>
 
+    <div>
+        <label>Select Roles:</label>
+        @foreach (var role in allRoles)
+        {
+            <div>
+                <input type="checkbox" name="UserRoles" value="@role.Name" @(Model.UserRoles.Contains(role.Name) ? "checked" : "") />
+                <label>@role.Name</label>
+            </div>
+        }
+    </div>
+    <!-- End role editing section -->
+
+    <button type="submit" class="w-100 btn btn-lg btn-primary">Update Information</button>
+
+    <div>
+        <a asp-action="Index">Back to User List</a>
+    </div>
 </form>
 
 @section Scripts {

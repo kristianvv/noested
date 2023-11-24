@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Text.Json;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ using Noested.Services;
 
 namespace Noested.Controllers
 {
+    [Authorize (Roles = "Admin, User")]
     public class ServiceOrdersController : Controller
     {
         private readonly ApplicationDbContext _context;
