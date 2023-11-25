@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\timef\\source\\repos\\Noested\\Noested\\Noested.csproj": {}
+    "C:\\Users\\timef\\noested\\Noested\\Noested.csproj": {}
   },
   "projects": {
-    "C:\\Users\\timef\\source\\repos\\Noested\\Noested\\Noested.csproj": {
+    "C:\\Users\\timef\\noested\\Noested\\Noested.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\timef\\source\\repos\\Noested\\Noested\\Noested.csproj",
+        "projectUniqueName": "C:\\Users\\timef\\noested\\Noested\\Noested.csproj",
         "projectName": "Noested",
-        "projectPath": "C:\\Users\\timef\\source\\repos\\Noested\\Noested\\Noested.csproj",
+        "projectPath": "C:\\Users\\timef\\noested\\Noested\\Noested.csproj",
         "packagesPath": "C:\\Users\\timef\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\timef\\source\\repos\\Noested\\Noested\\obj\\",
+        "outputPath": "C:\\Users\\timef\\noested\\Noested\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\timef\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -102,7 +102,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     }

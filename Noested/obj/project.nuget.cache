@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "AuyucGJNK4/hLJ+sC+kb9p7hoIG4jnCVVu0lDx7TQi3XGIcerVVlQHvtpzFI4Si05nof+R26AXwCGiX5j6i5kQ==",
+  "dgSpecHash": "AzhQR8yyrC/eXFwFmzN95RHE+V1pZFExIY5DHE+hSASf9E4oBQS4B0DKJWC0rFB/sU4NdarPz6KGREjs4C4sJw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\timef\\source\\repos\\Noested\\Noested\\Noested.csproj",
+  "projectFilePath": "C:\\Users\\timef\\noested\\Noested\\Noested.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\timef\\.nuget\\packages\\dapper\\2.0.143\\dapper.2.0.143.nupkg.sha512",
     "C:\\Users\\timef\\.nuget\\packages\\dapper.contrib\\2.0.78\\dapper.contrib.2.0.78.nupkg.sha512",
