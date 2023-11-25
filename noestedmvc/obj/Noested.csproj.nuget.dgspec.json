@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\felix\\Documents\\GitHub\\noested\\noestedmvc\\Noested.csproj": {}
+    "C:\\Users\\timef\\noested\\noestedmvc\\Noested.csproj": {}
   },
   "projects": {
-    "C:\\Users\\felix\\Documents\\GitHub\\noested\\noestedmvc\\Noested.csproj": {
+    "C:\\Users\\timef\\noested\\noestedmvc\\Noested.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\felix\\Documents\\GitHub\\noested\\noestedmvc\\Noested.csproj",
+        "projectUniqueName": "C:\\Users\\timef\\noested\\noestedmvc\\Noested.csproj",
         "projectName": "Noested",
-        "projectPath": "C:\\Users\\felix\\Documents\\GitHub\\noested\\noestedmvc\\Noested.csproj",
-        "packagesPath": "C:\\Users\\felix\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\felix\\Documents\\GitHub\\noested\\noestedmvc\\obj\\",
+        "projectPath": "C:\\Users\\timef\\noested\\noestedmvc\\Noested.csproj",
+        "packagesPath": "C:\\Users\\timef\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\timef\\noested\\noestedmvc\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\felix\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\timef\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -68,6 +68,10 @@
               "target": "Package",
               "version": "[7.0.9, )"
             },
+            "Moq": {
+              "target": "Package",
+              "version": "[4.20.69, )"
+            },
             "Pomelo.EntityFrameworkCore.MySql": {
               "target": "Package",
               "version": "[7.0.0, )"
@@ -92,7 +96,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     }
