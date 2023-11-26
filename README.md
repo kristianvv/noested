@@ -14,7 +14,7 @@ Applikasjonen har følgende funksjonalitet:
 
 ### Drift av systemet
 * Applikasjonen benytter roller som er definert i program.cs
-* Applikasjonen legger automatisk til en administrator som fjernes når permanent administrator er opprettet
+* Applikasjonen legger automatisk til en administratorbruker som kan fjernes når permanent administrator er opprettet
 * For brukere av systemet oppretter man bruker ved å trykke "Registrer deg" øverst i høyre hjørne
 * Administrator tilegner deretter passende rolle til brukeren
 
