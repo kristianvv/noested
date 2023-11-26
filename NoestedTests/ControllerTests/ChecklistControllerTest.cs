@@ -4,6 +4,9 @@ using Noested.Controllers;
 using Noested.Data;
 using Noested.Models;
 
+// This test is to make sure the checklist gets added to database. Which also
+// checks the CustomersController as well to ensure it actually goes through.
+
 namespace NoestedTests.ControllerTests
 {
     public class ChecklistControllerTest
@@ -42,6 +45,8 @@ namespace NoestedTests.ControllerTests
             // Insert assertions based on the data model
         }
 
+        // Ensures that the in-memory database is created before returning the context.
+        
         private static async Task<ApplicationDbContext> GetDbContext()
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
