@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Noested.Models.ViewModels;
 
 namespace Noested.Controllers
@@ -152,11 +153,6 @@ namespace Noested.Controllers
 
             return View(viewModel);
         }
-
-
-
-
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]

@@ -10,6 +10,7 @@
         "dependencies": {
           "Microsoft.EntityFrameworkCore.InMemory": "7.0.0",
           "Microsoft.NET.Test.Sdk": "17.6.0",
+          "Moq": "4.20.69",
           "Noested": "1.0.0",
           "coverlet.collector": "3.2.0",
           "xunit": "2.6.1",

@@ -97,7 +97,7 @@ namespace Noested.Controllers
         /// <param name="processedOrder"> Updated View Model: includes Service Order, Checklist and Customer </param>
         /// 
         /// <returns>
-        ///     View for display of processed order contents
+        ///     View model to view on success, or error view on exception
         /// </returns>
         [HttpPost]
         public async Task<IActionResult> SaveFilledOrder(FillOrderViewModel processedOrder)
@@ -106,7 +106,7 @@ namespace Noested.Controllers
 
             await _serviceOrderService.UpdateCompletedOrderAsync(processedOrder);
 
-            return View("Details");
+            return RedirectToAction("Index");
         }
 
         /// <summary>

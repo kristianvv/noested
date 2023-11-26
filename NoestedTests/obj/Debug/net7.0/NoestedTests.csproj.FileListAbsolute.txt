@@ -953,3 +953,5 @@ C:\Users\vikfj\Desktop\noested_221023\noested\NoestedTests\bin\Debug\net7.0\Noes
 C:\Users\vikfj\Desktop\noested_221023\noested\NoestedTests\obj\Debug\net7.0\NoestedTests.csproj.CopyComplete
 C:\Users\vikfj\Desktop\noested_221023\noested\NoestedTests\obj\Debug\net7.0\NoestedTests.genruntimeconfig.cache
 C:\Users\vikfj\Desktop\noested_221023\noested\NoestedTests\obj\Debug\net7.0\ref\NoestedTests.dll
+C:\Users\felix\Documents\GitHub\noested\NoestedTests\bin\Debug\net7.0\Castle.Core.dll
+C:\Users\felix\Documents\GitHub\noested\NoestedTests\bin\Debug\net7.0\Moq.dll
