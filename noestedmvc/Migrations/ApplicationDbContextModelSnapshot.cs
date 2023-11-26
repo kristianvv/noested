@@ -363,6 +363,23 @@ namespace Noested.Migrations
                     b.ToTable("ServiceOrder");
                 });
 
+            modelBuilder.Entity("Noested.Models.UserEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users", (string)null);
+                });
+
             modelBuilder.Entity("Noested.Models.WinchChecklist", b =>
                 {
                     b.HasBaseType("Noested.Models.Checklist");
