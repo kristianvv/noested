@@ -1,23 +1,15 @@
 # Nøsted
-Gruppe 2 sitt prosjekt for høsten 2023
+Gruppe 2 sin web applikasjon for Nøsted 2023. Denne applikasjonen digitaliserer sjekklisten hos Nøsted. I tillegg har det blitt laget et service ordre system som kan redigeres og lagres i database slik at Nøsted kan sotere, redigere og ha bedre oversikt over kunder, arbeid og relevante yrkesrelaterte elementer. 
 
 ###  Lage en mariadb container som inneholder sti til hvor du ønsker databasen skal lagres lokalt
 ```c
-docker run --name [databasenavn] -e MYSQL_ROOT_PASSWORD=1234 -p 3306:3306 -d mariadb:10.5.11
+docker run --name noested_mdb -e MYSQL_ROOT_PASSWORD=1234 -p 3306:3306 -d mariadb:10.5.11
 ```
 
 ### Lage en database i mariadb med samme navn som i appsettings.json
-1. Logge inn i container via CLI
+Logge inn i container via CLI;
 ```c
 docker exec -it noested_mdb mysql -u root -p
-```
-2. Sjekke hva slags databaser som faktisk eksisterer allerede
-```sql
-show databases;
-```
-3. Opprette en ny database for noested
-```sql
-create database noested_mdb;
 ```
 ## VIKTIG!
 * Start mariadb-containeren før du kjører programmet
