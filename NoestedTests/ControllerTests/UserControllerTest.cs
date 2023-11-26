@@ -4,6 +4,10 @@ using Moq;
 using Noested.Controllers;
 using Noested.Models.ViewModels;
 
+// Using the Moq library necessary dependencies for the controller (userManager and roleManager) ''
+// are mocked using the MockUserManager and MockRoleManager methods. 
+// An instance of the UsersController is created, passing the mocked dependencies as parameters.
+
 namespace NoestedTests.ControllerTests
 {
     public class UsersControllerTest
