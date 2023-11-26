@@ -12,6 +12,12 @@ Applikasjonen har følgende funksjonalitet:
 * Installert Docker Desktop
 * Installert .Net 7.0 SDK
 
+### Drift av systemet
+* Applikasjonen benytter roller som er definert i program.cs
+* Applikasjonen legger automatisk til en administratorbruker som kan fjernes når permanent administrator er opprettet
+* For brukere av systemet oppretter man bruker ved å trykke "Registrer deg" øverst i høyre hjørne
+* Administrator tilegner deretter passende rolle til brukeren
+
 ### Bruk av systemet med Docker
 1. Kjør database-containeren i Docker med kommandoen
 ```c
