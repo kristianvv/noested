@@ -28,6 +28,19 @@ namespace Noested.Controllers
             _checklistService = checklistService;
         }
 
+        /// <summary>
+        ///     Retrieves and displays a list of all service orders.
+        /// </summary>
+        ///
+        /// <remarks>
+        ///     Iterates list to create action anchors for each order, directed at OpenOrder() below.
+        /// </remarks>
+        /// 
+        /// <returns>
+        ///     List of service orders to view, or error view if exception occurs.
+        /// </returns>
+        ///
+        /// <exception cref="InvalidOperationException"> thrown from service layer when there is an issue in retrieving service orders. </exception>
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -46,7 +59,23 @@ namespace Noested.Controllers
             }
         }
 
-        [HttpGet] // ServiceOrders/OpenOrder
+        /// <summary>
+        ///     Opens and displays an selected service order
+        /// </summary>
+        /// 
+        /// <remarks>
+        ///     Anchor element passes int value derived from orderId as argument to this method.
+        ///     Checklist is generated based on 'order.Product' in <see cref="_serviceOrderService.PopulateOrderViewModel(id)"/> 
+        /// </remarks>
+        /// 
+        /// <param name="id"> PK of service order </param>
+        /// 
+        /// <returns>
+        ///     Populated view model (FillOrderViewModel) to the view.
+        /// </returns>
+        /// 
+        /// <exception cref="InvalidOperationException"> thrown from service layer if the order does not exist </exception>
+        [HttpGet]
         public async Task<IActionResult> OpenOrder(int id)
         {
             try
@@ -61,25 +90,43 @@ namespace Noested.Controllers
             }
         }
 
-        // ServiceOrders/SaveFilledOrder
+        /// <summary>
+        ///     Updates an order after processing checklist.
+        /// </summary>
+        /// 
+        /// <param name="processedOrder"> Updated View Model: includes Service Order, Checklist and Customer </param>
+        /// 
+        /// <returns>
+        ///     View for display of processed order contents
+        /// </returns>
         [HttpPost]
-        public async Task<IActionResult> SaveFilledOrder(FillOrderViewModel fillOrder)
+        public async Task<IActionResult> SaveFilledOrder(FillOrderViewModel processedOrder)
         {
-            fillOrder.OrderCompleted = DateTime.Now;
+            processedOrder.OrderCompleted = DateTime.Now;
 
-            var viewModelJson = JsonSerializer.Serialize(fillOrder, new JsonSerializerOptions { WriteIndented = true });
-            _logger.LogInformation("ONE!!! SAVE FILLED ORDER: {ViewModelJson}", viewModelJson);
-
-            await _serviceOrderService.UpdateCompletedOrderAsync(fillOrder);
+            await _serviceOrderService.UpdateCompletedOrderAsync(processedOrder);
 
             return View("Details");
         }
 
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <returns></returns>
-        [HttpGet] // ServiceOrders/CreateOrder
+        /// <summary>
+        ///     Preps view for registering an service order
+        /// </summary>
+        ///
+        /// <remarks>
+        ///     Initialises new viewmodel to send to the view.
+        ///     Populates the <see cref="Viewbag.ExistingCustomers"/> with registered customers from the database;
+        ///     this is displayed in drop down menu on the form.
+        /// </remarks>>
+        /// 
+        /// <returns>
+        ///     View model to view on success, or error view on exception
+        /// </returns>
+        /// 
+        /// <exception cref="InvalidOperationException"
+        ///     thrown from <see cref="_customerService.GetAllCustomersAsync()"/> if no existing customers are found.
+        /// </exception>
+        [HttpGet]
         public async Task<IActionResult> CreateOrder()
         {
             try
@@ -99,8 +146,6 @@ namespace Noested.Controllers
 
                 viewModel.NewChecklist.ProductType = viewModel.NewOrder.Product;
 
-
-
                 var existingCustomers = await _customerService.GetAllCustomersAsync();
                 ViewBag.ExistingCustomers = new SelectList(existingCustomers, "CustomerId", "FirstName");
                 _logger.LogInformation("Successfully populated data from service into ViewBag, sending to View");
@@ -116,11 +161,17 @@ namespace Noested.Controllers
                 return View("Error", errorViewModel);
             }
         }
+
         /// <summary>
-        ///     Lage ny Serviceordre med eller uten eksisterende kunde
+        ///     Registers an service order with or without an existing customer
         /// </summary>
-        /// <param name="viewModel"></param>
-        /// <returns></returns>
+        /// 
+        /// <param name="viewModel"> Updated model </param>
+        /// 
+        /// <returns>
+        ///     View model to view on valid state && successful order registration <see cref="_serviceOrderService.CreateNewServiceOrderAsync()"/>
+        ///     Errorview on invalid state || Redirect index view on unsuccessful call to <see cref="_serviceOrderService.CreateNewServiceOrderAsync()"/>
+        /// </returns>
         [HttpPost]
         public async Task<IActionResult> CreateOrder(OrderViewModel viewModel)
         {
@@ -177,8 +228,6 @@ namespace Noested.Controllers
                 return View("Error", errorViewModel);
             }
         }
-
-
 
 
         // GET: ServiceOrders/Edit/5
