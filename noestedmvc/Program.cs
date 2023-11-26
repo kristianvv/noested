@@ -86,6 +86,8 @@ app.MapControllerRoute(
     pattern: "{controller}/{action=Index}/{id?}");
 app.MapFallbackToAreaPage("/Account/Login", "Identity");
 
+// Database seeding av roller
+
 using (var serviceScope = app.Services.CreateScope())
     {
         var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
