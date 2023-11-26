@@ -159,7 +159,8 @@ public class ServiceOrderRepositoryTests
         var repository = Setup();
 
         // Act
-        await repository.AddCustomerAsync(AddTestOrder().Customer); //Legger til kunde-objektet fra testordren
+        // Adds the customer object from the TestOrder
+        await repository.AddCustomerAsync(AddTestOrder().Customer);
         var result = await repository.GetAllCustomersAsync();
 
         // Assert
