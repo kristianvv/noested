@@ -1,28 +1,30 @@
 # Nøsted
-Gruppe 2 sin web applikasjon for Nøsted 2023. Denne applikasjonen digitaliserer sjekklisten hos Nøsted. I tillegg har det blitt laget et service ordre system som kan redigeres og lagres i database slik at Nøsted kan sotere, redigere og ha bedre oversikt over kunder, arbeid og relevante yrkesrelaterte elementer. 
+Gruppe 2 sin web applikasjon for Nøsted & 2023 - digitalisering av serviceordre.
 
-###  Lage en mariadb container som inneholder sti til hvor du ønsker databasen skal lagres lokalt
+Applikasjonen har følgende funksjonalitet:
+* Registrering og innlogging
+* Tilgang på visninger basert på brukerens rolle
+* Oppretting av serviceordre og tilhørende sjekkliste
+* Serviceordreoversikt
+* Kundeoversikt med mulighet for oppretting, endring og sletting av kunder
+
+### Forutsetninger
+* Installert Docker Desktop
+* Installert .Net 7.0 SDK
+
+### Bruk av systemet med Docker
+1. Kjør database-containeren i Docker med kommandoen
 ```c
-docker run --name noested_mdb -e MYSQL_ROOT_PASSWORD=1234 -p 3306:3306 -d mariadb:10.5.11
+docker run --rm --env "TZ=Europe/Oslo" --name noested_mdb -p 3308:3306/tcp -e MYSQL_ROOT_PASSWORD=1234 -d mariadb:10.5.11
 ```
 
-### Lage en database i mariadb med samme navn som i appsettings.json
-Logge inn i container via CLI;
+2.	Navigere deg inn i noested/noestedmvc via CLI og skrive inn kommandoene
 ```c
-docker exec -it noested_mdb mysql -u root -p
+dotnet build
+dotnet run
 ```
-## VIKTIG!
-* Start mariadb-containeren før du kjører programmet
-* Gjøres det endringer i modellene, må det **alltid** lages ny EF-migrasjon. 
 
-Dette gjøres i Package Manager med følgende kommandoer:
-```c
-Add-Migration "Beskrivende navn på migrasjon"
-```
-Legger til ny migrasjon:
-```c
-Update-Database
-```
+3.	Teste applikasjonen på localhost-port angitt i CLI
+  
 ## OBS!
-``/Areas/Identity/`` er direktivet hvor AspNet autentisering og autorisering er 
-lokalisert
+For å kjøre noen av testene må Moq library være installert. Dette installerer du i Package Manager.
