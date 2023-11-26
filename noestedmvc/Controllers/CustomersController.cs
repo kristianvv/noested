@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +10,6 @@ using Noested.Models;
 
 namespace Noested.Controllers
 {
-    [Authorize (Roles = "Admin")]
     public class CustomersController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -135,22 +133,25 @@ namespace Noested.Controllers
         }
 
         // POST: Customers/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("DeleteConfirmed")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Customer == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.Customer'  is null.");
-            }
-            var customer = await _context.Customer.FindAsync(id);
-            if (customer != null)
-            {
-                _context.Customer.Remove(customer);
+                return Problem("Entity set 'ApplicationDbContext.Customer' is null.");
             }
 
+            var customer = await _context.Customer.FindAsync(id);
+            if (customer == null)
+            {
+                return NotFound();
+            }
+
+            _context.Customer.Remove(customer);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+
+            return RedirectToAction(nameof(Index)); // Redirect to the index page after deletion
         }
 
         private bool CustomerExists(int id)

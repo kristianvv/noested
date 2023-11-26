@@ -12025,19 +12025,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\felix\\.nuget\\packages\\": {}
+    "C:\\Users\\vikfj\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\felix\\Documents\\GitHub\\noested\\NoestedTests\\NoestedTests.csproj",
+      "projectUniqueName": "C:\\Users\\vikfj\\Desktop\\noested_221023\\noested\\NoestedTests\\NoestedTests.csproj",
       "projectName": "NoestedTests",
-      "projectPath": "C:\\Users\\felix\\Documents\\GitHub\\noested\\NoestedTests\\NoestedTests.csproj",
-      "packagesPath": "C:\\Users\\felix\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\felix\\Documents\\GitHub\\noested\\NoestedTests\\obj\\",
+      "projectPath": "C:\\Users\\vikfj\\Desktop\\noested_221023\\noested\\NoestedTests\\NoestedTests.csproj",
+      "packagesPath": "C:\\Users\\vikfj\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\vikfj\\Desktop\\noested_221023\\noested\\NoestedTests\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\felix\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\vikfj\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -12051,8 +12051,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\Users\\felix\\Documents\\GitHub\\noested\\noestedmvc\\Noested.csproj": {
-              "projectPath": "C:\\Users\\felix\\Documents\\GitHub\\noested\\noestedmvc\\Noested.csproj"
+            "C:\\Users\\vikfj\\Desktop\\noested_221023\\noested\\noestedmvc\\Noested.csproj": {
+              "projectPath": "C:\\Users\\vikfj\\Desktop\\noested_221023\\noested\\noestedmvc\\Noested.csproj"
             }
           }
         }
@@ -12112,7 +12112,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   },
