@@ -24,7 +24,35 @@ public class ServiceOrderRepositoryTests
     // This object is used in tests that involve adding or updating service orders.
     private static ServiceOrder AddTestOrder()
     {
-        // ...
+        return new ServiceOrder
+        {
+            IsActive = true,
+            OrderReceived = DateTime.Now,
+            OrderCompleted = null,
+            Status = OrderStatus.Received,
+            AgreedFinishedDate = DateTime.Now.AddDays(7),
+            ProductName = "IGLAND 5002 Pento TL",
+            Product = ProductType.Winch,
+            ModelYear = "2022",
+            SerialNumber = "12345",
+            Warranty = WarrantyType.Full,
+            CustomerAgreement = "Standard Agreement",
+            OrderDescription = "Problem with motor",
+            DiscardedParts = "",
+            ReplacedPartsReturned = "",
+            Shipping = "",
+            WorkHours = 0,
+            Customer = new Customer
+            {
+                FirstName = "Odd",
+                LastName = "Hansen",
+                Street = "Kaserneveien 30",
+                PostalCode = "4631",
+                City = "By",
+                Email = "",
+                Phone = "85429854"
+            }
+        };
     }
 
     // This test checks the repository's ability to search for orders based on a criteria (in this case, the search term "John").
